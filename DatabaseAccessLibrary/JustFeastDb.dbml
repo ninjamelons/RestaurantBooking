@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dmai0917_1067303" Class="JustFeastDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067303;Persist Security Info=True;User ID=dmai0917_1067303" SettingsObjectName="DatabaseAccessLibrary.Properties.Settings" SettingsPropertyName="dmai0917_1067303ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Customer" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="phoneNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Customer_OrderHistory" Member="OrderHistories" ThisKey="id" OtherKey="customerId" Type="OrderHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Restaurant" Member="Restaurants">
+    <Type Name="Restaurant">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="zipcode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="phoneNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="verified" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="resCatId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Restaurant_Menu" Member="Menus" ThisKey="id" OtherKey="restaurantId" Type="Menu" />
+      <Association Name="Restaurant_Order" Member="Orders" ThisKey="id" OtherKey="restaurantId" Type="Order" />
+      <Association Name="Restaurant_ResTable" Member="ResTables" ThisKey="id" OtherKey="restaurantId" Type="ResTable" />
+      <Association Name="ResCat_Restaurant" Member="ResCat" ThisKey="resCatId" OtherKey="id" Type="ResCat" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Item" Member="Items">
+    <Type Name="Item">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="menuId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="itemCatId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Item_OrderLineItem" Member="OrderLineItems" ThisKey="id" OtherKey="itemId" Type="OrderLineItem" />
+      <Association Name="Item_Price" Member="Prices" ThisKey="id" OtherKey="id" Type="Price" />
+      <Association Name="ItemCat_Item" Member="ItemCat" ThisKey="itemCatId" OtherKey="id" Type="ItemCat" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Menu_Item" Member="Menu" ThisKey="menuId" OtherKey="id" Type="Menu" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ItemCat" Member="ItemCats">
+    <Type Name="ItemCat">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="ItemCat_Item" Member="Items" ThisKey="id" OtherKey="itemCatId" Type="Item" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Menu" Member="Menus">
+    <Type Name="Menu">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="restaurantId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Menu_Item" Member="Items" ThisKey="id" OtherKey="menuId" Type="Item" />
+      <Association Name="Restaurant_Menu" Member="Restaurant" ThisKey="restaurantId" OtherKey="id" Type="Restaurant" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderHistory" Member="OrderHistories">
+    <Type Name="OrderHistory">
+      <Column Name="orderId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="customerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Customer_OrderHistory" Member="Customer" ThisKey="customerId" OtherKey="id" Type="Customer" IsForeignKey="true" />
+      <Association Name="Order_OrderHistory" Member="Order" ThisKey="orderId" OtherKey="id" Type="Order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderLineItem" Member="OrderLineItems">
+    <Type Name="OrderLineItem">
+      <Column Name="orderId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="itemId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Item_OrderLineItem" Member="Item" ThisKey="itemId" OtherKey="id" Type="Item" IsForeignKey="true" />
+      <Association Name="Order_OrderLineItem" Member="Order" ThisKey="orderId" OtherKey="id" Type="Order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Orders" Member="Orders">
+    <Type Name="Order">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="restaurantId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="reservation" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="noSeats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="accepted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Order_OrderHistory" Member="OrderHistories" ThisKey="id" OtherKey="orderId" Type="OrderHistory" />
+      <Association Name="Order_OrderLineItem" Member="OrderLineItems" ThisKey="id" OtherKey="orderId" Type="OrderLineItem" />
+      <Association Name="Restaurant_Order" Member="Restaurant" ThisKey="restaurantId" OtherKey="id" Type="Restaurant" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Price" Member="Prices">
+    <Type Name="Price">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="price" Member="price1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="startDate" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="endDate" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Item_Price" Member="Item" ThisKey="id" OtherKey="id" Type="Item" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ResCat" Member="ResCats">
+    <Type Name="ResCat">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Association Name="ResCat_Restaurant" Member="Restaurants" ThisKey="id" OtherKey="resCatId" Type="Restaurant" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ResTable" Member="ResTables">
+    <Type Name="ResTable">
+      <Column Name="restaurantId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="noSeats" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="reserved" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="total" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Restaurant_ResTable" Member="Restaurant" ThisKey="restaurantId" OtherKey="id" Type="Restaurant" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+</Database>
