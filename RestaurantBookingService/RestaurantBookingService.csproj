@@ -61,10 +61,15 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Interfaces\RestaurantService.svc" />
     <Content Include="Service1.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IRestaurantService.cs" />
+    <Compile Include="Interfaces\RestaurantService.svc.cs">
+      <DependentUpon>RestaurantService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>
     </Compile>
@@ -81,6 +86,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DatabaseAccessLibrary\DatabaseAccessLibrary.csproj">
+      <Project>{af59ed6c-26d5-4dc9-baa6-b304e4823194}</Project>
+      <Name>DatabaseAccessLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
