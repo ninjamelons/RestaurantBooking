@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.DataAnnotations;
 using ModelLibrary;
+using ControllerLibrary;
+using System;
 
 namespace UnitTestProject1
 {
@@ -34,23 +36,23 @@ namespace UnitTestProject1
         #endregion
 
         [TestMethod]
-        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", true, DisplayName = "Valid data")]
-        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "", false, DisplayName = "Empty Email")]
-        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21@@@gmail.com", false, DisplayName = "Bad Symbols in Email")]
-        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21gmail.com", false, DisplayName = "No @ in email")]
-        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.comsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", false, DisplayName = "Long Email")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "4552900554", "virma21@gmail.com", true, DisplayName = "Valid data")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "4552900554", "", false, DisplayName = "Empty Email")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "4552900554", "virma21@@!@#$@gmail.com", false, DisplayName = "Bad Symbols in Email")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "4552900554", "virma21gmail.com", false, DisplayName = "No @ in email")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "4552900554", "virma21@gmail.comsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", false, DisplayName = "Long Email")]
         [DataRow("9000", "Restaurant Name", "Restaurant Address", "", "virma21@gmail.com", true, DisplayName = "Empty Number")]
         [DataRow("9000", "Restaurant Name", "Restaurant Address", "+4%@$5 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Symbols in number")]
-        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 5455555555555555555555555", "virma21@gmail.com", false, DisplayName = "Long number")]
-        [DataRow("9000", "Restaurant Name", "Restaurant Addresssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Long address")]
-        [DataRow("9000", "Restaurant Name", "", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "empty address")]
-        [DataRow("9000", "Restaurant Name", "#@#$!", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "symbols in address")]
-        [DataRow("9000", "Restaurant Nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Long name")]
-        [DataRow("9000", "", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Empty name")]
-        [DataRow("9000", "!@*#&^!@(", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Symbols in name")]
-        [DataRow("", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Empty ZipCode")]
-        [DataRow("9000000000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Long ZipCode")]
-        [DataRow("#$%", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Symbols in ZipCode")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "455290055455555555555555555555555", "virma21@gmail.com", false, DisplayName = "Long number")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Addresssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", "4552900554", "virma21@gmail.com", false, DisplayName = "Long address")]
+        [DataRow("9000", "Restaurant Name", "", "4552900554", "virma21@gmail.com", false, DisplayName = "empty address")]
+        [DataRow("9000", "Restaurant Name", "#@#$!", "4552900554", "virma21@gmail.com", false, DisplayName = "symbols in address")]
+        [DataRow("9000", "Restaurant Nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "Restaurant Address", "4552900554", "virma21@gmail.com", false, DisplayName = "Long name")]
+        [DataRow("9000", "", "Restaurant Address", "4552900554", "virma21@gmail.com", false, DisplayName = "Empty name")]
+        [DataRow("9000", "!@*#&^!@(", "Restaurant Address", "4552900554", "virma21@gmail.com", false, DisplayName = "Symbols in name")]
+        [DataRow("", "Restaurant Name", "Restaurant Address", "4552900554", "virma21@gmail.com", false, DisplayName = "Empty ZipCode")]
+        [DataRow("9000000000", "Restaurant Name", "Restaurant Address", "4552900554", "virma21@gmail.com", false, DisplayName = "Long ZipCode")]
+        [DataRow("#$%", "Restaurant Name", "Restaurant Address", "4552900554", "virma21@gmail.com", false, DisplayName = "Symbols in ZipCode")]
         public void Restaurant_Validation_Test(string zipCode, string name, string address, string phoneNo, string email, bool shouldValidate)
         {
             // Setup
@@ -76,13 +78,53 @@ namespace UnitTestProject1
         [TestMethod]
         public void Controller_Will_Not_Create_Restaurant_If_Not_Validated()
         {
+            // Setup
+            RestaurantCtrl ctrl = new RestaurantCtrl();
 
+            // Act
+            try
+            {
+                var res = ctrl.CreateRestaurant("Na#@%me", "Add!@#%ress", "Email@g@#$!mail.com", "123@#$4", "90034650", null);
+            }
+
+            // Assert
+            catch(Exception ex)
+            {
+                return;
+            }
+            Assert.Fail();
         }
 
         [TestMethod]
         public void Controller_Will_Create_Restaurant_If_Validated()
         {
+            // Setup
+            RestaurantCtrl ctrl = new RestaurantCtrl();
 
+            // Act
+            try
+            {
+                var res = ctrl.CreateRestaurant("Name", "Address", "Email@gmail.com", "1234", "9000", null);
+            }
+
+            // Assert
+            catch (Exception ex)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
+        public void Controller_Will_Set_Created_Restaurant_As_Not_Verified()
+        {
+            // Setup
+            RestaurantCtrl ctrl = new RestaurantCtrl();
+
+            // Act
+            var res = ctrl.CreateRestaurant("Name", "Address", "Email@gmail.com", "1234", "9000", null);
+
+            // Assert
+            Assert.IsTrue(!res.Verified);
         }
     }
 }

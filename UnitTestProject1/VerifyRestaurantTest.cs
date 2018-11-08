@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-
+using ModelLibrary;
 
 namespace UnitTestProject1
 {
@@ -24,10 +24,10 @@ namespace UnitTestProject1
             var sut = new Restaurant
             {
                 Name = name,
-                address = address,
+                Address = address,
                 PhoneNo = phoneNo,
                 Email = email,
-                Verify = verify,
+                Verified = verify,
             };
 
             var context = new ValidationContext(sut, null, null);
