@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using DatabaseAccessLibrary;
+using ModelLibrary;
 
 namespace RestaurantBookingService.Interfaces
 {
@@ -13,22 +13,19 @@ namespace RestaurantBookingService.Interfaces
     public interface IRestaurantService
     {
         [OperationContract]
-        void DoWork();
-
-        [OperationContract]
         IEnumerable<Restaurant> GetAllRestaurants();
         [OperationContract]
         void RegisterRestaurant(Restaurant restaurant);
 
         [OperationContract]
-        void CreateTable(ResTable resTable);
+        void CreateTable(Table table);
         [OperationContract]
-        IEnumerable<ResTable> GetAllTables(Restaurant restaurant);
+        IEnumerable<Table> GetAllTables(Restaurant restaurant);
         [OperationContract]
-        void UpdateTable(ResTable resTable);
+        IEnumerable<Table> GetTable(Table table);
         [OperationContract]
-        void DeleteTable(ResTable resTable);
+        void UpdateTable(Table table);
+        [OperationContract]
+        void DeleteTable(Table table);
     }
-
-
 }

@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace RestaurantDesktopClient
 {
     /// <summary>
-    /// Interaction logic for RestaurantPage.xaml
+    /// Interaction logic for TablesCrud.xaml
     /// </summary>
-    public partial class RestaurantPage : Page
+    public partial class TablesCrud : Page
     {
-        public RestaurantPage()
+        public TablesCrud()
         {
             InitializeComponent();
-        }
-
-        public bool CheckNoSeatsValid()
-        {
-            throw new NotImplementedException();
         }
     }
 }
