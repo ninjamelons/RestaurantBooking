@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CRUDItemTest.cs" />
     <Compile Include="FindRestaurantsTest.cs" />
     <Compile Include="RegisterRestaurantTest.cs" />
     <Compile Include="UnitTest1.cs" />
@@ -99,9 +100,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DatabaseAccessLibrary\DatabaseAccessLibrary.csproj">
+      <Project>{af59ed6c-26d5-4dc9-baa6-b304e4823194}</Project>
+      <Name>DatabaseAccessLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ModelLibrary\ModelLibrary.csproj">
       <Project>{29a08a63-6222-4321-8d3a-9663ee89c12c}</Project>
       <Name>ModelLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestaurantBookingService\RestaurantBookingService.csproj">
+      <Project>{37df9bab-6d46-4087-95dc-e72e1e4b4e4d}</Project>
+      <Name>RestaurantBookingService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
