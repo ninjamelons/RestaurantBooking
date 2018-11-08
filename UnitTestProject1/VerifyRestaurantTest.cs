@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using ModelLibrary;
+
 
 
 namespace UnitTestProject1
@@ -15,8 +17,8 @@ namespace UnitTestProject1
     {
         [TestMethod]
         [DataRow("RestaurantName", "Good Address", "+45 50 38 97 04", "ohshit@gmail.com", true, DisplayName = "Restaurant is verify!")]
-        [DataRow("Restadfds", "Good Address", "+45 50 38 97 04", "ohshit@gmail.com", false, DisplayName = "Restaurant is not verify!")]
-        public void Test_Restaurant_Verify(string name, string address, string phoneNo, string email, bool shouldValidate, bool verify)
+        [DataRow("Restadfds", "Good Address", "+45 50 38 97 04", "ohshit@gmail.com", false,  DisplayName = "Restaurant is not verify!")]
+        public void Test_Restaurant_Verify(string name, string address, string phoneNo, string email, bool shouldVerify)
 
 
         {
@@ -27,7 +29,7 @@ namespace UnitTestProject1
                 address = address,
                 PhoneNo = phoneNo,
                 Email = email,
-                Verify = verify,
+               
             };
 
             var context = new ValidationContext(sut, null, null);
@@ -37,7 +39,7 @@ namespace UnitTestProject1
             var isModelStateValid = Validator.TryValidateObject(sut, context, result, true);
 
             //Assert
-            Assert.IsTrue(isModelStateValid == shouldValidate);
+            Assert.IsTrue(isModelStateValid == shouldVerify);
         }
     }
 }
