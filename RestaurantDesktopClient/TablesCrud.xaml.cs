@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RestaurantDesktopClient.RestaurantService;
+using ValidationResult = System.Windows.Controls.ValidationResult;
 
 namespace RestaurantDesktopClient
 {
@@ -35,11 +37,23 @@ namespace RestaurantDesktopClient
         {
             RestaurantServiceClient proxy = new RestaurantServiceClient();
 
-            proxy.DeleteTable(new RestaurantService.Table
+            ModelLibrary.Table table = new ModelLibrary.Table
             {
                 NoSeats = NoSeats.Text, Reserved = NoReserved.Text,
                 RestaurantId = ResId.Content.ToString(), Total = NoTotal.Text
-            });
+            };
+
+            var context = new ValidationContext(table, null, null);
+            var result = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+
+            if (Validator.TryValidateObject(table, context, result, true))
+            {
+                proxy.DeleteTable(table);
+            }
+            else
+            {
+                MessageBoxResult prompt = MessageBox.Show("Please enter valid characters", "Invalid Input");  
+            }
         }
     }
 }
