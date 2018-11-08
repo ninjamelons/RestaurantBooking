@@ -16,18 +16,20 @@ using System.Windows.Shapes;
 namespace RestaurantDesktopClient
 {
     /// <summary>
-    /// Interaction logic for RestaurantPage.xaml
+    /// Interaction logic for RestaurantHome.xaml
     /// </summary>
-    public partial class RestaurantPage : Page
+    public partial class RestaurantHome : Page
     {
-        public RestaurantPage()
+        public RestaurantHome()
         {
             InitializeComponent();
         }
 
-        public bool CheckNoSeatsValid()
+        private void ToTablesPage_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            // View TablesCrud Page
+            TablesCrud expenseReportPage = new TablesCrud();
+            this.NavigationService.Navigate(expenseReportPage);
         }
     }
 }

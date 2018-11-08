@@ -4,7 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using ControllerLibrary;
 using DatabaseAccessLibrary;
+using ModelLibrary;
 
 namespace RestaurantBookingService.Interfaces
 {
@@ -12,31 +14,7 @@ namespace RestaurantBookingService.Interfaces
     // NOTE: In order to launch WCF Test Client for testing this service, please select RestaurantService.svc or RestaurantService.svc.cs at the Solution Explorer and start debugging.
     public class RestaurantService : IRestaurantService
     {
-        public void DoWork()
-        {
-        }
-
-        void IRestaurantService.CreateTable(ResTable resTable)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IRestaurantService.DeleteTable(ResTable resTable)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IRestaurantService.DoWork()
-        {
-            throw new NotImplementedException();
-        }
-
         IEnumerable<Restaurant> IRestaurantService.GetAllRestaurants()
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<ResTable> IRestaurantService.GetAllTables(Restaurant restaurant)
         {
             throw new NotImplementedException();
         }
@@ -45,8 +23,24 @@ namespace RestaurantBookingService.Interfaces
         {
             throw new NotImplementedException();
         }
-
-        void IRestaurantService.UpdateTable(ResTable resTable)
+        
+        void IRestaurantService.CreateTable(Table table)
+        {
+            throw new NotImplementedException();
+        }
+        IEnumerable<Table> IRestaurantService.GetAllTables(Restaurant restaurant)
+        {
+            throw new NotImplementedException();
+        }
+        public IEnumerable<Table> GetTable(Table table)
+        {
+            throw new NotImplementedException();
+        }
+        void IRestaurantService.UpdateTable(Table table)
+        {
+            throw new NotImplementedException();
+        }
+        void IRestaurantService.DeleteTable(Table table)
         {
             throw new NotImplementedException();
         }
