@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using ControllerLibrary;
+using DatabaseAccessLibrary;
 using ModelLibrary;
 
 namespace RestaurantBookingService.Interfaces

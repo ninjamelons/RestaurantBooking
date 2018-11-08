@@ -29,26 +29,29 @@
                Margin="50,1,0,0" FontWeight="Bold" FontSize="22" Height="40" Width="282">
             Number of Seats per table
         </Label>
-        <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" 
+        <TextBox Name="NoSeats" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" 
                  HorizontalAlignment="Stretch" Margin="70,0,250,10" Height="30"/>
         <Label Grid.Column="1" Grid.Row="2" VerticalAlignment="top" HorizontalAlignment="Left"
                Margin="50,3.4,0,0" FontWeight="Bold" FontSize="22" Height="40" Width="291">
             Number of Reserved tables
         </Label>
-        <TextBox Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" 
+        <TextBox Name="NoReserved" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" 
                  HorizontalAlignment="Stretch" Margin="70,0,250,10" Height="30"/>
         <Label Grid.Column="1" Grid.Row="3" VerticalAlignment="top" HorizontalAlignment="Left"
                Margin="50,1.8,0,0" FontWeight="Bold" FontSize="22" Height="40" Width="248">
             Total Number of tables
         </Label>
-        <TextBox Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" 
+        <TextBox Name="NoTotal" Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" 
                  HorizontalAlignment="Stretch" Margin="70,0,250,10" Height="30"/>
-        <Button Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" 
-                HorizontalAlignment="Center" Padding="8 5">Update/Add Table</Button>
+        <Button x:Name="RemoveTable" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" 
+                HorizontalAlignment="Center" Margin="125 0 0 0" Padding="8 5" Click="RemoveTable_OnClickTable_OnClick">Remove Table</Button>
+        <Button x:Name="UpdateAddTable" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" 
+                HorizontalAlignment="Center" Margin="-125 0 0 0" Padding="8 5" Click="UpdateAddTable_OnClick">Update/Add Table</Button>
         <Label Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
                FontWeight="Bold" FontSize="28" Height="48" Margin="90,-7,90,3" Width="132">
             Table List
         </Label>
         <ComboBox Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Margin="10,11,10,0" Height="22"/>
+        <Label Content="Restaurant ID: " Name="ResId" Grid.Column="2" HorizontalAlignment="Left" Margin="272,76.8,0,0" Grid.Row="4" VerticalAlignment="Top"/>
     </Grid>
 </Page>

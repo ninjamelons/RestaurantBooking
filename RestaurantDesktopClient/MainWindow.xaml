@@ -6,5 +6,4 @@
         xmlns:local="clr-namespace:RestaurantDesktopClient"
         mc:Ignorable="d"
         Title="JustFeast" Height="450" Width="800" Source="RestaurantHome.xaml">
-
 </NavigationWindow>

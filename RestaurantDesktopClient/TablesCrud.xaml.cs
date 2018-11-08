@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RestaurantDesktopClient.RestaurantService;
 
 namespace RestaurantDesktopClient
 {
@@ -23,6 +24,22 @@ namespace RestaurantDesktopClient
         public TablesCrud()
         {
             InitializeComponent();
+        }
+
+        private void UpdateAddTable_OnClick(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RemoveTable_OnClickTable_OnClick(object sender, RoutedEventArgs e)
+        {
+            RestaurantServiceClient proxy = new RestaurantServiceClient();
+
+            proxy.DeleteTable(new RestaurantService.Table
+            {
+                NoSeats = NoSeats.Text, Reserved = NoReserved.Text,
+                RestaurantId = ResId.Content.ToString(), Total = NoTotal.Text
+            });
         }
     }
 }
