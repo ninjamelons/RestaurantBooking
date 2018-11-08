@@ -16,8 +16,8 @@ namespace UnitTestProject1
     class VerifyRestaurantTest
     {
         [TestMethod]
-        [DataRow("RestaurantName", "Good Address", "+45 50 38 97 04", "ohshit@gmail.com", true, DisplayName = "Restaurant is verify!")]
-        [DataRow("Restadfds", "Good Address", "+45 50 38 97 04", "ohshit@gmail.com", false,  DisplayName = "Restaurant is not verify!")]
+        [DataRow("RestaurantName", "Good Address", "+45 50 38 97 04", "ohshit@gmail.com", true, DisplayName = "Restaurant is verified!")]
+        [DataRow("Restadfds", "Good Address", "+45 50 38 97 04", "ohshit@gmail.com", false,  DisplayName = "Restaurant is not verified!")]
         public void Test_Restaurant_Verify(string name, string address, string phoneNo, string email, bool shouldVerify)
 
 
