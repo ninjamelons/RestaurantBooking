@@ -14,6 +14,7 @@ namespace DatabaseAccessLibrary
 
             if (db.Items.Any(t => !(t.name == item.name && t.id == item.id )))
                 db.Items.InsertOnSubmit(item);
+            
 
         }
 
@@ -23,6 +24,15 @@ namespace DatabaseAccessLibrary
             var dbItem = db.Items.Single(a => a.id == id && a.menuId == menuId && a.name == name && a.description == description
                                               && a.itemCatId == itemCatId);
             return dbItem;
+        }
+
+        public void DeleteItem(Item item)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+
+            if (db.Items.Any(t => !(t.name == item.name && t.id == item.id)))
+                db.Items.DeleteOnSubmit(item);
+
         }
     }
 }

@@ -55,14 +55,15 @@ namespace UnitTestProject1
                 menuId = 1,
                 name = "PerfectlyGoodName",
             };
-            DatabaseAccessLibrary.Menu newMenu = new Menu
+            Menu newMenu = new Menu
             {
                id = 1,
                restaurantId = 1,
                active = true
 
             };
-            DatabaseAccessLibrary.Restaurant newRestaurant = new Restaurant
+            
+            Restaurant newRestaurant = new Restaurant
             {
                 id = 1,
                 name = "RestaurantNameExample",
@@ -84,6 +85,46 @@ namespace UnitTestProject1
             Assert.Equals(anotherItem, newItem);
         }
 
+        public void Item_Deleted_From_Db()
+        {
+            //Setup
+            DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
+            {
+                description = "PerfectlyGoodDescription",
+                id = 1,
+                itemCatId = 1,
+                menuId = 1,
+                name = "PerfectlyGoodName",
+            };
+            Menu newMenu = new Menu
+            {
+                id = 1,
+                restaurantId = 1,
+                active = true
+
+            };
+
+            Restaurant newRestaurant = new Restaurant
+            {
+                id = 1,
+                name = "RestaurantNameExample",
+                address = "RestaurantAddressExample",
+                email = "RestaurantEmailExample",
+                zipcode = 1231223
+            };
+
+
+            ItemDb ItemDb = new ItemDb();
+            ItemDb.AddItem(newItem);
+            //Act
+
+
+            //Delete Item
+            ItemDb.DeleteItem(newItem);
+
+            //Assert
+            Assert.IsNull(newItem);
+        }
         
     }
     }
