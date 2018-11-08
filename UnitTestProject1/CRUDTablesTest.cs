@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Moq;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
+using ControllerLibrary;
 using DatabaseAccessLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModelLibrary;
@@ -56,15 +56,11 @@ namespace UnitTestProject1
             {
                 noSeats = 4, reserved = 0, restaurantId = 1, total = 20
             };
-            Restaurant newRestaurant = new Restaurant
-            {
-                address = "hobro", email = "ucn@ucn.dk", id = 1
-            };
 
             RestaurantsDb ResDb = new RestaurantsDb();
 
             //Act
-            ResDb.AddTable(newTable, newRestaurant);
+            ResDb.AddTable(newTable);
 
             //Get table with: noSeats = 4, reserved = 0, restaurantId = 1, total = 20
             ResTable resTable = ResDb.GetTable(4,0,1,20);
@@ -79,15 +75,16 @@ namespace UnitTestProject1
             //Setup
             Table table = new Table
             {
-                NoSeats = "4", Reserved = "0", Total = "20"
+                RestaurantId = "1", NoSeats = "4", Reserved = "0", Total = "20"
             };
             ResTable newTable = new ResTable
             {
                 noSeats = 4, reserved = 0, restaurantId = 1, total = 20
             };
+            RestaurantCtrl resCtrl = new RestaurantCtrl();
 
             //Act
-            ResTable resTable = ControllerLibrary.ConvertTable(table);
+            ResTable resTable = resCtrl.ConvertTable(table);
 
             //Assert
             Assert.Equals(resTable, newTable);
