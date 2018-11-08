@@ -1,12 +1,17 @@
-﻿using System;
+﻿using Moq;
+using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace UnitTestProject1
 {
-    class VerifyRestaurantTest
+    class VerifyResTest
     {
         [TestMethod]
         [DataRow("RestaurantName", "Good Address", "+45 50 38 97 04", "ohshit@gmail.com", true, DisplayName = "Restaurant is verify!")]
