@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using DatabaseAccessLibrary;
 
 namespace RestaurantBookingService.Interfaces
 {
@@ -13,6 +14,41 @@ namespace RestaurantBookingService.Interfaces
     {
         public void DoWork()
         {
+        }
+
+        void IRestaurantService.CreateTable(ResTable resTable)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRestaurantService.DeleteTable(ResTable resTable)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRestaurantService.DoWork()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Restaurant> IRestaurantService.GetAllRestaurants()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<ResTable> IRestaurantService.GetAllTables(Restaurant restaurant)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRestaurantService.RegisterRestaurant(Restaurant restaurant)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRestaurantService.UpdateTable(ResTable resTable)
+        {
+            throw new NotImplementedException();
         }
     }
 }
