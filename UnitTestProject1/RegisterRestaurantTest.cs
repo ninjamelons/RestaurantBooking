@@ -1,7 +1,7 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.ComponentModel.DataAnnotations;
+using ModelLibrary;
 
 namespace UnitTestProject1
 {
@@ -11,31 +11,6 @@ namespace UnitTestProject1
     [TestClass]
     public class RegisterRestaurantTest
     {
-        public RegisterRestaurantTest()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
-
         #region Additional test attributes
         //
         // You can use the following additional attributes as you write your tests:
@@ -59,11 +34,55 @@ namespace UnitTestProject1
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", true, DisplayName = "Valid data")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "", false, DisplayName = "Empty Email")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21@@@gmail.com", false, DisplayName = "Bad Symbols in Email")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21gmail.com", false, DisplayName = "No @ in email")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.comsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", false, DisplayName = "Long Email")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "", "virma21@gmail.com", true, DisplayName = "Empty Number")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+4%@$5 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Symbols in number")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 5455555555555555555555555", "virma21@gmail.com", false, DisplayName = "Long number")]
+        [DataRow("9000", "Restaurant Name", "Restaurant Addresssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Long address")]
+        [DataRow("9000", "Restaurant Name", "", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "empty address")]
+        [DataRow("9000", "Restaurant Name", "#@#$!", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "symbols in address")]
+        [DataRow("9000", "Restaurant Nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Long name")]
+        [DataRow("9000", "", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Empty name")]
+        [DataRow("9000", "!@*#&^!@(", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Symbols in name")]
+        [DataRow("", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Empty ZipCode")]
+        [DataRow("9000000000", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Long ZipCode")]
+        [DataRow("#$%", "Restaurant Name", "Restaurant Address", "+45 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Symbols in ZipCode")]
+        public void Restaurant_Validation_Test(string zipCode, string name, string address, string phoneNo, string email, bool shouldValidate)
         {
-            //
-            // TODO: Add test logic here
-            //
+            // Setup
+            var sut = new Restaurant
+            {
+                Name = name,
+                Address = address,
+                ZipCode = zipCode,
+                PhoneNo = phoneNo,
+                Email = email
+            };
+
+            var context = new ValidationContext(sut, null, null);
+            var result = new List<ValidationResult>();
+
+            // Act
+            var isModelStateValid = Validator.TryValidateObject(sut, context, result, true);
+
+            // Assert
+            Assert.IsTrue(isModelStateValid == shouldValidate);
+        }
+
+        [TestMethod]
+        public void Controller_Will_Not_Create_Restaurant_If_Not_Validated()
+        {
+
+        }
+
+        [TestMethod]
+        public void Controller_Will_Create_Restaurant_If_Validated()
+        {
+
         }
     }
 }
