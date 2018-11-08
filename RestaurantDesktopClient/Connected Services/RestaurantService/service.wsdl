@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RestaurantService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/DatabaseAccessLibrary" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ModelLibrary" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IRestaurantService_GetAllRestaurants_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRestaurants" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllRestaurants_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRestaurantsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_RegisterRestaurant_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterRestaurant" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_RegisterRestaurant_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterRestaurantResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_CreateTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTable" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_CreateTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllTables_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTables" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllTables_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTablesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTable" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_UpdateTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTable" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_UpdateTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_DeleteTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTable" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_DeleteTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTableResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IRestaurantService">
+    <wsdl:operation name="GetAllRestaurants">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurants" message="tns:IRestaurantService_GetAllRestaurants_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsResponse" message="tns:IRestaurantService_GetAllRestaurants_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterRestaurant">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/RegisterRestaurant" message="tns:IRestaurantService_RegisterRestaurant_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/RegisterRestaurantResponse" message="tns:IRestaurantService_RegisterRestaurant_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/CreateTable" message="tns:IRestaurantService_CreateTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/CreateTableResponse" message="tns:IRestaurantService_CreateTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTables">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetAllTables" message="tns:IRestaurantService_GetAllTables_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetAllTablesResponse" message="tns:IRestaurantService_GetAllTables_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetTable" message="tns:IRestaurantService_GetTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetTableResponse" message="tns:IRestaurantService_GetTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/UpdateTable" message="tns:IRestaurantService_UpdateTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/UpdateTableResponse" message="tns:IRestaurantService_UpdateTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/DeleteTable" message="tns:IRestaurantService_DeleteTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/DeleteTableResponse" message="tns:IRestaurantService_DeleteTable_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IRestaurantService" type="tns:IRestaurantService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllRestaurants">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetAllRestaurants" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterRestaurant">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/RegisterRestaurant" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTable">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/CreateTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTables">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetAllTables" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTable">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTable">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/UpdateTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTable">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/DeleteTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RestaurantService">
+    <wsdl:port name="BasicHttpBinding_IRestaurantService" binding="tns:BasicHttpBinding_IRestaurantService">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
