@@ -17,5 +17,16 @@ namespace DatabaseAccessLibrary
                 db.ResTables.InsertOnSubmit(resTable);
 
         }
+
+        public ResTable GetTable(int noSeats, int reserved, int restaurantId, int total)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+
+            var resTable = db.ResTables.Single(t => t.noSeats == noSeats
+                                                    && t.reserved == reserved
+                                                    && t.restaurantId == restaurantId
+                                                    && t.total == total);
+            return resTable;
+        }
     }
 }

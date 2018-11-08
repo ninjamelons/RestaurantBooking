@@ -62,7 +62,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Interfaces\RestaurantService.svc" />
-    <Content Include="Service1.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -70,10 +69,6 @@
     <Compile Include="Interfaces\RestaurantService.svc.cs">
       <DependentUpon>RestaurantService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
-    </Compile>
-    <Compile Include="IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
