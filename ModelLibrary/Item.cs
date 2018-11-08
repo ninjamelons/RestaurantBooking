@@ -9,13 +9,13 @@ namespace ModelLibrary
 {
     public class Item
     {
-        [RegularExpression("^[a-zA-Z ]{3,20}$*", ErrorMessage = "Invalid number")]
+        [RegularExpression("^[a-zA-Z ]{3,20}$*", ErrorMessage = "Invalid Name")]
         public string Name { get; set; }
 
-        [RegularExpression("^[0-9 a-zA-Z]{3,150}*", ErrorMessage = "Invalid number")]
+        [RegularExpression("^[0-9 a-zA-Z]{3,150}*", ErrorMessage = "Invalid Description")]
         public string Description { get; set; }
 
-        [RegularExpression("^[0-9/.]*", ErrorMessage = "Invalid number")]
+        [RegularExpression("^[0-9/.]*", ErrorMessage = "Invalid Price")]
         public double Price { get; set; }
     }
 }

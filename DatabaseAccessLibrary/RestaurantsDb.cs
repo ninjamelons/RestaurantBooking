@@ -15,7 +15,7 @@ namespace DatabaseAccessLibrary
 
             if(db.ResTables.Any(t => !(t.noSeats == resTable.noSeats && t.restaurantId == resTable.restaurantId)))
                 db.ResTables.InsertOnSubmit(resTable);
-
+            
         }
     }
 }
