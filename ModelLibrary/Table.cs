@@ -12,6 +12,8 @@ namespace ModelLibrary
     {
         public string RestaurantId { get; set; }
 
+        public int ZipCode { get; set; }
+
         [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number: Cannot contain spaces, ")]
         public string NoSeats { get; set; }
         
