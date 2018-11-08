@@ -75,9 +75,9 @@ namespace UnitTestProject1
             ItemDb ItemDb = new ItemDb();
 
             //Act
-            ItemDb.AddItem(newItem, newMenu, newRestaurant);
+            ItemDb.AddItem(newItem);
 
-            //Get table with: noSeats = 4, reserved = 0, restaurantId = 1, total = 20
+            //Get Item(1,1,"PerfectlyGoodName", "PerfectlyGoodDescription", 1);
             DatabaseAccessLibrary.Item anotherItem = ItemDb.GetItem(1, 1, "PerfectlyGoodName", "PerfectlyGoodDescription", 1);
 
             //Assert

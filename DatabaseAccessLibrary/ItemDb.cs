@@ -8,7 +8,7 @@ namespace DatabaseAccessLibrary
 {
     public class ItemDb
     {
-        public void AddItem(Item item, Menu menu, Restaurant restaurant)
+        public void AddItem(Item item)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
@@ -17,11 +17,12 @@ namespace DatabaseAccessLibrary
 
         }
 
-        public void GetItem()
+        public DatabaseAccessLibrary.Item GetItem(int id, int menuId, string name, string description, int itemCatId)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            if (db.Items.FirstOrDefault <Item>(name))
-                { }
+            var dbItem = db.Items.Single(a => a.id == id && a.menuId == menuId && a.name == name && a.description == description
+                                              && a.itemCatId == itemCatId);
+            return dbItem;
         }
     }
 }
