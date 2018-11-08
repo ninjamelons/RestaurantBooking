@@ -1,39 +1,89 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+using System.Web;
+using System.Web.Mvc;
 
 namespace UserWebClient.Controllers
 {
-    public class RestaurantController : ApiController
+    public class RestaurantController : Controller
     {
-        // GET: api/Restaurant
-        public IEnumerable<string> Get()
+        // GET: Restaurant
+        public ActionResult Index()
         {
-            return new string[] { "value1", "value2" };
+            return View();
         }
 
-        // GET: api/Restaurant/5
-        public string Get(int id)
+        // GET: Restaurant/Details/5
+        public ActionResult Details(int id)
         {
-            return "value";
+            return View();
         }
 
-        // POST: api/Restaurant
-        public void Post([FromBody]string value)
+        // GET: Restaurant/Create
+        public ActionResult Create()
         {
+            return View();
         }
 
-        // PUT: api/Restaurant/5
-        public void Put(int id, [FromBody]string value)
+        // POST: Restaurant/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
         {
+            try
+            {
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
-        // DELETE: api/Restaurant/5
-        public void Delete(int id)
+        // GET: Restaurant/Edit/5
+        public ActionResult Edit(int id)
         {
+            return View();
+        }
+
+        // POST: Restaurant/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Restaurant/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Restaurant/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
     }
 }
