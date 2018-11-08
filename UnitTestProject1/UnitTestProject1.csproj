@@ -95,11 +95,16 @@
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CRUDTablesTest.cs" />
+    <Compile Include="VerifyRestaurantTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ControllerLibrary\ControllerLibrary.csproj">
+      <Project>{7b98d978-139d-4669-94d1-92934fc668ca}</Project>
+      <Name>ControllerLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DatabaseAccessLibrary\DatabaseAccessLibrary.csproj">
       <Project>{af59ed6c-26d5-4dc9-baa6-b304e4823194}</Project>
       <Name>DatabaseAccessLibrary</Name>

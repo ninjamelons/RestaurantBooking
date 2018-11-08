@@ -1,49 +1,45 @@
 ﻿using System;
+using Moq;
+using System.Web.Mvc;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.ComponentModel.DataAnnotations;
+using ModelLibrary;
+
+
 
 namespace UnitTestProject1
 {
-    [TestClass]
-     public class VerifyRestaurantTest
+    class VerifyRestaurantTest
     {
-        public VerifyRestaurantTest()
-        {
-            //
-            //
-
-        }
-        private TestContext testContextInstance;
-
-
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
- 
-
-        public void TestMethod1()
-        {
         [TestMethod]
-        [DataRow("")]
-        public void Test_RestaurantModel_Verify( Boolean Verify)
-    }
+        [DataRow("RestaurantName", "Good Address", "+45 50 38 97 04", "ohshit@gmail.com", true, DisplayName = "Restaurant is verify!")]
+        [DataRow("Restadfds", "Good Address", "+45 50 38 97 04", "ohshit@gmail.com", false,  DisplayName = "Restaurant is not verify!")]
+        public void Test_Restaurant_Verify(string name, string address, string phoneNo, string email, bool shouldVerify)
 
-    }
 
-   /*
-    * db.ActiveRestaurants.Add(Restaurant) 
-    * db.SaveChanges();
-    * 
-    */
+        {
+            //Setup
+            var sut = new Restaurant
+            {
+                Name = name,
+                address = address,
+                PhoneNo = phoneNo,
+                Email = email,
+               
+            };
+
+            var context = new ValidationContext(sut, null, null);
+            var result = new List<ValidationResult>();
+
+            //Act
+            var isModelStateValid = Validator.TryValidateObject(sut, context, result, true);
+
+            //Assert
+            Assert.IsTrue(isModelStateValid == shouldVerify);
+        }
+    }
 }
