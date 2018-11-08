@@ -14,14 +14,17 @@ namespace RestaurantService
     public interface IRestaurantService
     {
         [OperationContract]
-        IEnumerable<Restaurant> GetAllRestaurants();
+        void DoWork();
+
         [OperationContract]
-        void RegisterRestaurant(Restaurant restaurant);
+        IEnumerable<ModelLibrary.Restaurant> GetAllRestaurants();
+        [OperationContract]
+        void RegisterRestaurant(ModelLibrary.Restaurant restaurant);
 
         [OperationContract]
         void CreateTable(Table table);
         [OperationContract]
-        IEnumerable<Table> GetAllTables(Restaurant restaurant);
+        IEnumerable<Table> GetAllTables(ModelLibrary.Restaurant restaurant);
         [OperationContract]
         IEnumerable<Table> GetTable(Table table);
         [OperationContract]

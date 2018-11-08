@@ -6,7 +6,6 @@ using ControllerLibrary;
 using DatabaseAccessLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModelLibrary;
-using RestaurantBookingService.Interfaces;
 
 namespace UnitTestProject1
 {
@@ -15,6 +14,7 @@ namespace UnitTestProject1
     {
         [TestMethod]
         [DataRow("4","20","0",true,DisplayName = "All valid")]
+        [DataRow("","","",true,DisplayName = "Empty")]
         [DataRow("4","20","30",false,DisplayName = "Reserved tables > Total tables")]
         [DataRow("4","20","-15",false,DisplayName = "Reserved negative")]
         [DataRow("4","20","1t0",false,DisplayName = "Reserved has letter")]
