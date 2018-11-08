@@ -1,25 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
-using ModelLibrary;
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+using Order = ModelLibrary.Order;
 
 namespace UnitTestProject1
 {
     [TestClass]
     public class OrderTest
     {
-        
-        [SetUp]
-        public void SetUp()
-        {
-        }
-
         [TestMethod]
         [DataRow("1000000", "2018-11-08 12:22:33", "2018-11-08 18:00:00", "2", true, true, DisplayName = "Valid input")]
+        [DataRow("100000", "2018-11-08 12:22:33", "2018-11-08 18:00:00", "2", true, false, DisplayName = "Invalid ID length")]
+        [DataRow("1000000", "2018-11-08", "2018-11-08 18:00:00", "2", true, false, DisplayName = "Invalid dateTime")]
+        [DataRow("1000000", "2018-11-08 12:22:33", "2018-11-818:00:00", "2", true, false, DisplayName = "Invalid reservationDateTime")]
+        [DataRow("1000000", "2018-11-08 12:22:33", "2018-11-08 18:00:00", "-1", true, false, DisplayName = "Invalid noSeats")]
+        [DataRow("1000000", "2018-11-08 12:22:33", "2018-11-08 18:00:00", "2", "true", true, DisplayName = "Invalid bool")]
+        [DataRow("100000", "2018-11-08 12:22:33", "2018-11-08 18:00:00", "2", false, true, DisplayName = "Invalid ID length")]
         public void Place_Order_Test(string orderId, string dateTime, string reservationDateTime,
             string noSeats, bool accepted, bool shouldValidate)
         {
