@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="CRUDItemTest.cs" />
     <Compile Include="FindRestaurantsTest.cs" />
+    <Compile Include="OrderTest.cs" />
     <Compile Include="RegisterRestaurantTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
