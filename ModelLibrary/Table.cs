@@ -10,13 +10,13 @@ namespace ModelLibrary
 {
     public class Table
     {
-        [RegularExpression("^[0-9]*$",ErrorMessage = "Invalid number")]
+        [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number: Cannot contain spaces, ")]
         public string NoSeats { get; set; }
         
-        [RegularExpression("^[0-9]*$",ErrorMessage = "Invalid number")]
+        [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number")]
         public string Total { get; set; }
         
-        [RegularExpression("^[0-9]*$",ErrorMessage = "Invalid number")]
+        [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number")]
         public string Reserved { get; set; }
     }
 }
