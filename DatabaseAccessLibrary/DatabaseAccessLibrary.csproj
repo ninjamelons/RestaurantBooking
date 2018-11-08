@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FindRestaurant.cs" />
+    <Compile Include="ItemDb.cs" />
     <Compile Include="JustFeastDb.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

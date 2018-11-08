@@ -7,7 +7,7 @@ using System.Text;
 using DatabaseAccessLibrary;
 using ModelLibrary;
 
-namespace RestaurantBookingService.Interfaces
+namespace RestaurantService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IRestaurantService" in both code and config file together.
     [ServiceContract]
