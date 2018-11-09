@@ -23,7 +23,7 @@ namespace UnitTestProject1
 
         {
             //Setup
-            var sut = new Restaurant
+            var sut =  new Restaurant
             {
                 Name = name,
                 address = address,
@@ -41,5 +41,7 @@ namespace UnitTestProject1
             //Assert
             Assert.IsTrue(isModelStateValid == shouldVerify);
         }
+
+        
     }
 }
