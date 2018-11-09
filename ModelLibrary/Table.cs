@@ -12,13 +12,16 @@ namespace ModelLibrary
     {
         public string RestaurantId { get; set; }
 
-        [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number: Cannot contain spaces, ")]
+        [Required]
+        [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number: Cannot contain spaces, symbols, or letters")]
         public string NoSeats { get; set; }
         
-        [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number")]
+        [Required]
+        [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number: Cannot contain spaces, symbols, or letters")]
         public string Total { get; set; }
         
-        [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number")]
+        [Required]
+        [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number: Cannot contain spaces, symbols, or letters")]
         public string Reserved { get; set; }
     }
 }

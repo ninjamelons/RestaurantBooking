@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -106,17 +107,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Connected Services\RestaurantService\DatabaseAccessLibrary.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\RestaurantService\ModelLibrary.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\RestaurantService\RestaurantDesktopClient.RestaurantService.Restaurant.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\RestaurantService\RestaurantDesktopClient.RestaurantService.Table.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\RestaurantService\service.wsdl" />
     <None Include="Connected Services\RestaurantService\service.xsd">
@@ -125,6 +117,8 @@
     <None Include="Connected Services\RestaurantService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\ModelLibrary.Restaurant.datasource" />
+    <None Include="Properties\DataSources\ModelLibrary.Table.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
