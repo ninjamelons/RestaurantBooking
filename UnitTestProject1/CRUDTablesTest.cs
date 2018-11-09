@@ -2,33 +2,34 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using ControllerLibrary;
 using DatabaseAccessLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModelLibrary;
 
-namespace UnitTestProject1
+namespace UnitTests
 {
     [TestClass]
     public class CRUDTablesTest
     {
         [TestMethod]
-        [DataRow("4","20","0",true,DisplayName = "All valid")]
-        [DataRow("","","",true,DisplayName = "Empty")]
-        [DataRow("4","20","30",false,DisplayName = "Reserved tables > Total tables")]
-        [DataRow("4","20","-15",false,DisplayName = "Reserved negative")]
-        [DataRow("4","20","1t0",false,DisplayName = "Reserved has letter")]
-        [DataRow("4","20","1£0",false,DisplayName = "Reserved has symbol")]
-        [DataRow("4","20","   0  ",false,DisplayName = "Reserved has space")]
-        [DataRow("4","-20","0",false,DisplayName = "Total tables negative")]
-        [DataRow("4","2t0","0",false,DisplayName = "Total tables has letter")]
-        [DataRow("4","2£0","0",false,DisplayName = "Total tables has symbol")]
-        [DataRow("4","    2 0  ","0",false,DisplayName = "Total has space")]
-        [DataRow("-4","20","0",false,DisplayName = "NoSeats negative")]
-        [DataRow("4t","20","0",false,DisplayName = "NoSeats has letter")]
-        [DataRow("4$","20","0",false,DisplayName = "NoSeats has symbol")]
-        [DataRow(" 4  ","20","0",false,DisplayName = "NoSeats has space")]
-        public void Create_Table_Valid_Inputs(string noSeats, string total, string reserved, bool shouldValidate)
+        [DataRow("1000000","4","20","0",true,DisplayName = "All valid")]
+        [DataRow("1000000","","","",false,DisplayName = "Empty")]
+        [DataRow("1000000","4","20","30",false,DisplayName = "Reserved tables > Total tables")]
+        [DataRow("1000000","4","20","-15",false,DisplayName = "Reserved negative")]
+        [DataRow("1000000","4","20","1t0",false,DisplayName = "Reserved has letter")]
+        [DataRow("1000000","4","20","1£0",false,DisplayName = "Reserved has symbol")]
+        [DataRow("1000000","4","20","   0  ",false,DisplayName = "Reserved has space")]
+        [DataRow("1000000","4","-20","0",false,DisplayName = "Total tables negative")]
+        [DataRow("1000000","4","2t0","0",false,DisplayName = "Total tables has letter")]
+        [DataRow("1000000","4","2£0","0",false,DisplayName = "Total tables has symbol")]
+        [DataRow("1000000","4","    2 0  ","0",false,DisplayName = "Total has space")]
+        [DataRow("1000000","-4","20","0",false,DisplayName = "NoSeats negative")]
+        [DataRow("1000000","4t","20","0",false,DisplayName = "NoSeats has letter")]
+        [DataRow("1000000","4$","20","0",false,DisplayName = "NoSeats has symbol")]
+        [DataRow("1000000"," 4  ","20","0",false,DisplayName = "NoSeats has space")]
+        public void Create_Table_Valid_Inputs(string restaurantId, string noSeats, string total, string reserved, bool shouldValidate)
         {
             //Setup
             var sut = new Table
@@ -54,40 +55,91 @@ namespace UnitTestProject1
             //Setup
             ResTable newTable = new ResTable
             {
-                noSeats = 4, reserved = 0, restaurantId = 1, total = 20
+                noSeats = 4, reserved = 0, restaurantId = 1000000, total = 20
             };
 
-            RestaurantsDb ResDb = new RestaurantsDb();
+            var tblDb = new TableDb();
 
             //Act
-            ResDb.AddTable(newTable);
+            tblDb.AddTable(newTable);
 
-            //Get table with: noSeats = 4, reserved = 0, restaurantId = 1, total = 20
-            ResTable resTable = ResDb.GetTable(4,0,1,20);
+            //Get table with: noSeats = 4, restaurantId = 1000000
+            ResTable resTable = tblDb.GetTable(4,1000000);
 
             //Assert
-            Assert.Equals(resTable, newTable);
+            //Assert
+            Assert.IsTrue(resTable.noSeats == newTable.noSeats
+                          && resTable.reserved == newTable.reserved
+                          && resTable.total == newTable.total
+                          && resTable.restaurantId == newTable.restaurantId);
         }
 
         [TestMethod]
         public void Create_Table_ModelLayer_To_DbModel()
         {
             //Setup
-            Table table = new Table
+            var table = new Table
             {
-                RestaurantId = "1", NoSeats = "4", Reserved = "0", Total = "20"
+                RestaurantId = "1000000", NoSeats = "4", Reserved = "0", Total = "20"
             };
-            ResTable newTable = new ResTable
+            var newTable = new ResTable
             {
-                noSeats = 4, reserved = 0, restaurantId = 1, total = 20
+                noSeats = 4, reserved = 0, restaurantId = 1000000, total = 20
             };
-            RestaurantCtrl resCtrl = new RestaurantCtrl();
+            var tblCtrl = new TableCtrl();
 
             //Act
-            ResTable resTable = resCtrl.ConvertTable(table);
+            var resTable = tblCtrl.ConvertTable(table);
 
             //Assert
-            Assert.Equals(resTable, newTable);
+            Assert.IsTrue(resTable.noSeats == newTable.noSeats
+                          && resTable.reserved == newTable.reserved
+                          && resTable.total == newTable.total
+                          && resTable.restaurantId == newTable.restaurantId);
+        }
+
+        [TestMethod]
+        public void Delete_No_Tables_Decrement_Db()
+        {
+            //Setup
+            var table = new Table
+            {
+                RestaurantId = "1000000", NoSeats = "4", Reserved = "0", Total = "20"
+            };
+            var tblCtrl = new TableCtrl();
+            var prevNo = tblCtrl.GetTables().Count();
+
+            //Act
+            tblCtrl.DeleteTable(table);
+            var currNo = tblCtrl.GetTables().Count();
+
+            //Assert
+            Assert.AreEqual(prevNo, currNo+1);
+        }
+
+        [TestMethod]
+        public void Delete_Correct_Table_Db()
+        {
+            //Setup
+            var table = new Table
+            {
+                RestaurantId = "1000000", NoSeats = "4", Reserved = "0", Total = "20"
+            };
+            var tblCtrl = new TableCtrl();
+
+            //Act
+            tblCtrl.DeleteTable(table);
+            var resTable = tblCtrl.GetTable(table);
+
+            //Assert
+            Assert.IsNull(resTable);
+        }
+
+        [TestMethod]
+        [DataRow(4,0,20)]
+        public void Edit_Table(int noSeats, int reserved, int total)
+        {
+
         }
     }
 }
