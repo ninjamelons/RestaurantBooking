@@ -21,12 +21,12 @@ namespace UserWebClient
         {
             ApplicationDbContext context = new ApplicationDbContext();
 
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 
             // In Startup iam creating first Admin Role and creating a default Admin User    
-            if (!roleManager.RoleExists("Admin"))
+            if (!RoleManager.RoleExists("Admin"))
             {
 
                 // first we create Admin rool   
@@ -34,7 +34,7 @@ namespace UserWebClient
                 {
                     Name = "Admin"
                 };
-                roleManager.Create(role);
+                RoleManager.Create(role);
 
                 //Here we create a Admin super user who will maintain the website                  
 
@@ -44,7 +44,7 @@ namespace UserWebClient
                     Email = "plebs@gmail.com"
                 };
 
-                string userPWD = "Plebs-101";
+                string userPWD = "plebs101";
 
                 var chkUser = UserManager.Create(user, userPWD);
 
@@ -56,36 +56,36 @@ namespace UserWebClient
                 }
             }
             // creating Creating Admin role    
-            if (!roleManager.RoleExists("Admin"))
+            if (!RoleManager.RoleExists("Admin"))
             {
                 var role = new IdentityRole
                 {
                     Name = "Admin"
                 };
-                roleManager.Create(role);
+                RoleManager.Create(role);
 
             }
 
 
             // creating Creating Manager role    
-            if (!roleManager.RoleExists("Manager"))
+            if (!RoleManager.RoleExists("Manager"))
             {
                 var role = new IdentityRole
                 {
                     Name = "Manager"
                 };
-                roleManager.Create(role);
+                RoleManager.Create(role);
 
             }
 
             // creating Creating User role    
-            if (!roleManager.RoleExists("User"))
+            if (!RoleManager.RoleExists("User"))
             {
                 var role = new IdentityRole
                 {
                     Name = "User"
                 };
-                roleManager.Create(role);
+                RoleManager.Create(role);
 
             }
         }
