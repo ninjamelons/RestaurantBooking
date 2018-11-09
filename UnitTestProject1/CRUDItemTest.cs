@@ -44,9 +44,12 @@ namespace UnitTestProject1
                 Assert.IsTrue(isModelStateValid == shouldValidate);
             }
 
+        [TestMethod]
         public void Create_Item_Added_To_Db()
         {
             //Setup
+            #region creates Item,Menu,Restaurant
+
             DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
             {
                 description = "PerfectlyGoodDescription",
@@ -71,23 +74,26 @@ namespace UnitTestProject1
                 email = "RestaurantEmailExample",
                 zipcode = 1231223
             };
-            
+            #endregion
 
-            ItemDb ItemDb = new ItemDb();
+
+            ItemDb itemDb = new ItemDb();
 
             //Act
-            ItemDb.AddItem(newItem);
+            itemDb.AddItem(newItem);
 
-            //Get Item(1,1,"PerfectlyGoodName", "PerfectlyGoodDescription", 1);
-            DatabaseAccessLibrary.Item anotherItem = ItemDb.GetItem(1, 1, "PerfectlyGoodName", "PerfectlyGoodDescription", 1);
+            //Get Item(1,1,"PerfectlyGoodName");
+            DatabaseAccessLibrary.Item anotherItem = itemDb.GetItem(1, "PerfectlyGoodName");
 
             //Assert
             Assert.Equals(anotherItem, newItem);
         }
-
+        [TestMethod]
         public void Item_Deleted_From_Db()
         {
             //Setup
+            #region creates Item,Menu,Restaurant
+
             DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
             {
                 description = "PerfectlyGoodDescription",
@@ -112,19 +118,69 @@ namespace UnitTestProject1
                 email = "RestaurantEmailExample",
                 zipcode = 1231223
             };
+            #endregion
 
 
-            ItemDb ItemDb = new ItemDb();
-            ItemDb.AddItem(newItem);
+            ItemDb itemDb = new ItemDb();
+            itemDb.AddItem(newItem);
+            
             //Act
 
 
             //Delete Item
-            ItemDb.DeleteItem(newItem);
+            itemDb.DeleteItem(newItem);
 
             //Assert
             Assert.IsNull(newItem);
         }
-        
+        [TestMethod]
+        public void Update_Item_In_Db()
+        {
+            #region creates Item,Menu,Restaurant
+
+            DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
+            {
+                description = "PerfectlyGoodDescription",
+                id = 1,
+                itemCatId = 1,
+                menuId = 1,
+                name = "PerfectlyGoodName",
+            };
+            Menu newMenu = new Menu
+            {
+                id = 1,
+                restaurantId = 1,
+                active = true
+
+            };
+
+            Restaurant newRestaurant = new Restaurant
+            {
+                id = 1,
+                name = "RestaurantNameExample",
+                address = "RestaurantAddressExample",
+                email = "RestaurantEmailExample",
+                zipcode = 1231223
+            };
+            #endregion
+
+            ItemDb itemDb = new ItemDb();
+            itemDb.AddItem(newItem);
+            
+
+            //Get Item(1,1,"PerfectlyGoodName");
+            DatabaseAccessLibrary.Item anotherItem = itemDb.GetItem(1, "PerfectlyGoodName");
+            itemDb.UpdateItem(newItem);
+            //Assert
+            Assert.AreNotEqual(newItem, anotherItem);
+
+
+
+        }
+        [TestMethod]
+        public void Update_Item_In_Db_Without_Changes()
+        {
+
+        }
     }
     }
