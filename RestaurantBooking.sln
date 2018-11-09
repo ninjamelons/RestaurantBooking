@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantDesktopClient", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserWebClient", "UserWebClient\UserWebClient.csproj", "{B26B7D4D-9A59-462C-9778-F9C241D7DD24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{612634E2-FE8B-4512-8A86-CABE553191FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTestProject1\UnitTests.csproj", "{612634E2-FE8B-4512-8A86-CABE553191FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseAccessLibrary", "DatabaseAccessLibrary\DatabaseAccessLibrary.csproj", "{AF59ED6C-26D5-4DC9-BAA6-B304E4823194}"
 EndProject

@@ -5,7 +5,7 @@ using ModelLibrary;
 using ControllerLibrary;
 using System;
 
-namespace UnitTestProject1
+namespace UnitTests
 {
     /// <summary>
     /// Summary description for RegisterRestaurantTest

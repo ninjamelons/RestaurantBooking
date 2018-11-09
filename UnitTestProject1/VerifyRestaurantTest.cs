@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using ModelLibrary;
 
-
-
-namespace UnitTestProject1
+namespace UnitTests
 {
     class VerifyRestaurantTest
     {
