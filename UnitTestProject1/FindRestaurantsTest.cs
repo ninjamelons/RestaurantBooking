@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using UserWebClient.Models;
 
-namespace UnitTestProject1
+namespace UnitTests
 {
         
 

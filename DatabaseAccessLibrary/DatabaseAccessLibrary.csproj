@@ -55,6 +55,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="RestaurantsDb.cs" />
+    <Compile Include="TableDb.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

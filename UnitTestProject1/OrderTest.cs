@@ -8,7 +8,7 @@ using ModelLibrary;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using Order = ModelLibrary.Order;
 
-namespace UnitTestProject1
+namespace UnitTests
 {
     [TestClass]
     public class OrderTest

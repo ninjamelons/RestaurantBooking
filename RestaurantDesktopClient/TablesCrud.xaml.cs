@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RestaurantDesktopClient.RestaurantService;
+using IRestaurantService = RestaurantService.IRestaurantService;
 using ValidationResult = System.Windows.Controls.ValidationResult;
 
 namespace RestaurantDesktopClient
@@ -30,30 +31,49 @@ namespace RestaurantDesktopClient
 
         private void UpdateAddTable_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            var proxy = new RestaurantServiceClient();
+            var table = CreateTable();
+
+            if (ValidateTable(table))
+            {
+                proxy.CreateTable(table);
+            }
+            else
+            {
+                MessageBoxResult prompt = MessageBox.Show("Please enter valid characters in all fields", "Invalid Input");  
+            }
         }
 
         private void RemoveTable_OnClickTable_OnClick(object sender, RoutedEventArgs e)
         {
-            RestaurantServiceClient proxy = new RestaurantServiceClient();
+            var proxy = new RestaurantServiceClient();
+            var table = CreateTable();
 
-            ModelLibrary.Table table = new ModelLibrary.Table
-            {
-                NoSeats = NoSeats.Text, Reserved = NoReserved.Text,
-                RestaurantId = ResId.Content.ToString(), Total = NoTotal.Text
-            };
-
-            var context = new ValidationContext(table, null, null);
-            var result = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
-
-            if (Validator.TryValidateObject(table, context, result, true))
+            if (ValidateTable(table))
             {
                 proxy.DeleteTable(table);
             }
             else
             {
-                MessageBoxResult prompt = MessageBox.Show("Please enter valid characters", "Invalid Input");  
+                MessageBoxResult prompt = MessageBox.Show("Please enter valid characters in all fields", "Invalid Input");  
             }
+        }
+
+        private bool ValidateTable(ModelLibrary.Table table)
+        {
+            var context = new ValidationContext(table, null, null);
+            var result = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+
+            return Validator.TryValidateObject(table, context, result, true);
+        }
+
+        private ModelLibrary.Table CreateTable()
+        {
+            return new ModelLibrary.Table
+            {
+                NoSeats = NoSeats.Text, Reserved = NoReserved.Text,
+                RestaurantId = ResId.Content.ToString(), Total = NoTotal.Text
+            };
         }
     }
 }
