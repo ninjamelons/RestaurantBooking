@@ -8,9 +8,19 @@ namespace UserWebClient.Controllers
 {
     public class RestaurantController : Controller
     {
+        RestaurantService.RestaurantServiceClient proxy = new RestaurantService.RestaurantServiceClient();
+
+       // private readonly RestaurantService.IRestaurantService _proxy;
+       //
+       // public RestaurantController(RestaurantService.IRestaurantService proxy)
+       // {
+       //     this._proxy = proxy;
+       // }
+
         // GET: Restaurant
         public ActionResult Index()
         {
+            
             return View();
         }
 
@@ -23,6 +33,7 @@ namespace UserWebClient.Controllers
         // GET: Restaurant/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
