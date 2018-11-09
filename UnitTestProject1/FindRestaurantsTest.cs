@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using UserWebClient.Models;
 
-namespace UnitTestProject1
+namespace UnitTests
 {
         
 
@@ -25,21 +25,21 @@ namespace UnitTestProject1
         [DataRow(" ", false, DisplayName = "No white space allowed")]
         public void Test_Search_Restaurant(int zipCode, string searchQuery, int expectedNoOfResults)
         {
-            var searchRestaurantStub = new Mock<SearchRestaurant>();
+            var findRestaurantStub = new Mock<FindRestaurant>();
 
-            searchRestaurantStub.Setup(x => x.GetMovie()).Returns(() =>
+            findRestaurantStub.Setup(x => x.GetZipCode()).Returns(() =>
             {
-                return new List<SearchRestaurant> {
-                    new SearchRestaurant{zipCode = "9000"}
+                return new List<FindRestaurant> {
+                    new FindRestaurant{zipCode = "9000"}
 
                 }.ToArray();
             });
 
-            var sut = new SearchRestaurant(searchRestaurantStub.Object);
+            var sut = new FindRestaurant(findRestaurantStub.Object);
 
             //Act
 
-            ViewResult resultPage = sut.Index(searchQuery) as ViewResult;
+            ViewResult resultPage = sut.Restaurants(searchQuery) as ViewResult;
 
             //Assert
 

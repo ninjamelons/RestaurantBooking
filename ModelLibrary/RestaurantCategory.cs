@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace UserWebClient.Models
+namespace ModelLibrary
 {
     public class RestaurantCategory
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public List<Restaurant> Restaurants { get; set; }
     }
 }

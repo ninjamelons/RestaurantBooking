@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModelLibrary;
 using DatabaseAccessLibrary;
 
-namespace UnitTestProject1
+namespace UnitTests
 {
     [TestClass]
     public class CRUDItemTest
@@ -183,4 +183,4 @@ namespace UnitTestProject1
 
         }
     }
-    }
+}

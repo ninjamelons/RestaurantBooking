@@ -22,12 +22,17 @@ namespace RestaurantService
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Restaurant> GetAllRestaurants()
+        public void DoWork()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Table> GetAllTables(Restaurant restaurant)
+        public IEnumerable<ModelLibrary.Restaurant> GetAllRestaurants()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Table> GetAllTables(ModelLibrary.Restaurant restaurant)
         {
             throw new NotImplementedException();
         }
@@ -37,7 +42,7 @@ namespace RestaurantService
             throw new NotImplementedException();
         }
 
-        public void RegisterRestaurant(Restaurant restaurant)
+        public void RegisterRestaurant(ModelLibrary.Restaurant restaurant)
         {
             throw new NotImplementedException();
         }
