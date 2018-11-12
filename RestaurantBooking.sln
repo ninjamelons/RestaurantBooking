@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantDesktopClient", "RestaurantDesktopClient\RestaurantDesktopClient.csproj", "{C266915F-9F3A-46EE-9D32-EF8F6DFF6DAB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserWebClient", "UserWebClient\UserWebClient.csproj", "{B26B7D4D-9A59-462C-9778-F9C241D7DD24}"
+	ProjectSection(ProjectDependencies) = postProject
+		{42A6ED34-8511-4A4E-8D7E-82BF17688F7F} = {42A6ED34-8511-4A4E-8D7E-82BF17688F7F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTestProject1\UnitTests.csproj", "{612634E2-FE8B-4512-8A86-CABE553191FC}"
 EndProject
