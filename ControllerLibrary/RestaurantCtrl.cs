@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ControllerLibrary
 {
-    public static class RestaurantCtrl
+    public class RestaurantCtrl
     {
         public static ResTable ConvertTable(Table table)
         {
