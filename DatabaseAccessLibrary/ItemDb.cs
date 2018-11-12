@@ -12,18 +12,16 @@ namespace DatabaseAccessLibrary
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-            if (db.Items.Any(t => !(t.name == item.name && t.id == item.id )))
+            if (db.Items.Any(t => !(t.name == item.name && t.id == item.id
+            && )))
                 db.Items.InsertOnSubmit(item);
             db.SubmitChanges();
-            
-            
-
         }
 
-        public DatabaseAccessLibrary.Item GetItem(int id, string name)
+        public Item GetItem(int id, string name, Price price )
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var dbItem = db.Items.Single(a => a.id == id && a.name == name); 
+            var dbItem = db.Items.Single(a => a.id == id && a.name == name && a.Prices.g== price)); //Price????
             return dbItem;
         }
 
@@ -36,12 +34,23 @@ namespace DatabaseAccessLibrary
             db.SubmitChanges();
         }
 
-        public void UpdateItem(Item item)
+        public void UpdateItem(Item beforeItem, Item afterItem)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var dbItem = db.Items
-
-
+            var newItem = db.Items.SingleOrDefault(a => a.name == beforeItem.name &&
+                          a.description == beforeItem.description && a.Prices.Equals(beforeItem.Prices)); //Price????
+            newItem = afterItem;
+            db.SubmitChanges();
         }
+
+        public IEnumerable<Item> GetItems()
+        {
+            var db = new JustFeastDbDataContext();
+
+            var items = db.Items.AsEnumerable();
+            return items;
+        }
+
+
     }
 }

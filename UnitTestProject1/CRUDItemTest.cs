@@ -12,7 +12,6 @@ namespace UnitTests
     [TestClass]
     public class CRUDItemTest
     {
-      
             [TestMethod]
             [DataRow("ChickenSteak", "WeirdDescription", 12.0, true, DisplayName = "All data correct")]
             [DataRow("a", "WeirderDescription", 12.0, false, DisplayName = "Name too short")]
@@ -48,7 +47,7 @@ namespace UnitTests
         public void Create_Item_Added_To_Db()
         {
             //Setup
-            #region creates Item,Menu,Restaurant
+            #region creates Item,Menu,Restaurant,Price
 
             DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
             {
@@ -65,8 +64,8 @@ namespace UnitTests
                active = true
 
             };
-            
-            Restaurant newRestaurant = new Restaurant
+
+            DatabaseAccessLibrary.Restaurant newRestaurant = new DatabaseAccessLibrary.Restaurant
             {
                 id = 1,
                 name = "RestaurantNameExample",
@@ -74,8 +73,16 @@ namespace UnitTests
                 email = "RestaurantEmailExample",
                 zipcode = 1231223
             };
+            DateTime startDate = new DateTime(2011, 6, 10);
+            DateTime endDate = new DateTime(2011, 7, 11);
+            Price newPrice = new Price
+            {
+                price1 = 12, // price int?
+                startDate = startDate,
+                endDate = endDate
+                
+        };
             #endregion
-
 
             ItemDb itemDb = new ItemDb();
 
@@ -83,7 +90,7 @@ namespace UnitTests
             itemDb.AddItem(newItem);
 
             //Get Item(1,1,"PerfectlyGoodName");
-            DatabaseAccessLibrary.Item anotherItem = itemDb.GetItem(1, "PerfectlyGoodName");
+            DatabaseAccessLibrary.Item anotherItem = itemDb.GetItem(1, "PerfectlyGoodName", newPrice);// PRICE!?
 
             //Assert
             Assert.Equals(anotherItem, newItem);
@@ -110,7 +117,7 @@ namespace UnitTests
 
             };
 
-            Restaurant newRestaurant = new Restaurant
+            DatabaseAccessLibrary.Restaurant newRestaurant = new DatabaseAccessLibrary.Restaurant
             {
                 id = 1,
                 name = "RestaurantNameExample",
@@ -136,7 +143,7 @@ namespace UnitTests
         [TestMethod]
         public void Update_Item_In_Db()
         {
-            #region creates Item,Menu,Restaurant
+            #region creates Item,Menu,Restaurant,Price
 
             DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
             {
@@ -154,13 +161,23 @@ namespace UnitTests
 
             };
 
-            Restaurant newRestaurant = new Restaurant
+            DatabaseAccessLibrary.Restaurant newRestaurant = new DatabaseAccessLibrary.Restaurant
             {
                 id = 1,
                 name = "RestaurantNameExample",
                 address = "RestaurantAddressExample",
                 email = "RestaurantEmailExample",
                 zipcode = 1231223
+            };
+
+            DateTime startDate = new DateTime(2011, 6, 10);
+            DateTime endDate = new DateTime(2011, 7, 11);
+            Price newPrice = new Price
+            {
+                price1 = 12, // price int?
+                startDate = startDate,
+                endDate = endDate
+
             };
             #endregion
 
@@ -169,7 +186,7 @@ namespace UnitTests
             
 
             //Get Item(1,1,"PerfectlyGoodName");
-            DatabaseAccessLibrary.Item anotherItem = itemDb.GetItem(1, "PerfectlyGoodName");
+            DatabaseAccessLibrary.Item anotherItem = itemDb.GetItem(1, "PerfectlyGoodName", newPrice);
             itemDb.UpdateItem(newItem);
             //Assert
             Assert.AreNotEqual(newItem, anotherItem);

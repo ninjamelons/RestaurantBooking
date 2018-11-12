@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ModelLibrary
 {
     public class Item
-    {
+    {   [Required]
         [RegularExpression("^[a-zA-Z ]{3,20}$*", ErrorMessage = "Invalid Name")]
         public string Name { get; set; }
 
