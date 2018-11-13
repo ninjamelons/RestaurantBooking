@@ -17,22 +17,44 @@ namespace RestaurantDesktopClient
         {
             InitializeComponent();
             //ResId.Content = GetRestaurantId();
-            TableCombo.ItemsSource = GetTables();
+            //TableCombo.ItemsSource = GetTables();
         }
 
         private void UpdateAddTable_OnClick(object sender, RoutedEventArgs e)
         {
             var proxy = new RestaurantServiceClient();
-            var table = CreateTable();
+            var oldTable = new Table
+            {
+                NoSeats = hiddenNoSeats.Content.ToString(),
+                RestaurantId = hiddenResId.Content.ToString()
+            };
+            var newTable = CreateTable();
 
-            if (ValidateTable(table))
+            if (ValidateTable(newTable))
             {
-                proxy.CreateTable(table);
+                if (CheckOldTableMatchesDb(oldTable))
+                {
+                    proxy.UpdateTable(oldTable,newTable);
+                }
+                else if (newTable.RestaurantId != hiddenResId.Content.ToString()
+                         && newTable.NoSeats != hiddenNoSeats.Content.ToString())
+                {
+                    proxy.CreateTable(newTable);
+                }
+                else
+                {
+                    MessageBoxResult prompt =
+                        MessageBox.Show("Please enter valid characters in all fields", "Invalid Input");
+                }
             }
-            else
-            {
-                MessageBoxResult prompt = MessageBox.Show("Please enter valid characters in all fields", "Invalid Input");  
-            }
+        }
+
+        private bool CheckOldTableMatchesDb(Table oldTable)
+        {
+            var proxy = new RestaurantServiceClient();
+            if (proxy.GetTable(oldTable) != null)
+                return true;
+            return false;
         }
 
         private void RemoveTable_OnClickTable_OnClick(object sender, RoutedEventArgs e)
@@ -73,14 +95,14 @@ namespace RestaurantDesktopClient
             return new ModelLibrary.Table
             {
                 NoSeats = NoSeats.Text, Reserved = NoReserved.Text,
-                RestaurantId = ResId.Content.ToString(), Total = NoTotal.Text
+                RestaurantId = hiddenResId.Content.ToString(), Total = NoTotal.Text
             };
         }
 
         private IEnumerable<Table> GetTables()
         {
             var proxy = new RestaurantServiceClient();
-            return proxy.GetAllTables(Convert.ToInt32(ResId.Content.ToString()));
+            return proxy.GetAllTables(Convert.ToInt32(hiddenResId.Content.ToString()));
         }
     }
 }

@@ -52,6 +52,7 @@
             Table List
         </Label>
         <ComboBox SelectionChanged="TableCombo_OnSelectionChanged" Name="TableCombo" Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Margin="10,11,10,0" Height="22"/>
-        <Label Content="" Name="ResId" Grid.Column="2" HorizontalAlignment="Left" Margin="292,76.8,0,0" Grid.Row="4" VerticalAlignment="Top"/>
+        <Label Name="hiddenResId" Visibility="Hidden"/>
+        <Label Name ="hiddenNoSeats" Visibility="Hidden"/>
     </Grid>
 </Page>

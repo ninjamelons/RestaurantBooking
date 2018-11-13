@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0e0d1c9f-034a-4d44-9754-aaa90a89fcb3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="28a2f2c1-8e44-4b66-a3d5-8bb5bd707034" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="8e4d0050-19c7-4c40-9a1c-e309098f7f11" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="0fb84206-ded8-4d05-87c3-760e986a8189" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="e1aa5702-7b0b-4f1f-8d77-446fbf4cddd2" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />
-    <MetadataFile FileName="ModelLibrary.xsd" MetadataType="Schema" ID="620d213d-1327-4126-96c8-0249b58cd898" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="f69bc2b3-5409-4814-8020-1964b44ed7c6" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="712cf415-0e33-4612-863a-1c0a0339b633" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="079c61ae-313e-4f8e-b7c6-fcf381f6d379" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />
+    <MetadataFile FileName="ModelLibrary.xsd" MetadataType="Schema" ID="11851a2f-0451-4cc9-9f50-dffff58794c0" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

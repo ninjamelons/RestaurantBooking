@@ -33,7 +33,7 @@ namespace RestaurantService
         [OperationContract]
         Table GetTable(Table table);
         [OperationContract]
-        void UpdateTable(Table table);
+        void UpdateTable(Table oldTable, Table newTable);
         [OperationContract]
         void DeleteTable(Table table);
     }

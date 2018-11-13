@@ -58,6 +58,34 @@ namespace ControllerLibrary
             return modelTables;
         }
 
+        public IEnumerable<Table> GetRestaurantTables(int restaurantId)
+        {
+            var tableDb = new TableDb();
+            var resTables = tableDb.GetRestaurantTables(restaurantId);
+            
+            var modelTables = new List<Table>();
+
+            foreach (var table in resTables)
+            {
+                modelTables.Add(new Table
+                {
+                    NoSeats = table.noSeats.ToString(),
+                    Reserved = table.reserved.ToString(),
+                    RestaurantId = table.restaurantId.ToString(),
+                    Total = table.total.ToString()
+                });
+            }
+
+            return modelTables;
+        }
+
+        public void CreateTable(Table table)
+        {
+            var tableDb = new TableDb();
+            var resTable = ConvertTable(table);
+            tableDb.AddTable(resTable);
+        }
+
         public void UpdateTable(Table oldTable, Table newTable)
         {
             var tableDb = new TableDb();

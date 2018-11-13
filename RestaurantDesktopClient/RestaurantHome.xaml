@@ -8,17 +8,13 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Restaurant - Home">
 
-    <Grid>
-        <Button x:Name="ToTablesPage" Content="Tables" HorizontalAlignment="Left" Margin="262,145,0,0" VerticalAlignment="Top" Width="265" RenderTransformOrigin="0.5,0.5" Height="95" Click="ToTablesPage_OnClick">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="12.806"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
+    <Grid Margin="0,0,0,0">
+        <Border BorderThickness="2" BorderBrush="DarkGray" Background="LightGray" Margin="10,10,10,130">
+            <Canvas>
 
+            </Canvas>
+        </Border>
+        <Button x:Name="ToTablesPage" Content="Manage Tables" HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" Margin="13" Padding="8 3" Click="ToTablesPage_OnClick"/>
     </Grid>
 </Page>
