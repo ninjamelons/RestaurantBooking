@@ -1,21 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ModelLibrary;
 using RestaurantDesktopClient.RestaurantService;
-using IRestaurantService = RestaurantService.IRestaurantService;
-using ValidationResult = System.Windows.Controls.ValidationResult;
 
 namespace RestaurantDesktopClient
 {
@@ -27,6 +16,8 @@ namespace RestaurantDesktopClient
         public TablesCrud()
         {
             InitializeComponent();
+            //ResId.Content = GetRestaurantId();
+            TableCombo.ItemsSource = GetTables();
         }
 
         private void UpdateAddTable_OnClick(object sender, RoutedEventArgs e)
@@ -59,6 +50,16 @@ namespace RestaurantDesktopClient
             }
         }
 
+        private void TableCombo_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var proxy = new RestaurantServiceClient();
+            var selectedTable = (ModelLibrary.Table)TableCombo.SelectedItem;
+            var dbTable = proxy.GetTable(selectedTable);
+            NoSeats.Text = dbTable.NoSeats;
+            NoReserved.Text = dbTable.Reserved;
+            NoTotal.Text = dbTable.Total;
+        }
+
         private bool ValidateTable(ModelLibrary.Table table)
         {
             var context = new ValidationContext(table, null, null);
@@ -74,6 +75,12 @@ namespace RestaurantDesktopClient
                 NoSeats = NoSeats.Text, Reserved = NoReserved.Text,
                 RestaurantId = ResId.Content.ToString(), Total = NoTotal.Text
             };
+        }
+
+        private IEnumerable<Table> GetTables()
+        {
+            var proxy = new RestaurantServiceClient();
+            return proxy.GetAllTables(Convert.ToInt32(ResId.Content.ToString()));
         }
     }
 }
