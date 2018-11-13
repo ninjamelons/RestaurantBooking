@@ -24,13 +24,13 @@ namespace UserWebClient.Controllers
             context = new ApplicationDbContext();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
 
-       
+
 
         public ApplicationSignInManager SignInManager
         {
@@ -38,9 +38,9 @@ namespace UserWebClient.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -87,7 +87,7 @@ namespace UserWebClient.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, model.RememberMe });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
@@ -95,7 +95,7 @@ namespace UserWebClient.Controllers
             }
         }
 
-        //
+        //   
         // GET: /Account/VerifyCode   
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
@@ -107,6 +107,8 @@ namespace UserWebClient.Controllers
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
+
+       
 
         //
         // POST: /Account/VerifyCode
@@ -124,7 +126,7 @@ namespace UserWebClient.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -149,7 +151,7 @@ namespace UserWebClient.Controllers
         }
 
         //
-        // POST: /Account/Register
+        // POST: /Account/Register   
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -324,7 +326,7 @@ namespace UserWebClient.Controllers
             {
                 return View("Error");
             }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
+            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, model.ReturnUrl, RememberMe = model.RememberMe });
         }
 
         //

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ModelLibrary;
+using UserWebClient.Models;
 
 namespace UserWebClient.Controllers
 {
@@ -10,18 +13,17 @@ namespace UserWebClient.Controllers
     {
         RestaurantService.RestaurantServiceClient proxy = new RestaurantService.RestaurantServiceClient();
 
-       // private readonly RestaurantService.IRestaurantService _proxy;
-       //
-       // public RestaurantController(RestaurantService.IRestaurantService proxy)
-       // {
-       //     this._proxy = proxy;
-       // }
+        // private readonly RestaurantService.IRestaurantService _proxy;
+        //
+        // public RestaurantController(RestaurantService.IRestaurantService proxy)
+        // {
+        //     this._proxy = proxy;
+        // }
 
         // GET: Restaurant
         public ActionResult Index()
         {
-            
-            return View();
+            return View(proxy.GetAllRestaurants());
         }
 
         // GET: Restaurant/Details/5
@@ -33,52 +35,81 @@ namespace UserWebClient.Controllers
         // GET: Restaurant/Create
         public ActionResult Create()
         {
-            
-            return View();
+            var rescats = new Dictionary<string, RestaurantCategory>();
+            rescats.Add("-No Category-", null);
+            foreach (RestaurantCategory x in proxy.GetAllRestaurantCategories())
+            {
+                rescats.Add(x.Name, x);
+            }
+
+            var model = new RestaurantViewModel { Restaurant = new Restaurant(), Categories = rescats };
+
+            return View("Create", model);
         }
 
         // POST: Restaurant/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(RestaurantViewModel model)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                proxy.CreateRestaurant(model.Restaurant);
+          
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
 
         // GET: Restaurant/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var rescats = new Dictionary<string, RestaurantCategory>();
+            rescats.Add("-No Category-", null);
+            foreach (RestaurantCategory x in proxy.GetAllRestaurantCategories())
+            {
+                rescats.Add(x.Name, x);
+            }
+
+            RestaurantViewModel model = new RestaurantViewModel { Restaurant = proxy.GetRestaurant(id), Categories = rescats };
+
+            return View("Edit", model);
         }
 
         // POST: Restaurant/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, RestaurantViewModel model)
         {
-            try
-            {
-                // TODO: Add update logic here
+           // try
+           // {
+           //     proxy.UpdateRestaurant(model.Restaurant);
+           //
+           //     return RedirectToAction("Index");
+           // }
+           // catch
+           // {
+           //     return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+           // }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            proxy.UpdateRestaurant(model.Restaurant);
+
+            return RedirectToAction("Index");
         }
 
         // GET: Restaurant/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                var model = proxy.GetRestaurant(id);
+                return View(model);
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
         }
 
         // POST: Restaurant/Delete/5
@@ -87,13 +118,12 @@ namespace UserWebClient.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
+                proxy.DeleteRestaurant(id);
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
     }

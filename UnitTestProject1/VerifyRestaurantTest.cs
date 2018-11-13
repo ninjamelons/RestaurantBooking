@@ -24,7 +24,7 @@ namespace UnitTests
             var sut =  new Restaurant
             {
                 Name = name,
-                address = address,
+                Address = address,
                 PhoneNo = phoneNo,
                 Email = email,
                

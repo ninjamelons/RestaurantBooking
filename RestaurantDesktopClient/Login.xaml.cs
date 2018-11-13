@@ -16,20 +16,20 @@ using System.Windows.Shapes;
 namespace RestaurantDesktopClient
 {
     /// <summary>
-    /// Interaction logic for RestaurantHome.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class RestaurantHome : Page
+    public partial class Login : Page
     {
-        public RestaurantHome()
+        public Login()
         {
             InitializeComponent();
         }
 
-        private void ToTablesPage_OnClick(object sender, RoutedEventArgs e)
+        private void LoginButton_OnClick(object sender, RoutedEventArgs e)
         {
             // View TablesCrud Page
-            TablesCrud tablesPage = new TablesCrud();
-            this.NavigationService.Navigate(tablesPage);
+            RestaurantHome homePage = new RestaurantHome();
+            this.NavigationService.Navigate(homePage);
         }
     }
 }

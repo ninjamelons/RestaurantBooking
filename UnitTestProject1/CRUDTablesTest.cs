@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using ControllerLibrary;
@@ -136,10 +134,30 @@ namespace UnitTests
         }
 
         [TestMethod]
-        [DataRow(4,0,20)]
-        public void Edit_Table(int noSeats, int reserved, int total)
+        [DataRow("4","0","30",DisplayName = "Total changed")]
+        [DataRow("4","2","20",DisplayName = "Reserved changed")]
+        [DataRow("3","0","20",DisplayName = "NoSeats changed")]
+        [DataRow("2","5","10",DisplayName = "All values changed")]
+        [DataRow("4","0","20",DisplayName = "No values changed")]
+        public void Edit_Table(string noSeats, string reserved, string total)
         {
+            //Setup
+            var ctrlTable = new Table
+            {
+                RestaurantId = "1000000", NoSeats = "4", Reserved = "0", Total = "20"
+            };
+            var editTable = new Table
+            {
+                RestaurantId = "1000000", NoSeats = noSeats, Reserved = reserved, Total = total
+            };
+            var tableCtrl = new TableCtrl();
+            
+            //Act
+            tableCtrl.UpdateTable(ctrlTable, editTable);
+            var returnedTable = tableCtrl.GetTable(editTable);
 
+            //Assert
+            Assert.AreNotEqual(ctrlTable,returnedTable);
         }
     }
 }

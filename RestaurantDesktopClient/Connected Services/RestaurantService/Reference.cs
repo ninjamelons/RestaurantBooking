@@ -21,11 +21,35 @@ namespace RestaurantDesktopClient.RestaurantService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetAllRestaurants", ReplyAction="http://tempuri.org/IRestaurantService/GetAllRestaurantsResponse")]
         System.Threading.Tasks.Task<ModelLibrary.Restaurant[]> GetAllRestaurantsAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/RegisterRestaurant", ReplyAction="http://tempuri.org/IRestaurantService/RegisterRestaurantResponse")]
-        void RegisterRestaurant(ModelLibrary.Restaurant restaurant);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByCategory", ReplyAction="http://tempuri.org/IRestaurantService/GetAllRestaurantsByCategoryResponse")]
+        ModelLibrary.Restaurant[] GetAllRestaurantsByCategory(int categoryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/RegisterRestaurant", ReplyAction="http://tempuri.org/IRestaurantService/RegisterRestaurantResponse")]
-        System.Threading.Tasks.Task RegisterRestaurantAsync(ModelLibrary.Restaurant restaurant);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByCategory", ReplyAction="http://tempuri.org/IRestaurantService/GetAllRestaurantsByCategoryResponse")]
+        System.Threading.Tasks.Task<ModelLibrary.Restaurant[]> GetAllRestaurantsByCategoryAsync(int categoryId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/CreateRestaurant", ReplyAction="http://tempuri.org/IRestaurantService/CreateRestaurantResponse")]
+        void CreateRestaurant(ModelLibrary.Restaurant restaurant);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/CreateRestaurant", ReplyAction="http://tempuri.org/IRestaurantService/CreateRestaurantResponse")]
+        System.Threading.Tasks.Task CreateRestaurantAsync(ModelLibrary.Restaurant restaurant);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/UpdateRestaurant", ReplyAction="http://tempuri.org/IRestaurantService/UpdateRestaurantResponse")]
+        void UpdateRestaurant(ModelLibrary.Restaurant restaurant);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/UpdateRestaurant", ReplyAction="http://tempuri.org/IRestaurantService/UpdateRestaurantResponse")]
+        System.Threading.Tasks.Task UpdateRestaurantAsync(ModelLibrary.Restaurant restaurant);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/DeleteRestaurant", ReplyAction="http://tempuri.org/IRestaurantService/DeleteRestaurantResponse")]
+        void DeleteRestaurant(ModelLibrary.Restaurant restaurant);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/DeleteRestaurant", ReplyAction="http://tempuri.org/IRestaurantService/DeleteRestaurantResponse")]
+        System.Threading.Tasks.Task DeleteRestaurantAsync(ModelLibrary.Restaurant restaurant);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetAllRestaurantCategories", ReplyAction="http://tempuri.org/IRestaurantService/GetAllRestaurantCategoriesResponse")]
+        ModelLibrary.RestaurantCategory[] GetAllRestaurantCategories();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetAllRestaurantCategories", ReplyAction="http://tempuri.org/IRestaurantService/GetAllRestaurantCategoriesResponse")]
+        System.Threading.Tasks.Task<ModelLibrary.RestaurantCategory[]> GetAllRestaurantCategoriesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/CreateTable", ReplyAction="http://tempuri.org/IRestaurantService/CreateTableResponse")]
         void CreateTable(ModelLibrary.Table table);
@@ -34,22 +58,22 @@ namespace RestaurantDesktopClient.RestaurantService {
         System.Threading.Tasks.Task CreateTableAsync(ModelLibrary.Table table);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetAllTables", ReplyAction="http://tempuri.org/IRestaurantService/GetAllTablesResponse")]
-        ModelLibrary.Table[] GetAllTables(ModelLibrary.Restaurant restaurant);
+        ModelLibrary.Table[] GetAllTables(int restaurantId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetAllTables", ReplyAction="http://tempuri.org/IRestaurantService/GetAllTablesResponse")]
-        System.Threading.Tasks.Task<ModelLibrary.Table[]> GetAllTablesAsync(ModelLibrary.Restaurant restaurant);
+        System.Threading.Tasks.Task<ModelLibrary.Table[]> GetAllTablesAsync(int restaurantId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetTable", ReplyAction="http://tempuri.org/IRestaurantService/GetTableResponse")]
-        ModelLibrary.Table[] GetTable(ModelLibrary.Table table);
+        ModelLibrary.Table GetTable(ModelLibrary.Table table);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetTable", ReplyAction="http://tempuri.org/IRestaurantService/GetTableResponse")]
-        System.Threading.Tasks.Task<ModelLibrary.Table[]> GetTableAsync(ModelLibrary.Table table);
+        System.Threading.Tasks.Task<ModelLibrary.Table> GetTableAsync(ModelLibrary.Table table);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/UpdateTable", ReplyAction="http://tempuri.org/IRestaurantService/UpdateTableResponse")]
-        void UpdateTable(ModelLibrary.Table table);
+        void UpdateTable(ModelLibrary.Table oldTable, ModelLibrary.Table newTable);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/UpdateTable", ReplyAction="http://tempuri.org/IRestaurantService/UpdateTableResponse")]
-        System.Threading.Tasks.Task UpdateTableAsync(ModelLibrary.Table table);
+        System.Threading.Tasks.Task UpdateTableAsync(ModelLibrary.Table oldTable, ModelLibrary.Table newTable);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/DeleteTable", ReplyAction="http://tempuri.org/IRestaurantService/DeleteTableResponse")]
         void DeleteTable(ModelLibrary.Table table);
@@ -93,12 +117,44 @@ namespace RestaurantDesktopClient.RestaurantService {
             return base.Channel.GetAllRestaurantsAsync();
         }
         
-        public void RegisterRestaurant(ModelLibrary.Restaurant restaurant) {
-            base.Channel.RegisterRestaurant(restaurant);
+        public ModelLibrary.Restaurant[] GetAllRestaurantsByCategory(int categoryId) {
+            return base.Channel.GetAllRestaurantsByCategory(categoryId);
         }
         
-        public System.Threading.Tasks.Task RegisterRestaurantAsync(ModelLibrary.Restaurant restaurant) {
-            return base.Channel.RegisterRestaurantAsync(restaurant);
+        public System.Threading.Tasks.Task<ModelLibrary.Restaurant[]> GetAllRestaurantsByCategoryAsync(int categoryId) {
+            return base.Channel.GetAllRestaurantsByCategoryAsync(categoryId);
+        }
+        
+        public void CreateRestaurant(ModelLibrary.Restaurant restaurant) {
+            base.Channel.CreateRestaurant(restaurant);
+        }
+        
+        public System.Threading.Tasks.Task CreateRestaurantAsync(ModelLibrary.Restaurant restaurant) {
+            return base.Channel.CreateRestaurantAsync(restaurant);
+        }
+        
+        public void UpdateRestaurant(ModelLibrary.Restaurant restaurant) {
+            base.Channel.UpdateRestaurant(restaurant);
+        }
+        
+        public System.Threading.Tasks.Task UpdateRestaurantAsync(ModelLibrary.Restaurant restaurant) {
+            return base.Channel.UpdateRestaurantAsync(restaurant);
+        }
+        
+        public void DeleteRestaurant(ModelLibrary.Restaurant restaurant) {
+            base.Channel.DeleteRestaurant(restaurant);
+        }
+        
+        public System.Threading.Tasks.Task DeleteRestaurantAsync(ModelLibrary.Restaurant restaurant) {
+            return base.Channel.DeleteRestaurantAsync(restaurant);
+        }
+        
+        public ModelLibrary.RestaurantCategory[] GetAllRestaurantCategories() {
+            return base.Channel.GetAllRestaurantCategories();
+        }
+        
+        public System.Threading.Tasks.Task<ModelLibrary.RestaurantCategory[]> GetAllRestaurantCategoriesAsync() {
+            return base.Channel.GetAllRestaurantCategoriesAsync();
         }
         
         public void CreateTable(ModelLibrary.Table table) {
@@ -109,28 +165,28 @@ namespace RestaurantDesktopClient.RestaurantService {
             return base.Channel.CreateTableAsync(table);
         }
         
-        public ModelLibrary.Table[] GetAllTables(ModelLibrary.Restaurant restaurant) {
-            return base.Channel.GetAllTables(restaurant);
+        public ModelLibrary.Table[] GetAllTables(int restaurantId) {
+            return base.Channel.GetAllTables(restaurantId);
         }
         
-        public System.Threading.Tasks.Task<ModelLibrary.Table[]> GetAllTablesAsync(ModelLibrary.Restaurant restaurant) {
-            return base.Channel.GetAllTablesAsync(restaurant);
+        public System.Threading.Tasks.Task<ModelLibrary.Table[]> GetAllTablesAsync(int restaurantId) {
+            return base.Channel.GetAllTablesAsync(restaurantId);
         }
         
-        public ModelLibrary.Table[] GetTable(ModelLibrary.Table table) {
+        public ModelLibrary.Table GetTable(ModelLibrary.Table table) {
             return base.Channel.GetTable(table);
         }
         
-        public System.Threading.Tasks.Task<ModelLibrary.Table[]> GetTableAsync(ModelLibrary.Table table) {
+        public System.Threading.Tasks.Task<ModelLibrary.Table> GetTableAsync(ModelLibrary.Table table) {
             return base.Channel.GetTableAsync(table);
         }
         
-        public void UpdateTable(ModelLibrary.Table table) {
-            base.Channel.UpdateTable(table);
+        public void UpdateTable(ModelLibrary.Table oldTable, ModelLibrary.Table newTable) {
+            base.Channel.UpdateTable(oldTable, newTable);
         }
         
-        public System.Threading.Tasks.Task UpdateTableAsync(ModelLibrary.Table table) {
-            return base.Channel.UpdateTableAsync(table);
+        public System.Threading.Tasks.Task UpdateTableAsync(ModelLibrary.Table oldTable, ModelLibrary.Table newTable) {
+            return base.Channel.UpdateTableAsync(oldTable, newTable);
         }
         
         public void DeleteTable(ModelLibrary.Table table) {
