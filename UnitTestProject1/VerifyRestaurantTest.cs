@@ -21,10 +21,10 @@ namespace UnitTests
 
         {
             //Setup
-            var sut = new Restaurant
+            var sut =  new Restaurant
             {
                 Name = name,
-                address = address,
+                Address = address,
                 PhoneNo = phoneNo,
                 Email = email,
                
@@ -39,5 +39,7 @@ namespace UnitTests
             //Assert
             Assert.IsTrue(isModelStateValid == shouldVerify);
         }
+
+        
     }
 }

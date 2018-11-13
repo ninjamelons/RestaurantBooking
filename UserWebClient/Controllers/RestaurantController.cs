@@ -3,14 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ModelLibrary;
+using UserWebClient.Models;
 
 namespace UserWebClient.Controllers
 {
     public class RestaurantController : Controller
     {
+        RestaurantService.RestaurantServiceClient proxy = new RestaurantService.RestaurantServiceClient();
+
+        // private readonly RestaurantService.IRestaurantService _proxy;
+        //
+        // public RestaurantController(RestaurantService.IRestaurantService proxy)
+        // {
+        //     this._proxy = proxy;
+        // }
+
         // GET: Restaurant
         public ActionResult Index()
         {
+
             return View();
         }
 
@@ -23,7 +35,15 @@ namespace UserWebClient.Controllers
         // GET: Restaurant/Create
         public ActionResult Create()
         {
-            return View();
+            var rescats = new Dictionary<string, int>();
+           // foreach (RestaurantCategory x in proxy.GetAllRestaurantCategories())
+           // {
+           //     rescats.Add(x.Name, x.Id);
+           // }
+
+            var model = new RestaurantViewModel { Restaurant = new Restaurant(), Categories = rescats };
+
+            return View("Create", model);
         }
 
         // POST: Restaurant/Create

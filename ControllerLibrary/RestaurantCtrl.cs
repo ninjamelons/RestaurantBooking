@@ -11,7 +11,18 @@ namespace ControllerLibrary
 {
     public class RestaurantCtrl
     {
-        public ModelLibrary.Restaurant CreateRestaurant(string name, string address, string email, string phoneNo, string zipCode, RestaurantCategory category)
+        public static ResTable ConvertTable(Table table)
+        {
+            ResTable returnTable = null;
+
+            returnTable.noSeats = Convert.ToInt32(table.NoSeats);
+            returnTable.reserved = Convert.ToInt32(table.Reserved);
+            returnTable.total = Convert.ToInt32(table.Total);
+            returnTable.restaurantId = Convert.ToInt32(table.RestaurantId);
+
+            return returnTable;
+        }
+        public static ModelLibrary.Restaurant CreateRestaurant(string name, string address, string email, string phoneNo, string zipCode, int categoryId)
         {
             var restaurant = new ModelLibrary.Restaurant
             {
@@ -20,7 +31,8 @@ namespace ControllerLibrary
                 ZipCode = zipCode,
                 PhoneNo = phoneNo,
                 Email = email,
-                Verified = false
+                Verified = false,
+                CategoryId = categoryId
             };
 
             var context = new ValidationContext(restaurant, null, null);
@@ -31,7 +43,7 @@ namespace ControllerLibrary
             return restaurant;
         }
 
-        public ModelLibrary.Restaurant ConvertRestaurantToModel(DatabaseAccessLibrary.Restaurant dbRestaurant)
+        public static ModelLibrary.Restaurant ConvertRestaurantToModel(DatabaseAccessLibrary.Restaurant dbRestaurant)
         {
             var mRes = new ModelLibrary.Restaurant
             {
@@ -47,7 +59,7 @@ namespace ControllerLibrary
             return mRes;
         }
 
-        public DatabaseAccessLibrary.Restaurant ConvertRestaurantToDatabase(ModelLibrary.Restaurant mRes)
+        public static DatabaseAccessLibrary.Restaurant ConvertRestaurantToDatabase(ModelLibrary.Restaurant mRes)
         {
             int PhoneNo = 0;
             int ZipCode = 0;
@@ -72,6 +84,26 @@ namespace ControllerLibrary
                 resCatId = mRes.CategoryId
             };
             return dbRes;
+        }
+
+        public static RestaurantCategory ConvertRestaurantCategoryToModel(ResCat cat)
+        {
+            var resCat = new RestaurantCategory
+            {
+                Id = cat.id,
+                Name = cat.name
+            };
+            return resCat;
+        }
+
+        public static ResCat ConvertRestaurantCategoryToDatabase(RestaurantCategory cat)
+        {
+            var resCat = new ResCat
+            {
+                id = cat.Id,
+                name = cat.Name
+            };
+            return resCat;
         }
     }
 }

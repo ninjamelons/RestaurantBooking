@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using DatabaseAccessLibrary;
 using ModelLibrary;
+using ControllerLibrary;
 
 namespace RestaurantService
 {
@@ -22,14 +23,28 @@ namespace RestaurantService
             throw new NotImplementedException();
         }
 
-        public void DoWork()
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<ModelLibrary.Restaurant> GetAllRestaurants()
         {
-            throw new NotImplementedException();
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var res = db.Restaurants.ToList();
+            List<ModelLibrary.Restaurant> mRes = new List<ModelLibrary.Restaurant>();
+            foreach(var x in res)
+            {
+                mRes.Add(RestaurantCtrl.ConvertRestaurantToModel(x));
+            }
+            return mRes;
+        }
+
+        public IEnumerable<ModelLibrary.Restaurant> GetAllRestaurantsByCategory(int categoryId)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var res = db.Restaurants.Where(x => x.resCatId == categoryId).ToList();
+            List<ModelLibrary.Restaurant> mRes = new List<ModelLibrary.Restaurant>();
+            foreach (var x in res)
+            {
+                mRes.Add(RestaurantCtrl.ConvertRestaurantToModel(x));
+            }
+            return mRes;
         }
 
         public IEnumerable<Table> GetAllTables(int restaurantId)
@@ -42,14 +57,43 @@ namespace RestaurantService
             throw new NotImplementedException();
         }
 
-        public void RegisterRestaurant(ModelLibrary.Restaurant restaurant)
+        public void CreateRestaurant(ModelLibrary.Restaurant restaurant)
         {
-            throw new NotImplementedException();
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            db.Restaurants.InsertOnSubmit(RestaurantCtrl.ConvertRestaurantToDatabase(restaurant));
+            db.SubmitChanges();
         }
 
         public void UpdateTable(Table table)
         {
             throw new NotImplementedException();
+        }
+
+        public void UpdateRestaurant(ModelLibrary.Restaurant restaurant)
+        {
+            var db = new JustFeastDbDataContext();
+            var res = db.Restaurants.SingleOrDefault(x => x.id == restaurant.Id);
+            res = RestaurantCtrl.ConvertRestaurantToDatabase(restaurant);
+            db.SubmitChanges();
+        }
+
+        public void DeleteRestaurant(ModelLibrary.Restaurant restaurant)
+        {
+            var db = new JustFeastDbDataContext();
+            db.Restaurants.DeleteOnSubmit(RestaurantCtrl.ConvertRestaurantToDatabase(restaurant));
+            db.SubmitChanges();
+        }
+
+        public IEnumerable<RestaurantCategory> GetAllRestaurantCategories()
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var cats = db.ResCats.ToList();
+            List<RestaurantCategory> mRes = new List<RestaurantCategory>();
+            foreach (var x in cats)
+            {
+                mRes.Add(RestaurantCtrl.ConvertRestaurantCategoryToModel(x));
+            }
+            return mRes;
         }
     }
 }
