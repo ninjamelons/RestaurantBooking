@@ -31,9 +31,9 @@ namespace RestaurantService
         [OperationContract]
         void CreateTable(Table table);
         [OperationContract]
-        IEnumerable<Table> GetAllTables(ModelLibrary.Restaurant restaurant);
+        IEnumerable<Table> GetAllTables(int restaurantId);
         [OperationContract]
-        IEnumerable<Table> GetTable(Table table);
+        Table GetTable(Table table);
         [OperationContract]
         void UpdateTable(Table table);
         [OperationContract]
