@@ -36,14 +36,13 @@ namespace ModelLibrary
         public string PhoneNo { get; set; }
 
         [Required]
-        [RegularExpression("^[A-Za-z0-9@.]*$", ErrorMessage = "Email does not match regex")]
-        [StringLength(30, MinimumLength = 3,
-            ErrorMessage = "Email needs to be bewteen 3 and 30")]
+        [EmailAddress]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         public bool Verified { get; set; }
         
         [Display(Name = "Category")]
-        public int CategoryId { get; set; }
+        public RestaurantCategory Category { get; set; }
     }
 }
