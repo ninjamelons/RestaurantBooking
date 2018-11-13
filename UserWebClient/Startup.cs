@@ -12,39 +12,35 @@ namespace UserWebClient
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            CreateRolesandUsers();
+            createRolesandUsers();
         }
 
 
         // In this method we will create default User roles and Admin user for login   
-        private void CreateRolesandUsers()
+        private void createRolesandUsers()
         {
             ApplicationDbContext context = new ApplicationDbContext();
 
-            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 
             // In Startup iam creating first Admin Role and creating a default Admin User    
-            if (!RoleManager.RoleExists("Admin"))
+            if (!roleManager.RoleExists("Admin"))
             {
 
                 // first we create Admin rool   
-                var role = new IdentityRole
-                {
-                    Name = "Admin"
-                };
-                RoleManager.Create(role);
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Admin";
+                roleManager.Create(role);
 
                 //Here we create a Admin super user who will maintain the website                  
 
-                var user = new ApplicationUser
-                {
-                    UserName = "plebs",
-                    Email = "plebs@gmail.com"
-                };
+                var user = new ApplicationUser();
+                user.UserName = "shanu";
+                user.Email = "syedshanumcain@gmail.com";
 
-                string userPWD = "plebs101";
+                string userPWD = "A@Z200711";
 
                 var chkUser = UserManager.Create(user, userPWD);
 
@@ -55,37 +51,13 @@ namespace UserWebClient
 
                 }
             }
-            // creating Creating Admin role    
-            if (!RoleManager.RoleExists("Admin"))
-            {
-                var role = new IdentityRole
-                {
-                    Name = "Admin"
-                };
-                RoleManager.Create(role);
-
-            }
-
 
             // creating Creating Manager role    
-            if (!RoleManager.RoleExists("Manager"))
+            if (!roleManager.RoleExists("Manager"))
             {
-                var role = new IdentityRole
-                {
-                    Name = "Manager"
-                };
-                RoleManager.Create(role);
-
-            }
-
-            // creating Creating User role    
-            if (!RoleManager.RoleExists("User"))
-            {
-                var role = new IdentityRole
-                {
-                    Name = "User"
-                };
-                RoleManager.Create(role);
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Manager";
+                roleManager.Create(role);
 
             }
         }
