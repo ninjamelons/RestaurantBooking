@@ -7,6 +7,9 @@ using System.Web.Mvc;
 namespace UserWebClient.Controllers
 {
     public class HomeController : Controller
+
+
+
     {
         public ActionResult Index()
         {
@@ -26,5 +29,7 @@ namespace UserWebClient.Controllers
 
             return View();
         }
+
     }
+
 }
