@@ -18,6 +18,8 @@ namespace RestaurantService
         [OperationContract]
         IEnumerable<ModelLibrary.Restaurant> GetAllRestaurantsByCategory(int categoryId);
         [OperationContract]
+        IEnumerable<ModelLibrary.Restaurant> GetAllRestaurantsByZipCode(int zipcode);
+        [OperationContract]
         void CreateRestaurant(ModelLibrary.Restaurant restaurant);
         [OperationContract]
         void UpdateRestaurant(ModelLibrary.Restaurant restaurant);
@@ -38,5 +40,6 @@ namespace RestaurantService
         void UpdateTable(Table oldTable, Table newTable);
         [OperationContract]
         void DeleteTable(Table table);
+
     }
 }
