@@ -73,7 +73,13 @@ namespace RestaurantService
         {
             var db = new JustFeastDbDataContext();
             var res = db.Restaurants.SingleOrDefault(x => x.id == restaurant.Id);
-            res = RestaurantCtrl.ConvertRestaurantToDatabase(restaurant);
+            var r = RestaurantCtrl.ConvertRestaurantToDatabase(restaurant);
+            res.name = r.name;
+            res.address = r.address;
+            res.email = r.email;
+            res.phoneNo = r.phoneNo;
+            res.zipcode = r.zipcode;
+            res.verified = r.verified;
             db.SubmitChanges();
         }
 
