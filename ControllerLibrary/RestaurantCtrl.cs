@@ -42,6 +42,10 @@ namespace ControllerLibrary
                 throw new ValidationException();
             return restaurant;
         }
+        public static RestaurantCategory CreateRestaurantCategory(string name)
+        {
+            return new RestaurantCategory { Name = name };
+        }
 
         public static ModelLibrary.Restaurant ConvertRestaurantToModel(DatabaseAccessLibrary.Restaurant dbRestaurant)
         {

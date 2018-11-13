@@ -113,5 +113,33 @@ namespace RestaurantService
             var res = db.Restaurants.FirstOrDefault(x => x.id == id);
             return RestaurantCtrl.ConvertRestaurantToModel(res);
         }
+
+        public void CreateRestaurantCategory(RestaurantCategory res)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            db.ResCats.InsertOnSubmit(RestaurantCtrl.ConvertRestaurantCategoryToDatabase(res));
+            db.SubmitChanges();
+        }
+
+        public void DeleteRestaurantCategory(int id)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            db.ResCats.DeleteOnSubmit(db.ResCats.First(x => x.id == id));
+            db.SubmitChanges();
+        }
+
+        public void UpdateRestaurantCategory(RestaurantCategory res)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var nres = db.ResCats.First(x => x.id == res.Id);
+            nres.name = res.Name;
+            db.SubmitChanges();
+        }
+
+        public RestaurantCategory GetRestaurantCategory(int id)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            return RestaurantCtrl.ConvertRestaurantCategoryToModel(db.ResCats.First(x => x.id == id));
+        }
     }
 }
