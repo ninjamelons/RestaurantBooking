@@ -40,7 +40,6 @@ namespace UnitTests
         [DataRow("9000", "Restaurant Name", "Restaurant Address", "4552900554", "", false, DisplayName = "Empty Email")]
         [DataRow("9000", "Restaurant Name", "Restaurant Address", "4552900554", "virma21@@!@#$@gmail.com", false, DisplayName = "Bad Symbols in Email")]
         [DataRow("9000", "Restaurant Name", "Restaurant Address", "4552900554", "virma21gmail.com", false, DisplayName = "No @ in email")]
-        [DataRow("9000", "Restaurant Name", "Restaurant Address", "4552900554", "virma21@gmail.comsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", false, DisplayName = "Long Email")]
         [DataRow("9000", "Restaurant Name", "Restaurant Address", "", "virma21@gmail.com", true, DisplayName = "Empty Number")]
         [DataRow("9000", "Restaurant Name", "Restaurant Address", "+4%@$5 52 90 05 54", "virma21@gmail.com", false, DisplayName = "Symbols in number")]
         [DataRow("9000", "Restaurant Name", "Restaurant Address", "455290055455555555555555555555555", "virma21@gmail.com", false, DisplayName = "Long number")]
@@ -84,7 +83,7 @@ namespace UnitTests
             // Act
             try
             {
-                var res = RestaurantCtrl.CreateRestaurant("Na#@%me", "Add!@#%ress", "Email@g@#$!mail.com", "123@#$4", "90034650", 0);
+                var res = RestaurantCtrl.CreateRestaurant("Na#@%me", "Add!@#%ress", "Email@g@#$!mail.com", "123@#$4", "90034650", null);
             }
 
             // Assert
@@ -104,7 +103,7 @@ namespace UnitTests
             // Act
             try
             {
-                var res = RestaurantCtrl.CreateRestaurant("Name", "Address", "Email@gmail.com", "1234", "9000", 0);
+                var res = RestaurantCtrl.CreateRestaurant("Name", "Address", "Email@gmail.com", "1234", "9000", null);
             }
 
             // Assert
@@ -121,7 +120,7 @@ namespace UnitTests
             //RestaurantCtrl ctrl = new RestaurantCtrl();
 
             // Act
-            var res = RestaurantCtrl.CreateRestaurant("Name", "Address", "Email@gmail.com", "1234", "9000", 0);
+            var res = RestaurantCtrl.CreateRestaurant("Name", "Address", "Email@gmail.com", "1234", "9000", null);
 
             // Assert
             Assert.IsTrue(!res.Verified);

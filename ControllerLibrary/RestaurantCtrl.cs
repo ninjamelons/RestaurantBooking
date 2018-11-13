@@ -22,7 +22,7 @@ namespace ControllerLibrary
 
             return returnTable;
         }
-        public static ModelLibrary.Restaurant CreateRestaurant(string name, string address, string email, string phoneNo, string zipCode, int categoryId)
+        public static ModelLibrary.Restaurant CreateRestaurant(string name, string address, string email, string phoneNo, string zipCode, RestaurantCategory category)
         {
             var restaurant = new ModelLibrary.Restaurant
             {
@@ -32,7 +32,7 @@ namespace ControllerLibrary
                 PhoneNo = phoneNo,
                 Email = email,
                 Verified = false,
-                CategoryId = categoryId
+                Category = category
             };
 
             var context = new ValidationContext(restaurant, null, null);
@@ -54,7 +54,7 @@ namespace ControllerLibrary
                 PhoneNo = dbRestaurant.phoneNo.ToString(),
                 Verified = dbRestaurant.verified,
                 ZipCode = dbRestaurant.zipcode.ToString(),
-                CategoryId = dbRestaurant.resCatId.GetValueOrDefault()
+                Category = ConvertRestaurantCategoryToModel(dbRestaurant.ResCat)
             };
             return mRes;
         }
@@ -81,13 +81,15 @@ namespace ControllerLibrary
                 phoneNo = PhoneNo,
                 verified = mRes.Verified,
                 zipcode = ZipCode,
-                resCatId = mRes.CategoryId
+                ResCat = ConvertRestaurantCategoryToDatabase(mRes.Category)
             };
             return dbRes;
         }
 
         public static RestaurantCategory ConvertRestaurantCategoryToModel(ResCat cat)
         {
+            if (cat == null)
+                return null;
             var resCat = new RestaurantCategory
             {
                 Id = cat.id,
@@ -98,6 +100,8 @@ namespace ControllerLibrary
 
         public static ResCat ConvertRestaurantCategoryToDatabase(RestaurantCategory cat)
         {
+            if (cat == null)
+                return null;
             var resCat = new ResCat
             {
                 id = cat.Id,

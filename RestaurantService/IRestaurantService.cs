@@ -22,9 +22,11 @@ namespace RestaurantService
         [OperationContract]
         void UpdateRestaurant(ModelLibrary.Restaurant restaurant);
         [OperationContract]
-        void DeleteRestaurant(ModelLibrary.Restaurant restaurant);
+        void DeleteRestaurant(int id);
         [OperationContract]
         IEnumerable<ModelLibrary.RestaurantCategory> GetAllRestaurantCategories();
+        [OperationContract]
+        ModelLibrary.Restaurant GetRestaurant(int id);
 
         [OperationContract]
         void CreateTable(Table table);
