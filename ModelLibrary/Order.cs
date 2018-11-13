@@ -7,22 +7,26 @@ namespace ModelLibrary
 {
     public class Order
     {
-        [RegularExpression("^[0-9]{7,7}$", ErrorMessage = "Invalid number")]
+        [RegularExpression("(\\d){7,7}$", ErrorMessage = "Invalid number")]
         public string OrderId { get; set; }
 
-        [RegularExpression("[-{2}][s][:{2}]{19,24}$", ErrorMessage = "Invalid dateTime")]
+        public string CustomerId { get; set; }
+
+        public string RestaurantId { get; set; }
+
+        [RegularExpression("[0-9-: ]{18,24}$", ErrorMessage = "Invalid dateTime")]
         public string DateTime { get; set; }
 
-        [RegularExpression("^[-{2}][s][:{2}]{19,24}$", ErrorMessage = "Invalid dateTime")]
+        [RegularExpression("[0-9-: ]{18,24}$", ErrorMessage = "Invalid dateTime")]
         public string ReservationDateTime { get; set; }
 
-        [@RequiredAttribute()]
-        public List<Item> ItemsList { get; set; }
+        public List<OrderLineItem> ItemsList { get; set; }
 
-        [RegularExpression("^[0-9]*$", ErrorMessage = "Invalid number")]
+        [RegularExpression("[0-9]*$", ErrorMessage = "Invalid number")]
         public string NoSeats { get; set; }
 
-        [RegularExpression("^[true][false]", ErrorMessage = "Invalid boolean")]
+        public string Payment { get; set; }
+
         public bool Accepted { get; set; }
     }
 }
