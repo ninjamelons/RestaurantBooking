@@ -15,12 +15,32 @@ namespace RestaurantService
     {
         public void CreateTable(Table table)
         {
-            throw new NotImplementedException();
+            TableCtrl tableCtrl = new TableCtrl();
+            tableCtrl.CreateTable(table);
+        }
+
+        public IEnumerable<Table> GetAllTables(int restaurantId)
+        {
+            TableCtrl tableCtrl = new TableCtrl();
+            return tableCtrl.GetRestaurantTables(restaurantId);
+        }
+
+        public Table GetTable(Table table)
+        {
+            TableCtrl tableCtrl = new TableCtrl();
+            return tableCtrl.GetTable(table);
+        }
+
+        public void UpdateTable(Table oldTable, Table newTable)
+        {
+            TableCtrl tableCtrl = new TableCtrl();
+            tableCtrl.UpdateTable(oldTable, newTable);
         }
 
         public void DeleteTable(Table table)
         {
-            throw new NotImplementedException();
+            TableCtrl tableCtrl = new TableCtrl();
+            tableCtrl.DeleteTable(table);
         }
 
         public IEnumerable<ModelLibrary.Restaurant> GetAllRestaurants()
@@ -47,16 +67,6 @@ namespace RestaurantService
             return mRes;
         }
 
-        public IEnumerable<Table> GetAllTables(int restaurantId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Table GetTable(Table table)
-        {
-            throw new NotImplementedException();
-        }
-
         public void CreateRestaurant(ModelLibrary.Restaurant restaurant)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
@@ -64,16 +74,17 @@ namespace RestaurantService
             db.SubmitChanges();
         }
 
-        public void UpdateTable(Table table)
-        {
-            throw new NotImplementedException();
-        }
-
         public void UpdateRestaurant(ModelLibrary.Restaurant restaurant)
         {
             var db = new JustFeastDbDataContext();
             var res = db.Restaurants.SingleOrDefault(x => x.id == restaurant.Id);
-            res = RestaurantCtrl.ConvertRestaurantToDatabase(restaurant);
+            var r = RestaurantCtrl.ConvertRestaurantToDatabase(restaurant);
+            res.name = r.name;
+            res.address = r.address;
+            res.email = r.email;
+            res.phoneNo = r.phoneNo;
+            res.zipcode = r.zipcode;
+            res.verified = r.verified;
             db.SubmitChanges();
         }
 

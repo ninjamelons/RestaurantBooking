@@ -82,16 +82,20 @@ namespace UserWebClient.Controllers
         [HttpPost]
         public ActionResult Edit(int id, RestaurantViewModel model)
         {
-            try
-            {
-                proxy.UpdateRestaurant(model.Restaurant);
+           // try
+           // {
+           //     proxy.UpdateRestaurant(model.Restaurant);
+           //
+           //     return RedirectToAction("Index");
+           // }
+           // catch
+           // {
+           //     return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+           // }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
-            }
+            proxy.UpdateRestaurant(model.Restaurant);
+
+            return RedirectToAction("Index");
         }
 
         // GET: Restaurant/Delete/5
