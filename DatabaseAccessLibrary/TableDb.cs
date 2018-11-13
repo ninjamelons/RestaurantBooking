@@ -46,6 +46,7 @@ namespace DatabaseAccessLibrary
             var db = new JustFeastDbDataContext();
             var resTable = db.ResTables.SingleOrDefault(t => t.noSeats == oldTable.noSeats
                                               && t.restaurantId == oldTable.restaurantId);
+
             resTable.restaurantId = newTable.restaurantId;
             resTable.noSeats = newTable.noSeats;
             resTable.total = newTable.total;
