@@ -9,6 +9,7 @@ namespace UserWebClient.Models
     public class RestaurantViewModel
     {
         public Restaurant Restaurant { get; set; }
-        public Dictionary<string, int> Categories { get; set; }
+        public Dictionary<string, RestaurantCategory> Categories { get; set; }
+        
     }
 }

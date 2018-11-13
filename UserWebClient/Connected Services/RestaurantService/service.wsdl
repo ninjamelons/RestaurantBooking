@@ -43,6 +43,12 @@
   <wsdl:message name="IRestaurantService_GetAllRestaurantCategories_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllRestaurantCategoriesResponse" />
   </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetRestaurant_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRestaurant" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetRestaurant_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRestaurantResponse" />
+  </wsdl:message>
   <wsdl:message name="IRestaurantService_CreateTable_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateTable" />
   </wsdl:message>
@@ -97,6 +103,10 @@
     <wsdl:operation name="GetAllRestaurantCategories">
       <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantCategories" message="tns:IRestaurantService_GetAllRestaurantCategories_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantCategoriesResponse" message="tns:IRestaurantService_GetAllRestaurantCategories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRestaurant">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetRestaurant" message="tns:IRestaurantService_GetRestaurant_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetRestaurantResponse" message="tns:IRestaurantService_GetRestaurant_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateTable">
       <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/CreateTable" message="tns:IRestaurantService_CreateTable_InputMessage" />
@@ -168,6 +178,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllRestaurantCategories">
       <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetAllRestaurantCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRestaurant">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetRestaurant" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -9,7 +9,7 @@
   <xs:complexType name="Restaurant">
     <xs:sequence>
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CategoryId" type="xs:int" />
+      <xs:element minOccurs="0" name="Category" nillable="true" type="tns:RestaurantCategory" />
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
@@ -19,12 +19,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Restaurant" nillable="true" type="tns:Restaurant" />
-  <xs:complexType name="ArrayOfRestaurantCategory">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="RestaurantCategory" nillable="true" type="tns:RestaurantCategory" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfRestaurantCategory" nillable="true" type="tns:ArrayOfRestaurantCategory" />
   <xs:complexType name="RestaurantCategory">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />
@@ -33,6 +27,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RestaurantCategory" nillable="true" type="tns:RestaurantCategory" />
+  <xs:complexType name="ArrayOfRestaurantCategory">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RestaurantCategory" nillable="true" type="tns:RestaurantCategory" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRestaurantCategory" nillable="true" type="tns:ArrayOfRestaurantCategory" />
   <xs:complexType name="Table">
     <xs:sequence>
       <xs:element minOccurs="0" name="NoSeats" nillable="true" type="xs:string" />

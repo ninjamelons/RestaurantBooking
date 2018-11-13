@@ -77,10 +77,10 @@ namespace RestaurantService
             db.SubmitChanges();
         }
 
-        public void DeleteRestaurant(ModelLibrary.Restaurant restaurant)
+        public void DeleteRestaurant(int id)
         {
             var db = new JustFeastDbDataContext();
-            db.Restaurants.DeleteOnSubmit(RestaurantCtrl.ConvertRestaurantToDatabase(restaurant));
+            db.Restaurants.DeleteOnSubmit(db.Restaurants.FirstOrDefault(x => x.id == id));
             db.SubmitChanges();
         }
 
@@ -94,6 +94,13 @@ namespace RestaurantService
                 mRes.Add(RestaurantCtrl.ConvertRestaurantCategoryToModel(x));
             }
             return mRes;
+        }
+
+        public ModelLibrary.Restaurant GetRestaurant(int id)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var res = db.Restaurants.FirstOrDefault(x => x.id == id);
+            return RestaurantCtrl.ConvertRestaurantToModel(res);
         }
     }
 }
