@@ -47,12 +47,12 @@ namespace RestaurantService
             return mRes;
         }
 
-        public IEnumerable<Table> GetAllTables(ModelLibrary.Restaurant restaurant)
+        public IEnumerable<Table> GetAllTables(int restaurantId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Table> GetTable(Table table)
+        public Table GetTable(Table table)
         {
             throw new NotImplementedException();
         }

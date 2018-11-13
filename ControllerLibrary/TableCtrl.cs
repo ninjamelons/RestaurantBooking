@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DatabaseAccessLibrary;
 using ModelLibrary;
 
@@ -43,8 +40,8 @@ namespace ControllerLibrary
 
         public IEnumerable<Table> GetTables()
         {
-            var tblCtrl = new TableDb();
-            var tables = tblCtrl.GetTables();
+            var tblDb = new TableDb();
+            var tables = tblDb.GetTables();
             var modelTables = new List<Table>();
 
             foreach (var table in tables)
@@ -59,6 +56,15 @@ namespace ControllerLibrary
             }
 
             return modelTables;
+        }
+
+        public void UpdateTable(Table oldTable, Table newTable)
+        {
+            var tableDb = new TableDb();
+            var oldResTable = ConvertTable(oldTable);
+            var newResTable = ConvertTable(newTable);
+
+            tableDb.UpdateTable(oldResTable, newResTable);
         }
 
         public void DeleteTable(Table table)
