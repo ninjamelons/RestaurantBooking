@@ -48,6 +48,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -203,6 +204,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Data\OrderTest.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -306,10 +308,9 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Restaurant\Create.cshtml" />
+    <Content Include="Views\Home\Searches.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -327,6 +328,10 @@
     <ProjectReference Include="..\ControllerLibrary\ControllerLibrary.csproj">
       <Project>{7b98d978-139d-4669-94d1-92934fc668ca}</Project>
       <Name>ControllerLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DatabaseAccessLibrary\DatabaseAccessLibrary.csproj">
+      <Project>{AF59ED6C-26D5-4DC9-BAA6-B304E4823194}</Project>
+      <Name>DatabaseAccessLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\ModelLibrary\ModelLibrary.csproj">
       <Project>{29a08a63-6222-4321-8d3a-9663ee89c12c}</Project>

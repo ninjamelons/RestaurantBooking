@@ -47,6 +47,18 @@ namespace RestaurantService
             return mRes;
         }
 
+        public IEnumerable<ModelLibrary.Restaurant> GetAllRestaurantsByZipCode(int zipcode)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var res = db.Restaurants.Where(x => x.zipcode == zipcode).ToList();
+            List<ModelLibrary.Restaurant> mRes = new List<ModelLibrary.Restaurant>();
+            foreach (var x in res)
+            {
+                mRes.Add(RestaurantCtrl.ConvertRestaurantToModel(x));
+            }
+            return mRes;
+        }
+
         public IEnumerable<Table> GetAllTables(ModelLibrary.Restaurant restaurant)
         {
             throw new NotImplementedException();

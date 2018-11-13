@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using ModelLibrary;
 
 namespace UserWebClient.Models
 {
@@ -25,9 +26,13 @@ namespace UserWebClient.Models
         {
         }
 
+        public DbSet<Restaurant> Restaurants { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<UserWebClient.Models.RestaurantSearch> RestaurantSearches { get; set; }
     }
 }

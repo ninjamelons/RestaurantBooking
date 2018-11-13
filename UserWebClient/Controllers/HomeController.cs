@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using DatabaseAccessLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,8 +8,10 @@ using System.Web.Mvc;
 
 namespace UserWebClient.Controllers
 {
+   
     public class HomeController : Controller
     {
+        JustFeastDbDataContext db = new JustFeastDbDataContext();
         public ActionResult Index()
         {
             return View();
@@ -25,6 +29,13 @@ namespace UserWebClient.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Searches()
+        {
+            ViewBag.Message = "Your searches";
+
+            return View(db.Restaurants.ToList());
         }
     }
 }
