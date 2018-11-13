@@ -1,13 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dmai0917_1067303" Class="JustFeastDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067303;Persist Security Info=True;User ID=dmai0917_1067303" SettingsObjectName="DatabaseAccessLibrary.Properties.Settings" SettingsPropertyName="dmai0917_1067303ConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Customer" Member="Customers">
-    <Type Name="Customer">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="phoneNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Association Name="Customer_OrderHistory" Member="OrderHistories" ThisKey="id" OtherKey="customerId" Type="OrderHistory" />
+  <Table Name="dbo.[__MigrationHistory]" Member="__MigrationHistories">
+    <Type Name="__MigrationHistory">
+      <Column Name="MigrationId" Type="System.String" DbType="NVarChar(150) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ContextKey" Type="System.String" DbType="NVarChar(300) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Model" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ProductVersion" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.Restaurant" Member="Restaurants">
@@ -17,13 +15,76 @@
       <Column Name="address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="zipcode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="phoneNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="NVarChar(40) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="verified" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="resCatId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="discontinued" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Restaurant_Menu" Member="Menus" ThisKey="id" OtherKey="restaurantId" Type="Menu" />
       <Association Name="Restaurant_Order" Member="Orders" ThisKey="id" OtherKey="restaurantId" Type="Order" />
       <Association Name="Restaurant_ResTable" Member="ResTables" ThisKey="id" OtherKey="restaurantId" Type="ResTable" />
-      <Association Name="ResCat_Restaurant" Member="ResCat" ThisKey="resCatId" OtherKey="id" Type="ResCat" IsForeignKey="true" />
+      <Association Name="ResCat_Restaurant" Member="ResCat" ThisKey="resCatId" OtherKey="id" Type="ResCat" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetRoles" Member="AspNetRoles">
+    <Type Name="AspNetRole">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetRole_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="RoleId" Type="AspNetUserRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserClaims" Member="AspNetUserClaims">
+    <Type Name="AspNetUserClaim">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="ClaimType" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ClaimValue" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserLogins" Member="AspNetUserLogins">
+    <Type Name="AspNetUserLogin">
+      <Column Name="LoginProvider" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ProviderKey" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUserRoles" Member="AspNetUserRoles">
+    <Type Name="AspNetUserRole">
+      <Column Name="UserId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="AspNetRole_AspNetUserRole" Member="AspNetRole" ThisKey="RoleId" OtherKey="Id" Type="AspNetRole" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUser" ThisKey="UserId" OtherKey="Id" Type="AspNetUser" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AspNetUsers" Member="AspNetUsers">
+    <Type Name="AspNetUser">
+      <Column Name="Id" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="EmailConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="SecurityStamp" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="PhoneNumberConfirmed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TwoFactorEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LockoutEndDateUtc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LockoutEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="AccessFailedCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="AspNetUser_AspNetUserClaim" Member="AspNetUserClaims" ThisKey="Id" OtherKey="UserId" Type="AspNetUserClaim" />
+      <Association Name="AspNetUser_AspNetUserLogin" Member="AspNetUserLogins" ThisKey="Id" OtherKey="UserId" Type="AspNetUserLogin" />
+      <Association Name="AspNetUser_AspNetUserRole" Member="AspNetUserRoles" ThisKey="Id" OtherKey="UserId" Type="AspNetUserRole" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customer" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="phoneNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="password" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Customer_OrderHistory" Member="OrderHistories" ThisKey="id" OtherKey="customerId" Type="OrderHistory" />
     </Type>
   </Table>
   <Table Name="dbo.Item" Member="Items">
@@ -34,7 +95,7 @@
       <Column Name="description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="itemCatId" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Item_OrderLineItem" Member="OrderLineItems" ThisKey="id" OtherKey="itemId" Type="OrderLineItem" />
-      <Association Name="Item_Price" Member="Prices" ThisKey="id" OtherKey="id" Type="Price" />
+      <Association Name="Item_Price" Member="Prices" ThisKey="id" OtherKey="itemId" Type="Price" />
       <Association Name="ItemCat_Item" Member="ItemCat" ThisKey="itemCatId" OtherKey="id" Type="ItemCat" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="Menu_Item" Member="Menu" ThisKey="menuId" OtherKey="id" Type="Menu" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
@@ -50,6 +111,7 @@
     <Type Name="Menu">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="restaurantId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Menu_Item" Member="Items" ThisKey="id" OtherKey="menuId" Type="Item" />
       <Association Name="Restaurant_Menu" Member="Restaurant" ThisKey="restaurantId" OtherKey="id" Type="Restaurant" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
@@ -58,9 +120,10 @@
   <Table Name="dbo.OrderHistory" Member="OrderHistories">
     <Type Name="OrderHistory">
       <Column Name="orderId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="customerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="customerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="payment" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="Customer_OrderHistory" Member="Customer" ThisKey="customerId" OtherKey="id" Type="Customer" IsForeignKey="true" />
-      <Association Name="Order_OrderHistory" Member="Order" ThisKey="orderId" OtherKey="id" Type="Order" IsForeignKey="true" />
+      <Association Name="Order_OrderHistory" Member="Order" ThisKey="orderId" OtherKey="id" Type="Order" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.OrderLineItem" Member="OrderLineItems">
@@ -69,7 +132,7 @@
       <Column Name="itemId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Item_OrderLineItem" Member="Item" ThisKey="itemId" OtherKey="id" Type="Item" IsForeignKey="true" />
-      <Association Name="Order_OrderLineItem" Member="Order" ThisKey="orderId" OtherKey="id" Type="Order" IsForeignKey="true" />
+      <Association Name="Order_OrderLineItem" Member="Order" ThisKey="orderId" OtherKey="id" Type="Order" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Orders" Member="Orders">
@@ -80,24 +143,24 @@
       <Column Name="reservation" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="noSeats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="accepted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Order_OrderHistory" Member="OrderHistories" ThisKey="id" OtherKey="orderId" Type="OrderHistory" />
+      <Association Name="Order_OrderHistory" Member="OrderHistory" ThisKey="id" OtherKey="orderId" Type="OrderHistory" Cardinality="One" />
       <Association Name="Order_OrderLineItem" Member="OrderLineItems" ThisKey="id" OtherKey="orderId" Type="OrderLineItem" />
-      <Association Name="Restaurant_Order" Member="Restaurant" ThisKey="restaurantId" OtherKey="id" Type="Restaurant" IsForeignKey="true" />
+      <Association Name="Restaurant_Order" Member="Restaurant" ThisKey="restaurantId" OtherKey="id" Type="Restaurant" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Price" Member="Prices">
     <Type Name="Price">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="price" Member="price1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="itemId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="price" Member="price1" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="startDate" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="endDate" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Item_Price" Member="Item" ThisKey="id" OtherKey="id" Type="Item" IsForeignKey="true" />
+      <Association Name="Item_Price" Member="Item" ThisKey="itemId" OtherKey="id" Type="Item" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.ResCat" Member="ResCats">
     <Type Name="ResCat">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
       <Association Name="ResCat_Restaurant" Member="Restaurants" ThisKey="id" OtherKey="resCatId" Type="Restaurant" />
     </Type>
   </Table>
