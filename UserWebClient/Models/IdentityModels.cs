@@ -33,6 +33,5 @@ namespace UserWebClient.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<UserWebClient.Models.RestaurantSearch> RestaurantSearches { get; set; }
     }
 }

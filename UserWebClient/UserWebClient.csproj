@@ -48,6 +48,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -336,6 +337,10 @@
     <ProjectReference Include="..\ControllerLibrary\ControllerLibrary.csproj">
       <Project>{7b98d978-139d-4669-94d1-92934fc668ca}</Project>
       <Name>ControllerLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DatabaseAccessLibrary\DatabaseAccessLibrary.csproj">
+      <Project>{AF59ED6C-26D5-4DC9-BAA6-B304E4823194}</Project>
+      <Name>DatabaseAccessLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\ModelLibrary\ModelLibrary.csproj">
       <Project>{29a08a63-6222-4321-8d3a-9663ee89c12c}</Project>

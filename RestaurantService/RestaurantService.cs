@@ -107,5 +107,30 @@ namespace RestaurantService
             }
             return mRes;
         }
+
+        public void DeleteRestaurant(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ModelLibrary.Restaurant GetRestaurant(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Table> GetAllTables(int restaurantId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Table IRestaurantService.GetTable(Table table)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateTable(Table oldTable, Table newTable)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
