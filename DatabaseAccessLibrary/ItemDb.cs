@@ -8,28 +8,29 @@ namespace DatabaseAccessLibrary
 {
     public class ItemDb
     {
+
         public void AddItem(Item item)
         {
+
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-            if (db.Items.Any(t => !(t.name == item.name && t.id == item.id
-            && )))
                 db.Items.InsertOnSubmit(item);
             db.SubmitChanges();
         }
 
-        public Item GetItem(int id, string name, Price price )
+        public Item GetItem(int id, string name)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var dbItem = db.Items.Single(a => a.id == id && a.name == name && a.Prices.g== price)); //Price????
-            return dbItem;
+
+            var item = db.Items.Single(t => t.name == name && t.id == id);
+            return item;
         }
 
         public void DeleteItem(Item item)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            
-            if (db.Items.Any(t => !(t.name == item.name && t.id == item.id)))
+
+            if (db.Items.Any(t => t.id == item.id))
                 db.Items.DeleteOnSubmit(item);
             db.SubmitChanges();
         }
@@ -37,9 +38,8 @@ namespace DatabaseAccessLibrary
         public void UpdateItem(Item beforeItem, Item afterItem)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var newItem = db.Items.SingleOrDefault(a => a.name == beforeItem.name &&
-                          a.description == beforeItem.description && a.Prices.Equals(beforeItem.Prices)); //Price????
-            newItem = afterItem;
+            var item = db.Items.SingleOrDefault(t => t.id == beforeItem.id);
+            item = afterItem;
             db.SubmitChanges();
         }
 
