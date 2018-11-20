@@ -49,20 +49,17 @@
         <tr>
             <th>Restaurant</th>
             <th>Adress</th>
-            <th>Zipcode</th>
+            <th>Zip Code</th>
             <th>Phone</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var Item in Model)
-        {
             <tr class="Search">
-                <td>@Item.Name</td>
-                <td>@Item.Address</td>
-                <td>@Item.ZipCode</td>
-                <td>@Item.PhoneNo</td>
+                <td>@Html.DisplayNameFor(restaurant => restaurant.Name)</td>
+                <td>@Html.DisplayNameFor(restaurant => restaurant.Address)</td>
+                <td>@Html.DisplayNameFor(restaurant => restaurant.ZipCode)</td>
+                <td>@Html.DisplayNameFor(restaurant => restaurant.PhoneNo)</td>
             </tr>
-        }
     </tbody>
 </table>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
