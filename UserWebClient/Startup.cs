@@ -12,11 +12,11 @@ namespace UserWebClient
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            CreateRolesandUsers();
+          //  CreateRolesandUsers();
         }
 
 
-        // In this method we will create default User roles and Admin user for login   
+        /* In this method we will create default User roles and Admin user for login   
         private void CreateRolesandUsers()
         {
             ApplicationDbContext context = new ApplicationDbContext();
@@ -89,6 +89,6 @@ namespace UserWebClient
                 roleManager.Create(role);
 
             }
-        }
+        }*/
     }
 }
