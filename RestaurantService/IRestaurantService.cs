@@ -29,6 +29,16 @@ namespace RestaurantService
         IEnumerable<ModelLibrary.RestaurantCategory> GetAllRestaurantCategories();
         [OperationContract]
         ModelLibrary.Restaurant GetRestaurant(int id);
+        [OperationContract]
+        void CreateRestaurantCategory(RestaurantCategory res);
+        [OperationContract]
+        void DeleteRestaurantCategory(int id);
+        [OperationContract]
+        void UpdateRestaurantCategory(RestaurantCategory res);
+        [OperationContract]
+        RestaurantCategory GetRestaurantCategory(int id);
+
+
 
         [OperationContract]
         void CreateTable(Table table);
