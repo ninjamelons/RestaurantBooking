@@ -16,8 +16,9 @@ namespace RestaurantDesktopClient
         public TablesCrud()
         {
             InitializeComponent();
-            //ResId.Content = GetRestaurantId();
-            //TableCombo.ItemsSource = GetTables();
+            hiddenResId.Content = "1000000";
+            //hiddenResId.Content = GetRestaurantId();
+            TableCombo.ItemsSource = GetTables();
         }
 
         private void UpdateAddTable_OnClick(object sender, RoutedEventArgs e)
@@ -77,6 +78,7 @@ namespace RestaurantDesktopClient
             var proxy = new RestaurantServiceClient();
             var selectedTable = (ModelLibrary.Table)TableCombo.SelectedItem;
             var dbTable = proxy.GetTable(selectedTable);
+            hiddenNoSeats.Content = dbTable.NoSeats;
             NoSeats.Text = dbTable.NoSeats;
             NoReserved.Text = dbTable.Reserved;
             NoTotal.Text = dbTable.Total;

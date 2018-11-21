@@ -10,7 +10,7 @@ namespace DatabaseAccessLibrary
     {
         public void AddOrder(Order order)
         {
-            var db = new JustFeastDbDataContext();
+            /*var db = new JustFeastDbDataContext();
 
             if (db.Orders.Any(o => (o.id != order.id)))
             {
@@ -22,7 +22,7 @@ namespace DatabaseAccessLibrary
                 }
                 db.OrderHistories.InsertOnSubmit(order.OrderHistories[0]);
                 db.SubmitChanges();
-            }
+            }*/
 
         }
     }
