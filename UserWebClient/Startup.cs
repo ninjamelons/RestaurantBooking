@@ -16,7 +16,7 @@ namespace UserWebClient
         }
 
 
-         In this method we will create default User roles and Admin user for login   
+         //In this method we will create default User roles and Admin user for login   
         private void CreateRolesandUsers()
         {
             ApplicationDbContext context = new ApplicationDbContext();
