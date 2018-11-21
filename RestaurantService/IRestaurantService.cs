@@ -10,7 +10,7 @@ using ModelLibrary;
 namespace RestaurantService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IRestaurantService" in both code and config file together.
-    [ServiceContract]
+    [ServiceContract(Name ="IRestaurantService")]
     public interface IRestaurantService
     {
         [OperationContract]

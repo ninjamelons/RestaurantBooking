@@ -5,16 +5,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UserWebClient.RestaurantService;
 
 namespace UserWebClient.Controllers
 {
-   
+
     public class HomeController : Controller
     {
-        JustFeastDbDataContext db = new JustFeastDbDataContext();
-        public ActionResult Index()
+        RestaurantService.RestaurantServiceClient proxy = new RestaurantService.RestaurantServiceClient();
+
+        public ActionResult Index(string SearchString)
         {
-            return View();
+            ViewBag.Title = "Home Page";
+
+           /* IEnumerable<ModelLibrary.Restaurant> serviceResult = this._proxy.GetAllRestaurants();
+
+            var restaurants = serviceResult.Select<restaurantRes => new Restaurant
+            {
+
+            }
+            */
+
+            return View(proxy.GetAllRestaurants());
         }
 
         public ActionResult About()
@@ -31,11 +43,5 @@ namespace UserWebClient.Controllers
             return View();
         }
 
-        public ActionResult Searches()
-        {
-            ViewBag.Message = "Your searches";
-
-            return View(db.Restaurants.ToList());
-        }
     }
 }

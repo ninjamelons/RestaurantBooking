@@ -36,8 +36,8 @@
 <div class="container">
     <div class="form-group">
         <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-            <input type="text" id="Search" placeholder="Search by Zip Code" class="form-control" />
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search" id="Search"></i></span>
+            <input type="text" placeholder="Search by Zip Code" class="form-control" />
         </div>
     </div>
 </div>
@@ -54,12 +54,15 @@
         </tr>
     </thead>
     <tbody>
+        @foreach (var item in Model)
+        {
             <tr class="Search">
-                <td>@Html.DisplayNameFor(restaurant => restaurant.Name)</td>
-                <td>@Html.DisplayNameFor(restaurant => restaurant.Address)</td>
-                <td>@Html.DisplayNameFor(restaurant => restaurant.ZipCode)</td>
-                <td>@Html.DisplayNameFor(restaurant => restaurant.PhoneNo)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                <td>@Html.DisplayFor(modelItem => item.ZipCode)</td>
+                <td>@Html.DisplayFor(modelItem => item.PhoneNo)</td>
             </tr>
+        }
     </tbody>
 </table>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -71,7 +74,7 @@
         }
         $("#Search").keyup(function () {
             var searchText = $("#Search").val().toLowerCase();
-            $(".Search").each(function () {
+            $("Search").each(function () {
                 if (!Contains($(this).text().toLowerCase, searchText)) {
                     $(this).hide();
                 }
