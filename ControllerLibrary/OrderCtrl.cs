@@ -12,7 +12,7 @@ namespace ControllerLibrary
         {
             Order returnOrder = new Order();
 
-            returnOrder.id = Convert.ToInt32(order.OrderId);
+            /*returnOrder.id = Convert.ToInt32(order.OrderId);
             returnOrder.restaurantId = Convert.ToInt32(order.RestaurantId);
             returnOrder.dateTime = Convert.ToDateTime(order.DateTime);
             returnOrder.reservation = Convert.ToDateTime(order.ReservationDateTime);
@@ -20,7 +20,7 @@ namespace ControllerLibrary
             returnOrder.OrderHistories = new EntitySet<OrderHistory>();
             //returnOrder.OrderHistories.Add(new OrderHistory(returnOrder.id, Convert.ToInt32(order.CustomerId), Convert.ToDouble(order.Payment));
             returnOrder.noSeats = Convert.ToInt32(order.NoSeats);
-            returnOrder.accepted = order.Accepted;
+            returnOrder.accepted = order.Accepted;*/
 
             return returnOrder;
         }

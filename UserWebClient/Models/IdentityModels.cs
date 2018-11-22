@@ -26,8 +26,6 @@ namespace UserWebClient.Models
         {
         }
 
-        public DbSet<Restaurant> Restaurants { get; set; }
-
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

@@ -12,18 +12,20 @@ namespace DatabaseAccessLibrary
         {
             var db = new JustFeastDbDataContext();
 
-            if(db.ResTables.Any(t => !(t.noSeats == resTable.noSeats 
-                                       && t.restaurantId == resTable.restaurantId)))
+            if (db.ResTables.FirstOrDefault(t => !(t.noSeats == resTable.noSeats
+                                                   && t.restaurantId == resTable.restaurantId)) == null)
+            {
                 db.ResTables.InsertOnSubmit(resTable);
-            db.SubmitChanges();
-            
+                db.SubmitChanges();
+            }
         }
         public ResTable GetTable(int noSeats, int restaurantId)
         {
             var db = new JustFeastDbDataContext();
 
-            var resTable = db.ResTables.Single(t => t.noSeats == noSeats
-                                                    && t.restaurantId == restaurantId);
+            ResTable resTable = null;
+            resTable = db.ResTables.SingleOrDefault(t => t.noSeats == noSeats
+                                                && t.restaurantId == restaurantId);
             return resTable;
         }
         public IEnumerable<ResTable> GetTables()
@@ -56,11 +58,14 @@ namespace DatabaseAccessLibrary
         public void DeleteTable(ResTable resTable)
         {
             var db = new JustFeastDbDataContext();
-
-            if(db.ResTables.Any(t => t.noSeats == resTable.noSeats 
-                                     && t.restaurantId == resTable.restaurantId))
-                db.ResTables.DeleteOnSubmit(resTable);
-            db.SubmitChanges();
+            ResTable tableRes = db.ResTables.First(t => t.noSeats == resTable.noSeats 
+                                                        && t.restaurantId == resTable.restaurantId);
+            if (tableRes != null)
+            {
+                db.ResTables.DeleteOnSubmit(db.ResTables.First(t => t.noSeats == resTable.noSeats 
+                                                        && t.restaurantId == resTable.restaurantId));
+                db.SubmitChanges();
+            }
         }
     }
 }
