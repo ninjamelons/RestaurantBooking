@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ControllerLibrary
 {
-    class MenuCtrl
+    public class MenuCtrl
     {
         public static ModelLibrary.Menu CreateMenu(string name, int restaurantId, bool active)
         {

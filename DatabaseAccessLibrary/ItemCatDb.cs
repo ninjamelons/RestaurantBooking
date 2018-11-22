@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DatabaseAccessLibrary
 {
-    class ItemCatDb
+    public class ItemCatDb
     {
-        public void AddItemCat(ItemCat itemCat)
+        public static void AddItemCat(ItemCat itemCat)
         {
 
             JustFeastDbDataContext db = new JustFeastDbDataContext();
@@ -17,7 +17,7 @@ namespace DatabaseAccessLibrary
             db.SubmitChanges();
         }
 
-        public ItemCat GetItemCat(string name)
+        public static ItemCat GetItemCat(string name)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
@@ -25,7 +25,7 @@ namespace DatabaseAccessLibrary
             return itemCat;
         }
 
-        public void DeleteItemCat(ItemCat itemCat)
+        public static void DeleteItemCat(ItemCat itemCat)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
@@ -34,7 +34,7 @@ namespace DatabaseAccessLibrary
             db.SubmitChanges();
         }
 
-        public void UpdateItemCat(ItemCat beforeItemCat, ItemCat afterItemCat)
+        public static void UpdateItemCat(ItemCat beforeItemCat, ItemCat afterItemCat)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             var itemCat = db.ItemCats.SingleOrDefault(t => t.id == beforeItemCat.id);

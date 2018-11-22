@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ControllerLibrary
 {
-    class PriceCtrl
+    public class PriceCtrl
     {
         public static ModelLibrary.Price CreatePrice(double price, DateTime startDate, DateTime endDate)
         {
@@ -23,7 +23,7 @@ namespace ControllerLibrary
         {
             var modelPrice = new ModelLibrary.Price
             {
-                VarPrice = price.price,
+                VarPrice = price.price1,
                 StartDate = price.startDate,
                 EndDate = price.endDate,
                 
@@ -35,7 +35,7 @@ namespace ControllerLibrary
         {
             var dbPrice = new DatabaseAccessLibrary.Price
             {
-                price = price.VarPrice,
+                price1 = price.VarPrice,
                 startDate = price.StartDate,
                 endDate = price.EndDate
             };

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using DatabaseAccessLibrary;
 
 namespace RestaurantService
 {
@@ -13,19 +14,33 @@ namespace RestaurantService
     public interface IItemService
     {
         [OperationContract]
-        void CreateItem(Item item);
+        void CreateItem(ModelLibrary.Item item);
 
         [OperationContract]
-        void UpdateItem(Item item);
+        void UpdateItem(ModelLibrary.Item item);
 
         [OperationContract]
-        void DeleteItem(Item item);
+        void DeleteItem(ModelLibrary.Item item);
 
         [OperationContract]
-        IEnumerable<Item> GetAllItems();
+        IEnumerable<ModelLibrary.Item> GetAllItems();
 
         [OperationContract]
-        IEnumerable<Item> GetAllItemsByCategory();
+        IEnumerable<ModelLibrary.Item> GetAllItemsByCategory(int categoryId);  // ????????
+
+        IEnumerable<ModelLibrary.Item> GetAllItemsByMenu(int menuId);
+
+        [OperationContract]
+        void CreateItemCat(ModelLibrary.ItemCat itemCat);
+
+        [OperationContract]
+        void UpdateItemCat(ModelLibrary.ItemCat itemCat);
+
+        [OperationContract]
+        void DeleteItemCat(ModelLibrary.ItemCat itemCat);
+
+        [OperationContract]
+        IEnumerable<ModelLibrary.ItemCat> GetAllItemCategories();
 
     }
 }

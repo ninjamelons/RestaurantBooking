@@ -12,6 +12,16 @@ namespace RestaurantService
     public interface IPriceService
     {
         [OperationContract]
-        void DoWork();
+        void CreatePrice(ModelLibrary.Price price);
+
+        [OperationContract]
+        void UpdatePrice(ModelLibrary.Price price);
+
+        [OperationContract]
+        void DeletePrice(ModelLibrary.Price price);
+
+        [OperationContract]
+        IEnumerable<ModelLibrary.Price> GetAllPricesByItem(string id);
+
     }
 }

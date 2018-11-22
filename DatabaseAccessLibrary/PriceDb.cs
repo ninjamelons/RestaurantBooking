@@ -7,39 +7,39 @@ using System.Threading.Tasks;
 
 namespace DatabaseAccessLibrary
 {
-    class PriceDb
+    public class PriceDb
     {
-        public void AddPrice(Price price)
+        public static void AddPrice(Price price)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            if (db.Prices.Any(t => !(t.ItemId == price.ItemId && t.startDate == price.startDate || t.endDate == price.endDate))) //???????
+            if (db.Prices.Any(t => !(t.itemId == price.itemId && t.startDate == price.startDate || t.endDate == price.endDate))) //???????
                 db.Prices.InsertOnSubmit(price);
             db.SubmitChanges();
         }
     
 
-        public Price GetPrice(int itemId, DateTime startDate)
+        public static Price GetPrice(int itemId, DateTime startDate)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-            var pric = db.Prices.Single(t => t.ItemId == itemId  && t.startDate == startDate);
+            var pric = db.Prices.Single(t => t.itemId == itemId  && t.startDate == startDate);
             return pric;
         }
 
-        public void DeletePrice(Price price)
+        public static void DeletePrice(Price price)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-            if (db.Prices.Any(t => t.ItemId == price.ItemId && t.startDate == price.startDate))
+            if (db.Prices.Any(t => t.itemId == price.itemId && t.startDate == price.startDate))
                 db.Prices.DeleteOnSubmit(price);
             db.SubmitChanges();
         }
 
-        public void UpdatePrice(Price priceBefore, Price priceAfter)
+        public static void UpdatePrice(Price priceBefore, Price priceAfter)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-            var price = db.Prices.SingleOrDefault(t => t.ItemId == priceBefore.ItemId && t.startDate == priceBefore.startDate);
+            var price = db.Prices.SingleOrDefault(t => t.itemId == priceBefore.itemId && t.startDate == priceBefore.startDate);
             price = priceAfter;
             db.SubmitChanges();
         }

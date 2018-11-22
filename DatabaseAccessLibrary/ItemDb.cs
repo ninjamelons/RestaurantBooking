@@ -9,7 +9,7 @@ namespace DatabaseAccessLibrary
     public class ItemDb
     {
 
-        public void AddItem(Item item)
+        public static void AddItem(Item item)
         {
 
             JustFeastDbDataContext db = new JustFeastDbDataContext();
@@ -18,7 +18,7 @@ namespace DatabaseAccessLibrary
             db.SubmitChanges();
         }
 
-        public Item GetItem(int id, string name)
+        public static Item GetItem(int id, string name)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
@@ -26,7 +26,7 @@ namespace DatabaseAccessLibrary
             return item;
         }
 
-        public void DeleteItem(Item item)
+        public static void DeleteItem(Item item)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
@@ -35,7 +35,7 @@ namespace DatabaseAccessLibrary
             db.SubmitChanges();
         }
 
-        public void UpdateItem(Item beforeItem, Item afterItem)
+        public static void UpdateItem(Item beforeItem, Item afterItem)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             var item = db.Items.SingleOrDefault(t => t.id == beforeItem.id);

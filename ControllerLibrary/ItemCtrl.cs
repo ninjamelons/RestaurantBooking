@@ -11,6 +11,15 @@ namespace ControllerLibrary
 {
     public class ItemCtrl
     {
+        public void UpdateItem (ModelLibrary.Item oldItem, ModelLibrary.Item newItem)
+        {
+                var tableDb = new TableDb();
+                var oldDbItem = ConvertItemToDb(oldItem);
+                var newDbItem = ConvertItemToDb(newItem);
+
+                ItemDb.UpdateItem(oldDbItem, newDbItem);
+            
+        }
         public static IEnumerable<ModelLibrary.Item> GetItems()
         {
             var itemDb = new ItemDb();
@@ -21,7 +30,7 @@ namespace ControllerLibrary
             foreach (var item in items)
             {
                 var CheckItem = db.Items.Single(a => a.id == item.id);
-                var prices = db.Prices.Where(p => p.ItemId == item.id).OrderByDescending(p => p.startDate);
+                var prices = db.Prices.Where(p => p.itemId == item.id).OrderByDescending(p => p.startDate);
                 var price = prices.First();
                 modelItems.Add(new ModelLibrary.Item
                 {
@@ -30,7 +39,7 @@ namespace ControllerLibrary
                     ItemCatId = Convert.ToInt32(item.itemCatId),
                     Id = item.id,
                     MenuId = item.menuId,
-                    Price = price.price
+                    Price = price.price1
                 });
             }
 
@@ -40,7 +49,7 @@ namespace ControllerLibrary
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             var CheckItem = db.Items.Single(a => a.id == item.Id);
-            var prices = db.Prices.Where(p => p.ItemId == item.Id).OrderByDescending(p => p.startDate);
+            var prices = db.Prices.Where(p => p.itemId == item.Id).OrderByDescending(p => p.startDate);
             var price = prices.First();
 
 
@@ -54,7 +63,7 @@ namespace ControllerLibrary
                     ItemCatId = Convert.ToInt32(CheckItem.itemCatId),
                     MenuId = CheckItem.menuId,
                     Id = CheckItem.id,
-                    Price = price.price
+                    Price = price.price1
                     
                 };
             }
@@ -163,7 +172,13 @@ namespace ControllerLibrary
             return dbItemCat;
         }
 
+        public static void DeleteTable(ModelLibrary.Item item)
+        {
+            var dbItem = ConvertItemToDb(item);
+            ItemDb.DeleteItem(dbItem);
+        }
 
-        
+
+
     }
 }

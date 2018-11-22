@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DatabaseAccessLibrary
 {
-    class MenuDb
+    public class MenuDb
     {
-        public void AddMenu(Menu menu)
+        public static void AddMenu(Menu menu)
         {
 
             JustFeastDbDataContext db = new JustFeastDbDataContext();
@@ -19,7 +19,7 @@ namespace DatabaseAccessLibrary
             db.SubmitChanges();
         }
 
-        public Menu GetMenu(int id)
+        public static Menu GetMenu(int id)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
@@ -27,7 +27,7 @@ namespace DatabaseAccessLibrary
             return menu;
         }
 
-        public void DeleteMenu(Menu menu)
+        public static void DeleteMenu(Menu menu)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
@@ -36,7 +36,7 @@ namespace DatabaseAccessLibrary
             db.SubmitChanges();
         }
 
-        public void UpdateMenu(Menu beforeMenu, Menu afterMenu)
+        public static void UpdateMenu(Menu beforeMenu, Menu afterMenu)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             var menu = db.Menus.SingleOrDefault(t => t.id == beforeMenu.id);
