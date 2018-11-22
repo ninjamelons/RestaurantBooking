@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ItemTestcs.cs" />
     <Compile Include="OrderTest.cs" />
     <Compile Include="RegisterRestaurantTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

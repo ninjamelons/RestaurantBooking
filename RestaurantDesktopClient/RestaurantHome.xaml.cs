@@ -31,5 +31,12 @@ namespace RestaurantDesktopClient
             TablesCrud tablesPage = new TablesCrud();
             this.NavigationService.Navigate(tablesPage);
         }
+
+        private void ManageMenus_Click(object sender, RoutedEventArgs e)
+        {
+            //View MenusCrud Page
+            MenusCrud menuPage = new MenusCrud();
+            this.NavigationService.Navigate(menuPage);
+        }
     }
 }

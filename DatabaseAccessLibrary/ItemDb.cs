@@ -8,31 +8,49 @@ namespace DatabaseAccessLibrary
 {
     public class ItemDb
     {
-        public void AddItem(Item item)
+
+        public static void AddItem(Item item)
         {
+
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-            if (db.Items.Any(t => !(t.name == item.name && t.id == item.id )))
                 db.Items.InsertOnSubmit(item);
-            
-
+            db.SubmitChanges();
         }
 
-        public DatabaseAccessLibrary.Item GetItem(int id, int menuId, string name, string description, int itemCatId)
-        {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var dbItem = db.Items.Single(a => a.id == id && a.menuId == menuId && a.name == name && a.description == description
-                                              && a.itemCatId == itemCatId);
-            return dbItem;
-        }
-
-        public void DeleteItem(Item item)
+        public static Item GetItem(int id, string name)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-            if (db.Items.Any(t => !(t.name == item.name && t.id == item.id)))
+            var item = db.Items.Single(t => t.name == name && t.id == id);
+            return item;
+        }
+
+        public static void DeleteItem(Item item)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+
+            if (db.Items.Any(t => t.id == item.id))
                 db.Items.DeleteOnSubmit(item);
-
+            db.SubmitChanges();
         }
+
+        public static void UpdateItem(Item beforeItem, Item afterItem)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var item = db.Items.SingleOrDefault(t => t.id == beforeItem.id);
+            item = afterItem;
+            db.SubmitChanges();
+        }
+
+        public IEnumerable<Item> GetItems()
+        {
+            var db = new JustFeastDbDataContext();
+
+            var items = db.Items.AsEnumerable();
+            return items;
+        }
+
+
     }
 }

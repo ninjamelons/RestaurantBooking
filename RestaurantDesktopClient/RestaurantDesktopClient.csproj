@@ -62,8 +62,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ItemCrud.xaml.cs">
+      <DependentUpon>ItemCrud.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MenusCrud.xaml.cs">
+      <DependentUpon>MenusCrud.xaml</DependentUpon>
     </Compile>
     <Compile Include="RestaurantHome.xaml.cs">
       <DependentUpon>RestaurantHome.xaml</DependentUpon>
@@ -75,6 +81,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ItemCrud.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +97,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MenusCrud.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RestaurantHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
