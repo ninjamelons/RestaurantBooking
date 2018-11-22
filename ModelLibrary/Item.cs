@@ -25,6 +25,8 @@ namespace ModelLibrary
         [RegularExpression("^[0-9/.]*", ErrorMessage = "Invalid Price")]
         public double Price { get; set; }
 
+        public Price PriceObj { get; set; }
+
         public List<Menu> Menus { get; set; }
 
         public int Id { get; set; }

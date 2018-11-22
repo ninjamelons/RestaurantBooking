@@ -145,7 +145,7 @@ namespace UserWebClient.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.Name = new SelectList(context.Roles.AsEnumerable());   
+            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Equals("Admin")).ToList(),"Name","Name");
             return View();
         }
 
@@ -481,7 +481,7 @@ namespace UserWebClient.Controllers
             public string RedirectUri { get; set; }
             public string UserId { get; set; }
 
-            public override void ExecuteResult(ControllerContext context)
+            /*public override void ExecuteResult(ControllerContext context)
             {
                 var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
                 if (UserId != null)
@@ -489,7 +489,7 @@ namespace UserWebClient.Controllers
                     properties.Dictionary[XsrfKey] = UserId;
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
-            }
+            }*/
         }
         #endregion
     }

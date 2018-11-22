@@ -1,0 +1,37 @@
+﻿@model ModelLibrary.Restaurant
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<div class="jumbotron">
+    <h1>@Model.Name</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-9">
+        <table class="table">
+            <thead>
+            <th>@Html.DisplayNameFor(model => model.Menu.Items)</th>
+            <th>@Html.DisplayNameFor(model => model.Menu.Items.First().Price)</th>
+            <th>Add to Cart</th>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Menu.Items)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price.VarPrice</td>
+                    <td>
+                        @Html.ActionLink("Add to cart", "AddToCart", "RestaurantHome", new { item.Id }, new {@class = "btn btn-info"})
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+

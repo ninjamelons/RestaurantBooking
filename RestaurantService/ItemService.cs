@@ -78,7 +78,7 @@ namespace RestaurantService
         public IEnumerable<ModelLibrary.Item> GetAllItemsByMenu(int menuId)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var items = db.Items.Where(a => a.itemMenuId == menuId).ToList();
+            var items = db.Items.Where(a => a.menuId == menuId).ToList();
             List<ModelLibrary.Item> modelItem = new List<ModelLibrary.Item>();
             foreach (var a in items)
             {
