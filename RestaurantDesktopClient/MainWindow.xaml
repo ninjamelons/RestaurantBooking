@@ -5,5 +5,5 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RestaurantDesktopClient"
         mc:Ignorable="d"
-        Title="JustFeast" Height="450" Width="800" Source="RestaurantHome.xaml">
+        Title="JustFeast" Height="515" Width="815" Source="Login.xaml">
 </NavigationWindow>

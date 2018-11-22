@@ -89,8 +89,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CRUDItemTest.cs" />
-    <Compile Include="FindRestaurantsTest.cs" />
     <Compile Include="OrderTest.cs" />
     <Compile Include="RegisterRestaurantTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,6 +110,10 @@
     <ProjectReference Include="..\ModelLibrary\ModelLibrary.csproj">
       <Project>{29a08a63-6222-4321-8d3a-9663ee89c12c}</Project>
       <Name>ModelLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserWebClient\UserWebClient.csproj">
+      <Project>{B26B7D4D-9A59-462C-9778-F9C241D7DD24}</Project>
+      <Name>UserWebClient</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

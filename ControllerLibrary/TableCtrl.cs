@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DatabaseAccessLibrary;
 using ModelLibrary;
 
@@ -43,8 +40,8 @@ namespace ControllerLibrary
 
         public IEnumerable<Table> GetTables()
         {
-            var tblCtrl = new TableDb();
-            var tables = tblCtrl.GetTables();
+            var tblDb = new TableDb();
+            var tables = tblDb.GetTables();
             var modelTables = new List<Table>();
 
             foreach (var table in tables)
@@ -59,6 +56,43 @@ namespace ControllerLibrary
             }
 
             return modelTables;
+        }
+
+        public IEnumerable<Table> GetRestaurantTables(int restaurantId)
+        {
+            var tableDb = new TableDb();
+            var resTables = tableDb.GetRestaurantTables(restaurantId);
+            
+            var modelTables = new List<Table>();
+
+            foreach (var table in resTables)
+            {
+                modelTables.Add(new Table
+                {
+                    NoSeats = table.noSeats.ToString(),
+                    Reserved = table.reserved.ToString(),
+                    RestaurantId = table.restaurantId.ToString(),
+                    Total = table.total.ToString()
+                });
+            }
+
+            return modelTables;
+        }
+
+        public void CreateTable(Table table)
+        {
+            var tableDb = new TableDb();
+            var resTable = ConvertTable(table);
+            tableDb.AddTable(resTable);
+        }
+
+        public void UpdateTable(Table oldTable, Table newTable)
+        {
+            var tableDb = new TableDb();
+            var oldResTable = ConvertTable(oldTable);
+            var newResTable = ConvertTable(newTable);
+
+            tableDb.UpdateTable(oldResTable, newResTable);
         }
 
         public void DeleteTable(Table table)

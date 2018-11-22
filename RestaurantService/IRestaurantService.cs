@@ -18,23 +18,38 @@ namespace RestaurantService
         [OperationContract]
         IEnumerable<ModelLibrary.Restaurant> GetAllRestaurantsByCategory(int categoryId);
         [OperationContract]
+        IEnumerable<ModelLibrary.Restaurant> GetAllRestaurantsByZipCode(int zipcode);
+        [OperationContract]
         void CreateRestaurant(ModelLibrary.Restaurant restaurant);
         [OperationContract]
         void UpdateRestaurant(ModelLibrary.Restaurant restaurant);
         [OperationContract]
-        void DeleteRestaurant(ModelLibrary.Restaurant restaurant);
+        void DeleteRestaurant(int id);
         [OperationContract]
         IEnumerable<ModelLibrary.RestaurantCategory> GetAllRestaurantCategories();
+        [OperationContract]
+        ModelLibrary.Restaurant GetRestaurant(int id);
+        [OperationContract]
+        void CreateRestaurantCategory(RestaurantCategory res);
+        [OperationContract]
+        void DeleteRestaurantCategory(int id);
+        [OperationContract]
+        void UpdateRestaurantCategory(RestaurantCategory res);
+        [OperationContract]
+        RestaurantCategory GetRestaurantCategory(int id);
+
+
 
         [OperationContract]
         void CreateTable(Table table);
         [OperationContract]
-        IEnumerable<Table> GetAllTables(ModelLibrary.Restaurant restaurant);
+        IEnumerable<Table> GetAllTables(int restaurantId);
         [OperationContract]
-        IEnumerable<Table> GetTable(Table table);
+        Table GetTable(Table table);
         [OperationContract]
-        void UpdateTable(Table table);
+        void UpdateTable(Table oldTable, Table newTable);
         [OperationContract]
         void DeleteTable(Table table);
+
     }
 }

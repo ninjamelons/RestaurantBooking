@@ -33,14 +33,25 @@ namespace DatabaseAccessLibrary
             var resTables = db.ResTables.AsEnumerable();
             return resTables;
         }
+        public IEnumerable<ResTable> GetRestaurantTables(int restaurantId)
+        {
+            var allTables = GetTables();
+            var resTables = from table in allTables
+                where table.restaurantId == restaurantId
+                select table;
+            return resTables;
+        }
         public void UpdateTable(ResTable oldTable, ResTable newTable)
         {
             var db = new JustFeastDbDataContext();
             var resTable = db.ResTables.SingleOrDefault(t => t.noSeats == oldTable.noSeats
                                               && t.restaurantId == oldTable.restaurantId);
-            resTable = newTable;
-            db.SubmitChanges();
 
+            resTable.restaurantId = newTable.restaurantId;
+            resTable.noSeats = newTable.noSeats;
+            resTable.total = newTable.total;
+            resTable.reserved = newTable.reserved;
+            db.SubmitChanges();
         }
         public void DeleteTable(ResTable resTable)
         {
