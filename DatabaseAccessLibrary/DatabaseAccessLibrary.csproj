@@ -58,6 +58,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ResetDb.cs" />
     <Compile Include="RestaurantsDb.cs" />
     <Compile Include="TableDb.cs" />
   </ItemGroup>
