@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Item = ModelLibrary.Item;
 
 namespace ControllerLibrary
 {
@@ -13,13 +14,31 @@ namespace ControllerLibrary
     {
         public void UpdateItem (ModelLibrary.Item oldItem, ModelLibrary.Item newItem)
         {
-                var tableDb = new TableDb();
                 var oldDbItem = ConvertItemToDb(oldItem);
                 var newDbItem = ConvertItemToDb(newItem);
 
                 ItemDb.UpdateItem(oldDbItem, newDbItem);
             
         }
+
+        public IEnumerable<ModelLibrary.Item> GetMenuItems(int menuId)
+        {
+            var itemDb = new ItemDb();
+            var priceCtrl = new PriceCtrl();
+
+            var itemsDb = itemDb.GetMenuItems(menuId);
+
+            var items = new List<Item>();
+
+            foreach (var item in itemsDb)
+            {
+                var itemi = ConvertItemToModel(item);
+                itemi.PriceObj = priceCtrl.GetPriceItemId(item.id);
+                items.Add(itemi);
+            }
+            return items;
+        }
+
         public static IEnumerable<ModelLibrary.Item> GetItems()
         {
             var itemDb = new ItemDb();
@@ -123,12 +142,12 @@ namespace ControllerLibrary
         {
             var modelItem = new ModelLibrary.Item
             {
+                Id = dbItem.id,
                 Name = dbItem.name,
                 Description = dbItem.description,
                 MenuId = dbItem.menuId,
                 ItemCatId = Convert.ToInt32(dbItem.itemCatId)
-                
-                
+
             };
             return modelItem;
         }

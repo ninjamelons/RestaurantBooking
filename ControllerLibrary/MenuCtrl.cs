@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DatabaseAccessLibrary;
 
 namespace ControllerLibrary
 {
@@ -20,10 +21,20 @@ namespace ControllerLibrary
             return modelMenu;
         }
 
+        public ModelLibrary.Menu GetActiveMenu(int restaurantId)
+        {
+            var menuDb = new MenuDb();
+            var itemCtrl = new ItemCtrl();
+            var menu = ConvertMenuToModel(menuDb.GetActiveMenu(restaurantId));
+            menu.Items = itemCtrl.GetMenuItems(menu.Id);
+            return menu;
+        }
+
         public static ModelLibrary.Menu ConvertMenuToModel(DatabaseAccessLibrary.Menu dbMenu)
         {
             var modelMenu = new ModelLibrary.Menu
             {
+                Id = dbMenu.id,
                 Name = dbMenu.name,
                 RestaurantId = dbMenu.restaurantId,
                 Active = dbMenu.active

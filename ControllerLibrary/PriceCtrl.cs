@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DatabaseAccessLibrary;
+using Price = ModelLibrary.Price;
 
 namespace ControllerLibrary
 {
@@ -42,6 +44,10 @@ namespace ControllerLibrary
             return dbPrice;
         }
 
-
+        internal Price GetPriceItemId(int id)
+        {
+            var priceDb = new PriceDb();
+            return ConvertPriceToModel(priceDb.GetPriceItemId(id));
+        }
     }
 }

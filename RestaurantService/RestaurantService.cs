@@ -117,9 +117,9 @@ namespace RestaurantService
 
         public ModelLibrary.Restaurant GetRestaurant(int id)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var res = db.Restaurants.FirstOrDefault(x => x.id == id);
-            return RestaurantCtrl.ConvertRestaurantToModel(res);
+            RestaurantCtrl ctrl = new RestaurantCtrl();
+            var res = ctrl.GetRestaurant(id);
+            return res;
         }
 
         public void CreateRestaurantCategory(RestaurantCategory res)

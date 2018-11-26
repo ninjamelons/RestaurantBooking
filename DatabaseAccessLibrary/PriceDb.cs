@@ -44,6 +44,12 @@ namespace DatabaseAccessLibrary
             db.SubmitChanges();
         }
 
+        public Price GetPriceItemId(int itemId)
+        {
+            var db = new JustFeastDbDataContext();
+            return db.Prices.FirstOrDefault(p => p.itemId == itemId);
+        }
+
         public IEnumerable<Price> GetPrices()
         {
             var db = new JustFeastDbDataContext();

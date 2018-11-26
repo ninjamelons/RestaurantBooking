@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ModelLibrary;
+using UserWebClient.Models;
 using UserWebClient.RestaurantService;
-using UserWebClient.OrderService;
+//using UserWebClient.OrderService;
 
 namespace UserWebClient.Controllers
 {
     public class RestaurantHomeController : Controller
     {
         private readonly IRestaurantService _restaurantProxy;
-        private readonly IOrderService _orderProxy;
+        //private readonly IOrderService _orderProxy;
 
         public RestaurantHomeController(IRestaurantService restaurantService)
         {
@@ -22,16 +24,27 @@ namespace UserWebClient.Controllers
         // GET: RestaurantHome
         public ActionResult Index(int id)
         {
-            var serviceResult = this._restaurantProxy.GetRestaurant(id);
-
-            return View("Index", serviceResult);
+            RestaurantOrderModel model = new RestaurantOrderModel();
+            model.Restaurant = this._restaurantProxy.GetRestaurant(id);
+            model.menu = model.Restaurant.Menu;
+            return View("Index", model);
         }
 
+        [HttpPost]
         // POST add item to cart
-        public ActionResult AddToCart(int id)
+        public ActionResult AddToCart(int resId, int orderId, int itemId)
         {
-            this._orderProxy.AddItemToOrder(id);
-            return View("Index");
+            #region Add item to cart
+
+            
+
+            #endregion
+
+            var model = new RestaurantOrderModel();
+            model.Restaurant = this._restaurantProxy.GetRestaurant(resId);
+            model.menu = model.Restaurant.Menu;
+            model.OrderId = orderId;
+            return View("Index", model);
         }
     }
 }

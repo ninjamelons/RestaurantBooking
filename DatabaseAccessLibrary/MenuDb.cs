@@ -27,6 +27,20 @@ namespace DatabaseAccessLibrary
             return menu;
         }
 
+        public Menu GetActiveMenu(int restaurantId)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+
+            var menu = db.Menus.SingleOrDefault(t => t.restaurantId == restaurantId && t.active == true );
+            return menu;
+        }
+
+        public int GetActiveMenuId(int restaurantId)
+        {
+            var db = new JustFeastDbDataContext();
+            return db.Menus.SingleOrDefault(t => t.restaurantId == restaurantId && t.active == true).id;
+        }
+
         public static void DeleteMenu(Menu menu)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();

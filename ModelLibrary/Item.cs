@@ -27,8 +27,6 @@ namespace ModelLibrary
 
         public Price PriceObj { get; set; }
 
-        public List<Menu> Menus { get; set; }
-
         public int Id { get; set; }
 
         public int MenuId { get; set; }

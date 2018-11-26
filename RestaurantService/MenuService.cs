@@ -17,7 +17,6 @@ namespace RestaurantService
         {
             var dbMenu = MenuCtrl.ConvertMenuToDb(menu);
             MenuDb.AddMenu(dbMenu);
-
         }
 
         public void DeleteMenu(ModelLibrary.Menu menu)

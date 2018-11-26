@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DatabaseAccessLibrary;
 using ModelLibrary;
 using System.ComponentModel.DataAnnotations;
+using Restaurant = DatabaseAccessLibrary.Restaurant;
 
 namespace ControllerLibrary
 {
@@ -45,6 +46,15 @@ namespace ControllerLibrary
         public static RestaurantCategory CreateRestaurantCategory(string name)
         {
             return new RestaurantCategory { Name = name };
+        }
+
+        public ModelLibrary.Restaurant GetRestaurant(int restaurantId)
+        {
+            var resDb = new RestaurantsDb();
+            var menuCtrl = new MenuCtrl();
+            var res = ConvertRestaurantToModel(resDb.GetRestaurant(restaurantId));
+            res.Menu = menuCtrl.GetActiveMenu(restaurantId);
+            return res;
         }
 
         public static ModelLibrary.Restaurant ConvertRestaurantToModel(DatabaseAccessLibrary.Restaurant dbRestaurant)
