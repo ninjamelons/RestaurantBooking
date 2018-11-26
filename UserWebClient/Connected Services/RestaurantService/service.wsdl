@@ -19,6 +19,12 @@
   <wsdl:message name="IRestaurantService_GetAllRestaurantsByCategory_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllRestaurantsByCategoryResponse" />
   </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllRestaurantsByZipCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRestaurantsByZipCode" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllRestaurantsByZipCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRestaurantsByZipCodeResponse" />
+  </wsdl:message>
   <wsdl:message name="IRestaurantService_CreateRestaurant_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateRestaurant" />
   </wsdl:message>
@@ -112,6 +118,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByCategory" message="tns:IRestaurantService_GetAllRestaurantsByCategory_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByCategoryResponse" message="tns:IRestaurantService_GetAllRestaurantsByCategory_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetAllRestaurantsByZipCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCode" message="tns:IRestaurantService_GetAllRestaurantsByZipCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCodeResponse" message="tns:IRestaurantService_GetAllRestaurantsByZipCode_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateRestaurant">
       <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/CreateRestaurant" message="tns:IRestaurantService_CreateRestaurant_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/CreateRestaurantResponse" message="tns:IRestaurantService_CreateRestaurant_OutputMessage" />
@@ -182,6 +192,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllRestaurantsByCategory">
       <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetAllRestaurantsByCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRestaurantsByZipCode">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCode" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

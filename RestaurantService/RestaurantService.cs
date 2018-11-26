@@ -7,6 +7,7 @@ using System.Text;
 using DatabaseAccessLibrary;
 using ModelLibrary;
 using ControllerLibrary;
+using Item = ModelLibrary.Item;
 
 namespace RestaurantService
 {
@@ -116,7 +117,9 @@ namespace RestaurantService
 
         public ModelLibrary.Restaurant GetRestaurant(int id)
         {
-            throw new NotImplementedException();
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var res = db.Restaurants.FirstOrDefault(x => x.id == id);
+            return RestaurantCtrl.ConvertRestaurantToModel(res);
         }
 
         public void CreateRestaurantCategory(RestaurantCategory res)

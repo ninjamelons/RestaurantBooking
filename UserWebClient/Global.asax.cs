@@ -17,6 +17,7 @@ namespace UserWebClient
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            UnityConfig.RegisterComponents();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }

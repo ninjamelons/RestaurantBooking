@@ -11,19 +11,17 @@ namespace UserWebClient.Controllers
 {
     public class RestaurantController : Controller
     {
-        RestaurantService.RestaurantServiceClient proxy = new RestaurantService.RestaurantServiceClient();
 
-        // private readonly RestaurantService.IRestaurantService _proxy;
-        //
-        // public RestaurantController(RestaurantService.IRestaurantService proxy)
-        // {
-        //     this._proxy = proxy;
-        // }
+        private readonly RestaurantService.IRestaurantService _proxy;
+        public RestaurantController(RestaurantService.IRestaurantService proxy)
+        {
+            this._proxy = proxy;
+        }
 
         // GET: Restaurant
         public ActionResult Index()
         {
-            return View(proxy.GetAllRestaurants());
+            return View(_proxy.GetAllRestaurants());
         }
 
         // GET: Restaurant/Details/5
@@ -37,7 +35,7 @@ namespace UserWebClient.Controllers
         {
             var rescats = new Dictionary<string, RestaurantCategory>();
             rescats.Add("-No Category-", null);
-            foreach (RestaurantCategory x in proxy.GetAllRestaurantCategories())
+            foreach (RestaurantCategory x in _proxy.GetAllRestaurantCategories())
             {
                 rescats.Add(x.Name, x);
             }
@@ -53,7 +51,7 @@ namespace UserWebClient.Controllers
         {
             try
             {
-                proxy.CreateRestaurant(model.Restaurant);
+                _proxy.CreateRestaurant(model.Restaurant);
           
                 return RedirectToAction("Index");
             }
@@ -68,12 +66,12 @@ namespace UserWebClient.Controllers
         {
             var rescats = new Dictionary<string, RestaurantCategory>();
             rescats.Add("-No Category-", null);
-            foreach (RestaurantCategory x in proxy.GetAllRestaurantCategories())
+            foreach (RestaurantCategory x in _proxy.GetAllRestaurantCategories())
             {
                 rescats.Add(x.Name, x);
             }
 
-            RestaurantViewModel model = new RestaurantViewModel { Restaurant = proxy.GetRestaurant(id), Categories = rescats };
+            RestaurantViewModel model = new RestaurantViewModel { Restaurant = _proxy.GetRestaurant(id), Categories = rescats };
 
             return View("Edit", model);
         }
@@ -84,7 +82,7 @@ namespace UserWebClient.Controllers
         {
             try
             {
-                proxy.UpdateRestaurant(model.Restaurant);
+                _proxy.UpdateRestaurant(model.Restaurant);
            
                 return RedirectToAction("Index");
             }
@@ -99,7 +97,7 @@ namespace UserWebClient.Controllers
         {
             try
             {
-                var model = proxy.GetRestaurant(id);
+                var model = _proxy.GetRestaurant(id);
                 return View(model);
             }
             catch
@@ -114,7 +112,7 @@ namespace UserWebClient.Controllers
         {
             try
             {
-                proxy.DeleteRestaurant(id);
+                _proxy.DeleteRestaurant(id);
                 return RedirectToAction("Index");
             }
             catch

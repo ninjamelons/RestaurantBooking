@@ -27,10 +27,24 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAllRestaurantsByZipCode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="zipcode" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllRestaurantsByZipCodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllRestaurantsByZipCodeResult" nillable="true" type="q3:ArrayOfRestaurant" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CreateRestaurant">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="restaurant" nillable="true" type="q3:Restaurant" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="restaurant" nillable="true" type="q4:Restaurant" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -42,7 +56,7 @@
   <xs:element name="UpdateRestaurant">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="restaurant" nillable="true" type="q4:Restaurant" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="restaurant" nillable="true" type="q5:Restaurant" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -71,7 +85,7 @@
   <xs:element name="GetAllRestaurantCategoriesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllRestaurantCategoriesResult" nillable="true" type="q5:ArrayOfRestaurantCategory" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllRestaurantCategoriesResult" nillable="true" type="q6:ArrayOfRestaurantCategory" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -85,14 +99,14 @@
   <xs:element name="GetRestaurantResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetRestaurantResult" nillable="true" type="q6:Restaurant" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetRestaurantResult" nillable="true" type="q7:Restaurant" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateRestaurantCategory">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="res" nillable="true" type="q7:RestaurantCategory" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="res" nillable="true" type="q8:RestaurantCategory" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -116,7 +130,7 @@
   <xs:element name="UpdateRestaurantCategory">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="res" nillable="true" type="q8:RestaurantCategory" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="res" nillable="true" type="q9:RestaurantCategory" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -135,14 +149,14 @@
   <xs:element name="GetRestaurantCategoryResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetRestaurantCategoryResult" nillable="true" type="q9:RestaurantCategory" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetRestaurantCategoryResult" nillable="true" type="q10:RestaurantCategory" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CreateTable">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="table" nillable="true" type="q10:Table" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="table" nillable="true" type="q11:Table" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -161,29 +175,29 @@
   <xs:element name="GetAllTablesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllTablesResult" nillable="true" type="q11:ArrayOfTable" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllTablesResult" nillable="true" type="q12:ArrayOfTable" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetTable">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="table" nillable="true" type="q12:Table" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="table" nillable="true" type="q13:Table" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetTableResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetTableResult" nillable="true" type="q13:Table" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetTableResult" nillable="true" type="q14:Table" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateTable">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="oldTable" nillable="true" type="q14:Table" />
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="newTable" nillable="true" type="q15:Table" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="oldTable" nillable="true" type="q15:Table" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="newTable" nillable="true" type="q16:Table" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -195,7 +209,7 @@
   <xs:element name="DeleteTable">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="table" nillable="true" type="q16:Table" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="table" nillable="true" type="q17:Table" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
