@@ -16,5 +16,6 @@
         </Border>
         <Button x:Name="ToTablesPage" Content="Manage Tables" HorizontalAlignment="Right"
                 VerticalAlignment="Bottom" Margin="13" Padding="8 3" Click="ToTablesPage_OnClick"/>
+        <Button x:Name="ManageMenus"  Content="Manage Menus" HorizontalAlignment="Left" Height="24" Margin="579,413,0,0" VerticalAlignment="Top" Width="106" Click="ManageMenus_Click"/>
     </Grid>
 </Page>

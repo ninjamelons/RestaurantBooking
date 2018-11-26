@@ -65,6 +65,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -97,6 +98,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="ItemTestcs.cs" />
     <Compile Include="OrderTest.cs" />
     <Compile Include="RegisterRestaurantTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +117,7 @@
     <None Include="Connected Services\RestaurantService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\ModelLibrary.Restaurant.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.RestaurantCategory.datasource" />

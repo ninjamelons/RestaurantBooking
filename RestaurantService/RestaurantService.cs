@@ -7,6 +7,7 @@ using System.Text;
 using DatabaseAccessLibrary;
 using ModelLibrary;
 using ControllerLibrary;
+using Item = ModelLibrary.Item;
 
 namespace RestaurantService
 {

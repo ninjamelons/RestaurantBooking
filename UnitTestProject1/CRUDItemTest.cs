@@ -12,7 +12,6 @@ namespace UnitTests
     [TestClass]
     public class CRUDItemTest
     {
-      
             [TestMethod]
             [DataRow("ChickenSteak", "WeirdDescription", 12.0, true, DisplayName = "All data correct")]
             [DataRow("a", "WeirderDescription", 12.0, false, DisplayName = "Name too short")]
@@ -44,9 +43,12 @@ namespace UnitTests
                 Assert.IsTrue(isModelStateValid == shouldValidate);
             }
 
+        [TestMethod]
         public void Create_Item_Added_To_Db()
         {
             //Setup
+            #region creates Item,Menu,Restaurant,Price
+
             DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
             {
                 description = "PerfectlyGoodDescription",
@@ -62,8 +64,8 @@ namespace UnitTests
                active = true
 
             };
-            
-            Restaurant newRestaurant = new Restaurant
+
+            DatabaseAccessLibrary.Restaurant newRestaurant = new DatabaseAccessLibrary.Restaurant
             {
                 id = 1,
                 name = "RestaurantNameExample",
@@ -71,23 +73,34 @@ namespace UnitTests
                 email = "RestaurantEmailExample",
                 zipcode = 1231223
             };
-            
+            DateTime startDate = new DateTime(2011, 6, 10);
+            DateTime endDate = new DateTime(2011, 7, 11);
+            Price newPrice = new Price
+            {
+                price1 = 12, // price int?
+                startDate = startDate,
+                endDate = endDate
+                
+        };
+            #endregion
 
-            ItemDb ItemDb = new ItemDb();
+            ItemDb itemDb = new ItemDb();
 
             //Act
-            ItemDb.AddItem(newItem);
+            itemDb.AddItem(newItem);
 
-            //Get Item(1,1,"PerfectlyGoodName", "PerfectlyGoodDescription", 1);
-            DatabaseAccessLibrary.Item anotherItem = ItemDb.GetItem(1, 1, "PerfectlyGoodName", "PerfectlyGoodDescription", 1);
+            //Get Item(1,1,"PerfectlyGoodName");
+            DatabaseAccessLibrary.Item anotherItem = itemDb.GetItem(1, "PerfectlyGoodName", newPrice);// PRICE!?
 
             //Assert
             Assert.Equals(anotherItem, newItem);
         }
-
+        [TestMethod]
         public void Item_Deleted_From_Db()
         {
             //Setup
+            #region creates Item,Menu,Restaurant
+
             DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
             {
                 description = "PerfectlyGoodDescription",
@@ -104,7 +117,51 @@ namespace UnitTests
 
             };
 
-            Restaurant newRestaurant = new Restaurant
+            DatabaseAccessLibrary.Restaurant newRestaurant = new DatabaseAccessLibrary.Restaurant
+            {
+                id = 1,
+                name = "RestaurantNameExample",
+                address = "RestaurantAddressExample",
+                email = "RestaurantEmailExample",
+                zipcode = 1231223
+            };
+            #endregion
+
+
+            ItemDb itemDb = new ItemDb();
+            itemDb.AddItem(newItem);
+            
+            //Act
+
+
+            //Delete Item
+            itemDb.DeleteItem(newItem);
+
+            //Assert
+            Assert.IsNull(newItem);
+        }
+        [TestMethod]
+        public void Update_Item_In_Db()
+        {
+            #region creates Item,Menu,Restaurant,Price
+
+            DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
+            {
+                description = "PerfectlyGoodDescription",
+                id = 1,
+                itemCatId = 1,
+                menuId = 1,
+                name = "PerfectlyGoodName",
+            };
+            Menu newMenu = new Menu
+            {
+                id = 1,
+                restaurantId = 1,
+                active = true
+
+            };
+
+            DatabaseAccessLibrary.Restaurant newRestaurant = new DatabaseAccessLibrary.Restaurant
             {
                 id = 1,
                 name = "RestaurantNameExample",
@@ -113,18 +170,34 @@ namespace UnitTests
                 zipcode = 1231223
             };
 
+            DateTime startDate = new DateTime(2011, 6, 10);
+            DateTime endDate = new DateTime(2011, 7, 11);
+            Price newPrice = new Price
+            {
+                price1 = 12, // price int?
+                startDate = startDate,
+                endDate = endDate
 
-            ItemDb ItemDb = new ItemDb();
-            ItemDb.AddItem(newItem);
-            //Act
+            };
+            #endregion
 
+            ItemDb itemDb = new ItemDb();
+            itemDb.AddItem(newItem);
+            
 
-            //Delete Item
-            ItemDb.DeleteItem(newItem);
-
+            //Get Item(1,1,"PerfectlyGoodName");
+            DatabaseAccessLibrary.Item anotherItem = itemDb.GetItem(1, "PerfectlyGoodName", newPrice);
+            itemDb.UpdateItem(newItem);
             //Assert
-            Assert.IsNull(newItem);
+            Assert.AreNotEqual(newItem, anotherItem);
+
+
+
         }
-        
+        [TestMethod]
+        public void Update_Item_In_Db_Without_Changes()
+        {
+
+        }
     }
 }

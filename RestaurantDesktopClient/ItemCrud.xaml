@@ -1,0 +1,30 @@
+﻿<Page x:Class="RestaurantDesktopClient.ItemCrud"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RestaurantDesktopClient"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ItemCrud">
+
+    <Grid>
+        <Label x:Name="labelName" Content="Name:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,25,0,0" Width="109"/>
+        <Label x:Name="labelItemCat" Content="Category:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,74,0,0" Width="109"/>
+        <Label x:Name="labelItemPrice" Content="Price:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,128,0,0" Width="109"/>
+        <Label x:Name="labelItemPriceDate" Content="Price Date:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="406,128,0,0" Width="103"/>
+        <Label x:Name="labelItemPriceDescription" Content="Description:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,167,0,0" Width="109"/>
+        <TextBox x:Name="textBoxDescription" HorizontalAlignment="Left" Height="182" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="726" Margin="21,201,0,0"/>
+        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="118,36,0,0" TextChanged="textBoxName_TextChanged"/>
+        <TextBox x:Name="textBoxNameCategory" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123" Margin="514,86,0,0" TextChanged="textBoxName_TextChanged" RenderTransformOrigin="0.411,0.599"/>
+        <TextBox x:Name="textBoxNamePrice" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="118,139,0,0" TextChanged="textBoxName_TextChanged"/>
+        <TextBox x:Name="textBoxNamePriceEnd" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123" Margin="652,139,0,0" TextChanged="textBoxName_TextChanged"/>
+        <Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="639,399,0,0" Height="27"/>
+        <Button x:Name="buttonSave" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="514,399,0,0" Height="27"/>
+        <ComboBox x:Name="comboBoxCategory" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="118,86,0,0"/>
+        <Label x:Name="labelItemNewCatName" Content="New Category Name:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,74,0,0" Width="189"/>
+        <Button x:Name="buttonSaveCategory" Content="Save Category" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="652,87,0,0" Height="22"/>
+        <TextBox x:Name="textBoxNamePriceStart" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123" Margin="514,139,0,0" TextChanged="textBoxName_TextChanged"/>
+
+    </Grid>
+</Page>

@@ -46,5 +46,7 @@ namespace ModelLibrary
         
         [Display(Name = "Category")]
         public RestaurantCategory Category { get; set; }
+
+        public Menu Menu { get; set; }
     }
 }
