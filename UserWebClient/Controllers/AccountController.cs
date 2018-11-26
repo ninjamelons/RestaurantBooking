@@ -145,7 +145,7 @@ namespace UserWebClient.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.Name = new SelectList(context.Roles.AsEnumerable());   
+            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Equals("Admin")).ToList(), "Name", "Name");   
             return View();
         }
 
