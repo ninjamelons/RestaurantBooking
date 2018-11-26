@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UserWebClient.RestaurantService {
+namespace UnitTestProject1.RestaurantService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -32,12 +32,6 @@ namespace UserWebClient.RestaurantService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCode", ReplyAction="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCodeResponse")]
         System.Threading.Tasks.Task<ModelLibrary.Restaurant[]> GetAllRestaurantsByZipCodeAsync(int zipcode);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetRestaurantsPaged", ReplyAction="http://tempuri.org/IRestaurantService/GetRestaurantsPagedResponse")]
-        ModelLibrary.Restaurant[] GetRestaurantsPaged(int zipcode, int categoryId, int page, int amount, bool verified, bool discontinued);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetRestaurantsPaged", ReplyAction="http://tempuri.org/IRestaurantService/GetRestaurantsPagedResponse")]
-        System.Threading.Tasks.Task<ModelLibrary.Restaurant[]> GetRestaurantsPagedAsync(int zipcode, int categoryId, int page, int amount, bool verified, bool discontinued);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/CreateRestaurant", ReplyAction="http://tempuri.org/IRestaurantService/CreateRestaurantResponse")]
         void CreateRestaurant(ModelLibrary.Restaurant restaurant);
@@ -125,12 +119,12 @@ namespace UserWebClient.RestaurantService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IRestaurantServiceChannel : UserWebClient.RestaurantService.IRestaurantService, System.ServiceModel.IClientChannel {
+    public interface IRestaurantServiceChannel : UnitTestProject1.RestaurantService.IRestaurantService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class RestaurantServiceClient : System.ServiceModel.ClientBase<UserWebClient.RestaurantService.IRestaurantService>, UserWebClient.RestaurantService.IRestaurantService {
+    public partial class RestaurantServiceClient : System.ServiceModel.ClientBase<UnitTestProject1.RestaurantService.IRestaurantService>, UnitTestProject1.RestaurantService.IRestaurantService {
         
         public RestaurantServiceClient() {
         }
@@ -173,14 +167,6 @@ namespace UserWebClient.RestaurantService {
         
         public System.Threading.Tasks.Task<ModelLibrary.Restaurant[]> GetAllRestaurantsByZipCodeAsync(int zipcode) {
             return base.Channel.GetAllRestaurantsByZipCodeAsync(zipcode);
-        }
-        
-        public ModelLibrary.Restaurant[] GetRestaurantsPaged(int zipcode, int categoryId, int page, int amount, bool verified, bool discontinued) {
-            return base.Channel.GetRestaurantsPaged(zipcode, categoryId, page, amount, verified, discontinued);
-        }
-        
-        public System.Threading.Tasks.Task<ModelLibrary.Restaurant[]> GetRestaurantsPagedAsync(int zipcode, int categoryId, int page, int amount, bool verified, bool discontinued) {
-            return base.Channel.GetRestaurantsPagedAsync(zipcode, categoryId, page, amount, verified, discontinued);
         }
         
         public void CreateRestaurant(ModelLibrary.Restaurant restaurant) {

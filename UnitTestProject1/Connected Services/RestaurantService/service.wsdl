@@ -25,12 +25,6 @@
   <wsdl:message name="IRestaurantService_GetAllRestaurantsByZipCode_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllRestaurantsByZipCodeResponse" />
   </wsdl:message>
-  <wsdl:message name="IRestaurantService_GetRestaurantsPaged_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetRestaurantsPaged" />
-  </wsdl:message>
-  <wsdl:message name="IRestaurantService_GetRestaurantsPaged_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetRestaurantsPagedResponse" />
-  </wsdl:message>
   <wsdl:message name="IRestaurantService_CreateRestaurant_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateRestaurant" />
   </wsdl:message>
@@ -128,10 +122,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCode" message="tns:IRestaurantService_GetAllRestaurantsByZipCode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCodeResponse" message="tns:IRestaurantService_GetAllRestaurantsByZipCode_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetRestaurantsPaged">
-      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetRestaurantsPaged" message="tns:IRestaurantService_GetRestaurantsPaged_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetRestaurantsPagedResponse" message="tns:IRestaurantService_GetRestaurantsPaged_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="CreateRestaurant">
       <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/CreateRestaurant" message="tns:IRestaurantService_CreateRestaurant_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/CreateRestaurantResponse" message="tns:IRestaurantService_CreateRestaurant_OutputMessage" />
@@ -211,15 +201,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllRestaurantsByZipCode">
       <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCode" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetRestaurantsPaged">
-      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetRestaurantsPaged" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
