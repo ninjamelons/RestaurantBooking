@@ -55,21 +55,21 @@
                             <th></th>
                         </tr>
                     </thead>
-                    @foreach (var item in Model.OrderLineItems)
+                    @foreach (var item in Model.Items)
                     {
-                        <tr id="row-@item.ItemsList">
+                        <tr id="row-@item.Name">
                             <td>
-                                @Html.ActionLink(item.Name, "Details", "Store", new { id = item.OrderId }, null)
+                                @Html.ActionLink(item.Name, "Details", "Store", new { id = item.Id }, null)
                             </td>
                             <td>
-                                @Price.Items
+                                @item.Price
                             </td>
-                            <td id="item-count-@item.ItemsList">
-                                @item.Count
+                            <td id="item-count-@item.Id">
+                                @item.PriceObj
                             </td>
                             <td>
                                 <a href="#" class="RemoveLink"
-                                   data-id="@item.ItemsList">
+                                   data-id="@item.Id">
                                     Remove
                                     from cart
                                 </a>
@@ -100,5 +100,7 @@
                 There are no items in your cart currently. Please shop for something and add items..
             </p>
         </div>
+
+
     }
 }

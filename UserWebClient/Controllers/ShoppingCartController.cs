@@ -7,7 +7,9 @@ using System.Web.Mvc;
 using ModelLibrary;
 using DatabaseAccessLibrary;
 using UserWebClient.ViewModels;
-/*
+using System.Net;
+using System.Threading.Tasks;
+
 namespace UserWebClient.Controllers
 {
     public class ShoppingCartController : Controller
@@ -22,7 +24,7 @@ namespace UserWebClient.Controllers
             // Set up our ViewModel
             var viewModel = new ShoppingCartViewModel
             {
-                OrderLineItems = cart.(),
+                CartItems = cart.GetCartItems(),
                 CartTotal = cart.GetTotal()
             };
             // Return the view

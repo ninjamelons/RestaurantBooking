@@ -61,6 +61,10 @@ namespace DatabaseAccessLibrary
             return items;
         }
 
-
+        public IEnumerable<Item> GetMenuItems(int menuId)
+        {
+            var db = new JustFeastDbDataContext();
+            return db.Items.Where(t => t.menuId == menuId).AsEnumerable().ToList();
+        }
     }
 }

@@ -253,22 +253,18 @@
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\RestaurantHomeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RestaurantBrowseModel.cs" />
+    <Compile Include="Models\RestaurantOrderModel.cs" />
     <Compile Include="Models\RestaurantViewModel.cs" />
-    <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\ShoppingCartRemoveViewModel.cs" />
-    <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\RestaurantService\configuration91.svcinfo" />
@@ -296,10 +292,10 @@
     <None Include="Connected Services\RestaurantService\ModelLibrary.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\RestaurantService\service.wsdl" />
     <None Include="Connected Services\RestaurantService\service.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\RestaurantService\service1.wsdl" />
     <None Include="Connected Services\RestaurantService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -358,8 +354,7 @@
     <Content Include="Views\RestaurantCategory\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Home\AdminHome.cshtml" />
-    <Content Include="Views\RestaurantCategory\Details.cshtml" />
-    <Content Include="Views\Restaurant\BrowseOld.cshtml" />
+    <Content Include="Views\RestaurantHome\Index.cshtml" />
     <Content Include="Views\Restaurant\Browse.cshtml" />
     <Content Include="Views\RestaurantHome\Index.cshtml" />
     <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
@@ -369,6 +364,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Logic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -395,6 +391,10 @@
     <ProjectReference Include="..\ModelLibrary\ModelLibrary.csproj">
       <Project>{29a08a63-6222-4321-8d3a-9663ee89c12c}</Project>
       <Name>ModelLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestaurantService\RestaurantService.csproj">
+      <Project>{42a6ed34-8511-4a4e-8d7e-82bf17688f7f}</Project>
+      <Name>RestaurantService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

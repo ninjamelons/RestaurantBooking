@@ -96,8 +96,7 @@ namespace RestaurantService
             res.address = mRes.address;
             res.discontinued = mRes.discontinued;
             res.email = mRes.email;
-          //  if (restaurant.Category != null)
-          //      res.ResCat = db.ResCats.FirstOrDefault(x => x.id == restaurant.Category.Id);
+            res.resCatId = mRes.resCatId;
 
             db.SubmitChanges();
         }
@@ -126,9 +125,9 @@ namespace RestaurantService
         }
         public ModelLibrary.Restaurant GetRestaurant(int id)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var res = db.Restaurants.FirstOrDefault(x => x.id == id);
-            return RestaurantCtrl.ConvertRestaurantToModel(res);
+            RestaurantCtrl ctrl = new RestaurantCtrl();
+            var res = ctrl.GetRestaurant(id);
+            return res;
         }
         public void CreateRestaurantCategory(RestaurantCategory res)
         {
@@ -152,7 +151,7 @@ namespace RestaurantService
         public RestaurantCategory GetRestaurantCategory(int id)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            return RestaurantCtrl.ConvertRestaurantCategoryToModel(db.ResCats.First(x => x.id == id));
+            return RestaurantCtrl.ConvertRestaurantCategoryToModel(db.ResCats.FirstOrDefault(x => x.id == id));
         }
 
         public List<ModelLibrary.Restaurant> GetRestaurantsPaged(int zipcode = 0, int categoryId = 0, int page = 0, int amount = 10, bool verified = true, bool discontinued = false)

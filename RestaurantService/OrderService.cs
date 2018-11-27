@@ -1,65 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Runtime.Serialization;
+using System.ServiceModel;
 using System.Text;
-using System.Threading.Tasks;
-using ControllerLibrary;
-using DatabaseAccessLibrary;
-using Order = ModelLibrary.Order;
 
 namespace RestaurantService
 {
-    class OrderService : IOrderService
+    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "OrderService" in both code and config file together.
+    public class OrderService : IOrderService
     {
-        public void AddItemToOrder(int orderId, int itemId)
+        public void DoNotDoWork(int num1, int num2)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var item = db.Items.SingleOrDefault(i => i.id == itemId);
-            var exists =
-                from lineItem in db.OrderLineItems
-                where lineItem.orderId == orderId && lineItem.itemId == itemId
-                select lineItem;
-            
-            if (exists.Any() && exists.FirstOrDefault() != null)
-            {
-                exists.FirstOrDefault().quantity++;
-            }
-            else
-            {
-                var oli = new OrderLineItem
-                {
-                    orderId = orderId,
-                    itemId = item.id,
-                    quantity = 1
-                };
-                db.OrderLineItems.InsertOnSubmit(oli);
-            }
-            db.SubmitChanges();
+            Console.Out.WriteLine();
         }
 
-        public void CreateOrder(Order order)
+        public void DoWork(int id)
         {
-            OrderCtrl ordC = new OrderCtrl();
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            db.Orders.InsertOnSubmit(ordC.ConvertOrder(order));
-            db.SubmitChanges();
-        }
-
-        public Order GetOrderById(int id)
-        {
-            OrderCtrl ordC = new OrderCtrl();
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            return ordC.ConvertOrderToModel(db.Orders.SingleOrDefault(o => o.id == id));
-        }
-
-        public void UpdateOrder(Order order)
-        {
-            var ordC = new OrderCtrl();
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var ord = db.Orders.SingleOrDefault(o => o.id == Convert.ToInt32(order.OrderId));
-            ord = ordC.ConvertOrder(order);
-            db.SubmitChanges();
+            Console.Out.WriteLine(id);
         }
     }
 }
