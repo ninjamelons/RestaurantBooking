@@ -19,5 +19,11 @@ namespace DatabaseAccessLibrary
 
             return restaurants;
         }
+
+        public static Restaurant GetRestaurant(int id)
+        {
+            var db = new JustFeastDbDataContext();
+            return db.Restaurants.FirstOrDefault(x => x.id == id);
+        }
     }
 }
