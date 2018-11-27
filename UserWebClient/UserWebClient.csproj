@@ -241,6 +241,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Connected Services\OrderService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\RestaurantService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -253,6 +258,7 @@
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\RestaurantHomeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -265,11 +271,32 @@
     <Compile Include="Models\RestaurantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\ViewModels\ShoppingCartRemoveViewModel.cs" />
+    <Compile Include="Views\ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Connected Services\OrderService\DatabaseAccessLibrary.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderService\service.wsdl" />
+    <None Include="Connected Services\OrderService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderService\System.Data.Linq.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\RestaurantService\configuration91.svcinfo" />
     <None Include="Connected Services\RestaurantService\configuration.svcinfo" />
     <None Include="Connected Services\RestaurantService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\OrderService\configuration91.svcinfo" />
+    <None Include="Connected Services\OrderService\configuration.svcinfo" />
+    <None Include="Connected Services\OrderService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -277,6 +304,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\custom.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -299,6 +327,7 @@
     <None Include="Connected Services\RestaurantService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Properties\DataSources\DatabaseAccessLibrary.Order.datasource" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -310,6 +339,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="source\lefteris-kallergis-581884-unsplash-min.jpg" />
+    <Content Include="source\LogoMakr_9ofBtV.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -364,6 +395,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Logic\" />
+    <Folder Include="Views\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -400,6 +432,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\OrderService\" />
     <WCFMetadataStorage Include="Connected Services\RestaurantService\" />
   </ItemGroup>
   <PropertyGroup>

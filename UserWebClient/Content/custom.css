@@ -1,0 +1,87 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+.navbar-brand {
+    float: left;
+    height: 40px;
+    width: auto;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+    padding-top: 0.5%;
+}
+
+.navbar-inverse {
+    padding-top: 1%;
+    background-color: mediumaquamarine;
+    border-color: mediumaquamarine;
+    overflow: hidden;
+}
+
+.nav navbar-nav ul li {
+    font-weight: 200;
+    font-size: 16px;
+    transition: 0.4s ease;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: azure;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: #b8fce3;
+    transition: 0.4s ease;
+}
+
+.input-group homesearch {
+    margin-bottom: 20px;
+}
+
+.align-middle {
+    margin: 0 auto;
+    vertical-align:middle;
+    text-align:center;
+    align-content: center;
+}
+
+.landing {
+    background-image: url('../source/lefteris-kallergis-581884-unsplash-min.jpg');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    border-style:none;
+    padding-top: 300px;
+    padding-bottom: 300px;
+    overflow: hidden;
+}
+
+h1 {
+    color: azure;
+    font-weight: 100;
+    text-align: center;
+}
+
+col-md-4 {
+    align-content:center;
+}
+
+.btn {
+    float: left;
+}
+
+.input-group {
+    padding-left: 10%;
+}
+
+
+
+
+
