@@ -44,7 +44,11 @@ namespace UserWebClient.Controllers
             //
             //  var model = new RestaurantViewModel { Restaurant = new Restaurant(), Categories = rescats };
 
-            var model = new RestaurantViewModel { Restaurant = new Restaurant(), CategoryList = new SelectList(proxy.GetAllRestaurantCategories(), "Id", "Name", 1) };
+            var categories = new List<RestaurantCategory>();
+            categories.Add(new RestaurantCategory { Id = 0, Name = "-No Category-" });
+            categories.AddRange(proxy.GetAllRestaurantCategories());
+
+            var model = new RestaurantViewModel { Restaurant = new Restaurant(), CategoryList = new SelectList(categories, "Id", "Name", 1) };
 
             return View("Create", model);
         }
@@ -79,7 +83,11 @@ namespace UserWebClient.Controllers
             //
             //  RestaurantViewModel model = new RestaurantViewModel { Restaurant = proxy.GetRestaurant(id), Categories = rescats };
 
-            var model = new RestaurantViewModel { Restaurant = proxy.GetRestaurant(id), CategoryList = new SelectList(proxy.GetAllRestaurantCategories(), "Id", "Name", 1) };
+            var categories = new List<RestaurantCategory>();
+            categories.Add(new RestaurantCategory { Id = 0, Name = "-No Category-" });
+            categories.AddRange(proxy.GetAllRestaurantCategories());
+
+            var model = new RestaurantViewModel { Restaurant = proxy.GetRestaurant(id), CategoryList = new SelectList(categories, "Id", "Name", 1) };
 
             return View("Edit", model);
         }
@@ -91,6 +99,7 @@ namespace UserWebClient.Controllers
             try
             {
                 var res = model.Restaurant;
+                res.Id = id;
                 res.Category = proxy.GetRestaurantCategory(model.SelectedCategoryId);
                 proxy.UpdateRestaurant(res);
 

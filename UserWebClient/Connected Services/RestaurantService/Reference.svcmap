@@ -22,7 +22,7 @@
     <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="ec5672ea-3c8d-4268-b173-10201425fd68" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />
+    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="a22f268e-79bf-4424-b056-f43528543075" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="f45e76d9-b3d3-4108-b2ea-6a59ab40aa8e" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="8f26cd67-8d99-4b5f-861d-5e85805dc2c3" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />
     <MetadataFile FileName="ModelLibrary.xsd" MetadataType="Schema" ID="e091bb89-1051-4a54-86a3-f5d5a579af81" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/mex" />

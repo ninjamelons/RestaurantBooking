@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DatabaseAccessLibrary
@@ -18,6 +19,13 @@ namespace DatabaseAccessLibrary
             .OrderBy(x => x.name).Skip(page*amount).Take(amount).ToList();
 
             return restaurants;
+        }
+
+        public static Restaurant GetRestaurant(int restaurantId)
+        {
+            var db = new JustFeastDbDataContext();
+            var res = db.Restaurants.FirstOrDefault(x => x.id == restaurantId);
+            return res;
         }
     }
 }

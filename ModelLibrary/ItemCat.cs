@@ -12,6 +12,5 @@ namespace ModelLibrary
 
         public string Name { get; set; }
 
-        public List<Item> Items { get; set; }
     }
 }
