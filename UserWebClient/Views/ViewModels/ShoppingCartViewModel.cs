@@ -17,4 +17,4 @@ namespace UserWebClient.Views.ViewModels
            public decimal CartTotal { get; set; }
       
     }
-}
+}*/
