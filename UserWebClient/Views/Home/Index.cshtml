@@ -3,82 +3,98 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<!-- Cart -->
+<div id="cart" class="float-right" data-bind="visible: cart().length > 0">
+    <h1>Your Cart</h1>
+    <table class="details ui-widget-content">
+        <thead>
+            <tr><td>Item</td><td>Price</td><td>Quantity</td><td></td></tr>
+        </thead>
+        <tbody data-bind="foreach: cart">
+            <tr>
+                <td><span data-bind="text: $data.Name"></span></td>
+                <td>$<span data-bind="text: $data.Price"></span></td>
+                <td class="qty"><span data-bind="text: $data.Quantity()"></span></td>
+                <td><a href="#" data-bind="click: removeAllFromCart">Remove</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <input type="button" data-bind="click: createOrder" value="Create Order" />
+    <div class="error" data-bind="if: errorMessage, text: errorMessage"></div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
 
-<br /> <br />
-
-<div class="container">
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-            <input type="text" id="Search" placeholder="Search by Zip Code" class="form-control" />
+    
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
         </div>
     </div>
-</div>
 
-<br />
+    <br /> <br />
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Restaurant</th>
-            <th>Adress</th>
-            <th>Zip Code</th>
-            <th>Phone</th>
-        </tr>
-    </thead>
-    <tbody>
+    <div class="container">
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                <input type="text" id="Search" placeholder="Search by Zip Code" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Restaurant</th>
+                <th>Adress</th>
+                <th>Zip Code</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody>
             <tr class="Search">
                 <td>@Html.DisplayNameFor(restaurant => restaurant.Name)</td>
                 <td>@Html.DisplayNameFor(restaurant => restaurant.Address)</td>
                 <td>@Html.DisplayNameFor(restaurant => restaurant.ZipCode)</td>
                 <td>@Html.DisplayNameFor(restaurant => restaurant.PhoneNo)</td>
             </tr>
-    </tbody>
-</table>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script>
-    $(document).ready(function () {
-        function Contains(text_one, text_two) {
-            if (text_one.indexOf(text_two) != -1)
-                return true;
-        }
-        $("#Search").keyup(function () {
-            var searchText = $("#Search").val().toLowerCase();
-            $(".Search").each(function () {
-                if (!Contains($(this).text().toLowerCase, searchText)) {
-                    $(this).hide();
-                }
-                else {
-                    $(this).show();
-                }
+        </tbody>
+    </table>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function Contains(text_one, text_two) {
+                if (text_one.indexOf(text_two) != -1)
+                    return true;
+            }
+            $("#Search").keyup(function () {
+                var searchText = $("#Search").val().toLowerCase();
+                $(".Search").each(function () {
+                    if (!Contains($(this).text().toLowerCase, searchText)) {
+                        $(this).hide();
+                    }
+                    else {
+                        $(this).show();
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
