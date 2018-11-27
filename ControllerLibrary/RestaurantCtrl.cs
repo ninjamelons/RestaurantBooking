@@ -65,6 +65,8 @@ namespace ControllerLibrary
 
         public static DatabaseAccessLibrary.Restaurant ConvertRestaurantToDatabase(ModelLibrary.Restaurant mRes)
         {
+            if (mRes == null)
+                return null;
             int PhoneNo = 0;
             int ZipCode = 0;
             try

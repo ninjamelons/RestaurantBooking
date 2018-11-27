@@ -46,6 +46,7 @@
     <Compile Include="ItemCat.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Order.cs" />
+    <Compile Include="OrderLineItem.cs" />
     <Compile Include="Price.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Restaurant.cs" />
