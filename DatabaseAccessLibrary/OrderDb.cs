@@ -11,7 +11,7 @@ namespace DatabaseAccessLibrary
         public void AddOrder(Order order)
         {
             var db = new JustFeastDbDataContext();
-            
+
             db.Orders.InsertOnSubmit(order);
             db.OrderLineItems.InsertAllOnSubmit(order.OrderLineItems);
             db.SubmitChanges();
@@ -21,16 +21,13 @@ namespace DatabaseAccessLibrary
         {
             var db = new JustFeastDbDataContext();
             var item = db.Items.SingleOrDefault(i => i.id == itemId);
-            var exists =
-                from lineItem in db.OrderLineItems
-                where lineItem.orderId == orderId && lineItem.itemId == itemId
-                select lineItem;
+            var exists = db.OrderLineItems.SingleOrDefault(i => i.itemId == itemId && i.orderId == orderId);
 
-            if (exists.Any() && exists.FirstOrDefault() != null)
+            if (exists != null)
             {
-                exists.FirstOrDefault().quantity++;
+                exists.quantity++;
             }
-            else if(item != null)
+            else if (item != null)
             {
                 var oli = new OrderLineItem
                 {
@@ -40,24 +37,21 @@ namespace DatabaseAccessLibrary
                 };
                 db.OrderLineItems.InsertOnSubmit(oli);
             }
+
             db.SubmitChanges();
         }
 
-        public int GetLastOrderIdentity()
+        public void CreateOrder(Order order)
         {
             var db = new JustFeastDbDataContext();
-            return db.Orders.Max(x => x.id);
+            db.Orders.InsertOnSubmit(order);
+            db.SubmitChanges();
         }
 
-        public DatabaseAccessLibrary.Order GetOrderById(int id)
+        public Order GetOrderById(int id)
         {
             var db = new JustFeastDbDataContext();
-
-            DatabaseAccessLibrary.Order dbO = null;
-
-            dbO = db.Orders.SingleOrDefault(o => o.id == id);
-
-            return dbO;
+            return new Order();
         }
 
         public void UpdateOrder(Order order)
@@ -72,5 +66,12 @@ namespace DatabaseAccessLibrary
             ord.noSeats = order.noSeats;
             db.SubmitChanges();
         }
+
+        public int GetLastOrderIdentity()
+        {
+            var db = new JustFeastDbDataContext();
+            return db.Orders.Max(x => x.id);
+        }
     }
+
 }
