@@ -3,63 +3,86 @@
     ViewBag.Title = "Home Page";
 }
 
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/custom.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel="stylesheet">
+</head>
 
-
-    
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </div>
-    </div>
-
-    <br /> <br />
-
-    <div class="container">
-        <div class="form-group">
-            <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                <input type="text" id="Search" placeholder="Search by Zip Code" class="form-control" />
+<body>
+    <div class="landing">
+        <div class="align-middle">
+            <h1 class="landing-h1">Search your area for restaurants</h1>
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                @using (Html.BeginForm())
+                {
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            @Html.TextBox("Search", "", new { @class = "form-control", placeholder = "Search by Zip Code" })
+                            <button class="btn btn-default" value="Filter" type="submit">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div>
+                }
             </div>
         </div>
     </div>
+    <div class="container body-content">
+        <!--<div class="row">
+            <div class="col-md-4">
+                <h2>Getting started</h2>
+                <p>
+                    ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                    enables a clean separation of concerns and gives you full control over markup
+                    for enjoyable, agile development.
+                </p>
+                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Get more libraries</h2>
+                <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Web Hosting</h2>
+                <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+                <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            </div>
+        </div> -->
 
-    <br />
+        <br /> <br />
+        <br />
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Restaurant</th>
-                <th>Adress</th>
-                <th>Zip Code</th>
-                <th>Phone</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="Search">
-                <td>@Html.DisplayNameFor(restaurant => restaurant.Name)</td>
-                <td>@Html.DisplayNameFor(restaurant => restaurant.Address)</td>
-                <td>@Html.DisplayNameFor(restaurant => restaurant.ZipCode)</td>
-                <td>@Html.DisplayNameFor(restaurant => restaurant.PhoneNo)</td>
-            </tr>
-        </tbody>
-    </table>
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Restaurant</th>
+                    <th>Adress</th>
+                    <th>Zip Code</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="Search">
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ZipCode)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PhoneNo)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+<footer>
+
+</footer>
+    <!--<script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script>
         $(document).ready(function () {
             function Contains(text_one, text_two) {
@@ -78,4 +101,4 @@
                 });
             });
         });
-    </script>
+    </script>-->
