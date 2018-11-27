@@ -39,9 +39,8 @@ namespace ControllerLibrary
 
         public ModelLibrary.Restaurant GetRestaurant(int restaurantId)
         {
-            var resDb = new RestaurantsDb();
             var menuCtrl = new MenuCtrl();
-            var res = ConvertRestaurantToModel(resDb.GetRestaurant(restaurantId));
+            var res = ConvertRestaurantToModel(RestaurantsDb.GetRestaurant(restaurantId));
             res.Menu = menuCtrl.GetActiveMenu(restaurantId);
             return res;
         }

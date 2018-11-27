@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -41,6 +42,21 @@ namespace DatabaseAccessLibrary
             }
 
           
+        }
+
+        public Menu GetActiveMenu(int restaurantId)
+        {
+            var db = new JustFeastDbDataContext();
+            var menu = db.Menus.SingleOrDefault(t => t.restaurantId == restaurantId
+                                                     && t.active);
+            return menu;
+        }
+
+        public int GetActiveMenuId(int restaurantId)
+        {
+            var db = new JustFeastDbDataContext();
+            return db.Menus.SingleOrDefault(t => t.restaurantId == restaurantId
+                                                 && t.active).id;
         }
 
         public void UpdateMenu(Menu beforeMenu, Menu afterMenu)
