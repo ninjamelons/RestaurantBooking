@@ -1,4 +1,4 @@
-﻿@model UserWebClient.ViewModels.ShoppingCartViewModel
+﻿@model UserWebClient.Views.ViewModels.ShoppingCartViewModel
 @{
     ViewBag.Title = "Shopping Cart";
 }
@@ -55,21 +55,21 @@
                             <th></th>
                         </tr>
                     </thead>
-                    @foreach (var item in Model.Items)
+                    @foreach (var item in Model.Item)
                     {
-                        <tr id="row-@item.Name">
+                        <tr id="row-@item.name">
                             <td>
-                                @Html.ActionLink(item.Name, "Details", "Store", new { id = item.Id }, null)
+                                @Html.ActionLink(item.Name, "Details", "Store", new { id = item.id }, null)
                             </td>
                             <td>
                                 @item.Price
                             </td>
-                            <td id="item-count-@item.Id">
+                            <td id="item-count-@item.id">
                                 @item.PriceObj
                             </td>
                             <td>
                                 <a href="#" class="RemoveLink"
-                                   data-id="@item.Id">
+                                   data-id="@item.id">
                                     Remove
                                     from cart
                                 </a>

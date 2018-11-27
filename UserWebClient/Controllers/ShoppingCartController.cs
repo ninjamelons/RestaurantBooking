@@ -48,6 +48,29 @@ namespace UserWebClient.Controllers
             var results = new ShoppingCartRemoveViewModel
             {
                 Message = Server.HtmlEncode(addedItem.Name) +
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     " has been added to your shopping cart.",
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.GetCount(),
