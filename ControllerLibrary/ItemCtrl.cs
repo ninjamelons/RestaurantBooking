@@ -33,7 +33,7 @@ namespace ControllerLibrary
             foreach (var item in itemsDb)
             {
                 var itemi = ConvertItemToModel(item);
-                itemi.PriceObj = priceCtrl.GetPriceItemId(item.id);
+                itemi.Price = priceCtrl.GetPriceItemId(item.id);
                 items.Add(itemi);
             }
             return items;
@@ -58,7 +58,7 @@ namespace ControllerLibrary
                     ItemCatId = Convert.ToInt32(item.itemCatId),
                     Id = item.id,
                     MenuId = item.menuId,
-                    Price = price.price1
+                    //Price = price.price1
                 });
             }
 
@@ -82,7 +82,7 @@ namespace ControllerLibrary
                     ItemCatId = Convert.ToInt32(CheckItem.itemCatId),
                     MenuId = CheckItem.menuId,
                     Id = CheckItem.id,
-                    Price = price.price1
+                    //Price = price.price1
                     
                 };
             }
@@ -130,7 +130,7 @@ namespace ControllerLibrary
             var newItem = GetItem(item);
             var pric = new ModelLibrary.Price
             {
-                ItemId = newItem.Id,
+                //ItemId = newItem.Id,
                 StartDate = startDate,
                 EndDate = endDate,
                 VarPrice = price

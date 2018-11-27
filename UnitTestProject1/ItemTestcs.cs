@@ -29,7 +29,7 @@ namespace UnitTestProject1
             {
                 Name = name,
                 Description = description,
-                Price = price,
+                //Price = price,
             };
 
             var context = new ValidationContext(sut, null, null);
@@ -155,7 +155,7 @@ namespace UnitTestProject1
                 ItemCatId = 1,
                 MenuId = 1,
                 Name = "PerfectlyGoodName",
-                Price = 12
+                //Price = 12
             };
            
                 ModelLibrary.Item editItem = new ModelLibrary.Item
@@ -167,11 +167,11 @@ namespace UnitTestProject1
                     ItemCatId = 1,
                     MenuId = 1,
                     Name = name,
-                    Price = price
+                    //Price = price
                 };
 
 
-            if (newItem.Description != description && newItem.Name != name && newItem.Price != price)
+            if (newItem.Description != description && newItem.Name != name /*&& newItem.Price != price*/)
             {
                 var tableCtrl = new TableCtrl();
                 #endregion
@@ -201,7 +201,7 @@ namespace UnitTestProject1
                 ItemCatId = 1,
                 MenuId = 1,
                 Name = "PerfectlyGoodName",
-                Price = 12
+                //Price = 12
             };
 
             //Act

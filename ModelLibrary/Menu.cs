@@ -10,8 +10,6 @@ namespace ModelLibrary
     {
         public int Id { get; set; }
 
-        public int RestaurantId { get; set; }
-
         public bool Active { get; set; }
 
         public string Name { get; set; }

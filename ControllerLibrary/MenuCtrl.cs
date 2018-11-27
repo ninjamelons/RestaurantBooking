@@ -14,7 +14,6 @@ namespace ControllerLibrary
             var modelMenu = new ModelLibrary.Menu
             {
                 Name = name,
-                RestaurantId = restaurantId,
                 Active = false
 
             };
@@ -36,7 +35,6 @@ namespace ControllerLibrary
             {
                 Id = dbMenu.id,
                 Name = dbMenu.name,
-                RestaurantId = dbMenu.restaurantId,
                 Active = dbMenu.active
 
             };
@@ -48,7 +46,6 @@ namespace ControllerLibrary
             var dbMenu = new DatabaseAccessLibrary.Menu
             {
                 name = modelMenu.Name,
-                restaurantId = modelMenu.RestaurantId,
                 active = modelMenu.Active
             };
             return dbMenu;

@@ -13,11 +13,12 @@ namespace UserWebClient.Controllers
     public class RestaurantHomeController : Controller
     {
         private readonly IRestaurantService _restaurantProxy;
-        //private readonly IOrderService _orderProxy;
+        /*private readonly IOrderService _orderProxy;*/
 
-        public RestaurantHomeController(IRestaurantService restaurantService)
+        public RestaurantHomeController(IRestaurantService restaurantService/*, IOrderService orderService*/)
         {
             this._restaurantProxy = restaurantService;
+            /*this._orderProxy = orderService;*/
         }
 
         [HttpGet]
@@ -27,24 +28,28 @@ namespace UserWebClient.Controllers
             RestaurantOrderModel model = new RestaurantOrderModel();
             model.Restaurant = this._restaurantProxy.GetRestaurant(id);
             model.menu = model.Restaurant.Menu;
+            model.OrderId = 50;
             return View("Index", model);
         }
 
         [HttpPost]
         // POST add item to cart
-        public ActionResult AddToCart(int resId, int orderId, int itemId)
+        public ActionResult IndexCart(int resId, int orderId, int itemId)
         {
             #region Add item to cart
 
+            /*_orderProxy.AddItemToCart(itemId, orderId);*/
             
-
             #endregion
 
+            #region Assign values
             var model = new RestaurantOrderModel();
             model.Restaurant = this._restaurantProxy.GetRestaurant(resId);
             model.menu = model.Restaurant.Menu;
             model.OrderId = orderId;
-            return View("Index", model);
+            #endregion
+
+            return RedirectToAction("Index", model);
         }
     }
 }

@@ -22,10 +22,7 @@ namespace ModelLibrary
         [RegularExpression("^[0-9 a-zA-Z]*", ErrorMessage = "Invalid Description")] //{3,150}
         public string Description { get; set; }
 
-        [RegularExpression("^[0-9/.]*", ErrorMessage = "Invalid Price")]
-        public double Price { get; set; }
-
-        public Price PriceObj { get; set; }
+        public Price Price { get; set; }
 
         public int Id { get; set; }
 

@@ -41,8 +41,8 @@ namespace RestaurantService
         public void UpdatePrice(ModelLibrary.Price price)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var aPrice = db.Prices.SingleOrDefault(a => a.itemId == price.ItemId);
-            aPrice = PriceCtrl.ConvertPriceToDb(price);
+            //var aPrice = db.Prices.SingleOrDefault(a => a.itemId == price.ItemId);
+            //aPrice = PriceCtrl.ConvertPriceToDb(price);
             db.SubmitChanges();
         }
     }
