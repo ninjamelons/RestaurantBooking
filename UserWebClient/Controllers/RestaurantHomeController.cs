@@ -12,10 +12,12 @@ namespace UserWebClient.Controllers
     public class RestaurantHomeController : Controller
     {
         private readonly IRestaurantService _restaurantProxy;
+        private readonly IOrderService _orderProxy;
 
-        public RestaurantHomeController(IRestaurantService restaurantService)
+        public RestaurantHomeController(IRestaurantService restaurantService, IOrderService orderService)
         {
             this._restaurantProxy = restaurantService;
+            this._orderProxy = orderService;
         }
 
         [HttpGet]
@@ -35,7 +37,7 @@ namespace UserWebClient.Controllers
         {
             #region Add item to cart
 
-            _restaurantProxy.AddItemToOrder(orderId, itemId);
+            _orderProxy.AddItemToOrder(orderId, itemId);
             
             #endregion
 

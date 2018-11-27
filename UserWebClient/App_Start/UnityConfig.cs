@@ -3,6 +3,7 @@ using Unity;
 using Unity.Mvc5;
 using Unity.Injection;
 using UserWebClient.Models;
+using UserWebClient.OrderService;
 using UserWebClient.RestaurantService;
 
 namespace UserWebClient
@@ -18,7 +19,7 @@ namespace UserWebClient
             
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IRestaurantService, RestaurantServiceClient>(new InjectionConstructor());
-            /*container.RegisterType<IOrderService, OrderServiceClient>(new InjectionConstructor());*/
+            container.RegisterType<IOrderService, OrderServiceClient>(new InjectionConstructor());
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
