@@ -39,8 +39,9 @@ namespace ControllerLibrary
 
         public ModelLibrary.Restaurant GetRestaurant(int restaurantId)
         {
+            var resDb = new RestaurantsDb();
             var menuCtrl = new MenuCtrl();
-            var res = ConvertRestaurantToModel(RestaurantsDb.GetRestaurant(restaurantId));
+            var res = ConvertRestaurantToModel(resDb.GetRestaurant(restaurantId));
             res.Menu = menuCtrl.GetActiveMenu(restaurantId);
             return res;
         }
@@ -101,7 +102,8 @@ namespace ControllerLibrary
             dbRes.verified = mRes.Verified;
             dbRes.zipcode = ZipCode;
             dbRes.discontinued = mRes.Discontinued;
-            dbRes.ResCat = ConvertRestaurantCategoryToDatabase(mRes.Category);
+            if(mRes.Category != null)
+                dbRes.resCatId = mRes.Category.Id;
 
             return dbRes;
         }

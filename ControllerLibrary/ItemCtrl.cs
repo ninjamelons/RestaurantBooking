@@ -37,25 +37,6 @@ namespace ControllerLibrary
 
             return modelItems;
         }
-
-        internal IEnumerable<ModelLibrary.Item> GetMenuItems(int menuId)
-        {
-            var itemDb = new ItemDb();
-            var priceCtrl = new PriceCtrl();
-
-            var itemsDb = itemDb.GetMenuItems(menuId);
-            var items = new List<ModelLibrary.Item>();
-
-            foreach (var item in itemsDb)
-            {
-                var itemi = ConvertItemToModel(item);
-                itemi.Price = priceCtrl.GetPriceItemId(item.id);
-                items.Add(itemi);
-            }
-
-            return items;
-        }
-
         public ModelLibrary.Item GetItem(ModelLibrary.Item item)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();

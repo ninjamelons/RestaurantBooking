@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DatabaseAccessLibrary;
-using ModelLibrary;
 
 namespace ControllerLibrary
 {
@@ -56,12 +55,6 @@ namespace ControllerLibrary
             var beforeDbPrice = ConvertPriceToDb(beforePrice);
             var afterDbPrice = ConvertPriceToDb(afterPrice);
             priceDb.UpdatePrice(beforeDbPrice, afterDbPrice);
-        }
-
-        internal ModelLibrary.Price GetPriceItemId(int itemId)
-        {
-            var priceDb = new PriceDb();
-            return ConvertPriceToModel(priceDb.GetPriceItemId(itemId));
         }
 
         public void DeletePrice(ModelLibrary.Price price)

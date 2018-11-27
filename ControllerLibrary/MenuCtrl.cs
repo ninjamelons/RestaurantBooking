@@ -25,16 +25,8 @@ namespace ControllerLibrary
             DatabaseAccessLibrary.MenuDb menuDb = new DatabaseAccessLibrary.MenuDb();
             menuDb.AddMenu(returnMenu);
             return returnMenu;
-        }
+            
 
-        public ModelLibrary.Menu GetActiveMenu(int restaurantId)
-        {
-            var menuDb = new MenuDb();
-            var itemCtrl = new ItemCtrl();
-
-            var menu = ConvertMenuToModel(menuDb.GetActiveMenu(restaurantId));
-            menu.Items = itemCtrl.GetMenuItems(menu.Id);
-            return menu;
         }
 
         public ModelLibrary.Menu ConvertMenuToModel(DatabaseAccessLibrary.Menu dbMenu)
