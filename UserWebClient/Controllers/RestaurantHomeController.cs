@@ -4,21 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ModelLibrary;
+using RestaurantService;
 using UserWebClient.Models;
-using UserWebClient.RestaurantService;
-//using UserWebClient.OrderService;
 
 namespace UserWebClient.Controllers
 {
     public class RestaurantHomeController : Controller
     {
         private readonly IRestaurantService _restaurantProxy;
-        /*private readonly IOrderService _orderProxy;*/
 
-        public RestaurantHomeController(IRestaurantService restaurantService/*, IOrderService orderService*/)
+        public RestaurantHomeController(IRestaurantService restaurantService)
         {
             this._restaurantProxy = restaurantService;
-            /*this._orderProxy = orderService;*/
         }
 
         [HttpGet]
@@ -38,7 +35,7 @@ namespace UserWebClient.Controllers
         {
             #region Add item to cart
 
-            /*_orderProxy.AddItemToCart(itemId, orderId);*/
+            _restaurantProxy.AddItemToOrder(orderId, itemId);
             
             #endregion
 

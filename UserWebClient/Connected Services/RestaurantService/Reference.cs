@@ -27,12 +27,6 @@ namespace UserWebClient.RestaurantService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByCategory", ReplyAction="http://tempuri.org/IRestaurantService/GetAllRestaurantsByCategoryResponse")]
         System.Threading.Tasks.Task<ModelLibrary.Restaurant[]> GetAllRestaurantsByCategoryAsync(int categoryId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCode", ReplyAction="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCodeResponse")]
-        ModelLibrary.Restaurant[] GetAllRestaurantsByZipCode(int zipcode);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCode", ReplyAction="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCodeResponse")]
-        System.Threading.Tasks.Task<ModelLibrary.Restaurant[]> GetAllRestaurantsByZipCodeAsync(int zipcode);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetRestaurantsPaged", ReplyAction="http://tempuri.org/IRestaurantService/GetRestaurantsPagedResponse")]
         ModelLibrary.Restaurant[] GetRestaurantsPaged(int zipcode, int categoryId, int page, int amount, bool verified, bool discontinued);
         
@@ -165,14 +159,6 @@ namespace UserWebClient.RestaurantService {
         
         public System.Threading.Tasks.Task<ModelLibrary.Restaurant[]> GetAllRestaurantsByCategoryAsync(int categoryId) {
             return base.Channel.GetAllRestaurantsByCategoryAsync(categoryId);
-        }
-        
-        public ModelLibrary.Restaurant[] GetAllRestaurantsByZipCode(int zipcode) {
-            return base.Channel.GetAllRestaurantsByZipCode(zipcode);
-        }
-        
-        public System.Threading.Tasks.Task<ModelLibrary.Restaurant[]> GetAllRestaurantsByZipCodeAsync(int zipcode) {
-            return base.Channel.GetAllRestaurantsByZipCodeAsync(zipcode);
         }
         
         public ModelLibrary.Restaurant[] GetRestaurantsPaged(int zipcode, int categoryId, int page, int amount, bool verified, bool discontinued) {
