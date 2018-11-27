@@ -41,8 +41,12 @@ namespace ModelLibrary
         public string Email { get; set; }
 
         public bool Verified { get; set; }
+
+        public bool Discontinued { get; set; }
         
         [Display(Name = "Category")]
         public RestaurantCategory Category { get; set; }
+
+        public Menu Menu { get; set; }
     }
 }

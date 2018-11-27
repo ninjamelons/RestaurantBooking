@@ -58,8 +58,23 @@ namespace ControllerLibrary
                 PhoneNo = dbRestaurant.phoneNo.ToString(),
                 Verified = dbRestaurant.verified,
                 ZipCode = dbRestaurant.zipcode.ToString(),
-                Category = ConvertRestaurantCategoryToModel(dbRestaurant.ResCat)
+                Category = ConvertRestaurantCategoryToModel(dbRestaurant.ResCat),
+                Discontinued = dbRestaurant.discontinued,
             };
+
+           // if(dbRestaurant.resCatId != null)
+           //     mRes.CategoryId = dbRestaurant.resCatId.Value;
+
+            return mRes;
+        }
+
+        public static List<ModelLibrary.Restaurant> ConvertRestaurantListToModel(IEnumerable<DatabaseAccessLibrary.Restaurant> restaurants)
+        {
+            var mRes = new List<ModelLibrary.Restaurant>();
+            foreach(var x in restaurants)
+            {
+                mRes.Add(ConvertRestaurantToModel(x));
+            }
             return mRes;
         }
 
@@ -78,17 +93,18 @@ namespace ControllerLibrary
             {
                 Console.WriteLine(ex.Message);
             }
-            var dbRes = new DatabaseAccessLibrary.Restaurant
-            {
-                name = mRes.Name,
-                address = mRes.Address,
-                email = mRes.Email,
-                id = mRes.Id,
-                phoneNo = PhoneNo,
-                verified = mRes.Verified,
-                zipcode = ZipCode,
-                ResCat = ConvertRestaurantCategoryToDatabase(mRes.Category)
-            };
+
+            var dbRes = new DatabaseAccessLibrary.Restaurant();
+            dbRes.name = mRes.Name;
+            dbRes.address = mRes.Address;
+            dbRes.email = mRes.Email;
+            dbRes.id = mRes.Id;
+            dbRes.phoneNo = PhoneNo;
+            dbRes.verified = mRes.Verified;
+            dbRes.zipcode = ZipCode;
+            dbRes.discontinued = mRes.Discontinued;
+            dbRes.ResCat = ConvertRestaurantCategoryToDatabase(mRes.Category);
+
             return dbRes;
         }
 
@@ -114,6 +130,13 @@ namespace ControllerLibrary
                 name = cat.Name
             };
             return resCat;
+        }
+
+        public static List<ModelLibrary.Restaurant> GetRestaurantsPaged(int zipcode = 0, int categoryId = 0, int page = 0, int amount = 10, bool verified = true, bool discontinued = false)
+        {
+            var res = RestaurantsDb.GetRestaurantsPaged(zipcode, categoryId, page, amount, verified, discontinued);
+            var mRes = ConvertRestaurantListToModel(res);
+            return mRes;
         }
     }
 }
