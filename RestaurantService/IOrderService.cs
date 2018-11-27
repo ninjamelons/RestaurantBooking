@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabaseAccessLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,9 +13,12 @@ namespace RestaurantService
     public interface IOrderService
     {
         [OperationContract]
-        void DoWork(int id);
-
+        void AddItemToOrder(int orderId, int itemId);
         [OperationContract]
-        void DoNotDoWork(int num1, int num2);
+        void CreateOrder(Order order);
+        [OperationContract]
+        Order GetOrderById(int id);
+        [OperationContract]
+        void UpdateOrder(Order order);
     }
 }

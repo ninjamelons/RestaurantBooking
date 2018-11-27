@@ -1,23 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading.Tasks;
+using ControllerLibrary;
+using DatabaseAccessLibrary;
+using Order = DatabaseAccessLibrary.Order;
 
 namespace RestaurantService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "OrderService" in both code and config file together.
-    public class OrderService : IOrderService
+    class OrderService : IOrderService
     {
-        public void DoNotDoWork(int num1, int num2)
+        public void AddItemToOrder(int orderId, int itemId)
         {
-            Console.Out.WriteLine();
+            var db = new JustFeastDbDataContext();
+            var item = db.Items.SingleOrDefault(i => i.id == itemId);
+            var exists = db.OrderLineItems.SingleOrDefault(i => i.itemId == itemId && i.orderId == orderId);
+
+            if (exists != null)
+            {
+                exists.quantity++;
+            }
+            else if (item != null)
+            {
+                var oli = new OrderLineItem
+                {
+                    orderId = orderId,
+                    itemId = item.id,
+                    quantity = 1
+                };
+                db.OrderLineItems.InsertOnSubmit(oli);
+            }
+            db.SubmitChanges();
         }
 
-        public void DoWork(int id)
+        public void CreateOrder(Order order)
         {
-            Console.Out.WriteLine(id);
+            var db = new JustFeastDbDataContext();
+            db.Orders.InsertOnSubmit(order);
+            db.SubmitChanges();
+        }
+
+        public Order GetOrderById(int id)
+        {
+            var ordC = new OrderCtrl();
+            return ordC.GetOrderById(id);
+        }
+
+        public void UpdateOrder(Order order)
+        {
+            var db = new JustFeastDbDataContext();
+            var ord = db.Orders.SingleOrDefault(o => o.id == Convert.ToInt32(order.id));
+            db.SubmitChanges();
         }
     }
 }
