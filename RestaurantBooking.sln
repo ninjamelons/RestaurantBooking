@@ -11,6 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserWebClient", "UserWebCli
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTestProject1\UnitTests.csproj", "{612634E2-FE8B-4512-8A86-CABE553191FC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{42A6ED34-8511-4A4E-8D7E-82BF17688F7F} = {42A6ED34-8511-4A4E-8D7E-82BF17688F7F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseAccessLibrary", "DatabaseAccessLibrary\DatabaseAccessLibrary.csproj", "{AF59ED6C-26D5-4DC9-BAA6-B304E4823194}"
 EndProject

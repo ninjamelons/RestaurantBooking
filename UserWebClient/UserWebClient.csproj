@@ -262,6 +262,7 @@
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RestaurantBrowseModel.cs" />
     <Compile Include="Models\RestaurantViewModel.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -357,6 +358,9 @@
     <Content Include="Views\RestaurantCategory\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Home\AdminHome.cshtml" />
+    <Content Include="Views\RestaurantCategory\Details.cshtml" />
+    <Content Include="Views\Restaurant\BrowseOld.cshtml" />
+    <Content Include="Views\Restaurant\Browse.cshtml" />
     <Content Include="Views\RestaurantHome\Index.cshtml" />
     <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />

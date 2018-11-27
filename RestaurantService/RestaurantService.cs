@@ -40,6 +40,7 @@ namespace RestaurantService
             tableCtrl.DeleteTable(table);
         }
 
+
         public IEnumerable<ModelLibrary.Restaurant> GetAllRestaurants()
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
@@ -51,7 +52,6 @@ namespace RestaurantService
             }
             return mRes;
         }
-
         public IEnumerable<ModelLibrary.Restaurant> GetAllRestaurantsByCategory(int categoryId)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
@@ -63,7 +63,6 @@ namespace RestaurantService
             }
             return mRes;
         }
-
         public IEnumerable<ModelLibrary.Restaurant> GetAllRestaurantsByZipCode(int zipcode)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
@@ -75,29 +74,39 @@ namespace RestaurantService
             }
             return mRes;
         }
-
         public void CreateRestaurant(ModelLibrary.Restaurant restaurant)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            db.Restaurants.InsertOnSubmit(RestaurantCtrl.ConvertRestaurantToDatabase(restaurant));
+            var res = RestaurantCtrl.ConvertRestaurantToDatabase(restaurant);
+            if(restaurant.Category != null)
+                res.ResCat = db.ResCats.FirstOrDefault(x => x.id == restaurant.Category.Id);
+            db.Restaurants.InsertOnSubmit(res);
             db.SubmitChanges();
         }
-
         public void UpdateRestaurant(ModelLibrary.Restaurant restaurant)
         {
             var db = new JustFeastDbDataContext();
-            var res = db.Restaurants.SingleOrDefault(x => x.id == restaurant.Id);
-            res = RestaurantCtrl.ConvertRestaurantToDatabase(restaurant);
+            var res = db.Restaurants.FirstOrDefault(x => x.id == restaurant.Id);
+
+            var mRes = RestaurantCtrl.ConvertRestaurantToDatabase(restaurant);
+            res.name = mRes.name;
+            res.phoneNo = mRes.phoneNo;
+            res.verified = mRes.verified;
+            res.zipcode = mRes.zipcode;
+            res.address = mRes.address;
+            res.discontinued = mRes.discontinued;
+            res.email = mRes.email;
+          //  if (restaurant.Category != null)
+          //      res.ResCat = db.ResCats.FirstOrDefault(x => x.id == restaurant.Category.Id);
+
             db.SubmitChanges();
         }
-
         public void DeleteRestaurant(ModelLibrary.Restaurant restaurant)
         {
             var db = new JustFeastDbDataContext();
             db.Restaurants.DeleteOnSubmit(RestaurantCtrl.ConvertRestaurantToDatabase(restaurant));
             db.SubmitChanges();
         }
-
         public IEnumerable<RestaurantCategory> GetAllRestaurantCategories()
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
@@ -109,33 +118,30 @@ namespace RestaurantService
             }
             return mRes;
         }
-
         public void DeleteRestaurant(int id)
         {
-            throw new NotImplementedException();
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            db.Restaurants.DeleteOnSubmit(db.Restaurants.FirstOrDefault(x => x.id == id));
+            db.SubmitChanges();
         }
-
         public ModelLibrary.Restaurant GetRestaurant(int id)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             var res = db.Restaurants.FirstOrDefault(x => x.id == id);
             return RestaurantCtrl.ConvertRestaurantToModel(res);
         }
-
         public void CreateRestaurantCategory(RestaurantCategory res)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             db.ResCats.InsertOnSubmit(RestaurantCtrl.ConvertRestaurantCategoryToDatabase(res));
             db.SubmitChanges();
         }
-
         public void DeleteRestaurantCategory(int id)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             db.ResCats.DeleteOnSubmit(db.ResCats.First(x => x.id == id));
             db.SubmitChanges();
         }
-
         public void UpdateRestaurantCategory(RestaurantCategory res)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
@@ -143,11 +149,15 @@ namespace RestaurantService
             nres.name = res.Name;
             db.SubmitChanges();
         }
-
         public RestaurantCategory GetRestaurantCategory(int id)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             return RestaurantCtrl.ConvertRestaurantCategoryToModel(db.ResCats.First(x => x.id == id));
+        }
+
+        public List<ModelLibrary.Restaurant> GetRestaurantsPaged(int zipcode = 0, int categoryId = 0, int page = 0, int amount = 10, bool verified = true, bool discontinued = false)
+        {
+            return RestaurantCtrl.GetRestaurantsPaged(zipcode, categoryId, page, amount, verified, discontinued);
         }
     }
 }
