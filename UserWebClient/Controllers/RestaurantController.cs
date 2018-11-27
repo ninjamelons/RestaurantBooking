@@ -175,7 +175,7 @@ namespace UserWebClient.Controllers
             RestaurantOrderModel model = new RestaurantOrderModel();
             model.Restaurant = this._proxy.GetRestaurantWithMenu(id);
             model.menu = model.Restaurant.Menu;
-            //model.OrderId = 50;
+            model.OrderId = 1000000;
             return View("Home", model);
         }
 
