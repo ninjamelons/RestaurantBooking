@@ -10,7 +10,7 @@
 
     <Grid>
         <Label x:Name="labelMenuName" Content="Menu List:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,19,0,0" Width="123" FontSize="18" FontWeight="Bold"/>
-        <ComboBox x:Name="menuNameBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="269" Margin="152,23,0,0" FontSize="18"/>
+        <ComboBox x:Name="menuNameBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="269" Margin="152,23,0,0" FontSize="18" SelectionChanged="menuNameBox_SelectionChanged"/>
         <ListBox x:Name="listBoxItems" HorizontalAlignment="Left" Height="185" VerticalAlignment="Top" Width="734" Margin="24,195,0,0"/>
         <CheckBox x:Name="checkBoxActive" Content="" HorizontalAlignment="Left" Height="34" Margin="517,32,0,0" VerticalAlignment="Top" Width="28" FontWeight="Bold" FontSize="18" RenderTransformOrigin="0.773,0.821" />
         <Label x:Name="labelItemList" Content="Item List" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="24,152,0,0" Width="123"/>

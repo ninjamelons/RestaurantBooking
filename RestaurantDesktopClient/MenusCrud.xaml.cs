@@ -1,20 +1,11 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ModelLibrary;
-using DatabaseAccessLibrary;
+using RestaurantDesktopClient.RestaurantService;
 using RestaurantService;
 
 namespace RestaurantDesktopClient
@@ -37,12 +28,23 @@ namespace RestaurantDesktopClient
         {
 
         }
-        /*private List<DatabaseAccessLibrary.Item> getItems(int menuId)
+
+        private void menuNameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ItemDb itemDb = new ItemDb();
-            itemDb.GetItems
-            return;
-        }*/
+            var proxy = new RestaurantServiceClient();
+            var selectedMenu = (ModelLibrary.Menu)menuNameBox.SelectedItem;
+            var dbMenu = proxy.GetMenu(selectedMenu);
+            textBoxName.Text = dbMenu.Name;
+            checkBoxActive.IsChecked = dbMenu.Active;
+
+
+        }
+        /*private List<DatabaseAccessLibrary.Item> getItems(int menuId)
+{
+   ItemDb itemDb = new ItemDb();
+   itemDb.GetItems
+   return;
+}*/
 
         /*public IEnumerable<Menu> GetMenus()
         {
