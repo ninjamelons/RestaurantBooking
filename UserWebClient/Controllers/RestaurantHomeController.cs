@@ -4,14 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UserWebClient.RestaurantService;
-using UserWebClient.OrderService;
 
 namespace UserWebClient.Controllers
 {
     public class RestaurantHomeController : Controller
     {
         private readonly IRestaurantService _restaurantProxy;
-        private readonly IOrderService _orderProxy;
+        //private readonly IOrderService _orderProxy;
 
         public RestaurantHomeController(IRestaurantService restaurantService)
         {
@@ -28,10 +27,10 @@ namespace UserWebClient.Controllers
         }
 
         // POST add item to cart
-        public ActionResult AddToCart(int id)
+        /*public ActionResult AddToCart(int id)
         {
             this._orderProxy.AddItemToOrder(id);
             return View("Index");
-        }
+        }*/
     }
 }

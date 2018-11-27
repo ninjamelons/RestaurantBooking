@@ -12,7 +12,7 @@ namespace UserWebClient
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            CreateRolesandUsers();
+            //CreateRolesandUsers();
         }
 
 
