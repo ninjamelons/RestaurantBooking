@@ -251,6 +251,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RestaurantCategoryController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
+    <Compile Include="Controllers\RestaurantHomeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -259,6 +260,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RestaurantBrowseModel.cs" />
     <Compile Include="Models\RestaurantOrderModel.cs" />
     <Compile Include="Models\RestaurantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -353,6 +355,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Home\AdminHome.cshtml" />
     <Content Include="Views\RestaurantHome\Index.cshtml" />
+    <Content Include="Views\Restaurant\Browse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
