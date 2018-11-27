@@ -20,6 +20,8 @@ namespace RestaurantService
         [OperationContract]
         IEnumerable<ModelLibrary.Restaurant> GetAllRestaurantsByZipCode(int zipcode);
         [OperationContract]
+        List<ModelLibrary.Restaurant> GetRestaurantsPaged(int zipcode = 0, int categoryId = 0, int page = 0, int amount = 10, bool verified = true, bool discontinued = false);
+        [OperationContract]
         void CreateRestaurant(ModelLibrary.Restaurant restaurant);
         [OperationContract]
         void UpdateRestaurant(ModelLibrary.Restaurant restaurant);

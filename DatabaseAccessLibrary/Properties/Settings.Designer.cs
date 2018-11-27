@@ -33,5 +33,16 @@ namespace DatabaseAccessLibrary.Properties {
                 return ((string)(this["dmai0917_1067303ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=HP-PAVILION-FIL\\MELONESERVER;Initial Catalog=RestaurantBooking;Integr" +
+            "ated Security=True")]
+        public string RestaurantBookingConnectionString {
+            get {
+                return ((string)(this["RestaurantBookingConnectionString"]));
+            }
+        }
     }
 }

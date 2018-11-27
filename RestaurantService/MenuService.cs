@@ -13,37 +13,39 @@ namespace RestaurantService
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "MenuService" in both code and config file together.
     public class MenuService : IMenuService
     {
-        public void CreateMenu(ModelLibrary.Menu menu)
+        MenuCtrl menuCtrl = new MenuCtrl();
+        public void CreateMenu(ModelLibrary.Menu menu, int restaurantId)
         {
-            var dbMenu = MenuCtrl.ConvertMenuToDb(menu);
-            MenuDb.AddMenu(dbMenu);
-
+            var menuCtrl = new MenuCtrl();
+            menuCtrl.CreateMenu(menu, restaurantId);
         }
-
-        public void DeleteMenu(ModelLibrary.Menu menu)
+        public void DeleteMenu(ModelLibrary.Menu menu, int restaurantId)
         {
-            var dbMenu = MenuCtrl.ConvertMenuToDb(menu);
-            MenuDb.DeleteMenu(dbMenu);
+            var menuCtrl = new MenuCtrl();
+            var menuDb = new MenuDb();
+            var dbMenu = menuCtrl.ConvertMenuToDb(menu, restaurantId);
+            menuDb.DeleteMenu(dbMenu);
         }
 
         public IEnumerable<ModelLibrary.Menu> GetAllMenusByRestaurant(int restaurantId)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var menus = db.Menus.Where(a => a.restaurantId == restaurantId).ToList();
+            MenuCtrl menuCtrl = new MenuCtrl();
+            var res = db.Menus.Where(x => x.restaurantId == restaurantId).ToList();
             List<ModelLibrary.Menu> modelMenu = new List<ModelLibrary.Menu>();
-            foreach (var a in menus)
+            foreach (var x in res)
             {
-                modelMenu.Add(MenuCtrl.ConvertMenuToModel(a));
+                modelMenu.Add(menuCtrl.ConvertMenuToModel(x));
             }
-            return modelMenu; ;
+            return modelMenu;
+           
         }
 
-        public void UpdateMenu(ModelLibrary.Menu menu)
+        public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu, int restaurantId)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var aMenu = db.Menus.SingleOrDefault(a => a.id == menu.Id);
-            aMenu = MenuCtrl.ConvertMenuToDb(menu);
-            db.SubmitChanges();
+            MenuCtrl menuCtrl = new MenuCtrl();
+            menuCtrl.UpdateMenu(beforeMenu, afterMenu, restaurantId);
         }
     }
 }

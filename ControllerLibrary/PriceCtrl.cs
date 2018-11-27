@@ -3,26 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DatabaseAccessLibrary;
 
 namespace ControllerLibrary
 {
     public class PriceCtrl
     {
-        public static ModelLibrary.Price CreatePrice(double price, DateTime startDate, DateTime endDate)
+        public DatabaseAccessLibrary.Price CreatePrice(ModelLibrary.Price price)
         {
-            var modelPrice = new ModelLibrary.Price
+            var priceDb = new PriceDb();
+            var returnPrice = new DatabaseAccessLibrary.Price
             {
-                VarPrice = price,
-                StartDate = startDate,
-                EndDate = endDate
+                endDate = price.EndDate,
+                startDate = price.StartDate,
+                price1 = price.VarPrice,
             };
-            return modelPrice;
+
+            priceDb.AddPrice(returnPrice);
+
+            return returnPrice;
         }
 
-        public static ModelLibrary.Price ConvertPriceToModel(DatabaseAccessLibrary.Price price)
+        public ModelLibrary.Price ConvertPriceToModel(DatabaseAccessLibrary.Price price)
         {
             var modelPrice = new ModelLibrary.Price
             {
+                
                 VarPrice = price.price1,
                 StartDate = price.startDate,
                 EndDate = price.endDate,
@@ -31,7 +37,7 @@ namespace ControllerLibrary
             return modelPrice;
         }
 
-        public static DatabaseAccessLibrary.Price ConvertPriceToDb(ModelLibrary.Price price)
+        public  DatabaseAccessLibrary.Price ConvertPriceToDb(ModelLibrary.Price price)
         {
             var dbPrice = new DatabaseAccessLibrary.Price
             {
@@ -42,6 +48,26 @@ namespace ControllerLibrary
             return dbPrice;
         }
 
+        public void UpdatePrice(ModelLibrary.Price beforePrice, ModelLibrary.Price afterPrice)
+        {
+            var priceDb = new PriceDb();
 
+            var beforeDbPrice = ConvertPriceToDb(beforePrice);
+            var afterDbPrice = ConvertPriceToDb(afterPrice);
+            priceDb.UpdatePrice(beforeDbPrice, afterDbPrice);
+        }
+
+        internal ModelLibrary.Price GetPriceItemId(int itemId)
+        {
+            var priceDb = new PriceDb();
+            return ConvertPriceToModel(priceDb.GetPriceItemId(itemId));
+        }
+
+        public void DeletePrice(ModelLibrary.Price price)
+        {
+            var priceDb = new PriceDb();
+            var dbPrice = ConvertPriceToDb(price);
+            priceDb.DeletePrice(dbPrice);
+        }
     }
 }

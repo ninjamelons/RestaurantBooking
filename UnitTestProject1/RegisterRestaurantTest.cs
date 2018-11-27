@@ -125,5 +125,17 @@ namespace UnitTests
             // Assert
             Assert.IsTrue(!res.Verified);
         }
+
+        [TestMethod]
+        public void Service_Will_Create_Restaurant()
+        {
+            // Setup
+           // RestaurantService.RestaurantServiceClient proxy = new RestaurantService.RestaurantServiceClient();
+
+            // Act
+
+            // Assert
+            Assert.Fail();
+        }
     }
 }

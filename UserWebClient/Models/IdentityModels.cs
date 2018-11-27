@@ -21,6 +21,8 @@ namespace UserWebClient.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        internal readonly object Carts;
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

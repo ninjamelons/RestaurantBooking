@@ -18,6 +18,7 @@ namespace UserWebClient
             
             // e.g. container.RegisterType<ITestService, TestService>();
             container.RegisterType<IRestaurantService, RestaurantServiceClient>(new InjectionConstructor());
+            /*container.RegisterType<IOrderService, OrderServiceClient>(new InjectionConstructor());*/
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RestaurantService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ModelLibrary" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IRestaurantService_GetAllRestaurants_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRestaurants" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllRestaurants_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRestaurantsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllRestaurantsByCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRestaurantsByCategory" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllRestaurantsByCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRestaurantsByCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllRestaurantsByZipCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRestaurantsByZipCode" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllRestaurantsByZipCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRestaurantsByZipCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetRestaurantsPaged_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRestaurantsPaged" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetRestaurantsPaged_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRestaurantsPagedResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_CreateRestaurant_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRestaurant" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_CreateRestaurant_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRestaurantResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_UpdateRestaurant_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRestaurant" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_UpdateRestaurant_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRestaurantResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_DeleteRestaurant_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRestaurant" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_DeleteRestaurant_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRestaurantResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllRestaurantCategories_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRestaurantCategories" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllRestaurantCategories_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRestaurantCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetRestaurant_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRestaurant" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetRestaurant_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRestaurantResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_CreateRestaurantCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRestaurantCategory" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_CreateRestaurantCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRestaurantCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_DeleteRestaurantCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRestaurantCategory" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_DeleteRestaurantCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRestaurantCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_UpdateRestaurantCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRestaurantCategory" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_UpdateRestaurantCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRestaurantCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetRestaurantCategory_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRestaurantCategory" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetRestaurantCategory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRestaurantCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_CreateTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTable" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_CreateTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllTables_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTables" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetAllTables_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTablesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTable" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_GetTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_UpdateTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTable" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_UpdateTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_DeleteTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTable" />
+  </wsdl:message>
+  <wsdl:message name="IRestaurantService_DeleteTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTableResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IRestaurantService">
+    <wsdl:operation name="GetAllRestaurants">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurants" message="tns:IRestaurantService_GetAllRestaurants_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsResponse" message="tns:IRestaurantService_GetAllRestaurants_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRestaurantsByCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByCategory" message="tns:IRestaurantService_GetAllRestaurantsByCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByCategoryResponse" message="tns:IRestaurantService_GetAllRestaurantsByCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRestaurantsByZipCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCode" message="tns:IRestaurantService_GetAllRestaurantsByZipCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCodeResponse" message="tns:IRestaurantService_GetAllRestaurantsByZipCode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRestaurantsPaged">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetRestaurantsPaged" message="tns:IRestaurantService_GetRestaurantsPaged_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetRestaurantsPagedResponse" message="tns:IRestaurantService_GetRestaurantsPaged_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateRestaurant">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/CreateRestaurant" message="tns:IRestaurantService_CreateRestaurant_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/CreateRestaurantResponse" message="tns:IRestaurantService_CreateRestaurant_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRestaurant">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/UpdateRestaurant" message="tns:IRestaurantService_UpdateRestaurant_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/UpdateRestaurantResponse" message="tns:IRestaurantService_UpdateRestaurant_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRestaurant">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/DeleteRestaurant" message="tns:IRestaurantService_DeleteRestaurant_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/DeleteRestaurantResponse" message="tns:IRestaurantService_DeleteRestaurant_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRestaurantCategories">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantCategories" message="tns:IRestaurantService_GetAllRestaurantCategories_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetAllRestaurantCategoriesResponse" message="tns:IRestaurantService_GetAllRestaurantCategories_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRestaurant">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetRestaurant" message="tns:IRestaurantService_GetRestaurant_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetRestaurantResponse" message="tns:IRestaurantService_GetRestaurant_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateRestaurantCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/CreateRestaurantCategory" message="tns:IRestaurantService_CreateRestaurantCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/CreateRestaurantCategoryResponse" message="tns:IRestaurantService_CreateRestaurantCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRestaurantCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/DeleteRestaurantCategory" message="tns:IRestaurantService_DeleteRestaurantCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/DeleteRestaurantCategoryResponse" message="tns:IRestaurantService_DeleteRestaurantCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRestaurantCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/UpdateRestaurantCategory" message="tns:IRestaurantService_UpdateRestaurantCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/UpdateRestaurantCategoryResponse" message="tns:IRestaurantService_UpdateRestaurantCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRestaurantCategory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetRestaurantCategory" message="tns:IRestaurantService_GetRestaurantCategory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetRestaurantCategoryResponse" message="tns:IRestaurantService_GetRestaurantCategory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/CreateTable" message="tns:IRestaurantService_CreateTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/CreateTableResponse" message="tns:IRestaurantService_CreateTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTables">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetAllTables" message="tns:IRestaurantService_GetAllTables_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetAllTablesResponse" message="tns:IRestaurantService_GetAllTables_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/GetTable" message="tns:IRestaurantService_GetTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/GetTableResponse" message="tns:IRestaurantService_GetTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/UpdateTable" message="tns:IRestaurantService_UpdateTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/UpdateTableResponse" message="tns:IRestaurantService_UpdateTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRestaurantService/DeleteTable" message="tns:IRestaurantService_DeleteTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRestaurantService/DeleteTableResponse" message="tns:IRestaurantService_DeleteTable_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IRestaurantService" type="tns:IRestaurantService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllRestaurants">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetAllRestaurants" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRestaurantsByCategory">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetAllRestaurantsByCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRestaurantsByZipCode">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetAllRestaurantsByZipCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRestaurantsPaged">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetRestaurantsPaged" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRestaurant">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/CreateRestaurant" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRestaurant">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/UpdateRestaurant" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRestaurant">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/DeleteRestaurant" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRestaurantCategories">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetAllRestaurantCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRestaurant">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetRestaurant" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRestaurantCategory">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/CreateRestaurantCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRestaurantCategory">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/DeleteRestaurantCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRestaurantCategory">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/UpdateRestaurantCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRestaurantCategory">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetRestaurantCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateTable">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/CreateTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTables">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetAllTables" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTable">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/GetTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTable">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/UpdateTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTable">
+      <soap:operation soapAction="http://tempuri.org/IRestaurantService/DeleteTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RestaurantService">
+    <wsdl:port name="BasicHttpBinding_IRestaurantService" binding="tns:BasicHttpBinding_IRestaurantService">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/RestaurantService/RestaurantService/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
