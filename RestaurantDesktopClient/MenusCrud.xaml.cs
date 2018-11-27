@@ -33,9 +33,13 @@ namespace RestaurantDesktopClient
         {
             var proxy = new RestaurantServiceClient();
             var selectedMenu = (ModelLibrary.Menu)menuNameBox.SelectedItem;
-            var dbMenu = proxy.GetMenu(selectedMenu);
+            var dbMenu.items = proxy.GetMenu(selectedMenu);
             textBoxName.Text = dbMenu.Name;
             checkBoxActive.IsChecked = dbMenu.Active;
+            foreach (Item item in dbMenu)
+                    {
+                      listBoxItems.Items.Add.dbMenu.item;
+                    }
 
 
         }
