@@ -260,6 +260,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RestaurantBrowseModel.cs" />
     <Compile Include="Models\RestaurantOrderModel.cs" />
     <Compile Include="Models\RestaurantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -354,6 +355,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Home\AdminHome.cshtml" />
     <Content Include="Views\RestaurantHome\Index.cshtml" />
+    <Content Include="Views\Restaurant\Browse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -383,6 +385,10 @@
     <ProjectReference Include="..\ModelLibrary\ModelLibrary.csproj">
       <Project>{29a08a63-6222-4321-8d3a-9663ee89c12c}</Project>
       <Name>ModelLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestaurantService\RestaurantService.csproj">
+      <Project>{42a6ed34-8511-4a4e-8d7e-82bf17688f7f}</Project>
+      <Name>RestaurantService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

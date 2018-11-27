@@ -48,11 +48,13 @@
     <Compile Include="IItemService.cs" />
     <Compile Include="IMenuService.cs" />
     <Compile Include="IOrderService.cs" />
+    <Compile Include="IOrdersService.cs" />
     <Compile Include="IPriceService.cs" />
     <Compile Include="IRestaurantService.cs" />
     <Compile Include="ItemService.cs" />
     <Compile Include="MenuService.cs" />
     <Compile Include="OrderService.cs" />
+    <Compile Include="OrdersService.cs" />
     <Compile Include="PriceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestaurantService.cs" />
