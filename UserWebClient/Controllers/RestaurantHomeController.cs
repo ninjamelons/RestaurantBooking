@@ -35,7 +35,7 @@ namespace UserWebClient.Controllers
         {
             #region Add item to cart
 
-            _restaurantProxy.AddItemToOrder(orderId, itemId);
+           // _restaurantProxy.AddItemToOrder(orderId, itemId);
             
             #endregion
 

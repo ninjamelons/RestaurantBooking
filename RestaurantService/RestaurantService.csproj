@@ -47,8 +47,18 @@
   <ItemGroup>
     <Compile Include="AdminService.cs" />
     <Compile Include="IAdminService.cs" />
+    <Compile Include="IItemService.cs" />
+    <Compile Include="IMenuService.cs" />
+    <Compile Include="IOrderService.cs" />
+    <Compile Include="IPriceService.cs" />
+    <Compile Include="IRestaurantService.cs" />
+    <Compile Include="ItemService.cs" />
     <Compile Include="IUserService.cs" />
+    <Compile Include="MenuService.cs" />
+    <Compile Include="OrderService.cs" />
+    <Compile Include="PriceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RestaurantService.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>

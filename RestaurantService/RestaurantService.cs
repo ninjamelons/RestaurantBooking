@@ -125,8 +125,12 @@ namespace RestaurantService
         }
         public ModelLibrary.Restaurant GetRestaurant(int id)
         {
-            RestaurantCtrl ctrl = new RestaurantCtrl();
-            var res = ctrl.GetRestaurant(id);
+            return RestaurantCtrl.GetRestaurant(id);
+        }
+        public ModelLibrary.Restaurant GetRestaurantWithMenu(int id)
+        {
+            var res = RestaurantCtrl.GetRestaurant(id);
+            res.Menu = RestaurantCtrl.GetMenu(id);
             return res;
         }
         public void CreateRestaurantCategory(RestaurantCategory res)

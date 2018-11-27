@@ -50,7 +50,7 @@
                 @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", item.Id)
+                @Html.ActionLink("Details", "Home", new { id = item.Id })
             </td>
         </tr>
     }
