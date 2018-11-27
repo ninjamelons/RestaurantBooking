@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using UserWebClient.Models;
 using System.Web.Mvc;
 using ModelLibrary;
 using DatabaseAccessLibrary;
-using UserWebClient.ViewModels;
-using System.Net;
-using System.Threading.Tasks;
+using UserWebClient.Views;
+using UserWebClient.Views.ViewModels;
 
 namespace UserWebClient.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        JustFeastDbDataContext orderDB = new JustFeastDbDataContext();
+        readonly JustFeastDbDataContext orderDB = new JustFeastDbDataContext();
+        private readonly object ShoppingCart;
+
         //
         // GET: /ShoppingCart/
         public ActionResult Index()
         {
-            var cart = ShoppingCart.GetCart(this.HttpContext);
+            var cart = ShoppingCart.GetCart(HttpContext);
 
             // Set up our ViewModel
             var viewModel = new ShoppingCartViewModel
@@ -99,6 +99,4 @@ namespace UserWebClient.Controllers
             return PartialView("CartSummary");
         }
     }
-
-}
 }

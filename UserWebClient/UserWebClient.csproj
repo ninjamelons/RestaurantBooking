@@ -253,6 +253,7 @@
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\RestaurantHomeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -265,6 +266,8 @@
     <Compile Include="Models\RestaurantViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Views\ViewModels\ShoppingCartRemoveViewModel.cs" />
+    <Compile Include="Views\ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\RestaurantService\configuration91.svcinfo" />
