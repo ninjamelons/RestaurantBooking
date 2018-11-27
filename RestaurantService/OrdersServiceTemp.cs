@@ -12,7 +12,8 @@ namespace RestaurantService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "OrdersService" in both code and config file together.
     public class OrdersService : IOrdersService
-    {public void AddItemToOrder(int orderId, int itemId)
+    {
+        public void AddItemToOrder(int orderId, int itemId)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             var item = db.Items.SingleOrDefault(i => i.id == itemId);

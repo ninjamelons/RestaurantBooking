@@ -57,6 +57,12 @@ namespace ControllerLibrary
             priceDb.UpdatePrice(beforeDbPrice, afterDbPrice);
         }
 
+        internal ModelLibrary.Price GetPriceItemId(int itemId)
+        {
+            var priceDb = new PriceDb();
+            return ConvertPriceToModel(priceDb.GetPriceItemId(itemId));
+        }
+
         public void DeletePrice(ModelLibrary.Price price)
         {
             var priceDb = new PriceDb();
