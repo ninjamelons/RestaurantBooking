@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DatabaseAccessLibrary
@@ -20,10 +21,11 @@ namespace DatabaseAccessLibrary
             return restaurants;
         }
 
-        public static Restaurant GetRestaurant(int id)
+        public static Restaurant GetRestaurant(int restaurantId)
         {
             var db = new JustFeastDbDataContext();
-            return db.Restaurants.FirstOrDefault(x => x.id == id);
+            var res = db.Restaurants.FirstOrDefault(x => x.id == restaurantId);
+            return res;
         }
     }
 }
