@@ -57,6 +57,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\MenuService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\RestaurantService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -128,6 +133,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\MenuService\ModelLibrary.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MenuService\service.wsdl" />
+    <None Include="Connected Services\MenuService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MenuService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\RestaurantService\ModelLibrary.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -138,6 +153,7 @@
     <None Include="Connected Services\RestaurantService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\ModelLibrary.Menu.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.Restaurant.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.RestaurantCategory.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.Table.datasource" />
@@ -167,6 +183,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\MenuService\" />
     <WCFMetadataStorage Include="Connected Services\RestaurantService\" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +194,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\RestaurantService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MenuService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MenuService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MenuService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

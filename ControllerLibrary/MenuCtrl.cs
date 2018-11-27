@@ -86,6 +86,26 @@ namespace ControllerLibrary
             menuDb.UpdateMenu(beforeDbMenu, afterDbMenu);
 
         }
-        
+        public ModelLibrary.Menu GetMenu(ModelLibrary.Menu menuModel)
+        {
+            var menuDb = new MenuDb();
+            var itemCtrl = new ItemCtrl();
+            var menu = menuDb.GetMenu(menuModel.Id);
+            ModelLibrary.Menu newMenu = null;
+            var modelMenu = ConvertMenuToModel(menu);
+            if (menu != null)
+            {
+                newMenu = new ModelLibrary.Menu
+                {
+                    Name = menu.name,
+                    Active = menu.active,
+                    Items = modelMenu.Items.AsEnumerable()
+  
+                };
+            }
+
+            return newMenu;
+        }
+
     }
 }

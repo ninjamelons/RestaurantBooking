@@ -22,10 +22,12 @@ namespace DatabaseAccessLibrary
 
         public Menu GetMenu(int id)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var db = new JustFeastDbDataContext();
 
-            var menu = db.Menus.Single(t => t.id == id );
-            return menu;
+            Menu dbMenu = null;
+            dbMenu = db.Menus.SingleOrDefault(t => t.id == id);
+                                               
+            return dbMenu;
         }
 
         public void DeleteMenu(DatabaseAccessLibrary.Menu menu)

@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using System.Windows.Controls;
 using ModelLibrary;
-using RestaurantDesktopClient.RestaurantService;
-using RestaurantService;
+using RestaurantDesktopClient.MenuService;
+
 
 namespace RestaurantDesktopClient
 {
@@ -18,43 +18,38 @@ namespace RestaurantDesktopClient
         public MenusCrud()
         {
             InitializeComponent();
-            hiddenMenuId.Content = "0";
-            MenuService menuService = new MenuService();
             //listBoxItems.Items.Add = me
             //menuNameBox.ItemsSource = GetMenus();
         }
 
+        
+
+        private void MenuNameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var proxy = new MenuServiceClient();
+            var selectedMenu = (ModelLibrary.Menu)menuNameBox.SelectedItem;
+            var dbMenu = proxy.GetMenu(selectedMenu);
+            textBoxName.Text = dbMenu.Name;
+            hiddenName.Content = dbMenu.Name;
+            checkBoxActive.IsChecked = dbMenu.Active;
+            foreach (Item item in dbMenu.Items)
+                    {
+                      listBoxItems.Items.Add(item);
+                    }
+            
+        }
+
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
+            var proxy = new MenuServiceClient();
+            var oldMenu = new ModelLibrary.Menu
+            {
+                Name = ""
+            };
 
         }
+        
 
-        private void menuNameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var proxy = new RestaurantServiceClient();
-            var selectedMenu = (ModelLibrary.Menu)menuNameBox.SelectedItem;
-            var dbMenu.items = proxy.GetMenu(selectedMenu);
-            textBoxName.Text = dbMenu.Name;
-            checkBoxActive.IsChecked = dbMenu.Active;
-            foreach (Item item in dbMenu)
-                    {
-                      listBoxItems.Items.Add.dbMenu.item;
-                    }
-
-
-        }
-        /*private List<DatabaseAccessLibrary.Item> getItems(int menuId)
-{
-   ItemDb itemDb = new ItemDb();
-   itemDb.GetItems
-   return;
-}*/
-
-        /*public IEnumerable<Menu> GetMenus()
-        {
-            MenuService menuService = new MenuService();
-            return menuService.GetAllMenusByRestaurant(Convert.ToInt32(hiddenMenuId));
-            
-        }*/
+        
     }
 }
