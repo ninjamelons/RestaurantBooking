@@ -5,7 +5,7 @@ using System.Web;
 using UserWebClient;
 using System.ComponentModel.DataAnnotations;
 using ModelLibrary;
-
+/*
 namespace UserWebClient.Views.ViewModels
 {
     public class ShoppingCartViewModel
