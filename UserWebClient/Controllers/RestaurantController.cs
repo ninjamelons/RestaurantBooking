@@ -13,12 +13,15 @@ namespace UserWebClient.Controllers
     {
         //RestaurantService.RestaurantServiceClient proxy = new RestaurantService.RestaurantServiceClient();
 
-         private readonly RestaurantService.IRestaurantService _proxy;
+        private readonly RestaurantService.IRestaurantService _proxy;
+        private readonly OrderService.IOrderService _orderProxy;
         
-         public RestaurantController(RestaurantService.IRestaurantService proxy)
-         {
-             this._proxy = proxy;
-         }
+        public RestaurantController(RestaurantService.IRestaurantService proxy,
+            OrderService.IOrderService orderProxy)
+        {
+            this._proxy = proxy;
+            this._orderProxy = orderProxy;
+        }
 
         // GET: Restaurant
         public ActionResult Index()
@@ -173,7 +176,7 @@ namespace UserWebClient.Controllers
             model.Restaurant = this._proxy.GetRestaurantWithMenu(id);
             model.menu = model.Restaurant.Menu;
             //model.OrderId = 50;
-            return View("Index", model);
+            return View("Home", model);
         }
 
         [HttpPost]
@@ -182,7 +185,7 @@ namespace UserWebClient.Controllers
         {
             #region Add item to cart
 
-            // _restaurantProxy.AddItemToOrder(orderId, itemId);
+            _orderProxy.AddItemToOrder(orderId, itemId);
 
             #endregion
 
@@ -193,7 +196,7 @@ namespace UserWebClient.Controllers
             model.OrderId = orderId;
             #endregion
 
-            return RedirectToAction("Index", model);
+            return RedirectToAction("Home", model);
         }
     }
 }
