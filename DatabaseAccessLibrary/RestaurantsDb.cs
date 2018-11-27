@@ -3,13 +3,21 @@ using System.Linq;
 
 namespace DatabaseAccessLibrary
 {
-    public class RestaurantsDb
+    public static class RestaurantsDb
     {
-        public Restaurant GetRestaurant(int restaurantId)
+        public static List<Restaurant> GetRestaurantsPaged(int zipcode, int categoryId, int page, int amount, bool verified, bool discontinued)
         {
-            var dbContext = new JustFeastDbDataContext();
-            var res = dbContext.Restaurants.FirstOrDefault(x => x.id == restaurantId);
-            return res;
+            var db = new JustFeastDbDataContext();
+            var restaurants = new List<Restaurant>();
+
+            restaurants = db.Restaurants.Where(x => 
+            (zipcode == 0 ? true : x.zipcode == zipcode) && 
+            (categoryId == 0 ? true : x.resCatId == categoryId) &&
+            (verified ? x.verified : true) &&
+            (discontinued ? true : !x.discontinued))
+            .OrderBy(x => x.name).Skip(page*amount).Take(amount).ToList();
+
+            return restaurants;
         }
     }
 }

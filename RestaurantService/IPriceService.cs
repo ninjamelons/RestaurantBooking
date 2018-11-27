@@ -15,13 +15,13 @@ namespace RestaurantService
         void CreatePrice(ModelLibrary.Price price);
 
         [OperationContract]
-        void UpdatePrice(ModelLibrary.Price price);
-
-        [OperationContract]
         void DeletePrice(ModelLibrary.Price price);
 
         [OperationContract]
         IEnumerable<ModelLibrary.Price> GetAllPricesByItem(string id);
+
+        [OperationContract]
+        void UpdatePrice(ModelLibrary.Price beforePrice, ModelLibrary.Price afterPrice);
 
     }
 }

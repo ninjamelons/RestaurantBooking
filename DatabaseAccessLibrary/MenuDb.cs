@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace DatabaseAccessLibrary
 {
     public class MenuDb
     {
-        public static void AddMenu(Menu menu)
+        public void AddMenu(Menu menu)
         {
 
             JustFeastDbDataContext db = new JustFeastDbDataContext();
@@ -19,7 +20,7 @@ namespace DatabaseAccessLibrary
             db.SubmitChanges();
         }
 
-        public static Menu GetMenu(int id)
+        public Menu GetMenu(int id)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
@@ -27,35 +28,32 @@ namespace DatabaseAccessLibrary
             return menu;
         }
 
-        public Menu GetActiveMenu(int restaurantId)
-        {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-
-            var menu = db.Menus.SingleOrDefault(t => t.restaurantId == restaurantId && t.active == true );
-            return menu;
-        }
-
-        public int GetActiveMenuId(int restaurantId)
+        public void DeleteMenu(DatabaseAccessLibrary.Menu menu)
         {
             var db = new JustFeastDbDataContext();
-            return db.Menus.SingleOrDefault(t => t.restaurantId == restaurantId && t.active == true).id;
+            DatabaseAccessLibrary.Menu dbMenu = db.Menus.First(t => t.name == menu.name
+                                                        && t.id == menu.id);
+            if (dbMenu != null)
+            {
+                db.Menus.DeleteOnSubmit(db.Menus.First(t => t.name == menu.name
+                                                        && t.id == menu.id));
+                db.SubmitChanges();
+            }
+
+          
         }
 
-        public static void DeleteMenu(Menu menu)
+        public void UpdateMenu(Menu beforeMenu, Menu afterMenu)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var db = new JustFeastDbDataContext();
+            var dbMenu = db.Menus.SingleOrDefault(t => t.id == beforeMenu.id
+                                                  && t.restaurantId == beforeMenu.restaurantId && beforeMenu.id == afterMenu.id);
 
-            if (db.Menus.Any(t => t.id == menu.id))
-                db.Menus.DeleteOnSubmit(menu);
-            db.SubmitChanges();
-        }
+                dbMenu.restaurantId = afterMenu.restaurantId;
+                dbMenu.name = afterMenu.name;
+                dbMenu.Items = afterMenu.Items;
+                db.SubmitChanges();
 
-        public static void UpdateMenu(Menu beforeMenu, Menu afterMenu)
-        {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var menu = db.Menus.SingleOrDefault(t => t.id == beforeMenu.id);
-            menu = afterMenu;
-            db.SubmitChanges();
         }
 
         public IEnumerable<Menu> GetMenus()

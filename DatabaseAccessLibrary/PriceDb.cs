@@ -9,16 +9,16 @@ namespace DatabaseAccessLibrary
 {
     public class PriceDb
     {
-        public static void AddPrice(Price price)
+        public  void AddPrice(Price price)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            if (db.Prices.Any(t => !(t.itemId == price.itemId && t.startDate == price.startDate || t.endDate == price.endDate))) //???????
-                db.Prices.InsertOnSubmit(price);
+
+            db.Prices.InsertOnSubmit(price);
             db.SubmitChanges();
         }
     
 
-        public static Price GetPrice(int itemId, DateTime startDate)
+        public  Price GetPrice(int itemId, DateTime startDate)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
@@ -26,21 +26,29 @@ namespace DatabaseAccessLibrary
             return pric;
         }
 
-        public static void DeletePrice(Price price)
+        public  void DeletePrice(Price price)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-
-            if (db.Prices.Any(t => t.itemId == price.itemId && t.startDate == price.startDate))
-                db.Prices.DeleteOnSubmit(price);
-            db.SubmitChanges();
+            var db = new JustFeastDbDataContext();
+            DatabaseAccessLibrary.Price dbPrice = db.Prices.First(t => t.itemId == price.itemId
+                                                        && t.startDate == price.startDate);
+            if (dbPrice != null)
+            {
+                db.Prices.DeleteOnSubmit(db.Prices.First(t => t.itemId == price.itemId
+                                                        && t.startDate == price.startDate));
+                db.SubmitChanges();
+            }
         }
 
-        public static void UpdatePrice(Price priceBefore, Price priceAfter)
+        public  void UpdatePrice(Price priceBefore, Price priceAfter)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var db = new JustFeastDbDataContext();
+            var dbPrice = db.Prices.SingleOrDefault(t => t.itemId == priceBefore.itemId
+                                                  && t.startDate == priceBefore.startDate);
 
-            var price = db.Prices.SingleOrDefault(t => t.itemId == priceBefore.itemId && t.startDate == priceBefore.startDate);
-            price = priceAfter;
+            dbPrice.itemId = priceAfter.itemId;
+            dbPrice.startDate = priceAfter.startDate;
+            dbPrice.endDate = priceAfter.endDate;
+            dbPrice.price1 = priceAfter.price1;
             db.SubmitChanges();
         }
 

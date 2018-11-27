@@ -8,37 +8,44 @@ namespace DatabaseAccessLibrary
 {
     public class ItemCatDb
     {
-        public static void AddItemCat(ItemCat itemCat)
+        public  void AddItemCat(ItemCat itemCat)
         {
-
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            if (db.ItemCats.Any(t => !(t.name == itemCat.name)))
-                db.ItemCats.InsertOnSubmit(itemCat);
+
+            db.ItemCats.InsertOnSubmit(itemCat);
             db.SubmitChanges();
         }
+    
 
-        public static ItemCat GetItemCat(string name)
+        public  ItemCat GetItemCat(string name, int itemCatId)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-            var itemCat = db.ItemCats.Single(t => t.name == name);
+            var itemCat = db.ItemCats.Single(t => t.name == name && t.id == itemCatId);
             return itemCat;
         }
 
-        public static void DeleteItemCat(ItemCat itemCat)
+        public  void DeleteItemCat(ItemCat itemCat)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-
-            if (db.ItemCats.Any(t => t.id == itemCat.id))
-                db.ItemCats.DeleteOnSubmit(itemCat);
-            db.SubmitChanges();
+            var db = new JustFeastDbDataContext();
+            DatabaseAccessLibrary.ItemCat dbItemCat = db.ItemCats.First(t => t.name == itemCat.name
+                                                        && t.id == itemCat.id);
+            if (dbItemCat != null)
+            {
+                db.Items.DeleteOnSubmit(db.Items.First(t => t.name == itemCat.name
+                                                        && t.id == itemCat.id));
+                db.SubmitChanges();
+            }
         }
 
-        public static void UpdateItemCat(ItemCat beforeItemCat, ItemCat afterItemCat)
+        public  void UpdateItemCat(ItemCat beforeItemCat, ItemCat afterItemCat)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var itemCat = db.ItemCats.SingleOrDefault(t => t.id == beforeItemCat.id);
-            itemCat = afterItemCat;
+            var db = new JustFeastDbDataContext();
+            var dbItemCat = db.ItemCats.SingleOrDefault(t => t.id == beforeItemCat.id && beforeItemCat.id == afterItemCat.id);
+
+            dbItemCat.id = afterItemCat.id;
+            dbItemCat.name = afterItemCat.name;
+           
             db.SubmitChanges();
         }
 

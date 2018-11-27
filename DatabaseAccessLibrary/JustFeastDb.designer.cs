@@ -813,7 +813,7 @@ namespace DatabaseAccessLibrary
     partial void OnitemCatIdChanged();
     #endregion
 		
-		public Item()
+		public Item(object p)
 		{
 			this._OrderLineItems = new EntitySet<OrderLineItem>(new Action<OrderLineItem>(this.attach_OrderLineItems), new Action<OrderLineItem>(this.detach_OrderLineItems));
 			this._Prices = new EntitySet<Price>(new Action<Price>(this.attach_Prices), new Action<Price>(this.detach_Prices));
@@ -821,8 +821,12 @@ namespace DatabaseAccessLibrary
 			this._Menu = default(EntityRef<Menu>);
 			OnCreated();
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+
+        public Item()
+        {
+        }
+
+        [global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -1023,8 +1027,10 @@ namespace DatabaseAccessLibrary
 				}
 			}
 		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
+
+        public string Name { get; set; }
+
+        public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
 		

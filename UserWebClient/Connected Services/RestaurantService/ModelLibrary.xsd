@@ -10,6 +10,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Category" nillable="true" type="tns:RestaurantCategory" />
+      <xs:element minOccurs="0" name="Discontinued" type="xs:boolean" />
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Menu" nillable="true" type="tns:Menu" />

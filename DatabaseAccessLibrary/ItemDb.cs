@@ -9,16 +9,15 @@ namespace DatabaseAccessLibrary
     public class ItemDb
     {
 
-        public static void AddItem(Item item)
+        public  void AddItem(Item item)
         {
-
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-                db.Items.InsertOnSubmit(item);
+            db.Items.InsertOnSubmit(item);
             db.SubmitChanges();
         }
 
-        public static Item GetItem(int id, string name)
+        public  Item GetItem(int id, string name)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
@@ -26,21 +25,32 @@ namespace DatabaseAccessLibrary
             return item;
         }
 
-        public static void DeleteItem(Item item)
+        public  void DeleteItem(Item item)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-
-            if (db.Items.Any(t => t.id == item.id))
-                db.Items.DeleteOnSubmit(item);
-            db.SubmitChanges();
+            var db = new JustFeastDbDataContext();
+            DatabaseAccessLibrary.Item dbItem = db.Items.First(t => t.name == item.name
+                                                        && t.id == item.id);
+            if (dbItem != null)
+            {
+                db.Items.DeleteOnSubmit(db.Items.First(t => t.name == item.name
+                                                        && t.id == item.id));
+                db.SubmitChanges();
+            }
         }
 
-        public static void UpdateItem(Item beforeItem, Item afterItem)
+        public void UpdateItem(Item beforeItem, Item afterItem)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var item = db.Items.SingleOrDefault(t => t.id == beforeItem.id);
-            item = afterItem;
+            var db = new JustFeastDbDataContext();
+            var dbItem = db.Items.SingleOrDefault(t => t.id == beforeItem.id
+                                                  && t.menuId == beforeItem.menuId && beforeItem.id == afterItem.id);
+
+            dbItem.menuId = afterItem.menuId;
+            dbItem.name = afterItem.name;
+            dbItem.Prices = afterItem.Prices;
+            dbItem.description = afterItem.description;
+            dbItem.ItemCat = afterItem.ItemCat;
             db.SubmitChanges();
+
         }
 
         public IEnumerable<Item> GetItems()
