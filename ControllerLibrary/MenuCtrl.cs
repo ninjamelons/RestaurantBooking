@@ -34,11 +34,14 @@ namespace ControllerLibrary
             var modelMenu = new ModelLibrary.Menu();
             List<ModelLibrary.Item> itemList = new List<ModelLibrary.Item>();
             ItemCtrl itemCtrl = new ItemCtrl();
+            if (dbMenu == null)
+                return modelMenu;
 
             foreach (var Item in dbMenu.Items)
             {
                 itemList.Add(itemCtrl.ConvertItemToModel(Item));
             }
+
             modelMenu.Id = dbMenu.id;
             modelMenu.Name = dbMenu.name;
             modelMenu.Items = itemList;
