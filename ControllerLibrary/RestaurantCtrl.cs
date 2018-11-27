@@ -6,22 +6,12 @@ using System.Threading.Tasks;
 using DatabaseAccessLibrary;
 using ModelLibrary;
 using System.ComponentModel.DataAnnotations;
+using Restaurant = DatabaseAccessLibrary.Restaurant;
 
 namespace ControllerLibrary
 {
     public class RestaurantCtrl
     {
-        public static ResTable ConvertTable(Table table)
-        {
-            ResTable returnTable = null;
-
-            returnTable.noSeats = Convert.ToInt32(table.NoSeats);
-            returnTable.reserved = Convert.ToInt32(table.Reserved);
-            returnTable.total = Convert.ToInt32(table.Total);
-            returnTable.restaurantId = Convert.ToInt32(table.RestaurantId);
-
-            return returnTable;
-        }
         public static ModelLibrary.Restaurant CreateRestaurant(string name, string address, string email, string phoneNo, string zipCode, RestaurantCategory category)
         {
             var restaurant = new ModelLibrary.Restaurant
@@ -45,6 +35,15 @@ namespace ControllerLibrary
         public static RestaurantCategory CreateRestaurantCategory(string name)
         {
             return new RestaurantCategory { Name = name };
+        }
+
+        public ModelLibrary.Restaurant GetRestaurant(int restaurantId)
+        {
+            var resDb = new RestaurantsDb();
+            var menuCtrl = new MenuCtrl();
+            var res = ConvertRestaurantToModel(resDb.GetRestaurant(restaurantId));
+            res.Menu = menuCtrl.GetActiveMenu(restaurantId);
+            return res;
         }
 
         public static ModelLibrary.Restaurant ConvertRestaurantToModel(DatabaseAccessLibrary.Restaurant dbRestaurant)
@@ -80,6 +79,8 @@ namespace ControllerLibrary
 
         public static DatabaseAccessLibrary.Restaurant ConvertRestaurantToDatabase(ModelLibrary.Restaurant mRes)
         {
+            if (mRes == null)
+                return null;
             int PhoneNo = 0;
             int ZipCode = 0;
             try

@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-
+using ModelLibrary;
+using DatabaseAccessLibrary;
+using OrderLineItem = DatabaseAccessLibrary.OrderLineItem;
 
 namespace UserWebClient.Models
 {
     public class Cart
     {
-        public string ItemId { get; set; }
+
+        [Key]
         public string CartId { get; set; }
-        public int Quantity { get; set; }
-        public double Price { get; set; }
+        public int OrderId { get; set; }
         public int Count { get; set; }
-    
         public System.DateTime DateCreated { get; set; }
-
-
-
+        public virtual  OrderLineItem Item{ get; set; }
     }
 }

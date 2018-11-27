@@ -12,24 +12,20 @@ namespace UnitTestProject1
     public class ItemTestcs
     {
         [TestMethod]
-        [DataRow("ChickenSteak", "WeirdDescription", 12.0, true, DisplayName = "All data correct")]
-        [DataRow("a", "WeirderDescription", 12.0, false, DisplayName = "Name too short")]
-        [DataRow("asdjkddsfjdsfjkdfsjkdsfkjdfjkdfsjksdfjksdfjksdfjkdsfjkdksfsdkjsdfkjh", "Weird description", 12.0, false, DisplayName = "name too long")]
-        [DataRow(null, "Weird Description", 12.0, false, DisplayName = "Null name")]
+        [DataRow("ChickenSteak", "WeirdDescription", true, DisplayName = "All data correct")]
+        [DataRow("a", "WeirderDescription", false, DisplayName = "Name too short")]
+        [DataRow("asdjkddsfjdsfjkdfsjkdsfkjdfjkdfsjksdfjksdfjksdfjkdsfjkdksfsdkjsdfkjh", "Weird description", false, DisplayName = "name too long")]
         [DataRow("GoodName", "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789" +
                    "01234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789" +
-                   "01234567890123456789012345678901234567890123456789", 12.0, false, DisplayName = "Description Too long")]
-        [DataRow("GoodName", null, 12.0, false, DisplayName = "Null Description")]
-        [DataRow("GoodName", "GoodDescription", -12.0, false, DisplayName = "Price < 0")]
-        [DataRow("GoodName", "GoodDescription", null, false, DisplayName = "Null Price")]
-        public void Create_Table_Valid_Inputs(string name, string description, double price, bool shouldValidate)
+                   "01234567890123456789012345678901234567890123456789", false, DisplayName = "Description Too long")]
+        public void Create_Table_Valid_Inputs(string name, string description, bool shouldValidate)
         {
             //Setup
             var sut = new ModelLibrary.Item
             {
                 Name = name,
                 Description = description,
-                Price = price,
+
             };
 
             var context = new ValidationContext(sut, null, null);
@@ -45,33 +41,35 @@ namespace UnitTestProject1
         [TestMethod]
         public void Create_Item_Added_To_Db()
         {
+            ItemDb itemDb = new ItemDb();
             //Setup
             #region creates Item,Menu,Restaurant,Price
-
-            DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
-            {
-                description = "PerfectlyGoodDescription",
-                id = 1,
-                itemCatId = 1,
-                menuId = 1,
-                name = "PerfectlyGoodName",
-            };
-            DatabaseAccessLibrary.Menu newMenu = new DatabaseAccessLibrary.Menu
-            {
-                id = 1,
-                restaurantId = 1,
-                active = true
-
-            };
-
             DatabaseAccessLibrary.Restaurant newRestaurant = new DatabaseAccessLibrary.Restaurant
             {
-                id = 1,
+
                 name = "RestaurantNameExample",
                 address = "RestaurantAddressExample",
                 email = "RestaurantEmailExample",
                 zipcode = 1231223
             };
+
+            DatabaseAccessLibrary.Menu newMenu = new DatabaseAccessLibrary.Menu
+            {
+
+                name = "aMenuName",
+                active = true
+
+            };
+
+            DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
+            {
+                description = "PerfectlyGoodDescription",
+
+                name = "PerfectlyGoodName",
+            };
+
+
+
             DateTime startDate = new DateTime(2011, 6, 10);
             DateTime endDate = new DateTime(2011, 7, 11);
             DatabaseAccessLibrary.Price newPrice = new DatabaseAccessLibrary.Price
@@ -83,34 +81,34 @@ namespace UnitTestProject1
             };
             #endregion
 
-            ItemDb itemDb = new ItemDb();
-            ItemDb.AddItem(newItem);
+
+            itemDb.AddItem(newItem);
             //Act
-            ItemDb.AddItem(newItem);
-            
+            itemDb.AddItem(newItem);
+
             //Get Item(1,1,"PerfectlyGoodName");
-            DatabaseAccessLibrary.Item anotherItem = ItemDb.GetItem(1, "PerfectlyGoodName");// PRICE!?
+            DatabaseAccessLibrary.Item anotherItem = itemDb.GetItem(1, "PerfectlyGoodName");// PRICE!?
 
             //Assert
-            Assert.IsTrue(anotherItem.name == newItem.name 
+            Assert.IsTrue(anotherItem.name == newItem.name
                           && anotherItem.menuId == newItem.menuId
                           && anotherItem.id == newItem.id
                           && anotherItem.description == newItem.description
                           && anotherItem.itemCatId == newItem.itemCatId); //
 
         }
-        
+
         [TestMethod]
         public void Item_Deleted_From_Db()
         {
+            ItemDb itemDb = new ItemDb();
             //Setup
             #region creates Item,Menu,Restaurant
 
             DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
             {
                 description = "PerfectlyGoodDescription",
-                id = 1,
-                itemCatId = 1,
+                //ItemCat = itemCat1
                 menuId = 1,
                 name = "PerfectlyGoodName",
             };
@@ -132,17 +130,17 @@ namespace UnitTestProject1
             };
             #endregion
 
-            ItemDb.AddItem(newItem);
+            itemDb.AddItem(newItem);
 
             //Act
 
 
             //Delete Item
-            ItemDb.DeleteItem(newItem);
+            itemDb.DeleteItem(newItem);
 
             //Assert
             Assert.IsNull(newItem);
-        }
+        }/*
         [TestMethod]
         public void Update_Item(string description, double price, string name )
         {
@@ -152,8 +150,8 @@ namespace UnitTestProject1
             {
                 Description = "PerfectlyGoodDescription",
                 Id = 1,
-                ItemCatId = 1,
-                MenuId = 1,
+                //ItemCatId = 1,
+                //MenuId = 1,
                 Name = "PerfectlyGoodName",
                 Price = 12
             };
@@ -164,10 +162,10 @@ namespace UnitTestProject1
 
                     Description = description,
                     Id = 1,
-                    ItemCatId = 1,
-                    MenuId = 1,
+                    //ItemCatId = 1,
+                    //MenuId = 1,
                     Name = name,
-                    Price = price
+                    //Price = price
                 };
 
 
@@ -183,34 +181,95 @@ namespace UnitTestProject1
 
                 //Assert
                 Assert.AreNotEqual(newItem, returnedItem);
-            }
-          
-            
+            }*/
 
 
 
-        }
+
+
+
         [TestMethod]
         public void Delete_Correct_Item_Db()
         {
+            ItemCtrl itemCtrl = new ItemCtrl();
             //Setup
             var item = new ModelLibrary.Item
             {
                 Description = "PerfectlyGoodDescription",
                 Id = 1,
-                ItemCatId = 1,
-                MenuId = 1,
+                //ItemCatId = 1,
+                //MenuId = 1,
                 Name = "PerfectlyGoodName",
-                Price = 12
+                //Price = 12
             };
 
             //Act
-            ItemCtrl.DeleteTable(item);
-            var resTable = ItemCtrl.GetItem(item);
+            //ItemCtrl.DeleteItem(item);
+            var resTable = itemCtrl.GetItem(item);
 
             //Assert
             Assert.IsNull(resTable);
         }
 
+        [TestMethod]
+        public void Create_Item_Service()
+        {
+            ItemCtrl itemCtrl = new ItemCtrl();
+            //Setup
+            var itemCat = new ModelLibrary.ItemCat
+            {
+                Id = 1000000,
+                Name = "Soup"
+            };
+            var price = new ModelLibrary.Price
+            {
+                StartDate = DateTime.Now.Date,
+                EndDate = new DateTime(9999, 12, 31),
+                VarPrice = 12.5
+
+            };
+            var item = new ModelLibrary.Item
+            {
+                Name = "Controllerforabi",
+                Description = "Totallynotadescription",
+                ItemCat = itemCat,
+                Price = price
+            };
+
+            //Act
+            var itemdb = itemCtrl.CreateItem(item, 1000000);
+
+            //Assert
+            Assert.AreEqual(item.Name, itemdb.name);
+        }
+        [TestMethod]
+        public void Edit_Item_Service()
+        {
+            ItemCtrl itemCtrl = new ItemCtrl();
+            //Setup
+            var itemCat = new ModelLibrary.ItemCat
+            {
+                Id = 1000000,
+                Name = "Soup"
+            };
+            var price = new ModelLibrary.Price
+            {
+                StartDate = DateTime.Now.Date,
+                EndDate = new DateTime(9999, 12, 31),
+                VarPrice = 12.5
+
+            };
+            var item = new ModelLibrary.Item
+            {
+                Name = "Controllerforabi",
+                Description = "Totallynotadescription",
+                ItemCat = itemCat,
+                Price = price
+            };
+            //Act
+            var itemDb = new ItemDb();
+
+
+        }
     }
 }

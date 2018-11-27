@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using 
+using System.Web.Mvc;
+using UserWebClient.Models;
+
+
+namespace UserWebClient.Logic
 
 public class ShoppingCartActions
 {
-	public class1()
+	public ()
 	{
 	}
 }
