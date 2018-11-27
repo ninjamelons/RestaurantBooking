@@ -101,7 +101,8 @@ namespace ControllerLibrary
             dbRes.verified = mRes.Verified;
             dbRes.zipcode = ZipCode;
             dbRes.discontinued = mRes.Discontinued;
-            dbRes.ResCat = ConvertRestaurantCategoryToDatabase(mRes.Category);
+            if(mRes.Category != null)
+                dbRes.resCatId = mRes.Category.Id;
 
             return dbRes;
         }
