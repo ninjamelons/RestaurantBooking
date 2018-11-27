@@ -26,6 +26,9 @@ namespace ControllerLibrary
 
         public ModelLibrary.Price ConvertPriceToModel(DatabaseAccessLibrary.Price price)
         {
+            if (price == null)
+                return null;
+
             var modelPrice = new ModelLibrary.Price
             {
                 

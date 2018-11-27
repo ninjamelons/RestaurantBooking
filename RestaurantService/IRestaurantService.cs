@@ -39,7 +39,8 @@ namespace RestaurantService
         void UpdateRestaurantCategory(RestaurantCategory res);
         [OperationContract]
         RestaurantCategory GetRestaurantCategory(int id);
-
+        [OperationContract]
+        ModelLibrary.Restaurant GetRestaurantWithMenu(int id);
 
 
         [OperationContract]

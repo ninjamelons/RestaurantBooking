@@ -93,6 +93,12 @@ namespace UserWebClient.RestaurantService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetRestaurantCategory", ReplyAction="http://tempuri.org/IRestaurantService/GetRestaurantCategoryResponse")]
         System.Threading.Tasks.Task<ModelLibrary.RestaurantCategory> GetRestaurantCategoryAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetRestaurantWithMenu", ReplyAction="http://tempuri.org/IRestaurantService/GetRestaurantWithMenuResponse")]
+        ModelLibrary.Restaurant GetRestaurantWithMenu(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetRestaurantWithMenu", ReplyAction="http://tempuri.org/IRestaurantService/GetRestaurantWithMenuResponse")]
+        System.Threading.Tasks.Task<ModelLibrary.Restaurant> GetRestaurantWithMenuAsync(int id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/CreateTable", ReplyAction="http://tempuri.org/IRestaurantService/CreateTableResponse")]
         void CreateTable(ModelLibrary.Table table);
         
@@ -253,6 +259,14 @@ namespace UserWebClient.RestaurantService {
         
         public System.Threading.Tasks.Task<ModelLibrary.RestaurantCategory> GetRestaurantCategoryAsync(int id) {
             return base.Channel.GetRestaurantCategoryAsync(id);
+        }
+        
+        public ModelLibrary.Restaurant GetRestaurantWithMenu(int id) {
+            return base.Channel.GetRestaurantWithMenu(id);
+        }
+        
+        public System.Threading.Tasks.Task<ModelLibrary.Restaurant> GetRestaurantWithMenuAsync(int id) {
+            return base.Channel.GetRestaurantWithMenuAsync(id);
         }
         
         public void CreateTable(ModelLibrary.Table table) {

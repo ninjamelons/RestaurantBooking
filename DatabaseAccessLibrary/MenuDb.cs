@@ -46,7 +46,7 @@ namespace DatabaseAccessLibrary
         public Menu GetActiveMenu(int restaurantId)
         {
             var db = new JustFeastDbDataContext();
-            var menu = db.Menus.SingleOrDefault(t => t.restaurantId == restaurantId
+            var menu = db.Menus.FirstOrDefault(t => t.restaurantId == restaurantId
                                                      && t.active);
             return menu;
         }
