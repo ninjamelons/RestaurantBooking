@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UserWebClient.Models;
 
 namespace UserWebClient.Controllers
 {
@@ -13,12 +14,13 @@ namespace UserWebClient.Controllers
     public class HomeController : Controller
     {
         private readonly RestaurantService.IRestaurantService _proxy;
+
         public HomeController(RestaurantService.IRestaurantService proxy)
         {
             this._proxy = proxy;
         }
 
-        public ActionResult Index(string Search)
+        public ActionResult Index()
         {
             //IEnumerable<ModelLibrary.Restaurant> serviceResult = _proxy.GetAllRestaurants();
             /*var restaurants = serviceResult.Select(restaurantRes => new ModelLibrary.Restaurant
@@ -32,10 +34,13 @@ namespace UserWebClient.Controllers
             if (Search != null && Search != "")
                 restaurants = restaurants.Where(x => x.ZipCode.Contains(Search));*/
 
-            if (Search != null && Search != "")
-              return View(_proxy.GetAllRestaurantsByZipCode(Int32.Parse(Search)));
+            return View(new HomeViewModel { Zipcode = 0 });
+        }
 
-            return View(_proxy.GetAllRestaurants());
+        [HttpPost]
+        public ActionResult Index(HomeViewModel model)
+        {
+            return RedirectToAction("Browse", "Restaurant", new { zipcode = model.Zipcode });
         }
 
         public ActionResult About()

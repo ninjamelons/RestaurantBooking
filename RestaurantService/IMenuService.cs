@@ -23,6 +23,11 @@ namespace RestaurantService
         [OperationContract]
         IEnumerable<ModelLibrary.Menu> GetAllMenusByRestaurant(int restaurantId);
 
+        [OperationContract]
+        ModelLibrary.Menu GetMenu(ModelLibrary.Menu menu);
+
+
+
 
 
     }

@@ -37,12 +37,17 @@ namespace ControllerLibrary
             return new RestaurantCategory { Name = name };
         }
 
-        public ModelLibrary.Restaurant GetRestaurant(int restaurantId)
+        public static ModelLibrary.Restaurant GetRestaurant(int restaurantId)
+        {
+            var res = ConvertRestaurantToModel(RestaurantsDb.GetRestaurant(restaurantId));
+            return res;
+        }
+
+        public static ModelLibrary.Menu GetMenu(int restaurantId)
         {
             var menuCtrl = new MenuCtrl();
-            var res = ConvertRestaurantToModel(RestaurantsDb.GetRestaurant(restaurantId));
-            res.Menu = menuCtrl.GetActiveMenu(restaurantId);
-            return res;
+            var menu = menuCtrl.GetActiveMenu(restaurantId);
+            return menu;
         }
 
         public static ModelLibrary.Restaurant ConvertRestaurantToModel(DatabaseAccessLibrary.Restaurant dbRestaurant)
