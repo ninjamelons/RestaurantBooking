@@ -258,6 +258,7 @@
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\RestaurantHomeController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SearchResultController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -390,10 +391,12 @@
     <Content Include="Views\RestaurantHome\Index.cshtml" />
     <Content Include="Views\Checkout\Complete.cshtml" />
     <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
+    <Content Include="Views\Home\SearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Logic\" />
+    <Folder Include="Views\SearchResult\" />
     <Folder Include="Views\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
-﻿@model IEnumerable<ModelLibrary.Restaurant>
+﻿@model UserWebClient.Models.RestaurantBrowseModel
 @{
     ViewBag.Title = "Home Page";
+    ViewBag.Description = "";
 }
 
 <head>
@@ -8,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="~/Content/custom.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel="stylesheet">
+    <title>Home Page</title>
 </head>
 
 <body>
@@ -16,7 +18,7 @@
             <h1 class="landing-h1">Search your area for restaurants</h1>
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                @using (Html.BeginForm())
+                @using (Html.BeginForm(FormMethod.Post))
                 {
                     <div class="input-group">
                         <span class="input-group-btn">
@@ -53,62 +55,31 @@
             </div>
         </div> -->
 
-<br /> <br />
+        <br />
+        <br />
 
-<div class="container">
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-            <input type="text" id="Search" placeholder="Search by Zip Code" class="form-control" />
-        </div>
-    </div>
-</div>
-
-<br />
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Restaurant</th>
-                    <th>Adress</th>
-                    <th>Zip Code</th>
-                    <th>Phone</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr class="Search">
-                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Address)</td>
-                        <td>@Html.DisplayFor(modelItem => item.ZipCode)</td>
-                        <td>@Html.DisplayFor(modelItem => item.PhoneNo)</td>
+        <!-- <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Restaurant</th>
+                        <th>Adress</th>
+                        <th>Zip Code</th>
+                        <th>Phone</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    foreach (var item in Model)
+                    {
+                        <tr class="Search">
+                            <td>Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>Html.DisplayFor(modelItem => item.Address)</td>
+                            <td>Html.DisplayFor(modelItem => item.ZipCode)</td>
+                            <td>Html.DisplayFor(modelItem => item.PhoneNo)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div> -->
 </body>
-<footer>
+<footer></footer>
 
-</footer>
-    <!--<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            function Contains(text_one, text_two) {
-                if (text_one.indexOf(text_two) != -1)
-                    return true;
-            }
-            $("#Search").keyup(function () {
-                var searchText = $("#Search").val().toLowerCase();
-                $(".Search").each(function () {
-                    if (!Contains($(this).text().toLowerCase, searchText)) {
-                        $(this).hide();
-                    }
-                    else {
-                        $(this).show();
-                    }
-                });
-            });
-        });
-    </script>-->

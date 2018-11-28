@@ -6,43 +6,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UserWebClient.Models;
 
 namespace UserWebClient.Controllers
 {
    
     public class HomeController : Controller
     {
-        private readonly RestaurantService.IRestaurantService _proxy;
-        public HomeController(RestaurantService.IRestaurantService proxy)
+        RestaurantService.RestaurantServiceClient proxy = new RestaurantService.RestaurantServiceClient();
+
+        public ActionResult Index()
         {
-            this._proxy = proxy;
+            return View();
         }
 
+        [HttpPost]
         public ActionResult Index(string Search)
         {
-            //IEnumerable<ModelLibrary.Restaurant> serviceResult = _proxy.GetAllRestaurants();
-            /*var restaurants = serviceResult.Select(restaurantRes => new ModelLibrary.Restaurant
-            {
-                Name = restaurantRes.Name,
-                Address = restaurantRes.Address,
-                ZipCode = restaurantRes.ZipCode,
-                PhoneNo = restaurantRes.PhoneNo
-            });
 
+            /*var model = new RestaurantBrowseModel();
+
+            model.SelectedZipCode = 0;
+            if (zipcode.HasValue)
+                model.SelectedZipCode = zipcode.Value;
+            model.Restaurants = new List<ModelLibrary.Restaurant>();
+            model.Page = 0;
+            model.Amount = 100;
+
+            model.Restaurants.AddRange(_proxy.GetRestaurantsPaged(model.SelectedZipCode, model.SelectedRestaurantCategoryId, model.Page, model.Amount, true, false));
+
+            return View("~/Views/Restaurant/Browse.cshtml", model);*/
             if (Search != null && Search != "")
-                restaurants = restaurants.Where(x => x.ZipCode.Contains(Search));*/
+                return View("SearchResults", proxy.GetAllRestaurantsByZipCode(Int32.Parse(Search)));
+            return View();
 
-            if (Search != null && Search != "")
-              return View(_proxy.GetAllRestaurantsByZipCode(Int32.Parse(Search)));
-
-            return View(_proxy.GetAllRestaurants());
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
 
             return View();
+
         }
 
         public ActionResult Contact()
