@@ -264,8 +264,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PageHomeViewModel.cs" />
     <Compile Include="Models\RestaurantBrowseModel.cs" />
     <Compile Include="Models\RestaurantOrderModel.cs" />
     <Compile Include="Models\RestaurantViewModel.cs" />
@@ -395,7 +397,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Logic\" />
-    <Folder Include="Views\ShoppingCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
