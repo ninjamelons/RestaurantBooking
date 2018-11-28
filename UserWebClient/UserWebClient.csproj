@@ -267,7 +267,6 @@
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\PageHomeViewModel.cs" />
     <Compile Include="Models\RestaurantBrowseModel.cs" />
     <Compile Include="Models\RestaurantOrderModel.cs" />
     <Compile Include="Models\RestaurantViewModel.cs" />
@@ -388,11 +387,10 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Home\AdminHome.cshtml" />
     <Content Include="Views\Restaurant\Browse.cshtml" />
-    <Content Include="Views\ShoppingCart\CartSummary.cshtml" />
-    <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Checkout\Complete.cshtml" />
     <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
     <Content Include="Views\Restaurant\Home.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

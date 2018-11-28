@@ -5,11 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using ModelLibrary;
 using DatabaseAccessLibrary;
-
-/*
 using UserWebClient.Views;
 using UserWebClient.Views.ViewModels;
+
+/*
 namespace UserWebClient.Controllers
+
 {
     public class ShoppingCartController : Controller
     {

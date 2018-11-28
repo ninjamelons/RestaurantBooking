@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using UserWebClient;
 using ModelLibrary;
-/*
+
 namespace UserWebClient.Views.ViewModels
 {
     public class ShoppingCartRemoveViewModel
@@ -15,4 +15,4 @@ namespace UserWebClient.Views.ViewModels
         public int ItemCount { get; set; }
         public int DeleteId { get; set; }
     }
-}*/
+}
