@@ -14,6 +14,7 @@ namespace UserWebClient.Controllers
     public class HomeController : Controller
     {
         private readonly RestaurantService.IRestaurantService _proxy;
+
         public HomeController(RestaurantService.IRestaurantService proxy)
         {
             this._proxy = proxy;

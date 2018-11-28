@@ -41,6 +41,11 @@ namespace RestaurantService
            
         }
 
+        public ModelLibrary.Menu GetMenu(ModelLibrary.Menu menu)
+        {
+            return menuCtrl.GetMenu(menu);
+        }
+
         public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu, int restaurantId)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();

@@ -1,21 +1,14 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ControllerLibrary;
 using ModelLibrary;
-using DatabaseAccessLibrary;
-using RestaurantService;
+using RestaurantDesktopClient.MenuService;
+
 
 namespace RestaurantDesktopClient
 {
@@ -27,28 +20,69 @@ namespace RestaurantDesktopClient
         public MenusCrud()
         {
             InitializeComponent();
-            hiddenMenuId.Content = "0";
-            MenuService menuService = new MenuService();
-            //listBoxItems.Items.Add = me
-            //menuNameBox.ItemsSource = GetMenus();
+            menuNameBox.ItemsSource = GetMenus(1000000);
+            labelRestaurantId.Content = 1000000;
         }
-
-        private void buttonAdd_Click(object sender, RoutedEventArgs e)
+        
+        private IEnumerable<ModelLibrary.Menu> GetMenus(int restaurantId)
         {
-
+            var proxy = new MenuServiceClient();
+            return proxy.GetAllMenusByRestaurant(restaurantId);
         }
-        /*private List<DatabaseAccessLibrary.Item> getItems(int menuId)
+        private void menuNameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ItemDb itemDb = new ItemDb();
-            itemDb.GetItems
-            return;
-        }*/
+            dataGridItemList.Items.Clear();
 
-        /*public IEnumerable<Menu> GetMenus()
-        {
-            MenuService menuService = new MenuService();
-            return menuService.GetAllMenusByRestaurant(Convert.ToInt32(hiddenMenuId));
+            ItemCtrl itemCtrl = new ItemCtrl();
+            var proxy = new MenuServiceClient();
+            var selectedMenu = (ModelLibrary.Menu)menuNameBox.SelectedItem;
+            var modelMenu = proxy.GetMenu(selectedMenu);
+            textBoxName.Text = modelMenu.Name;
+            hiddenName.Content = modelMenu.Name;
+            // put restaurant id here when possible
+            checkBoxActive.IsChecked = modelMenu.Active;
+            //dataGridItemList.Items.Add = itemCtrl.GetMenuItems(modelMenu.Id);
+            //itemTable.RowGroups.Add(new TableRowGroup());
+            //itemTable.RowGroups[itemTable.RowGroups.Count].Rows.Add(new TableRow());
             
-        }*/
+            foreach (Item item in modelMenu.Items)
+            {
+                dataGridItemList.Items.Add(item);
+                
+            };
+            
+
+
+        }
+
+
+        private void buttonAdd_Click(object sender, RoutedEventArgs e) // save menu
+        {
+            MenuCtrl menuCtrl = new MenuCtrl();
+            var selectedMenu = (ModelLibrary.Menu)menuNameBox.SelectedItem;
+            var proxy = new MenuServiceClient();
+            var oldMenu = new ModelLibrary.Menu
+            {
+                Id = selectedMenu.Id,
+                Name = selectedMenu.Name,
+                Active = selectedMenu.Active,
+                Items = selectedMenu.Items
+                 
+            };
+            bool newBool = checkBoxActive.IsChecked ?? false;
+            var newMenu = new ModelLibrary.Menu
+            {
+                Id = selectedMenu.Id,
+                Name = textBoxName.Text,
+                Active = newBool,
+                Items = selectedMenu.Items
+            };
+            proxy.UpdateMenu(oldMenu, newMenu, 1000000);
+            MessageBox.Show("Menu updated!");
+
+        }
+        
+
+        
     }
 }
