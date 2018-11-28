@@ -169,6 +169,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ControllerLibrary\ControllerLibrary.csproj">
+      <Project>{7B98D978-139D-4669-94D1-92934FC668CA}</Project>
+      <Name>ControllerLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DatabaseAccessLibrary\DatabaseAccessLibrary.csproj">
       <Project>{af59ed6c-26d5-4dc9-baa6-b304e4823194}</Project>
       <Name>DatabaseAccessLibrary</Name>

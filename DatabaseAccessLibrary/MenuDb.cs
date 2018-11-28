@@ -64,7 +64,7 @@ namespace DatabaseAccessLibrary
         {
             var db = new JustFeastDbDataContext();
             var dbMenu = db.Menus.SingleOrDefault(t => t.id == beforeMenu.id
-                                                  && t.restaurantId == beforeMenu.restaurantId && beforeMenu.id == afterMenu.id);
+                                                   && beforeMenu.id == afterMenu.id);
 
                 dbMenu.restaurantId = afterMenu.restaurantId;
                 dbMenu.name = afterMenu.name;

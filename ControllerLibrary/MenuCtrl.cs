@@ -60,6 +60,9 @@ namespace ControllerLibrary
             menu.Items = itemCtrl.GetMenuItems(menu.Id);
             return menu;
         }
+        
+
+    
 
         public DatabaseAccessLibrary.Menu ConvertMenuToDb(ModelLibrary.Menu menu, int restaurantId)
         {
@@ -69,7 +72,7 @@ namespace ControllerLibrary
             var returnMenu = new DatabaseAccessLibrary.Menu();
             ItemCtrl itemCtrl = new ItemCtrl();
 
-            returnMenu.id = Convert.ToInt32(menu.Id);
+            returnMenu.id = menu.Id;
             returnMenu.name = menu.Name;
             returnMenu.restaurantId = restaurantId;
             foreach (var Item in menu.Items)
