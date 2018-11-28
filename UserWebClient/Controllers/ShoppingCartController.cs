@@ -15,6 +15,17 @@ namespace UserWebClient.Controllers
         readonly JustFeastDbDataContext orderDB = new JustFeastDbDataContext();
         private readonly object ShoppingCart;
 
+        // Helper method to simplify shopping cart calls
+        public static ShoppingCartController GetCart(Controller controller)
+        {
+            return GetCart(controller.HttpContext);
+        }
+
+        private static ShoppingCartController GetCart(HttpContextBase httpContext)
+        {
+            throw new NotImplementedException();
+        }
+
         //
         // GET: /ShoppingCart/
         public ActionResult Index()
