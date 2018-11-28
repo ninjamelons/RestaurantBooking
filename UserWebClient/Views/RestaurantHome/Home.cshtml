@@ -1,0 +1,38 @@
+﻿@model UserWebClient.Models.RestaurantOrderModel
+
+@{
+    ViewBag.Title = Model.Restaurant.Name;
+}
+
+<div class="jumbotron">
+    <h1>@ViewBag.Title</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+
+    </div>
+    <div class="col-md-9">
+        <table class="table">
+            <thead>
+            <th>@Html.DisplayNameFor(model => model.Restaurant.Menu.Items)</th>
+            <th>@Html.DisplayNameFor(model => model.Restaurant.Menu.Items.First().Price)</th>
+            <th>Add to Cart</th>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Restaurant.Menu.Items)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price.VarPrice</td>
+                    <td>
+                        @Html.ActionLink("Add to cart", "HomeCart", "Restaurant",
+                            new { id = Model.Restaurant.Id, oId = Model.OrderId, iId = item.Id }, new {@class = "btn btn-info"})
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+

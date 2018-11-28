@@ -13,40 +13,41 @@ namespace UserWebClient.Controllers
    
     public class HomeController : Controller
     {
-        RestaurantService.RestaurantServiceClient proxy = new RestaurantService.RestaurantServiceClient();
+        private readonly RestaurantService.IRestaurantService _proxy;
+
+        public HomeController(RestaurantService.IRestaurantService proxy)
+        {
+            this._proxy = proxy;
+        }
 
         public ActionResult Index()
         {
-            return View();
+            //IEnumerable<ModelLibrary.Restaurant> serviceResult = _proxy.GetAllRestaurants();
+            /*var restaurants = serviceResult.Select(restaurantRes => new ModelLibrary.Restaurant
+            {
+                Name = restaurantRes.Name,
+                Address = restaurantRes.Address,
+                ZipCode = restaurantRes.ZipCode,
+                PhoneNo = restaurantRes.PhoneNo
+            });
+
+            if (Search != null && Search != "")
+                restaurants = restaurants.Where(x => x.ZipCode.Contains(Search));*/
+
+            return View(new HomeViewModel { Zipcode = 0 });
         }
 
         [HttpPost]
-        public ActionResult Index(string Search)
+        public ActionResult Index(HomeViewModel model)
         {
-
-            /*var model = new RestaurantBrowseModel();
-
-            model.SelectedZipCode = 0;
-            if (zipcode.HasValue)
-                model.SelectedZipCode = zipcode.Value;
-            model.Restaurants = new List<ModelLibrary.Restaurant>();
-            model.Page = 0;
-            model.Amount = 100;
-
-            model.Restaurants.AddRange(_proxy.GetRestaurantsPaged(model.SelectedZipCode, model.SelectedRestaurantCategoryId, model.Page, model.Amount, true, false));
-
-            return View("~/Views/Restaurant/Browse.cshtml", model);*/
-            if (Search != null && Search != "")
-                return View("SearchResults", proxy.GetAllRestaurantsByZipCode(Int32.Parse(Search)));
-            return View();
-
+            return RedirectToAction("Browse", "Restaurant", new { zipcode = model.Zipcode });
         }
 
         public ActionResult About()
         {
+            ViewBag.Message = "Your application description page.";
 
             return View();
-
         }
 
         public ActionResult Contact()
