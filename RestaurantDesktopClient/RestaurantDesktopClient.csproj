@@ -57,6 +57,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\MenuService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\RestaurantService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -128,6 +133,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\MenuService\ModelLibrary.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MenuService\service.wsdl" />
+    <None Include="Connected Services\MenuService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MenuService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\RestaurantService\ModelLibrary.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -138,6 +153,7 @@
     <None Include="Connected Services\RestaurantService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\ModelLibrary.Menu.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.Restaurant.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.RestaurantCategory.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.Table.datasource" />
@@ -153,6 +169,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ControllerLibrary\ControllerLibrary.csproj">
+      <Project>{7B98D978-139D-4669-94D1-92934FC668CA}</Project>
+      <Name>ControllerLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DatabaseAccessLibrary\DatabaseAccessLibrary.csproj">
       <Project>{af59ed6c-26d5-4dc9-baa6-b304e4823194}</Project>
       <Name>DatabaseAccessLibrary</Name>
@@ -167,6 +187,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\MenuService\" />
     <WCFMetadataStorage Include="Connected Services\RestaurantService\" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +198,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\RestaurantService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MenuService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MenuService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MenuService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

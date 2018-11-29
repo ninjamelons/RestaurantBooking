@@ -22,10 +22,12 @@ namespace DatabaseAccessLibrary
 
         public Menu GetMenu(int id)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var db = new JustFeastDbDataContext();
 
-            var menu = db.Menus.Single(t => t.id == id );
-            return menu;
+            Menu dbMenu = null;
+            dbMenu = db.Menus.SingleOrDefault(t => t.id == id);
+                                               
+            return dbMenu;
         }
 
         public void DeleteMenu(DatabaseAccessLibrary.Menu menu)
@@ -46,7 +48,7 @@ namespace DatabaseAccessLibrary
         public Menu GetActiveMenu(int restaurantId)
         {
             var db = new JustFeastDbDataContext();
-            var menu = db.Menus.SingleOrDefault(t => t.restaurantId == restaurantId
+            var menu = db.Menus.FirstOrDefault(t => t.restaurantId == restaurantId
                                                      && t.active);
             return menu;
         }
@@ -62,7 +64,7 @@ namespace DatabaseAccessLibrary
         {
             var db = new JustFeastDbDataContext();
             var dbMenu = db.Menus.SingleOrDefault(t => t.id == beforeMenu.id
-                                                  && t.restaurantId == beforeMenu.restaurantId && beforeMenu.id == afterMenu.id);
+                                                   && beforeMenu.id == afterMenu.id);
 
                 dbMenu.restaurantId = afterMenu.restaurantId;
                 dbMenu.name = afterMenu.name;

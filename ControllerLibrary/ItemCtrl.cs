@@ -38,7 +38,7 @@ namespace ControllerLibrary
             return modelItems;
         }
 
-        internal IEnumerable<ModelLibrary.Item> GetMenuItems(int menuId)
+        public IEnumerable<ModelLibrary.Item> GetMenuItems(int menuId)
         {
             var itemDb = new ItemDb();
             var priceCtrl = new PriceCtrl();
@@ -50,7 +50,8 @@ namespace ControllerLibrary
             {
                 var itemi = ConvertItemToModel(item);
                 itemi.Price = priceCtrl.GetPriceItemId(item.id);
-                items.Add(itemi);
+                if(itemi.Price != null)
+                    items.Add(itemi);
             }
 
             return items;
@@ -152,9 +153,12 @@ namespace ControllerLibrary
         }
         public ModelLibrary.ItemCat ConvertItemCatToModel(DatabaseAccessLibrary.ItemCat dbItemCat)
         {
+            if (dbItemCat == null)
+                return null;
+
             var modelItemCat = new ModelLibrary.ItemCat();
-            modelItemCat.Id = dbItemCat.id;
-            modelItemCat.Name = dbItemCat.name;
+            dbItemCat.id = modelItemCat.Id;
+            dbItemCat.name = modelItemCat.Name;
 
             return modelItemCat;
         }

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CartCtrl.cs" />
     <Compile Include="ItemCtrl.cs" />
     <Compile Include="MenuCtrl.cs" />
     <Compile Include="OrderCtrl.cs" />

@@ -8,12 +8,25 @@ using DatabaseAccessLibrary;
 using UserWebClient.Views;
 using UserWebClient.Views.ViewModels;
 
+/*
 namespace UserWebClient.Controllers
+
 {
     public class ShoppingCartController : Controller
     {
         readonly JustFeastDbDataContext orderDB = new JustFeastDbDataContext();
         private readonly object ShoppingCart;
+
+        // Helper method to simplify shopping cart calls
+        public static ShoppingCartController GetCart(Controller controller)
+        {
+            return GetCart(controller.HttpContext);
+        }
+
+        private static ShoppingCartController GetCart(HttpContextBase httpContext)
+        {
+            throw new NotImplementedException();
+        }
 
         //
         // GET: /ShoppingCart/
@@ -48,29 +61,7 @@ namespace UserWebClient.Controllers
             var results = new ShoppingCartRemoveViewModel
             {
                 Message = Server.HtmlEncode(addedItem.Name) +
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                
                     " has been added to your shopping cart.",
                 CartTotal = cart.GetTotal(),
                 CartCount = cart.GetCount(),
@@ -122,4 +113,4 @@ namespace UserWebClient.Controllers
             return PartialView("CartSummary");
         }
     }
-}
+}*/

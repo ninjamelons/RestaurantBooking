@@ -4,17 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ModelLibrary;
-using RestaurantService;
 using UserWebClient.Models;
 
 namespace UserWebClient.Controllers
 {
     public class RestaurantHomeController : Controller
     {
-        private readonly IRestaurantService _restaurantProxy;
-        private readonly IOrderService _orderProxy;
+        private readonly RestaurantService.IRestaurantService _restaurantProxy;
+        private readonly OrderService.IOrderService _orderProxy;
 
-        public RestaurantHomeController(IRestaurantService restaurantService, IOrderService orderService)
+        public RestaurantHomeController(RestaurantService.IRestaurantService restaurantService
+            , OrderService.IOrderService orderService)
         {
             this._restaurantProxy = restaurantService;
             this._orderProxy = orderService;
