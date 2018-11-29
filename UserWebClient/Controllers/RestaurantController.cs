@@ -171,7 +171,8 @@ namespace UserWebClient.Controllers
            [HttpGet]
         // GET: RestaurantHome
         public ActionResult Home(int id)
-        {
+           {
+               Session["order"] = 1000000;
             RestaurantOrderModel model = new RestaurantOrderModel();
             model.Restaurant = this._proxy.GetRestaurantWithMenu(id);
             model.menu = model.Restaurant.Menu;
@@ -179,7 +180,7 @@ namespace UserWebClient.Controllers
             return View("Home", model);
         }
 
-        [HttpPost]
+        [HttpGet]
         // POST add item to cart
         public ActionResult HomeCart(int resId, int orderId, int itemId)
         {

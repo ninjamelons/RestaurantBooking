@@ -5,16 +5,28 @@ using System.Web;
 using System.Web.Mvc;
 using ModelLibrary;
 using DatabaseAccessLibrary;
-
-/*
 using UserWebClient.Views;
 using UserWebClient.Views.ViewModels;
+
+/*
 namespace UserWebClient.Controllers
+
 {
     public class ShoppingCartController : Controller
     {
         readonly JustFeastDbDataContext orderDB = new JustFeastDbDataContext();
         private readonly object ShoppingCart;
+
+        // Helper method to simplify shopping cart calls
+        public static ShoppingCartController GetCart(Controller controller)
+        {
+            return GetCart(controller.HttpContext);
+        }
+
+        private static ShoppingCartController GetCart(HttpContextBase httpContext)
+        {
+            throw new NotImplementedException();
+        }
 
         //
         // GET: /ShoppingCart/
