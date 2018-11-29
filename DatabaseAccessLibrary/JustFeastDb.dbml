@@ -8,21 +8,11 @@
       <Column Name="ProductVersion" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.Restaurant" Member="Restaurants">
-    <Type Name="Restaurant">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
-      <Column Name="address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="zipcode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="phoneNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="verified" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="resCatId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="discontinued" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="Restaurant_Menu" Member="Menus" ThisKey="id" OtherKey="restaurantId" Type="Menu" />
-      <Association Name="Restaurant_Order" Member="Orders" ThisKey="id" OtherKey="restaurantId" Type="Order" />
-      <Association Name="Restaurant_ResTable" Member="ResTables" ThisKey="id" OtherKey="restaurantId" Type="ResTable" />
-      <Association Name="ResCat_Restaurant" Member="ResCat" ThisKey="resCatId" OtherKey="id" Type="ResCat" IsForeignKey="true" DeleteRule="CASCADE" />
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="customerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Customer_User" Member="Customer" ThisKey="customerId" OtherKey="id" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.AspNetRoles" Member="AspNetRoles">
@@ -83,8 +73,10 @@
       <Column Name="address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="phoneNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="password" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="roleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_User" Member="User" ThisKey="id" OtherKey="customerId" Type="User" Cardinality="One" />
       <Association Name="Customer_OrderHistory" Member="OrderHistories" ThisKey="id" OtherKey="customerId" Type="OrderHistory" />
+      <Association Name="Customer_Restaurant" Member="Restaurant" ThisKey="id" OtherKey="id" Type="Restaurant" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.Item" Member="Items">
@@ -145,6 +137,7 @@
       <Column Name="accepted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Order_OrderHistory" Member="OrderHistory" ThisKey="id" OtherKey="orderId" Type="OrderHistory" Cardinality="One" />
       <Association Name="Order_OrderLineItem" Member="OrderLineItems" ThisKey="id" OtherKey="orderId" Type="OrderLineItem" />
+      <Association Name="Order_ReservedTable" Member="ReservedTables" ThisKey="id" OtherKey="orderId" Type="ReservedTable" />
       <Association Name="Restaurant_Order" Member="Restaurant" ThisKey="restaurantId" OtherKey="id" Type="Restaurant" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
@@ -164,13 +157,40 @@
       <Association Name="ResCat_Restaurant" Member="Restaurants" ThisKey="id" OtherKey="resCatId" Type="Restaurant" />
     </Type>
   </Table>
+  <Table Name="dbo.ReservedTable" Member="ReservedTables">
+    <Type Name="ReservedTable">
+      <Column Name="tableId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="orderId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Order_ReservedTable" Member="Order" ThisKey="orderId" OtherKey="id" Type="Order" IsForeignKey="true" />
+      <Association Name="ResTable_ReservedTable" Member="ResTable" ThisKey="tableId" OtherKey="id" Type="ResTable" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.ResTable" Member="ResTables">
     <Type Name="ResTable">
-      <Column Name="restaurantId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="noSeats" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="reserved" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="total" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="restaurantId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="noSeats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="reserved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ResTable_ReservedTable" Member="ReservedTables" ThisKey="id" OtherKey="tableId" Type="ReservedTable" />
       <Association Name="Restaurant_ResTable" Member="Restaurant" ThisKey="restaurantId" OtherKey="id" Type="Restaurant" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Restaurant" Member="Restaurants">
+    <Type Name="Restaurant">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="zipcode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="phoneNo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="verified" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="resCatId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="discontinued" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Restaurant_Menu" Member="Menus" ThisKey="id" OtherKey="restaurantId" Type="Menu" />
+      <Association Name="Restaurant_Order" Member="Orders" ThisKey="id" OtherKey="restaurantId" Type="Order" />
+      <Association Name="Restaurant_ResTable" Member="ResTables" ThisKey="id" OtherKey="restaurantId" Type="ResTable" />
+      <Association Name="Customer_Restaurant" Member="Customer" ThisKey="id" OtherKey="id" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="ResCat_Restaurant" Member="ResCat" ThisKey="resCatId" OtherKey="id" Type="ResCat" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>

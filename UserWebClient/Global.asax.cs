@@ -27,7 +27,7 @@ namespace UserWebClient
             if(orderId != null)
             {
                 OrderService.OrderServiceClient proxy = new OrderService.OrderServiceClient();
-                proxy.DeleteOrder(orderId);
+                proxy.DeleteOrder(orderId.Value);
             }
         }
     }

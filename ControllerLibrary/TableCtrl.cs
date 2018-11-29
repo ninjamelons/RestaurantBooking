@@ -11,10 +11,10 @@ namespace ControllerLibrary
         {
             var returnTable = new ResTable();
 
-            returnTable.noSeats = Convert.ToInt32(table.NoSeats);
-            returnTable.reserved = Convert.ToInt32(table.Reserved);
-            returnTable.total = Convert.ToInt32(table.Total);
-            returnTable.restaurantId = Convert.ToInt32(table.RestaurantId);
+         //   returnTable.noSeats = Convert.ToInt32(table.NoSeats);
+         //   returnTable.reserved = Convert.ToInt32(table.Reserved);
+         //   returnTable.total = Convert.ToInt32(table.Total);
+         //   returnTable.restaurantId = Convert.ToInt32(table.RestaurantId);
 
             return returnTable;
         }
@@ -31,7 +31,7 @@ namespace ControllerLibrary
                     NoSeats = tbl.noSeats.ToString(),
                     Reserved = tbl.reserved.ToString(),
                     RestaurantId = tbl.restaurantId.ToString(),
-                    Total = tbl.total.ToString()
+               //     Total = tbl.total.ToString()
                 };
             }
 
@@ -51,7 +51,7 @@ namespace ControllerLibrary
                     NoSeats = table.noSeats.ToString(),
                     Reserved = table.reserved.ToString(),
                     RestaurantId = table.restaurantId.ToString(),
-                    Total = table.total.ToString()
+               //     Total = table.total.ToString()
                 });
             }
 
@@ -72,7 +72,7 @@ namespace ControllerLibrary
                     NoSeats = table.noSeats.ToString(),
                     Reserved = table.reserved.ToString(),
                     RestaurantId = table.restaurantId.ToString(),
-                    Total = table.total.ToString()
+               //     Total = table.total.ToString()
                 });
             }
 

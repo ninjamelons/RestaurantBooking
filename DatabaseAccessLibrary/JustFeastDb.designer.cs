@@ -33,9 +33,9 @@ namespace DatabaseAccessLibrary
     partial void Insert__MigrationHistory(__MigrationHistory instance);
     partial void Update__MigrationHistory(__MigrationHistory instance);
     partial void Delete__MigrationHistory(__MigrationHistory instance);
-    partial void InsertRestaurant(Restaurant instance);
-    partial void UpdateRestaurant(Restaurant instance);
-    partial void DeleteRestaurant(Restaurant instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     partial void InsertAspNetRole(AspNetRole instance);
     partial void UpdateAspNetRole(AspNetRole instance);
     partial void DeleteAspNetRole(AspNetRole instance);
@@ -78,9 +78,15 @@ namespace DatabaseAccessLibrary
     partial void InsertResCat(ResCat instance);
     partial void UpdateResCat(ResCat instance);
     partial void DeleteResCat(ResCat instance);
+    partial void InsertReservedTable(ReservedTable instance);
+    partial void UpdateReservedTable(ReservedTable instance);
+    partial void DeleteReservedTable(ReservedTable instance);
     partial void InsertResTable(ResTable instance);
     partial void UpdateResTable(ResTable instance);
     partial void DeleteResTable(ResTable instance);
+    partial void InsertRestaurant(Restaurant instance);
+    partial void UpdateRestaurant(Restaurant instance);
+    partial void DeleteRestaurant(Restaurant instance);
     #endregion
 		
 		public JustFeastDbDataContext() : 
@@ -121,11 +127,11 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		public System.Data.Linq.Table<Restaurant> Restaurants
+		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
-				return this.GetTable<Restaurant>();
+				return this.GetTable<User>();
 			}
 		}
 		
@@ -241,11 +247,27 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
+		public System.Data.Linq.Table<ReservedTable> ReservedTables
+		{
+			get
+			{
+				return this.GetTable<ReservedTable>();
+			}
+		}
+		
 		public System.Data.Linq.Table<ResTable> ResTables
 		{
 			get
 			{
 				return this.GetTable<ResTable>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Restaurant> Restaurants
+		{
+			get
+			{
+				return this.GetTable<Restaurant>();
 			}
 		}
 	}
@@ -384,324 +406,108 @@ namespace DatabaseAccessLibrary
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Restaurant")]
-	public partial class Restaurant : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _id;
+		private int _customerId;
 		
-		private string _name;
+		private string _password;
 		
-		private string _address;
-		
-		private int _zipcode;
-		
-		private int _phoneNo;
-		
-		private string _email;
-		
-		private bool _verified;
-		
-		private System.Nullable<int> _resCatId;
-		
-		private bool _discontinued;
-		
-		private EntitySet<Menu> _Menus;
-		
-		private EntitySet<Order> _Orders;
-		
-		private EntitySet<ResTable> _ResTables;
-		
-		private EntityRef<ResCat> _ResCat;
+		private EntityRef<Customer> _Customer;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OnaddressChanging(string value);
-    partial void OnaddressChanged();
-    partial void OnzipcodeChanging(int value);
-    partial void OnzipcodeChanged();
-    partial void OnphoneNoChanging(int value);
-    partial void OnphoneNoChanged();
-    partial void OnemailChanging(string value);
-    partial void OnemailChanged();
-    partial void OnverifiedChanging(bool value);
-    partial void OnverifiedChanged();
-    partial void OnresCatIdChanging(System.Nullable<int> value);
-    partial void OnresCatIdChanged();
-    partial void OndiscontinuedChanging(bool value);
-    partial void OndiscontinuedChanged();
+    partial void OncustomerIdChanging(int value);
+    partial void OncustomerIdChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
     #endregion
 		
-		public Restaurant()
+		public User()
 		{
-			this._Menus = new EntitySet<Menu>(new Action<Menu>(this.attach_Menus), new Action<Menu>(this.detach_Menus));
-			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
-			this._ResTables = new EntitySet<ResTable>(new Action<ResTable>(this.attach_ResTables), new Action<ResTable>(this.detach_ResTables));
-			this._ResCat = default(EntityRef<ResCat>);
+			this._Customer = default(EntityRef<Customer>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customerId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int customerId
 		{
 			get
 			{
-				return this._id;
+				return this._customerId;
 			}
 			set
 			{
-				if ((this._id != value))
+				if ((this._customerId != value))
 				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string address
-		{
-			get
-			{
-				return this._address;
-			}
-			set
-			{
-				if ((this._address != value))
-				{
-					this.OnaddressChanging(value);
-					this.SendPropertyChanging();
-					this._address = value;
-					this.SendPropertyChanged("address");
-					this.OnaddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_zipcode", DbType="Int NOT NULL")]
-		public int zipcode
-		{
-			get
-			{
-				return this._zipcode;
-			}
-			set
-			{
-				if ((this._zipcode != value))
-				{
-					this.OnzipcodeChanging(value);
-					this.SendPropertyChanging();
-					this._zipcode = value;
-					this.SendPropertyChanged("zipcode");
-					this.OnzipcodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phoneNo", DbType="Int NOT NULL")]
-		public int phoneNo
-		{
-			get
-			{
-				return this._phoneNo;
-			}
-			set
-			{
-				if ((this._phoneNo != value))
-				{
-					this.OnphoneNoChanging(value);
-					this.SendPropertyChanging();
-					this._phoneNo = value;
-					this.SendPropertyChanged("phoneNo");
-					this.OnphoneNoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string email
-		{
-			get
-			{
-				return this._email;
-			}
-			set
-			{
-				if ((this._email != value))
-				{
-					this.OnemailChanging(value);
-					this.SendPropertyChanging();
-					this._email = value;
-					this.SendPropertyChanged("email");
-					this.OnemailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_verified", DbType="Bit NOT NULL")]
-		public bool verified
-		{
-			get
-			{
-				return this._verified;
-			}
-			set
-			{
-				if ((this._verified != value))
-				{
-					this.OnverifiedChanging(value);
-					this.SendPropertyChanging();
-					this._verified = value;
-					this.SendPropertyChanged("verified");
-					this.OnverifiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_resCatId", DbType="Int")]
-		public System.Nullable<int> resCatId
-		{
-			get
-			{
-				return this._resCatId;
-			}
-			set
-			{
-				if ((this._resCatId != value))
-				{
-					if (this._ResCat.HasLoadedOrAssignedValue)
+					if (this._Customer.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnresCatIdChanging(value);
+					this.OncustomerIdChanging(value);
 					this.SendPropertyChanging();
-					this._resCatId = value;
-					this.SendPropertyChanged("resCatId");
-					this.OnresCatIdChanged();
+					this._customerId = value;
+					this.SendPropertyChanged("customerId");
+					this.OncustomerIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_discontinued", DbType="Bit NOT NULL")]
-		public bool discontinued
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(MAX)")]
+		public string password
 		{
 			get
 			{
-				return this._discontinued;
+				return this._password;
 			}
 			set
 			{
-				if ((this._discontinued != value))
+				if ((this._password != value))
 				{
-					this.OndiscontinuedChanging(value);
+					this.OnpasswordChanging(value);
 					this.SendPropertyChanging();
-					this._discontinued = value;
-					this.SendPropertyChanged("discontinued");
-					this.OndiscontinuedChanged();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Restaurant_Menu", Storage="_Menus", ThisKey="id", OtherKey="restaurantId")]
-		public EntitySet<Menu> Menus
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_User", Storage="_Customer", ThisKey="customerId", OtherKey="id", IsForeignKey=true)]
+		public Customer Customer
 		{
 			get
 			{
-				return this._Menus;
+				return this._Customer.Entity;
 			}
 			set
 			{
-				this._Menus.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Restaurant_Order", Storage="_Orders", ThisKey="id", OtherKey="restaurantId")]
-		public EntitySet<Order> Orders
-		{
-			get
-			{
-				return this._Orders;
-			}
-			set
-			{
-				this._Orders.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Restaurant_ResTable", Storage="_ResTables", ThisKey="id", OtherKey="restaurantId")]
-		public EntitySet<ResTable> ResTables
-		{
-			get
-			{
-				return this._ResTables;
-			}
-			set
-			{
-				this._ResTables.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ResCat_Restaurant", Storage="_ResCat", ThisKey="resCatId", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
-		public ResCat ResCat
-		{
-			get
-			{
-				return this._ResCat.Entity;
-			}
-			set
-			{
-				ResCat previousValue = this._ResCat.Entity;
+				Customer previousValue = this._Customer.Entity;
 				if (((previousValue != value) 
-							|| (this._ResCat.HasLoadedOrAssignedValue == false)))
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._ResCat.Entity = null;
-						previousValue.Restaurants.Remove(this);
+						this._Customer.Entity = null;
+						previousValue.User = null;
 					}
-					this._ResCat.Entity = value;
+					this._Customer.Entity = value;
 					if ((value != null))
 					{
-						value.Restaurants.Add(this);
-						this._resCatId = value.id;
+						value.User = this;
+						this._customerId = value.id;
 					}
 					else
 					{
-						this._resCatId = default(Nullable<int>);
+						this._customerId = default(int);
 					}
-					this.SendPropertyChanged("ResCat");
+					this.SendPropertyChanged("Customer");
 				}
 			}
 		}
@@ -724,42 +530,6 @@ namespace DatabaseAccessLibrary
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Menus(Menu entity)
-		{
-			this.SendPropertyChanging();
-			entity.Restaurant = this;
-		}
-		
-		private void detach_Menus(Menu entity)
-		{
-			this.SendPropertyChanging();
-			entity.Restaurant = null;
-		}
-		
-		private void attach_Orders(Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Restaurant = this;
-		}
-		
-		private void detach_Orders(Order entity)
-		{
-			this.SendPropertyChanging();
-			entity.Restaurant = null;
-		}
-		
-		private void attach_ResTables(ResTable entity)
-		{
-			this.SendPropertyChanging();
-			entity.Restaurant = this;
-		}
-		
-		private void detach_ResTables(ResTable entity)
-		{
-			this.SendPropertyChanging();
-			entity.Restaurant = null;
 		}
 	}
 	
@@ -1797,9 +1567,13 @@ namespace DatabaseAccessLibrary
 		
 		private string _email;
 		
-		private System.Data.Linq.Binary _password;
+		private int _roleId;
+		
+		private EntityRef<User> _User;
 		
 		private EntitySet<OrderHistory> _OrderHistories;
+		
+		private EntityRef<Restaurant> _Restaurant;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1815,13 +1589,15 @@ namespace DatabaseAccessLibrary
     partial void OnphoneNoChanged();
     partial void OnemailChanging(string value);
     partial void OnemailChanged();
-    partial void OnpasswordChanging(System.Data.Linq.Binary value);
-    partial void OnpasswordChanged();
+    partial void OnroleIdChanging(int value);
+    partial void OnroleIdChanged();
     #endregion
 		
 		public Customer()
 		{
+			this._User = default(EntityRef<User>);
 			this._OrderHistories = new EntitySet<OrderHistory>(new Action<OrderHistory>(this.attach_OrderHistories), new Action<OrderHistory>(this.detach_OrderHistories));
+			this._Restaurant = default(EntityRef<Restaurant>);
 			OnCreated();
 		}
 		
@@ -1925,22 +1701,51 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary password
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_roleId", DbType="Int NOT NULL")]
+		public int roleId
 		{
 			get
 			{
-				return this._password;
+				return this._roleId;
 			}
 			set
 			{
-				if ((this._password != value))
+				if ((this._roleId != value))
 				{
-					this.OnpasswordChanging(value);
+					this.OnroleIdChanging(value);
 					this.SendPropertyChanging();
-					this._password = value;
-					this.SendPropertyChanged("password");
-					this.OnpasswordChanged();
+					this._roleId = value;
+					this.SendPropertyChanged("roleId");
+					this.OnroleIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_User", Storage="_User", ThisKey="id", OtherKey="customerId", IsUnique=true, IsForeignKey=false)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Customer = null;
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Customer = this;
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -1955,6 +1760,35 @@ namespace DatabaseAccessLibrary
 			set
 			{
 				this._OrderHistories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Restaurant", Storage="_Restaurant", ThisKey="id", OtherKey="id", IsUnique=true, IsForeignKey=false)]
+		public Restaurant Restaurant
+		{
+			get
+			{
+				return this._Restaurant.Entity;
+			}
+			set
+			{
+				Restaurant previousValue = this._Restaurant.Entity;
+				if (((previousValue != value) 
+							|| (this._Restaurant.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Restaurant.Entity = null;
+						previousValue.Customer = null;
+					}
+					this._Restaurant.Entity = value;
+					if ((value != null))
+					{
+						value.Customer = this;
+					}
+					this.SendPropertyChanged("Restaurant");
+				}
 			}
 		}
 		
@@ -3010,6 +2844,8 @@ namespace DatabaseAccessLibrary
 		
 		private EntitySet<OrderLineItem> _OrderLineItems;
 		
+		private EntitySet<ReservedTable> _ReservedTables;
+		
 		private EntityRef<Restaurant> _Restaurant;
 		
     #region Extensibility Method Definitions
@@ -3034,6 +2870,7 @@ namespace DatabaseAccessLibrary
 		{
 			this._OrderHistory = default(EntityRef<OrderHistory>);
 			this._OrderLineItems = new EntitySet<OrderLineItem>(new Action<OrderLineItem>(this.attach_OrderLineItems), new Action<OrderLineItem>(this.detach_OrderLineItems));
+			this._ReservedTables = new EntitySet<ReservedTable>(new Action<ReservedTable>(this.attach_ReservedTables), new Action<ReservedTable>(this.detach_ReservedTables));
 			this._Restaurant = default(EntityRef<Restaurant>);
 			OnCreated();
 		}
@@ -3204,6 +3041,19 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_ReservedTable", Storage="_ReservedTables", ThisKey="id", OtherKey="orderId")]
+		public EntitySet<ReservedTable> ReservedTables
+		{
+			get
+			{
+				return this._ReservedTables;
+			}
+			set
+			{
+				this._ReservedTables.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Restaurant_Order", Storage="_Restaurant", ThisKey="restaurantId", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Restaurant Restaurant
 		{
@@ -3265,6 +3115,18 @@ namespace DatabaseAccessLibrary
 		}
 		
 		private void detach_OrderLineItems(OrderLineItem entity)
+		{
+			this.SendPropertyChanging();
+			entity.Order = null;
+		}
+		
+		private void attach_ReservedTables(ReservedTable entity)
+		{
+			this.SendPropertyChanging();
+			entity.Order = this;
+		}
+		
+		private void detach_ReservedTables(ReservedTable entity)
 		{
 			this.SendPropertyChanging();
 			entity.Order = null;
@@ -3560,19 +3422,189 @@ namespace DatabaseAccessLibrary
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ReservedTable")]
+	public partial class ReservedTable : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _tableId;
+		
+		private int _orderId;
+		
+		private EntityRef<Order> _Order;
+		
+		private EntityRef<ResTable> _ResTable;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OntableIdChanging(int value);
+    partial void OntableIdChanged();
+    partial void OnorderIdChanging(int value);
+    partial void OnorderIdChanged();
+    #endregion
+		
+		public ReservedTable()
+		{
+			this._Order = default(EntityRef<Order>);
+			this._ResTable = default(EntityRef<ResTable>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tableId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int tableId
+		{
+			get
+			{
+				return this._tableId;
+			}
+			set
+			{
+				if ((this._tableId != value))
+				{
+					if (this._ResTable.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OntableIdChanging(value);
+					this.SendPropertyChanging();
+					this._tableId = value;
+					this.SendPropertyChanged("tableId");
+					this.OntableIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_orderId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int orderId
+		{
+			get
+			{
+				return this._orderId;
+			}
+			set
+			{
+				if ((this._orderId != value))
+				{
+					if (this._Order.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnorderIdChanging(value);
+					this.SendPropertyChanging();
+					this._orderId = value;
+					this.SendPropertyChanged("orderId");
+					this.OnorderIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_ReservedTable", Storage="_Order", ThisKey="orderId", OtherKey="id", IsForeignKey=true)]
+		public Order Order
+		{
+			get
+			{
+				return this._Order.Entity;
+			}
+			set
+			{
+				Order previousValue = this._Order.Entity;
+				if (((previousValue != value) 
+							|| (this._Order.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Order.Entity = null;
+						previousValue.ReservedTables.Remove(this);
+					}
+					this._Order.Entity = value;
+					if ((value != null))
+					{
+						value.ReservedTables.Add(this);
+						this._orderId = value.id;
+					}
+					else
+					{
+						this._orderId = default(int);
+					}
+					this.SendPropertyChanged("Order");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ResTable_ReservedTable", Storage="_ResTable", ThisKey="tableId", OtherKey="id", IsForeignKey=true)]
+		public ResTable ResTable
+		{
+			get
+			{
+				return this._ResTable.Entity;
+			}
+			set
+			{
+				ResTable previousValue = this._ResTable.Entity;
+				if (((previousValue != value) 
+							|| (this._ResTable.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ResTable.Entity = null;
+						previousValue.ReservedTables.Remove(this);
+					}
+					this._ResTable.Entity = value;
+					if ((value != null))
+					{
+						value.ReservedTables.Add(this);
+						this._tableId = value.id;
+					}
+					else
+					{
+						this._tableId = default(int);
+					}
+					this.SendPropertyChanged("ResTable");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ResTable")]
 	public partial class ResTable : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
+		private int _id;
+		
 		private int _restaurantId;
 		
 		private int _noSeats;
 		
-		private int _reserved;
+		private bool _reserved;
 		
-		private int _total;
+		private EntitySet<ReservedTable> _ReservedTables;
 		
 		private EntityRef<Restaurant> _Restaurant;
 		
@@ -3580,23 +3612,44 @@ namespace DatabaseAccessLibrary
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
     partial void OnrestaurantIdChanging(int value);
     partial void OnrestaurantIdChanged();
     partial void OnnoSeatsChanging(int value);
     partial void OnnoSeatsChanged();
-    partial void OnreservedChanging(int value);
+    partial void OnreservedChanging(bool value);
     partial void OnreservedChanged();
-    partial void OntotalChanging(int value);
-    partial void OntotalChanged();
     #endregion
 		
 		public ResTable()
 		{
+			this._ReservedTables = new EntitySet<ReservedTable>(new Action<ReservedTable>(this.attach_ReservedTables), new Action<ReservedTable>(this.detach_ReservedTables));
 			this._Restaurant = default(EntityRef<Restaurant>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_restaurantId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_restaurantId", DbType="Int NOT NULL")]
 		public int restaurantId
 		{
 			get
@@ -3620,7 +3673,7 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_noSeats", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_noSeats", DbType="Int NOT NULL")]
 		public int noSeats
 		{
 			get
@@ -3640,8 +3693,8 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_reserved", DbType="Int NOT NULL")]
-		public int reserved
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_reserved", DbType="Bit NOT NULL")]
+		public bool reserved
 		{
 			get
 			{
@@ -3660,23 +3713,16 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_total", DbType="Int NOT NULL")]
-		public int total
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ResTable_ReservedTable", Storage="_ReservedTables", ThisKey="id", OtherKey="tableId")]
+		public EntitySet<ReservedTable> ReservedTables
 		{
 			get
 			{
-				return this._total;
+				return this._ReservedTables;
 			}
 			set
 			{
-				if ((this._total != value))
-				{
-					this.OntotalChanging(value);
-					this.SendPropertyChanging();
-					this._total = value;
-					this.SendPropertyChanged("total");
-					this.OntotalChanged();
-				}
+				this._ReservedTables.Assign(value);
 			}
 		}
 		
@@ -3732,6 +3778,438 @@ namespace DatabaseAccessLibrary
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_ReservedTables(ReservedTable entity)
+		{
+			this.SendPropertyChanging();
+			entity.ResTable = this;
+		}
+		
+		private void detach_ReservedTables(ReservedTable entity)
+		{
+			this.SendPropertyChanging();
+			entity.ResTable = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Restaurant")]
+	public partial class Restaurant : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _name;
+		
+		private string _address;
+		
+		private int _zipcode;
+		
+		private int _phoneNo;
+		
+		private string _email;
+		
+		private bool _verified;
+		
+		private System.Nullable<int> _resCatId;
+		
+		private bool _discontinued;
+		
+		private EntitySet<Menu> _Menus;
+		
+		private EntitySet<Order> _Orders;
+		
+		private EntitySet<ResTable> _ResTables;
+		
+		private EntityRef<Customer> _Customer;
+		
+		private EntityRef<ResCat> _ResCat;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnaddressChanging(string value);
+    partial void OnaddressChanged();
+    partial void OnzipcodeChanging(int value);
+    partial void OnzipcodeChanged();
+    partial void OnphoneNoChanging(int value);
+    partial void OnphoneNoChanged();
+    partial void OnemailChanging(string value);
+    partial void OnemailChanged();
+    partial void OnverifiedChanging(bool value);
+    partial void OnverifiedChanged();
+    partial void OnresCatIdChanging(System.Nullable<int> value);
+    partial void OnresCatIdChanged();
+    partial void OndiscontinuedChanging(bool value);
+    partial void OndiscontinuedChanged();
+    #endregion
+		
+		public Restaurant()
+		{
+			this._Menus = new EntitySet<Menu>(new Action<Menu>(this.attach_Menus), new Action<Menu>(this.detach_Menus));
+			this._Orders = new EntitySet<Order>(new Action<Order>(this.attach_Orders), new Action<Order>(this.detach_Orders));
+			this._ResTables = new EntitySet<ResTable>(new Action<ResTable>(this.attach_ResTables), new Action<ResTable>(this.detach_ResTables));
+			this._Customer = default(EntityRef<Customer>);
+			this._ResCat = default(EntityRef<ResCat>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(30) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string address
+		{
+			get
+			{
+				return this._address;
+			}
+			set
+			{
+				if ((this._address != value))
+				{
+					this.OnaddressChanging(value);
+					this.SendPropertyChanging();
+					this._address = value;
+					this.SendPropertyChanged("address");
+					this.OnaddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_zipcode", DbType="Int NOT NULL")]
+		public int zipcode
+		{
+			get
+			{
+				return this._zipcode;
+			}
+			set
+			{
+				if ((this._zipcode != value))
+				{
+					this.OnzipcodeChanging(value);
+					this.SendPropertyChanging();
+					this._zipcode = value;
+					this.SendPropertyChanged("zipcode");
+					this.OnzipcodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phoneNo", DbType="Int NOT NULL")]
+		public int phoneNo
+		{
+			get
+			{
+				return this._phoneNo;
+			}
+			set
+			{
+				if ((this._phoneNo != value))
+				{
+					this.OnphoneNoChanging(value);
+					this.SendPropertyChanging();
+					this._phoneNo = value;
+					this.SendPropertyChanged("phoneNo");
+					this.OnphoneNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this.OnemailChanging(value);
+					this.SendPropertyChanging();
+					this._email = value;
+					this.SendPropertyChanged("email");
+					this.OnemailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_verified", DbType="Bit NOT NULL")]
+		public bool verified
+		{
+			get
+			{
+				return this._verified;
+			}
+			set
+			{
+				if ((this._verified != value))
+				{
+					this.OnverifiedChanging(value);
+					this.SendPropertyChanging();
+					this._verified = value;
+					this.SendPropertyChanged("verified");
+					this.OnverifiedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_resCatId", DbType="Int")]
+		public System.Nullable<int> resCatId
+		{
+			get
+			{
+				return this._resCatId;
+			}
+			set
+			{
+				if ((this._resCatId != value))
+				{
+					if (this._ResCat.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnresCatIdChanging(value);
+					this.SendPropertyChanging();
+					this._resCatId = value;
+					this.SendPropertyChanged("resCatId");
+					this.OnresCatIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_discontinued", DbType="Bit NOT NULL")]
+		public bool discontinued
+		{
+			get
+			{
+				return this._discontinued;
+			}
+			set
+			{
+				if ((this._discontinued != value))
+				{
+					this.OndiscontinuedChanging(value);
+					this.SendPropertyChanging();
+					this._discontinued = value;
+					this.SendPropertyChanged("discontinued");
+					this.OndiscontinuedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Restaurant_Menu", Storage="_Menus", ThisKey="id", OtherKey="restaurantId")]
+		public EntitySet<Menu> Menus
+		{
+			get
+			{
+				return this._Menus;
+			}
+			set
+			{
+				this._Menus.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Restaurant_Order", Storage="_Orders", ThisKey="id", OtherKey="restaurantId")]
+		public EntitySet<Order> Orders
+		{
+			get
+			{
+				return this._Orders;
+			}
+			set
+			{
+				this._Orders.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Restaurant_ResTable", Storage="_ResTables", ThisKey="id", OtherKey="restaurantId")]
+		public EntitySet<ResTable> ResTables
+		{
+			get
+			{
+				return this._ResTables;
+			}
+			set
+			{
+				this._ResTables.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_Restaurant", Storage="_Customer", ThisKey="id", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.Restaurant = null;
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.Restaurant = this;
+						this._id = value.id;
+					}
+					else
+					{
+						this._id = default(int);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ResCat_Restaurant", Storage="_ResCat", ThisKey="resCatId", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
+		public ResCat ResCat
+		{
+			get
+			{
+				return this._ResCat.Entity;
+			}
+			set
+			{
+				ResCat previousValue = this._ResCat.Entity;
+				if (((previousValue != value) 
+							|| (this._ResCat.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ResCat.Entity = null;
+						previousValue.Restaurants.Remove(this);
+					}
+					this._ResCat.Entity = value;
+					if ((value != null))
+					{
+						value.Restaurants.Add(this);
+						this._resCatId = value.id;
+					}
+					else
+					{
+						this._resCatId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("ResCat");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Menus(Menu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Restaurant = this;
+		}
+		
+		private void detach_Menus(Menu entity)
+		{
+			this.SendPropertyChanging();
+			entity.Restaurant = null;
+		}
+		
+		private void attach_Orders(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Restaurant = this;
+		}
+		
+		private void detach_Orders(Order entity)
+		{
+			this.SendPropertyChanging();
+			entity.Restaurant = null;
+		}
+		
+		private void attach_ResTables(ResTable entity)
+		{
+			this.SendPropertyChanging();
+			entity.Restaurant = this;
+		}
+		
+		private void detach_ResTables(ResTable entity)
+		{
+			this.SendPropertyChanging();
+			entity.Restaurant = null;
 		}
 	}
 }

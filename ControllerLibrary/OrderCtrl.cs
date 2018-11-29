@@ -112,7 +112,6 @@ namespace ControllerLibrary
         public void DeleteOrder(int orderId)
         {
             OrderDb db = new OrderDb();
-            db.
         }
     }
 }
