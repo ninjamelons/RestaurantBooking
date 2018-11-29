@@ -54,5 +54,11 @@ namespace RestaurantService
             var ord = db.Orders.SingleOrDefault(o => o.id == Convert.ToInt32(order.id));
             db.SubmitChanges();
         }
+
+        public void DeleteOrder(int orderId)
+        {
+            var ctrl = new OrderCtrl();
+            ctrl.DeleteOrder(orderId);
+        }
     }
 }

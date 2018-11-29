@@ -267,7 +267,6 @@
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\PageHomeViewModel.cs" />
     <Compile Include="Models\RestaurantBrowseModel.cs" />
     <Compile Include="Models\RestaurantOrderModel.cs" />
     <Compile Include="Models\RestaurantViewModel.cs" />

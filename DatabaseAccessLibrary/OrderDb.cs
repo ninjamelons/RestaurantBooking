@@ -72,6 +72,14 @@ namespace DatabaseAccessLibrary
             var db = new JustFeastDbDataContext();
             return db.Orders.Max(x => x.id);
         }
+
+        public void DeleteOrder(int id)
+        {
+            var db = new JustFeastDbDataContext();
+
+            db.Orders.DeleteOnSubmit(db.Orders.FirstOrDefault(x => x.id == id));
+            db.SubmitChanges();
+        }
     }
 
 }

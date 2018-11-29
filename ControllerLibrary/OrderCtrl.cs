@@ -108,5 +108,11 @@ namespace ControllerLibrary
             OrderDb ordDb = new OrderDb();
             return ordDb.GetLastOrderIdentity();
         }
+
+        public void DeleteOrder(int orderId)
+        {
+            OrderDb db = new OrderDb();
+            db.
+        }
     }
 }
