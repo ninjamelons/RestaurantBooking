@@ -37,7 +37,6 @@ namespace DatabaseAccessLibrary
                 };
                 db.OrderLineItems.InsertOnSubmit(oli);
             }
-
             db.SubmitChanges();
         }
 

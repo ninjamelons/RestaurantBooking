@@ -6,14 +6,12 @@ namespace DatabaseAccessLibrary
     public partial class ResetDb
     {
         private readonly WebClient _client = new WebClient();
-        private Stream _streamInsert;
 
         public string GetCreateFile()
         {
             var streamCreate = _client.OpenRead("https://www.dropbox.com/s/d4aibod4sffqtrx/Drop%20and%20Create%20all%20tables.sql?dl=1");
             var streamReaderCreate = new StreamReader(streamCreate);
             return streamReaderCreate.ReadToEnd();
-
         }
 
         public string GetInsertFile()
@@ -22,6 +20,7 @@ namespace DatabaseAccessLibrary
             var streamReaderInsert = new StreamReader(streamInsert);
             return streamReaderInsert.ReadToEnd();
         }
+
         public void Clean()
         {
             var db = new JustFeastDbDataContext();

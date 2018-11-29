@@ -38,6 +38,7 @@ namespace UnitTests
             string reservationDateTime,
             string noSeats, string payment, bool accepted, bool shouldValidate)
         {
+            //Setup
             var itemList = new List<OrderLineItem>();
             var sut = new Order
             {
@@ -57,23 +58,17 @@ namespace UnitTests
             var context = new ValidationContext(sut, null, null);
             var result = new List<ValidationResult>();
 
+            //Act
             var isModelStateValid = Validator.TryValidateObject(sut, context, result, true);
 
+            //Assert
             Assert.IsTrue(shouldValidate == isModelStateValid);
-        }
-
-        [TestMethod]
-        public void Order_Creation_Test()
-        {
-            var oli = new List<OrderLineItem>();
-
-            var ordCtrl = new OrderCtrl();
-            //var resOrd = ordCtrl.CreateOrder("1000000", "1000000", "1000000", "2018-11-08 12:22:33", "2018-11-08 18:00:00", oli, "2", "200.00");
         }
 
         [TestMethod]
         public void Convert_To_Database_Test()
         {
+            //Setup
             var oli = new List<OrderLineItem>();
             var ordCtrl = new OrderCtrl();
             var ordDb = new OrderDb();
@@ -101,8 +96,11 @@ namespace UnitTests
                 reservation = resDt,
                 noSeats = 2
             };
+
+            //Act
             var resOrder = ordCtrl.ConvertOrder(order);
-            Assert.IsNotNull(resOrder.id);
+
+            //Assert
             Assert.IsTrue(resOrder.id == dbOrder.id &&
                           resOrder.restaurantId == dbOrder.restaurantId &&
                           resOrder.dateTime == dbOrder.dateTime &&
@@ -114,6 +112,7 @@ namespace UnitTests
         [TestMethod]
         public void Add_Order_To_Database_Test()
         {
+            //Setup
             var ordCtrl = new OrderCtrl();
             var ordDb = new OrderDb();
             var dt = new DateTime(2018, 11, 08, 12, 22, 33);
@@ -135,44 +134,63 @@ namespace UnitTests
                 Payment = "200.00",
                 Accepted = false
             };
+
+            //Act
             var oliList = ordCtrl.ConvertOrderLineItemsToDb(order);
             var dbOrder = ordCtrl.ConvertOrder(order);
-            for (int i = 0; i < dbOrder.OrderLineItems.Count - 1; i++)
+            for (var i = 0; i < dbOrder.OrderLineItems.Count - 1; i++)
             {
                 dbOrder.OrderLineItems.Add(oliList[i]);
             }
             ordDb.AddOrder(dbOrder);
+
+            //Assert
             Assert.IsTrue(ordCtrl.GetLastOrderIdentity() == Convert.ToInt32(order.OrderId));
         }
 
         [TestMethod]
         public void Add_Item_To_Order_Increment_Quantity_Test()
         {
+            //Setup
             var ordC = new OrderCtrl();
+
+            //Act
             ordC.AddItemToOrder(1000000, 1000000);
+
+            //Assert
             Assert.IsTrue(ordC.GetOrderById(1000000).OrderLineItems[0].quantity == 3);
         }
 
         [TestMethod]
         public void Add_New_Item_To_Order_Test()
         {
+            //Setup
             var ordC = new OrderCtrl();
+
+            //Act
             ordC.AddItemToOrder(1000000, 1000001);
+
+            //Assert
             Assert.IsTrue(ordC.GetOrderById(1000000).OrderLineItems[1].itemId == 1000001);
         }
 
         [TestMethod]
         public void Get_Order_By_ID_Test()
         {
+            //Setup
             var ordC = new OrderCtrl();
+
+            //Act
             var dbO = ordC.GetOrderById(1000000);
 
+            //Assert
             Assert.IsTrue(dbO.id == 1000000);
         }
 
         [TestMethod]
         public void Update_Order_Test()
         {
+            //Setup
             var ordC = new OrderCtrl(); var ordDb = new OrderDb();
             var dt = new DateTime(2018, 11, 08, 12, 22, 33);
             var newResDt = new DateTime(2018, 11, 08, 19, 00, 00);
@@ -186,21 +204,28 @@ namespace UnitTests
                 noSeats = 2,
                 accepted = false
             };
+
+            //Act
             ordC.UpdateOrder(dbOrder);
+
+            //Assert
             Assert.IsTrue(ordC.GetOrderById(1000000).reservation == newResDt);
         }
 
         [TestMethod]
         public void Get_Last_Identity_Test()
         {
-            OrderCtrl ordC = new OrderCtrl();
+            //Setup
+            var ordC = new OrderCtrl();
 
+            //Assert
             Assert.IsTrue(ordC.GetLastOrderIdentity() == 1000000);
         }
 
         [TestMethod]
         public void Convert_OrderLineItem_To_Db_Test()
         {
+            //Setup
             var ordC = new OrderCtrl();
             var oli = new List<OrderLineItem>();
             var item = new ModelLibrary.Item();
@@ -218,8 +243,11 @@ namespace UnitTests
                 Payment = "200.00",
                 Accepted = false
             };
+
+            //Act
             var dbOrd = ordC.ConvertOrderLineItemsToDb(mOrder);
 
+            //Assert
             Assert.IsTrue(dbOrd[0].itemId == 1000000 &&
                           dbOrd[0].orderId == 1000002);
         }
