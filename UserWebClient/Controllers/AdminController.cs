@@ -20,7 +20,7 @@ namespace UserWebClient.Controllers
 
             if (!admin)
             {
-                filterContext.Result = RedirectToAction("Index", "Home"); ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
+                filterContext.Result = RedirectToAction("Index", "Home");
             }
             else
                 base.OnActionExecuting(filterContext);
