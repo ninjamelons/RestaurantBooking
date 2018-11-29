@@ -5,7 +5,8 @@ using System.Web;
 using UserWebClient;
 using System.ComponentModel.DataAnnotations;
 using ModelLibrary;
-/*
+using System.Web.Mvc;
+
 namespace UserWebClient.Views.ViewModels
 {
     public class ShoppingCartViewModel
@@ -13,8 +14,9 @@ namespace UserWebClient.Views.ViewModels
         internal object CartItems;
 
         [Key]
+
             public List<OrderLineItem> Items { get; set; }
            public decimal CartTotal { get; set; }
       
     }
-}*/
+}
