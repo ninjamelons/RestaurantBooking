@@ -28,14 +28,13 @@ namespace DatabaseAccessLibrary
         public  void DeleteItemCat(ItemCat itemCat)
         {
             var db = new JustFeastDbDataContext();
-            DatabaseAccessLibrary.ItemCat dbItemCat = db.ItemCats.First(t => t.name == itemCat.name
-                                                        && t.id == itemCat.id);
-            if (dbItemCat != null)
-            {
-                db.Items.DeleteOnSubmit(db.Items.First(t => t.name == itemCat.name
-                                                        && t.id == itemCat.id));
+            //DatabaseAccessLibrary.ItemCat dbItemCat = db.ItemCats.First(t => t.name == itemCat.name);
+                                                        
+            //if (dbItemCat != null)
+           // {
+                db.Items.DeleteOnSubmit(db.Items.First(t => t.id == itemCat.id && t.name ==  itemCat.name));
                 db.SubmitChanges();
-            }
+           // }
         }
 
         public  void UpdateItemCat(ItemCat beforeItemCat, ItemCat afterItemCat)

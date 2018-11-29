@@ -9,11 +9,12 @@ namespace ControllerLibrary
 {
     public class PriceCtrl
     {
-        public DatabaseAccessLibrary.Price CreatePrice(ModelLibrary.Price price)
+        public DatabaseAccessLibrary.Price CreatePrice(ModelLibrary.Price price, int itemId)
         {
             var priceDb = new PriceDb();
             var returnPrice = new DatabaseAccessLibrary.Price
             {
+                itemId = itemId,
                 endDate = price.EndDate,
                 startDate = price.StartDate,
                 price1 = price.VarPrice,
@@ -66,11 +67,11 @@ namespace ControllerLibrary
             return ConvertPriceToModel(priceDb.GetPriceItemId(itemId));
         }
 
-        public void DeletePrice(ModelLibrary.Price price)
+        public void DeletePrice(ModelLibrary.Price price, int itemId)
         {
             var priceDb = new PriceDb();
             var dbPrice = ConvertPriceToDb(price);
-            priceDb.DeletePrice(dbPrice);
+            priceDb.DeletePrice(dbPrice, itemId);
         }
     }
 }

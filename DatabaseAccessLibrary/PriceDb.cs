@@ -26,14 +26,14 @@ namespace DatabaseAccessLibrary
             return pric;
         }
 
-        public  void DeletePrice(Price price)
+        public  void DeletePrice(Price price, int itemId)
         {
             var db = new JustFeastDbDataContext();
-            DatabaseAccessLibrary.Price dbPrice = db.Prices.First(t => t.itemId == price.itemId
+            DatabaseAccessLibrary.Price dbPrice = db.Prices.First(t => t.itemId == itemId
                                                         && t.startDate == price.startDate);
             if (dbPrice != null)
             {
-                db.Prices.DeleteOnSubmit(db.Prices.First(t => t.itemId == price.itemId
+                db.Prices.DeleteOnSubmit(db.Prices.First(t => t.itemId == itemId
                                                         && t.startDate == price.startDate));
                 db.SubmitChanges();
             }

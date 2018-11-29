@@ -56,6 +56,24 @@ namespace ControllerLibrary
 
             return items;
         }
+       
+
+        public ModelLibrary.Price GetItemPrice(DatabaseAccessLibrary.Item item)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            PriceCtrl priceCtrl = new PriceCtrl();
+            var prices = db.Prices.Where(p => p.itemId == item.id).OrderByDescending(p => p.startDate);
+            var price = prices.First();
+
+            ModelLibrary.Price varPrice = new ModelLibrary.Price
+            {
+                StartDate = price.startDate,
+                EndDate = price.endDate,
+                VarPrice = price.price1
+            };
+
+            return varPrice;
+        }
         public ModelLibrary.Item GetItem(ModelLibrary.Item item)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
@@ -84,15 +102,16 @@ namespace ControllerLibrary
             else { return returnItem; }
         }
 
-        public DatabaseAccessLibrary.Item CreateItem(ModelLibrary.Item item, int menuId)
+        public DatabaseAccessLibrary.Item CreateItem(ModelLibrary.Item item)
         {
             var itemDb = new ItemDb();
             var returnItem = new DatabaseAccessLibrary.Item
             {
                 
                 name = item.Name,
-                menuId = menuId,
-                description = item.Description
+                menuId = item.Menu.Id,
+                description = item.Description,
+
                 
             };
 
@@ -109,31 +128,43 @@ namespace ControllerLibrary
 
         public ModelLibrary.Item ConvertItemToModel(DatabaseAccessLibrary.Item dbItem)
         {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            PriceCtrl priceCtrl = new PriceCtrl();
+            MenuCtrl menuCtrl = new MenuCtrl();
+
             var modelItem = new ModelLibrary.Item
             {
                 Id = dbItem.id,
                 Name = dbItem.name,
                 Description = dbItem.description,
-                ItemCat = ConvertItemCatToModel(dbItem.ItemCat)
-
+                ItemCat = ConvertItemCatToModel(dbItem.ItemCat),
+                Menu = menuCtrl.ConvertMenuToModel(dbItem.Menu)
 
             };
             return modelItem;
         }
 
-        public DatabaseAccessLibrary.Item ConvertItemToDb(ModelLibrary.Item modelItem, int menuId) // remove statics
+        public DatabaseAccessLibrary.Item ConvertItemToDb(ModelLibrary.Item modelItem)// , int menuId menuId = menuId 
         {
             if (modelItem == null)
                 return null;
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            PriceCtrl priceCtrl = new PriceCtrl();
+            //var CheckItem = db.Items.Single(a => a.id == modelItem.Id);
+            //var prices = db.Prices.Where(p => p.itemId == modelItem.Id).OrderByDescending(p => p.startDate);
+            //var price = prices.First();
+            var menuCtrl = new MenuCtrl();
 
             var dbItem = new DatabaseAccessLibrary.Item
             {
-                menuId = menuId,
+                menuId = modelItem.Menu.Id,
                 id = modelItem.Id,
                 name = modelItem.Name,
                 description = modelItem.Description,
-                ItemCat = ConvertItemCatToDb(modelItem.ItemCat)
-
+                ItemCat = ConvertItemCatToDb(modelItem.ItemCat),
+                Menu = menuCtrl.ConvertMenuToDb(modelItem.Menu)
+                
+                
             };
             return dbItem;
         }
@@ -156,9 +187,12 @@ namespace ControllerLibrary
             if (dbItemCat == null)
                 return null;
 
-            var modelItemCat = new ModelLibrary.ItemCat();
-            dbItemCat.id = modelItemCat.Id;
-            dbItemCat.name = modelItemCat.Name;
+            var modelItemCat = new ModelLibrary.ItemCat
+            {
+                Id = dbItemCat.id,
+                Name = dbItemCat.name
+            };
+            
 
             return modelItemCat;
         }
@@ -167,29 +201,27 @@ namespace ControllerLibrary
         {
             if (modelItemCat == null)
                 return null;
-            var itemCat = new DatabaseAccessLibrary.ItemCat
-            {
-                id = modelItemCat.Id,
-                name = modelItemCat.Name
-
-            };
+            var itemCat = new DatabaseAccessLibrary.ItemCat();
+            itemCat.id = modelItemCat.Id;
+            itemCat.name = modelItemCat.Name;
+            
             return itemCat;
 
         }
 
-        public void DeleteItem(ModelLibrary.Item item, int menuId)
+        public void DeleteItem(ModelLibrary.Item item)
         {
             var itemDb = new ItemDb();
-            var dbItem = ConvertItemToDb(item, menuId);
+            var dbItem = ConvertItemToDb(item);
             itemDb.DeleteItem(dbItem);
         }
 
-        public void UpdateItem(ModelLibrary.Item beforeItem, ModelLibrary.Item afterItem, int menuId)
+        public void UpdateItem(ModelLibrary.Item beforeItem, ModelLibrary.Item afterItem)
         {
             var itemDb = new ItemDb();
 
-            var beforeDbItem = ConvertItemToDb(beforeItem, menuId);
-            var afterDbItem = ConvertItemToDb(afterItem, menuId);
+            var beforeDbItem = ConvertItemToDb(beforeItem);
+            var afterDbItem = ConvertItemToDb(afterItem);
             itemDb.UpdateItem(beforeDbItem, afterDbItem);
 
         }

@@ -16,6 +16,9 @@
         </Border>
         <Button x:Name="ToTablesPage" Content="Manage Tables" HorizontalAlignment="Right"
                 VerticalAlignment="Bottom" Margin="13" Padding="8 3" Click="ToTablesPage_OnClick"/>
-        <Button x:Name="ManageMenus"  Content="Manage Menus" HorizontalAlignment="Left" Height="24" Margin="579,413,0,0" VerticalAlignment="Top" Width="106" Click="ManageMenus_Click"/>
+        <Button x:Name="ButtonMenus"  Content="Manage Menus" HorizontalAlignment="Left" Height="24" Margin="579,413,0,0" VerticalAlignment="Top" Width="106" Click="ManageMenus_Click"/>
+        <Button x:Name="buttonItem" Content="Manage Items" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="468,413,0,0" Height="23" Click="buttonItem_Click"/>
+        <Button x:Name="buttonItemCat" Content="Manage Categories" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="357,413,0,0" Height="23" Click="buttonItemCat_Click"/>
+
     </Grid>
 </Page>

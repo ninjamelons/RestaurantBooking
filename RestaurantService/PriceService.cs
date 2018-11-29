@@ -15,15 +15,15 @@ namespace RestaurantService
     {
         PriceCtrl priceCtrl = new PriceCtrl();
         PriceDb priceDb = new PriceDb();
-        public void CreatePrice(ModelLibrary.Price price)
+        public void CreatePrice(ModelLibrary.Price price, int itemId)
         {
-            priceCtrl.CreatePrice(price);
+            priceCtrl.CreatePrice(price, itemId);
         }
 
-        public void DeletePrice(ModelLibrary.Price price)
+        public void DeletePrice(ModelLibrary.Price price,int itemId)
         {
             var dbPrice = priceCtrl.ConvertPriceToDb(price);
-            priceDb.DeletePrice(dbPrice);
+            priceDb.DeletePrice(dbPrice, itemId);
         }
 
         public IEnumerable<ModelLibrary.Price> GetAllPricesByItem(string id)

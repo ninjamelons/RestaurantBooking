@@ -14,16 +14,16 @@ namespace RestaurantService
     public class MenuService : IMenuService
     {
         MenuCtrl menuCtrl = new MenuCtrl();
-        public void CreateMenu(ModelLibrary.Menu menu, int restaurantId)
+        public void CreateMenu(ModelLibrary.Menu menu)
         {
             var menuCtrl = new MenuCtrl();
-            menuCtrl.CreateMenu(menu, restaurantId);
+            menuCtrl.CreateMenu(menu);
         }
-        public void DeleteMenu(ModelLibrary.Menu menu, int restaurantId)
+        public void DeleteMenu(ModelLibrary.Menu menu)
         {
             var menuCtrl = new MenuCtrl();
             var menuDb = new MenuDb();
-            var dbMenu = menuCtrl.ConvertMenuToDb(menu, restaurantId);
+            var dbMenu = menuCtrl.ConvertMenuToDb(menu);
             menuDb.DeleteMenu(dbMenu);
         }
 
@@ -46,11 +46,11 @@ namespace RestaurantService
             return menuCtrl.GetMenu(menu);
         }
 
-        public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu, int restaurantId)
+        public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             MenuCtrl menuCtrl = new MenuCtrl();
-            menuCtrl.UpdateMenu(beforeMenu, afterMenu, restaurantId);
+            menuCtrl.UpdateMenu(beforeMenu, afterMenu);
         }
     }
 }

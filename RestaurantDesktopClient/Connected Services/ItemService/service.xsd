@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/ModelLibrary" />
+  <xs:element name="GetItemByNameAndMenuId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="itemName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="menuId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemByNameAndMenuIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetItemByNameAndMenuIdResult" nillable="true" type="q1:Item" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemPrice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="item" nillable="true" type="q2:Item" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemPriceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetItemPriceResult" nillable="true" type="q3:Price" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="item" nillable="true" type="q4:Item" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateItemResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="beforeItem" nillable="true" type="q5:Item" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="afterItem" nillable="true" type="q6:Item" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateItemResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="item" nillable="true" type="q7:Item" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteItemResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllItemsByCategory">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="categoryId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllItemsByCategoryResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllItemsByCategoryResult" nillable="true" type="q8:ArrayOfItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllItemsByMenu">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="menuId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllItemsByMenuResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllItemsByMenuResult" nillable="true" type="q9:ArrayOfItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllItemsByRestaurant">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="restaurandId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllItemsByRestaurantResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllItemsByRestaurantResult" nillable="true" type="q10:ArrayOfItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateItemCat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="itemCat" nillable="true" type="q11:ItemCat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CreateItemCatResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateItemCat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="beforeItemCat" nillable="true" type="q12:ItemCat" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="afterItemCat" nillable="true" type="q13:ItemCat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateItemCatResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteItemCat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="itemCat" nillable="true" type="q14:ItemCat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DeleteItemCatResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllItemCategories">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllItemCategoriesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllItemCategoriesResult" nillable="true" type="q15:ArrayOfItemCat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemCats">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemCatsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetItemCatsResult" nillable="true" type="q16:ArrayOfItemCat" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

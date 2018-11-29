@@ -28,5 +28,7 @@ namespace ModelLibrary
         public Price Price { get; set; }
         
         public ItemCat ItemCat { get; set; }
+
+        public Menu Menu { get; set; }
     }
 }

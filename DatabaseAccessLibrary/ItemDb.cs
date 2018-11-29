@@ -16,7 +16,13 @@ namespace DatabaseAccessLibrary
             db.Items.InsertOnSubmit(item);
             db.SubmitChanges();
         }
+        public Item GetItemByNameAndMenu(string name, int menuId)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
 
+            var item = db.Items.Single(t => t.name == name && t.menuId == menuId);
+            return item;
+        }
         public  Item GetItem(int id, string name)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();

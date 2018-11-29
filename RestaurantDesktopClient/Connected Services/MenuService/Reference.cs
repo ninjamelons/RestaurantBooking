@@ -16,22 +16,22 @@ namespace RestaurantDesktopClient.MenuService {
     public interface IMenuService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/CreateMenu", ReplyAction="http://tempuri.org/IMenuService/CreateMenuResponse")]
-        void CreateMenu(ModelLibrary.Menu menu, int restaurantId);
+        void CreateMenu(ModelLibrary.Menu menu);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/CreateMenu", ReplyAction="http://tempuri.org/IMenuService/CreateMenuResponse")]
-        System.Threading.Tasks.Task CreateMenuAsync(ModelLibrary.Menu menu, int restaurantId);
+        System.Threading.Tasks.Task CreateMenuAsync(ModelLibrary.Menu menu);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/UpdateMenu", ReplyAction="http://tempuri.org/IMenuService/UpdateMenuResponse")]
-        void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu, int restaurantId);
+        void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/UpdateMenu", ReplyAction="http://tempuri.org/IMenuService/UpdateMenuResponse")]
-        System.Threading.Tasks.Task UpdateMenuAsync(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu, int restaurantId);
+        System.Threading.Tasks.Task UpdateMenuAsync(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/DeleteMenu", ReplyAction="http://tempuri.org/IMenuService/DeleteMenuResponse")]
-        void DeleteMenu(ModelLibrary.Menu menu, int restaurantId);
+        void DeleteMenu(ModelLibrary.Menu menu);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/DeleteMenu", ReplyAction="http://tempuri.org/IMenuService/DeleteMenuResponse")]
-        System.Threading.Tasks.Task DeleteMenuAsync(ModelLibrary.Menu menu, int restaurantId);
+        System.Threading.Tasks.Task DeleteMenuAsync(ModelLibrary.Menu menu);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/GetAllMenusByRestaurant", ReplyAction="http://tempuri.org/IMenuService/GetAllMenusByRestaurantResponse")]
         ModelLibrary.Menu[] GetAllMenusByRestaurant(int restaurantId);
@@ -73,28 +73,28 @@ namespace RestaurantDesktopClient.MenuService {
                 base(binding, remoteAddress) {
         }
         
-        public void CreateMenu(ModelLibrary.Menu menu, int restaurantId) {
-            base.Channel.CreateMenu(menu, restaurantId);
+        public void CreateMenu(ModelLibrary.Menu menu) {
+            base.Channel.CreateMenu(menu);
         }
         
-        public System.Threading.Tasks.Task CreateMenuAsync(ModelLibrary.Menu menu, int restaurantId) {
-            return base.Channel.CreateMenuAsync(menu, restaurantId);
+        public System.Threading.Tasks.Task CreateMenuAsync(ModelLibrary.Menu menu) {
+            return base.Channel.CreateMenuAsync(menu);
         }
         
-        public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu, int restaurantId) {
-            base.Channel.UpdateMenu(beforeMenu, afterMenu, restaurantId);
+        public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu) {
+            base.Channel.UpdateMenu(beforeMenu, afterMenu);
         }
         
-        public System.Threading.Tasks.Task UpdateMenuAsync(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu, int restaurantId) {
-            return base.Channel.UpdateMenuAsync(beforeMenu, afterMenu, restaurantId);
+        public System.Threading.Tasks.Task UpdateMenuAsync(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu) {
+            return base.Channel.UpdateMenuAsync(beforeMenu, afterMenu);
         }
         
-        public void DeleteMenu(ModelLibrary.Menu menu, int restaurantId) {
-            base.Channel.DeleteMenu(menu, restaurantId);
+        public void DeleteMenu(ModelLibrary.Menu menu) {
+            base.Channel.DeleteMenu(menu);
         }
         
-        public System.Threading.Tasks.Task DeleteMenuAsync(ModelLibrary.Menu menu, int restaurantId) {
-            return base.Channel.DeleteMenuAsync(menu, restaurantId);
+        public System.Threading.Tasks.Task DeleteMenuAsync(ModelLibrary.Menu menu) {
+            return base.Channel.DeleteMenuAsync(menu);
         }
         
         public ModelLibrary.Menu[] GetAllMenusByRestaurant(int restaurantId) {

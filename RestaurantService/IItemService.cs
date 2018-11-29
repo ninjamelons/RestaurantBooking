@@ -14,20 +14,25 @@ namespace RestaurantService
     public interface IItemService
     {
         [OperationContract]
-        void CreateItem(ModelLibrary.Item item, int menuId);
+        ModelLibrary.Item GetItemByNameAndMenuId(string itemName, int menuId);
+        [OperationContract]
+        ModelLibrary.Price GetItemPrice(ModelLibrary.Item item);
 
         [OperationContract]
-        void UpdateItem(ModelLibrary.Item beforeItem, ModelLibrary.Item afterItem, int menuId);
+        void CreateItem(ModelLibrary.Item item);
 
         [OperationContract]
-        void DeleteItem(ModelLibrary.Item item, int menuId);
+        void UpdateItem(ModelLibrary.Item beforeItem, ModelLibrary.Item afterItem);
 
-
+        [OperationContract]
+        void DeleteItem(ModelLibrary.Item item);
 
         [OperationContract]
         IEnumerable<ModelLibrary.Item> GetAllItemsByCategory(int categoryId);  // ????????
-
+        [OperationContract]
         IEnumerable<ModelLibrary.Item> GetAllItemsByMenu(int menuId);
+        [OperationContract]
+        IEnumerable<ModelLibrary.Item> GetAllItemsByRestaurant(int restaurandId);
 
         [OperationContract]
         void CreateItemCat(ModelLibrary.ItemCat itemCat);
@@ -40,6 +45,9 @@ namespace RestaurantService
 
         [OperationContract]
         IEnumerable<ModelLibrary.ItemCat> GetAllItemCategories();
+
+        [OperationContract]
+        IEnumerable<ModelLibrary.ItemCat> GetItemCats();
 
 
 
