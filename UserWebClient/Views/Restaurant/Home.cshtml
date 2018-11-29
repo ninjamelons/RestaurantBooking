@@ -26,8 +26,8 @@
                     <td>@item.Name</td>
                     <td>@item.Price.VarPrice</td>
                     <td>
-                        @Html.ActionLink("Add to cart", "Home", "Restaurant",
-                            new { id = Model.Restaurant.Id, oId = Model.OrderId, iId = item.Id }, new {@class = "btn btn-info"})
+                        @Html.ActionLink("Add to cart", "HomeCart", "Restaurant",
+                            new { resId = Model.Restaurant.Id, orderId = Model.OrderId, itemId = item.Id }, new {@class = "btn btn-info"})
                     </td>
                 </tr>
             }

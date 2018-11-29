@@ -24,11 +24,11 @@ namespace UserWebClient.Controllers
             context = new ApplicationDbContext();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        /*public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
-        }
+        }*/
 
 
 
@@ -145,7 +145,7 @@ namespace UserWebClient.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            //ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Equals("Admin")).ToList(),"Name","Name");
+            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Equals("Admin")).ToList(),"Name","Name");
             return View();
         }
 
@@ -174,8 +174,8 @@ namespace UserWebClient.Controllers
                     //Ends Here    
                     return RedirectToAction("Index", "Users");
                 }
-                ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
-                                          .ToList(), "Name", "Name");
+                /*ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+                                          .ToList(), "Name", "Name");*/
                 AddErrors(result);
             }
 
