@@ -14,7 +14,7 @@
         <Button x:Name="buttonCreate" Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" Margin="417,408,0,0" Height="30" Click="buttonCreate_Click"/>
         <Label x:Name="label" Content="Category Name: " FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="267,34,0,0" Width="151"/>
         <TextBox x:Name="textBoxName" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Height="34" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="222" Margin="423,34,0,0"/>
-        <DataGrid x:Name="dataGridItemCatList" HorizontalAlignment="Left" AutoGenerateColumns="True" Height="404" VerticalAlignment="Top" Width="252" Margin="15,34,0,0">
+        <DataGrid x:Name="dataGridItemCatList" HorizontalAlignment="Left" AutoGenerateColumns="True" Height="404" VerticalAlignment="Top" Width="252" Margin="15,34,0,0" SelectionChanged="dataGridItemCatList_SelectionChanged">
         <DataGrid.Resources>
             <Style TargetType="{x:Type DataGridColumnHeader}">
                 <Setter Property="Background" Value="DarkGray"/>

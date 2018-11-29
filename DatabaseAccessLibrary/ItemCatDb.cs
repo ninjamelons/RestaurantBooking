@@ -17,12 +17,13 @@ namespace DatabaseAccessLibrary
         }
     
 
-        public  ItemCat GetItemCat(string name, int itemCatId)
+        public  ItemCat GetItemCat(string name)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
+                JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-            var itemCat = db.ItemCats.Single(t => t.name == name && t.id == itemCatId);
-            return itemCat;
+                var item = db.ItemCats.Single(t => t.name == name);
+                return item;
+            
         }
 
         public  void DeleteItemCat(ItemCat itemCat)

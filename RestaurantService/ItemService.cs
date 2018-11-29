@@ -140,5 +140,13 @@ namespace RestaurantService
             var itemDb = new ItemDb();
             return itemCtrl.ConvertItemToModel(itemDb.GetItemByNameAndMenu(itemName, menuId));
         }
+
+        public ModelLibrary.ItemCat GetItemCatByName(string name)
+        {
+            var itemCtrl = new ItemCtrl();
+            var itemCatDb = new ItemCatDb();
+
+            return itemCtrl.ConvertItemCatToModel(itemCatDb.GetItemCat(name));
+        }
     }
 }

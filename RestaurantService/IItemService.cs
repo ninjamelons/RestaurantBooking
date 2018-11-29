@@ -48,6 +48,8 @@ namespace RestaurantService
 
         [OperationContract]
         IEnumerable<ModelLibrary.ItemCat> GetItemCats();
+        [OperationContract]
+        ModelLibrary.ItemCat GetItemCatByName(string name);
 
 
 

@@ -21,7 +21,7 @@ namespace RestaurantService
         void DeleteMenu(ModelLibrary.Menu menu);
 
         [OperationContract]
-        IEnumerable<ModelLibrary.Menu> GetAllMenusByRestaurant(int restaurantId);
+        IEnumerable<DatabaseAccessLibrary.Menu> GetAllMenusByRestaurant(int restaurantId);
 
         [OperationContract]
         ModelLibrary.Menu GetMenu(ModelLibrary.Menu menu);

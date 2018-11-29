@@ -216,10 +216,21 @@ namespace UnitTests
         {
             ItemCtrl itemCtrl = new ItemCtrl();
             //Setup
+            var menu = new ModelLibrary.Menu
+            {
+                 Active = false,
+                 Id = 1000000,
+                 Name = "newName",
+                 RestaurantId = 1000000, 
+                  
+
+            };
             var itemCat = new ModelLibrary.ItemCat
             {
                 Id = 1000000,
                 Name = "Soup"
+
+                
             };
             var price = new ModelLibrary.Price
             {
@@ -233,11 +244,12 @@ namespace UnitTests
                 Name = "Controllerforabi",
                 Description = "Totallynotadescription",
                 ItemCat = itemCat,
-                Price = price
+                Price = price,
+                Menu = menu
             };
 
             //Act
-            var itemdb = itemCtrl.CreateItem(item, 1000000);
+            var itemdb = itemCtrl.CreateItem(item);
 
             //Assert
             Assert.AreEqual(item.Name, itemdb.name);

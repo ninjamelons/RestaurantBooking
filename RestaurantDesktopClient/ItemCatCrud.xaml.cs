@@ -25,6 +25,7 @@ namespace RestaurantDesktopClient
         public ItemCatCrud()
         {
             InitializeComponent();
+
             var proxy = new ItemServiceClient();
             var modelMenu = proxy.GetAllItemCategories();
             foreach (ItemCat item in modelMenu)
@@ -68,8 +69,39 @@ namespace RestaurantDesktopClient
 
         private void buttonEdit_Click(object sender, RoutedEventArgs e)
         {
-            
-            
+            var proxy = new ItemServiceClient();
+            var slectedItemCat = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
+            var oldItem = new ItemCat
+            {
+                Name = slectedItemCat.Name,
+                Id = slectedItemCat.Id
+                
+            };
+            var newItem = new ItemCat
+            {
+                Name  =  textBoxName.Text,
+                Id = slectedItemCat.Id
+            };
+            proxy.UpdateItemCat(oldItem, newItem);
+            dataGridItemCatList.Items.Clear();
+            var modelMenu = proxy.GetAllItemCategories();
+            foreach (ItemCat item in modelMenu)
+            {
+                dataGridItemCatList.Items.Add(item);
+            };
+            var selectedItem = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
+            var name = selectedItem.Name;
+            textBoxName.Text = name;
+
+        }
+
+        private void dataGridItemCatList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var proxy = new ItemServiceClient();
+            var selectedItem = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
+            var name = selectedItem.Name;
+            //proxy.GetItemCats
+            //textBoxName.Text = name;
         }
     }
 }

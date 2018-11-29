@@ -30,27 +30,6 @@ namespace DatabaseAccessLibrary
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insert__MigrationHistory(__MigrationHistory instance);
-    partial void Update__MigrationHistory(__MigrationHistory instance);
-    partial void Delete__MigrationHistory(__MigrationHistory instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
-    partial void InsertAspNetRole(AspNetRole instance);
-    partial void UpdateAspNetRole(AspNetRole instance);
-    partial void DeleteAspNetRole(AspNetRole instance);
-    partial void InsertAspNetUserClaim(AspNetUserClaim instance);
-    partial void UpdateAspNetUserClaim(AspNetUserClaim instance);
-    partial void DeleteAspNetUserClaim(AspNetUserClaim instance);
-    partial void InsertAspNetUserLogin(AspNetUserLogin instance);
-    partial void UpdateAspNetUserLogin(AspNetUserLogin instance);
-    partial void DeleteAspNetUserLogin(AspNetUserLogin instance);
-    partial void InsertAspNetUserRole(AspNetUserRole instance);
-    partial void UpdateAspNetUserRole(AspNetUserRole instance);
-    partial void DeleteAspNetUserRole(AspNetUserRole instance);
-    partial void InsertAspNetUser(AspNetUser instance);
-    partial void UpdateAspNetUser(AspNetUser instance);
-    partial void DeleteAspNetUser(AspNetUser instance);
     partial void InsertCustomer(Customer instance);
     partial void UpdateCustomer(Customer instance);
     partial void DeleteCustomer(Customer instance);
@@ -60,12 +39,12 @@ namespace DatabaseAccessLibrary
     partial void InsertItemCat(ItemCat instance);
     partial void UpdateItemCat(ItemCat instance);
     partial void DeleteItemCat(ItemCat instance);
-    partial void InsertMenu(Menu instance);
-    partial void UpdateMenu(Menu instance);
-    partial void DeleteMenu(Menu instance);
     partial void InsertOrderHistory(OrderHistory instance);
     partial void UpdateOrderHistory(OrderHistory instance);
     partial void DeleteOrderHistory(OrderHistory instance);
+    partial void InsertMenu(Menu instance);
+    partial void UpdateMenu(Menu instance);
+    partial void DeleteMenu(Menu instance);
     partial void InsertOrderLineItem(OrderLineItem instance);
     partial void UpdateOrderLineItem(OrderLineItem instance);
     partial void DeleteOrderLineItem(OrderLineItem instance);
@@ -87,6 +66,9 @@ namespace DatabaseAccessLibrary
     partial void InsertRestaurant(Restaurant instance);
     partial void UpdateRestaurant(Restaurant instance);
     partial void DeleteRestaurant(Restaurant instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     #endregion
 		
 		public JustFeastDbDataContext() : 
@@ -119,62 +101,6 @@ namespace DatabaseAccessLibrary
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<@__MigrationHistory> @__MigrationHistories
-		{
-			get
-			{
-				return this.GetTable<@__MigrationHistory>();
-			}
-		}
-		
-		public System.Data.Linq.Table<User> Users
-		{
-			get
-			{
-				return this.GetTable<User>();
-			}
-		}
-		
-		public System.Data.Linq.Table<AspNetRole> AspNetRoles
-		{
-			get
-			{
-				return this.GetTable<AspNetRole>();
-			}
-		}
-		
-		public System.Data.Linq.Table<AspNetUserClaim> AspNetUserClaims
-		{
-			get
-			{
-				return this.GetTable<AspNetUserClaim>();
-			}
-		}
-		
-		public System.Data.Linq.Table<AspNetUserLogin> AspNetUserLogins
-		{
-			get
-			{
-				return this.GetTable<AspNetUserLogin>();
-			}
-		}
-		
-		public System.Data.Linq.Table<AspNetUserRole> AspNetUserRoles
-		{
-			get
-			{
-				return this.GetTable<AspNetUserRole>();
-			}
-		}
-		
-		public System.Data.Linq.Table<AspNetUser> AspNetUsers
-		{
-			get
-			{
-				return this.GetTable<AspNetUser>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Customer> Customers
 		{
 			get
@@ -199,19 +125,19 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		public System.Data.Linq.Table<Menu> Menus
-		{
-			get
-			{
-				return this.GetTable<Menu>();
-			}
-		}
-		
 		public System.Data.Linq.Table<OrderHistory> OrderHistories
 		{
 			get
 			{
 				return this.GetTable<OrderHistory>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Menu> Menus
+		{
+			get
+			{
+				return this.GetTable<Menu>();
 			}
 		}
 		
@@ -270,1284 +196,13 @@ namespace DatabaseAccessLibrary
 				return this.GetTable<Restaurant>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[__MigrationHistory]")]
-	public partial class @__MigrationHistory : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _MigrationId;
-		
-		private string _ContextKey;
-		
-		private System.Data.Linq.Binary _Model;
-		
-		private string _ProductVersion;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnMigrationIdChanging(string value);
-    partial void OnMigrationIdChanged();
-    partial void OnContextKeyChanging(string value);
-    partial void OnContextKeyChanged();
-    partial void OnModelChanging(System.Data.Linq.Binary value);
-    partial void OnModelChanged();
-    partial void OnProductVersionChanging(string value);
-    partial void OnProductVersionChanged();
-    #endregion
-		
-		public @__MigrationHistory()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MigrationId", DbType="NVarChar(150) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string MigrationId
+		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
-				return this._MigrationId;
+				return this.GetTable<User>();
 			}
-			set
-			{
-				if ((this._MigrationId != value))
-				{
-					this.OnMigrationIdChanging(value);
-					this.SendPropertyChanging();
-					this._MigrationId = value;
-					this.SendPropertyChanged("MigrationId");
-					this.OnMigrationIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContextKey", DbType="NVarChar(300) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ContextKey
-		{
-			get
-			{
-				return this._ContextKey;
-			}
-			set
-			{
-				if ((this._ContextKey != value))
-				{
-					this.OnContextKeyChanging(value);
-					this.SendPropertyChanging();
-					this._ContextKey = value;
-					this.SendPropertyChanged("ContextKey");
-					this.OnContextKeyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Model", DbType="VarBinary(MAX) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary Model
-		{
-			get
-			{
-				return this._Model;
-			}
-			set
-			{
-				if ((this._Model != value))
-				{
-					this.OnModelChanging(value);
-					this.SendPropertyChanging();
-					this._Model = value;
-					this.SendPropertyChanged("Model");
-					this.OnModelChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProductVersion", DbType="NVarChar(32) NOT NULL", CanBeNull=false)]
-		public string ProductVersion
-		{
-			get
-			{
-				return this._ProductVersion;
-			}
-			set
-			{
-				if ((this._ProductVersion != value))
-				{
-					this.OnProductVersionChanging(value);
-					this.SendPropertyChanging();
-					this._ProductVersion = value;
-					this.SendPropertyChanged("ProductVersion");
-					this.OnProductVersionChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _customerId;
-		
-		private string _password;
-		
-		private EntityRef<Customer> _Customer;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OncustomerIdChanging(int value);
-    partial void OncustomerIdChanged();
-    partial void OnpasswordChanging(string value);
-    partial void OnpasswordChanged();
-    #endregion
-		
-		public User()
-		{
-			this._Customer = default(EntityRef<Customer>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customerId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int customerId
-		{
-			get
-			{
-				return this._customerId;
-			}
-			set
-			{
-				if ((this._customerId != value))
-				{
-					if (this._Customer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OncustomerIdChanging(value);
-					this.SendPropertyChanging();
-					this._customerId = value;
-					this.SendPropertyChanged("customerId");
-					this.OncustomerIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="NVarChar(MAX)")]
-		public string password
-		{
-			get
-			{
-				return this._password;
-			}
-			set
-			{
-				if ((this._password != value))
-				{
-					this.OnpasswordChanging(value);
-					this.SendPropertyChanging();
-					this._password = value;
-					this.SendPropertyChanged("password");
-					this.OnpasswordChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_User", Storage="_Customer", ThisKey="customerId", OtherKey="id", IsForeignKey=true)]
-		public Customer Customer
-		{
-			get
-			{
-				return this._Customer.Entity;
-			}
-			set
-			{
-				Customer previousValue = this._Customer.Entity;
-				if (((previousValue != value) 
-							|| (this._Customer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Customer.Entity = null;
-						previousValue.User = null;
-					}
-					this._Customer.Entity = value;
-					if ((value != null))
-					{
-						value.User = this;
-						this._customerId = value.id;
-					}
-					else
-					{
-						this._customerId = default(int);
-					}
-					this.SendPropertyChanged("Customer");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetRoles")]
-	public partial class AspNetRole : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Id;
-		
-		private string _Name;
-		
-		private EntitySet<AspNetUserRole> _AspNetUserRoles;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(string value);
-    partial void OnIdChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    #endregion
-		
-		public AspNetRole()
-		{
-			this._AspNetUserRoles = new EntitySet<AspNetUserRole>(new Action<AspNetUserRole>(this.attach_AspNetUserRoles), new Action<AspNetUserRole>(this.detach_AspNetUserRoles));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetRole_AspNetUserRole", Storage="_AspNetUserRoles", ThisKey="Id", OtherKey="RoleId")]
-		public EntitySet<AspNetUserRole> AspNetUserRoles
-		{
-			get
-			{
-				return this._AspNetUserRoles;
-			}
-			set
-			{
-				this._AspNetUserRoles.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_AspNetUserRoles(AspNetUserRole entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetRole = this;
-		}
-		
-		private void detach_AspNetUserRoles(AspNetUserRole entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetRole = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetUserClaims")]
-	public partial class AspNetUserClaim : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private string _UserId;
-		
-		private string _ClaimType;
-		
-		private string _ClaimValue;
-		
-		private EntityRef<AspNetUser> _AspNetUser;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnUserIdChanging(string value);
-    partial void OnUserIdChanged();
-    partial void OnClaimTypeChanging(string value);
-    partial void OnClaimTypeChanged();
-    partial void OnClaimValueChanging(string value);
-    partial void OnClaimValueChanged();
-    #endregion
-		
-		public AspNetUserClaim()
-		{
-			this._AspNetUser = default(EntityRef<AspNetUser>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
-		public string UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					if (this._AspNetUser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClaimType", DbType="NVarChar(MAX)")]
-		public string ClaimType
-		{
-			get
-			{
-				return this._ClaimType;
-			}
-			set
-			{
-				if ((this._ClaimType != value))
-				{
-					this.OnClaimTypeChanging(value);
-					this.SendPropertyChanging();
-					this._ClaimType = value;
-					this.SendPropertyChanged("ClaimType");
-					this.OnClaimTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ClaimValue", DbType="NVarChar(MAX)")]
-		public string ClaimValue
-		{
-			get
-			{
-				return this._ClaimValue;
-			}
-			set
-			{
-				if ((this._ClaimValue != value))
-				{
-					this.OnClaimValueChanging(value);
-					this.SendPropertyChanging();
-					this._ClaimValue = value;
-					this.SendPropertyChanged("ClaimValue");
-					this.OnClaimValueChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserClaim", Storage="_AspNetUser", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public AspNetUser AspNetUser
-		{
-			get
-			{
-				return this._AspNetUser.Entity;
-			}
-			set
-			{
-				AspNetUser previousValue = this._AspNetUser.Entity;
-				if (((previousValue != value) 
-							|| (this._AspNetUser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._AspNetUser.Entity = null;
-						previousValue.AspNetUserClaims.Remove(this);
-					}
-					this._AspNetUser.Entity = value;
-					if ((value != null))
-					{
-						value.AspNetUserClaims.Add(this);
-						this._UserId = value.Id;
-					}
-					else
-					{
-						this._UserId = default(string);
-					}
-					this.SendPropertyChanged("AspNetUser");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetUserLogins")]
-	public partial class AspNetUserLogin : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _LoginProvider;
-		
-		private string _ProviderKey;
-		
-		private string _UserId;
-		
-		private EntityRef<AspNetUser> _AspNetUser;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnLoginProviderChanging(string value);
-    partial void OnLoginProviderChanged();
-    partial void OnProviderKeyChanging(string value);
-    partial void OnProviderKeyChanged();
-    partial void OnUserIdChanging(string value);
-    partial void OnUserIdChanged();
-    #endregion
-		
-		public AspNetUserLogin()
-		{
-			this._AspNetUser = default(EntityRef<AspNetUser>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoginProvider", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string LoginProvider
-		{
-			get
-			{
-				return this._LoginProvider;
-			}
-			set
-			{
-				if ((this._LoginProvider != value))
-				{
-					this.OnLoginProviderChanging(value);
-					this.SendPropertyChanging();
-					this._LoginProvider = value;
-					this.SendPropertyChanged("LoginProvider");
-					this.OnLoginProviderChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProviderKey", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string ProviderKey
-		{
-			get
-			{
-				return this._ProviderKey;
-			}
-			set
-			{
-				if ((this._ProviderKey != value))
-				{
-					this.OnProviderKeyChanging(value);
-					this.SendPropertyChanging();
-					this._ProviderKey = value;
-					this.SendPropertyChanged("ProviderKey");
-					this.OnProviderKeyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					if (this._AspNetUser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserLogin", Storage="_AspNetUser", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public AspNetUser AspNetUser
-		{
-			get
-			{
-				return this._AspNetUser.Entity;
-			}
-			set
-			{
-				AspNetUser previousValue = this._AspNetUser.Entity;
-				if (((previousValue != value) 
-							|| (this._AspNetUser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._AspNetUser.Entity = null;
-						previousValue.AspNetUserLogins.Remove(this);
-					}
-					this._AspNetUser.Entity = value;
-					if ((value != null))
-					{
-						value.AspNetUserLogins.Add(this);
-						this._UserId = value.Id;
-					}
-					else
-					{
-						this._UserId = default(string);
-					}
-					this.SendPropertyChanged("AspNetUser");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetUserRoles")]
-	public partial class AspNetUserRole : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _UserId;
-		
-		private string _RoleId;
-		
-		private EntityRef<AspNetRole> _AspNetRole;
-		
-		private EntityRef<AspNetUser> _AspNetUser;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnUserIdChanging(string value);
-    partial void OnUserIdChanged();
-    partial void OnRoleIdChanging(string value);
-    partial void OnRoleIdChanged();
-    #endregion
-		
-		public AspNetUserRole()
-		{
-			this._AspNetRole = default(EntityRef<AspNetRole>);
-			this._AspNetUser = default(EntityRef<AspNetUser>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					if (this._AspNetUser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string RoleId
-		{
-			get
-			{
-				return this._RoleId;
-			}
-			set
-			{
-				if ((this._RoleId != value))
-				{
-					if (this._AspNetRole.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnRoleIdChanging(value);
-					this.SendPropertyChanging();
-					this._RoleId = value;
-					this.SendPropertyChanged("RoleId");
-					this.OnRoleIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetRole_AspNetUserRole", Storage="_AspNetRole", ThisKey="RoleId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public AspNetRole AspNetRole
-		{
-			get
-			{
-				return this._AspNetRole.Entity;
-			}
-			set
-			{
-				AspNetRole previousValue = this._AspNetRole.Entity;
-				if (((previousValue != value) 
-							|| (this._AspNetRole.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._AspNetRole.Entity = null;
-						previousValue.AspNetUserRoles.Remove(this);
-					}
-					this._AspNetRole.Entity = value;
-					if ((value != null))
-					{
-						value.AspNetUserRoles.Add(this);
-						this._RoleId = value.Id;
-					}
-					else
-					{
-						this._RoleId = default(string);
-					}
-					this.SendPropertyChanged("AspNetRole");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserRole", Storage="_AspNetUser", ThisKey="UserId", OtherKey="Id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public AspNetUser AspNetUser
-		{
-			get
-			{
-				return this._AspNetUser.Entity;
-			}
-			set
-			{
-				AspNetUser previousValue = this._AspNetUser.Entity;
-				if (((previousValue != value) 
-							|| (this._AspNetUser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._AspNetUser.Entity = null;
-						previousValue.AspNetUserRoles.Remove(this);
-					}
-					this._AspNetUser.Entity = value;
-					if ((value != null))
-					{
-						value.AspNetUserRoles.Add(this);
-						this._UserId = value.Id;
-					}
-					else
-					{
-						this._UserId = default(string);
-					}
-					this.SendPropertyChanged("AspNetUser");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AspNetUsers")]
-	public partial class AspNetUser : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _Id;
-		
-		private string _Email;
-		
-		private bool _EmailConfirmed;
-		
-		private string _PasswordHash;
-		
-		private string _SecurityStamp;
-		
-		private string _PhoneNumber;
-		
-		private bool _PhoneNumberConfirmed;
-		
-		private bool _TwoFactorEnabled;
-		
-		private System.Nullable<System.DateTime> _LockoutEndDateUtc;
-		
-		private bool _LockoutEnabled;
-		
-		private int _AccessFailedCount;
-		
-		private string _UserName;
-		
-		private EntitySet<AspNetUserClaim> _AspNetUserClaims;
-		
-		private EntitySet<AspNetUserLogin> _AspNetUserLogins;
-		
-		private EntitySet<AspNetUserRole> _AspNetUserRoles;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(string value);
-    partial void OnIdChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnEmailConfirmedChanging(bool value);
-    partial void OnEmailConfirmedChanged();
-    partial void OnPasswordHashChanging(string value);
-    partial void OnPasswordHashChanged();
-    partial void OnSecurityStampChanging(string value);
-    partial void OnSecurityStampChanged();
-    partial void OnPhoneNumberChanging(string value);
-    partial void OnPhoneNumberChanged();
-    partial void OnPhoneNumberConfirmedChanging(bool value);
-    partial void OnPhoneNumberConfirmedChanged();
-    partial void OnTwoFactorEnabledChanging(bool value);
-    partial void OnTwoFactorEnabledChanged();
-    partial void OnLockoutEndDateUtcChanging(System.Nullable<System.DateTime> value);
-    partial void OnLockoutEndDateUtcChanged();
-    partial void OnLockoutEnabledChanging(bool value);
-    partial void OnLockoutEnabledChanged();
-    partial void OnAccessFailedCountChanging(int value);
-    partial void OnAccessFailedCountChanged();
-    partial void OnUserNameChanging(string value);
-    partial void OnUserNameChanged();
-    #endregion
-		
-		public AspNetUser()
-		{
-			this._AspNetUserClaims = new EntitySet<AspNetUserClaim>(new Action<AspNetUserClaim>(this.attach_AspNetUserClaims), new Action<AspNetUserClaim>(this.detach_AspNetUserClaims));
-			this._AspNetUserLogins = new EntitySet<AspNetUserLogin>(new Action<AspNetUserLogin>(this.attach_AspNetUserLogins), new Action<AspNetUserLogin>(this.detach_AspNetUserLogins));
-			this._AspNetUserRoles = new EntitySet<AspNetUserRole>(new Action<AspNetUserRole>(this.attach_AspNetUserRoles), new Action<AspNetUserRole>(this.detach_AspNetUserRoles));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="NVarChar(128) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(256)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmailConfirmed", DbType="Bit NOT NULL")]
-		public bool EmailConfirmed
-		{
-			get
-			{
-				return this._EmailConfirmed;
-			}
-			set
-			{
-				if ((this._EmailConfirmed != value))
-				{
-					this.OnEmailConfirmedChanging(value);
-					this.SendPropertyChanging();
-					this._EmailConfirmed = value;
-					this.SendPropertyChanged("EmailConfirmed");
-					this.OnEmailConfirmedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordHash", DbType="NVarChar(MAX)")]
-		public string PasswordHash
-		{
-			get
-			{
-				return this._PasswordHash;
-			}
-			set
-			{
-				if ((this._PasswordHash != value))
-				{
-					this.OnPasswordHashChanging(value);
-					this.SendPropertyChanging();
-					this._PasswordHash = value;
-					this.SendPropertyChanged("PasswordHash");
-					this.OnPasswordHashChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SecurityStamp", DbType="NVarChar(MAX)")]
-		public string SecurityStamp
-		{
-			get
-			{
-				return this._SecurityStamp;
-			}
-			set
-			{
-				if ((this._SecurityStamp != value))
-				{
-					this.OnSecurityStampChanging(value);
-					this.SendPropertyChanging();
-					this._SecurityStamp = value;
-					this.SendPropertyChanged("SecurityStamp");
-					this.OnSecurityStampChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="NVarChar(MAX)")]
-		public string PhoneNumber
-		{
-			get
-			{
-				return this._PhoneNumber;
-			}
-			set
-			{
-				if ((this._PhoneNumber != value))
-				{
-					this.OnPhoneNumberChanging(value);
-					this.SendPropertyChanging();
-					this._PhoneNumber = value;
-					this.SendPropertyChanged("PhoneNumber");
-					this.OnPhoneNumberChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumberConfirmed", DbType="Bit NOT NULL")]
-		public bool PhoneNumberConfirmed
-		{
-			get
-			{
-				return this._PhoneNumberConfirmed;
-			}
-			set
-			{
-				if ((this._PhoneNumberConfirmed != value))
-				{
-					this.OnPhoneNumberConfirmedChanging(value);
-					this.SendPropertyChanging();
-					this._PhoneNumberConfirmed = value;
-					this.SendPropertyChanged("PhoneNumberConfirmed");
-					this.OnPhoneNumberConfirmedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TwoFactorEnabled", DbType="Bit NOT NULL")]
-		public bool TwoFactorEnabled
-		{
-			get
-			{
-				return this._TwoFactorEnabled;
-			}
-			set
-			{
-				if ((this._TwoFactorEnabled != value))
-				{
-					this.OnTwoFactorEnabledChanging(value);
-					this.SendPropertyChanging();
-					this._TwoFactorEnabled = value;
-					this.SendPropertyChanged("TwoFactorEnabled");
-					this.OnTwoFactorEnabledChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LockoutEndDateUtc", DbType="DateTime")]
-		public System.Nullable<System.DateTime> LockoutEndDateUtc
-		{
-			get
-			{
-				return this._LockoutEndDateUtc;
-			}
-			set
-			{
-				if ((this._LockoutEndDateUtc != value))
-				{
-					this.OnLockoutEndDateUtcChanging(value);
-					this.SendPropertyChanging();
-					this._LockoutEndDateUtc = value;
-					this.SendPropertyChanged("LockoutEndDateUtc");
-					this.OnLockoutEndDateUtcChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LockoutEnabled", DbType="Bit NOT NULL")]
-		public bool LockoutEnabled
-		{
-			get
-			{
-				return this._LockoutEnabled;
-			}
-			set
-			{
-				if ((this._LockoutEnabled != value))
-				{
-					this.OnLockoutEnabledChanging(value);
-					this.SendPropertyChanging();
-					this._LockoutEnabled = value;
-					this.SendPropertyChanged("LockoutEnabled");
-					this.OnLockoutEnabledChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccessFailedCount", DbType="Int NOT NULL")]
-		public int AccessFailedCount
-		{
-			get
-			{
-				return this._AccessFailedCount;
-			}
-			set
-			{
-				if ((this._AccessFailedCount != value))
-				{
-					this.OnAccessFailedCountChanging(value);
-					this.SendPropertyChanging();
-					this._AccessFailedCount = value;
-					this.SendPropertyChanged("AccessFailedCount");
-					this.OnAccessFailedCountChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this.OnUserNameChanging(value);
-					this.SendPropertyChanging();
-					this._UserName = value;
-					this.SendPropertyChanged("UserName");
-					this.OnUserNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserClaim", Storage="_AspNetUserClaims", ThisKey="Id", OtherKey="UserId")]
-		public EntitySet<AspNetUserClaim> AspNetUserClaims
-		{
-			get
-			{
-				return this._AspNetUserClaims;
-			}
-			set
-			{
-				this._AspNetUserClaims.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserLogin", Storage="_AspNetUserLogins", ThisKey="Id", OtherKey="UserId")]
-		public EntitySet<AspNetUserLogin> AspNetUserLogins
-		{
-			get
-			{
-				return this._AspNetUserLogins;
-			}
-			set
-			{
-				this._AspNetUserLogins.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AspNetUser_AspNetUserRole", Storage="_AspNetUserRoles", ThisKey="Id", OtherKey="UserId")]
-		public EntitySet<AspNetUserRole> AspNetUserRoles
-		{
-			get
-			{
-				return this._AspNetUserRoles;
-			}
-			set
-			{
-				this._AspNetUserRoles.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_AspNetUserClaims(AspNetUserClaim entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = this;
-		}
-		
-		private void detach_AspNetUserClaims(AspNetUserClaim entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = null;
-		}
-		
-		private void attach_AspNetUserLogins(AspNetUserLogin entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = this;
-		}
-		
-		private void detach_AspNetUserLogins(AspNetUserLogin entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = null;
-		}
-		
-		private void attach_AspNetUserRoles(AspNetUserRole entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = this;
-		}
-		
-		private void detach_AspNetUserRoles(AspNetUserRole entity)
-		{
-			this.SendPropertyChanging();
-			entity.AspNetUser = null;
 		}
 	}
 	
@@ -1563,17 +218,17 @@ namespace DatabaseAccessLibrary
 		
 		private string _address;
 		
-		private int _phoneNo;
+		private System.Nullable<int> _phoneNo;
 		
 		private string _email;
 		
 		private int _roleId;
 		
-		private EntityRef<User> _User;
-		
 		private EntitySet<OrderHistory> _OrderHistories;
 		
 		private EntityRef<Restaurant> _Restaurant;
+		
+		private EntityRef<User> _User;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1585,7 +240,7 @@ namespace DatabaseAccessLibrary
     partial void OnnameChanged();
     partial void OnaddressChanging(string value);
     partial void OnaddressChanged();
-    partial void OnphoneNoChanging(int value);
+    partial void OnphoneNoChanging(System.Nullable<int> value);
     partial void OnphoneNoChanged();
     partial void OnemailChanging(string value);
     partial void OnemailChanged();
@@ -1595,9 +250,9 @@ namespace DatabaseAccessLibrary
 		
 		public Customer()
 		{
-			this._User = default(EntityRef<User>);
 			this._OrderHistories = new EntitySet<OrderHistory>(new Action<OrderHistory>(this.attach_OrderHistories), new Action<OrderHistory>(this.detach_OrderHistories));
 			this._Restaurant = default(EntityRef<Restaurant>);
+			this._User = default(EntityRef<User>);
 			OnCreated();
 		}
 		
@@ -1621,7 +276,7 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
 		public string name
 		{
 			get
@@ -1641,7 +296,7 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_address", DbType="NVarChar(50)")]
 		public string address
 		{
 			get
@@ -1661,8 +316,8 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phoneNo", DbType="Int NOT NULL")]
-		public int phoneNo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phoneNo", DbType="Int")]
+		public System.Nullable<int> phoneNo
 		{
 			get
 			{
@@ -1721,35 +376,6 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_User", Storage="_User", ThisKey="id", OtherKey="customerId", IsUnique=true, IsForeignKey=false)]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.Customer = null;
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.Customer = this;
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_OrderHistory", Storage="_OrderHistories", ThisKey="id", OtherKey="customerId")]
 		public EntitySet<OrderHistory> OrderHistories
 		{
@@ -1788,6 +414,35 @@ namespace DatabaseAccessLibrary
 						value.Customer = this;
 					}
 					this.SendPropertyChanged("Restaurant");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_User", Storage="_User", ThisKey="id", OtherKey="customerId", IsUnique=true, IsForeignKey=false)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Customer = null;
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Customer = this;
+					}
+					this.SendPropertyChanged("User");
 				}
 			}
 		}
@@ -2235,6 +890,198 @@ namespace DatabaseAccessLibrary
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OrderHistory")]
+	public partial class OrderHistory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _orderId;
+		
+		private int _customerId;
+		
+		private double _payment;
+		
+		private EntityRef<Customer> _Customer;
+		
+		private EntityRef<Order> _Order;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnorderIdChanging(int value);
+    partial void OnorderIdChanged();
+    partial void OncustomerIdChanging(int value);
+    partial void OncustomerIdChanged();
+    partial void OnpaymentChanging(double value);
+    partial void OnpaymentChanged();
+    #endregion
+		
+		public OrderHistory()
+		{
+			this._Customer = default(EntityRef<Customer>);
+			this._Order = default(EntityRef<Order>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_orderId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int orderId
+		{
+			get
+			{
+				return this._orderId;
+			}
+			set
+			{
+				if ((this._orderId != value))
+				{
+					if (this._Order.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnorderIdChanging(value);
+					this.SendPropertyChanging();
+					this._orderId = value;
+					this.SendPropertyChanged("orderId");
+					this.OnorderIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customerId", DbType="Int NOT NULL")]
+		public int customerId
+		{
+			get
+			{
+				return this._customerId;
+			}
+			set
+			{
+				if ((this._customerId != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OncustomerIdChanging(value);
+					this.SendPropertyChanging();
+					this._customerId = value;
+					this.SendPropertyChanged("customerId");
+					this.OncustomerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_payment", DbType="Float NOT NULL")]
+		public double payment
+		{
+			get
+			{
+				return this._payment;
+			}
+			set
+			{
+				if ((this._payment != value))
+				{
+					this.OnpaymentChanging(value);
+					this.SendPropertyChanging();
+					this._payment = value;
+					this.SendPropertyChanged("payment");
+					this.OnpaymentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_OrderHistory", Storage="_Customer", ThisKey="customerId", OtherKey="id", IsForeignKey=true)]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.OrderHistories.Remove(this);
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.OrderHistories.Add(this);
+						this._customerId = value.id;
+					}
+					else
+					{
+						this._customerId = default(int);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_OrderHistory", Storage="_Order", ThisKey="orderId", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
+		public Order Order
+		{
+			get
+			{
+				return this._Order.Entity;
+			}
+			set
+			{
+				Order previousValue = this._Order.Entity;
+				if (((previousValue != value) 
+							|| (this._Order.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Order.Entity = null;
+						previousValue.OrderHistory = null;
+					}
+					this._Order.Entity = value;
+					if ((value != null))
+					{
+						value.OrderHistory = this;
+						this._orderId = value.id;
+					}
+					else
+					{
+						this._orderId = default(int);
+					}
+					this.SendPropertyChanged("Order");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Menu")]
 	public partial class Menu : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2435,198 +1282,6 @@ namespace DatabaseAccessLibrary
 		{
 			this.SendPropertyChanging();
 			entity.Menu = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.OrderHistory")]
-	public partial class OrderHistory : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _orderId;
-		
-		private int _customerId;
-		
-		private double _payment;
-		
-		private EntityRef<Customer> _Customer;
-		
-		private EntityRef<Order> _Order;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnorderIdChanging(int value);
-    partial void OnorderIdChanged();
-    partial void OncustomerIdChanging(int value);
-    partial void OncustomerIdChanged();
-    partial void OnpaymentChanging(double value);
-    partial void OnpaymentChanged();
-    #endregion
-		
-		public OrderHistory()
-		{
-			this._Customer = default(EntityRef<Customer>);
-			this._Order = default(EntityRef<Order>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_orderId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int orderId
-		{
-			get
-			{
-				return this._orderId;
-			}
-			set
-			{
-				if ((this._orderId != value))
-				{
-					if (this._Order.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnorderIdChanging(value);
-					this.SendPropertyChanging();
-					this._orderId = value;
-					this.SendPropertyChanged("orderId");
-					this.OnorderIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customerId", DbType="Int NOT NULL")]
-		public int customerId
-		{
-			get
-			{
-				return this._customerId;
-			}
-			set
-			{
-				if ((this._customerId != value))
-				{
-					if (this._Customer.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OncustomerIdChanging(value);
-					this.SendPropertyChanging();
-					this._customerId = value;
-					this.SendPropertyChanged("customerId");
-					this.OncustomerIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_payment", DbType="Float NOT NULL")]
-		public double payment
-		{
-			get
-			{
-				return this._payment;
-			}
-			set
-			{
-				if ((this._payment != value))
-				{
-					this.OnpaymentChanging(value);
-					this.SendPropertyChanging();
-					this._payment = value;
-					this.SendPropertyChanged("payment");
-					this.OnpaymentChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_OrderHistory", Storage="_Customer", ThisKey="customerId", OtherKey="id", IsForeignKey=true)]
-		public Customer Customer
-		{
-			get
-			{
-				return this._Customer.Entity;
-			}
-			set
-			{
-				Customer previousValue = this._Customer.Entity;
-				if (((previousValue != value) 
-							|| (this._Customer.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Customer.Entity = null;
-						previousValue.OrderHistories.Remove(this);
-					}
-					this._Customer.Entity = value;
-					if ((value != null))
-					{
-						value.OrderHistories.Add(this);
-						this._customerId = value.id;
-					}
-					else
-					{
-						this._customerId = default(int);
-					}
-					this.SendPropertyChanged("Customer");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Order_OrderHistory", Storage="_Order", ThisKey="orderId", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public Order Order
-		{
-			get
-			{
-				return this._Order.Entity;
-			}
-			set
-			{
-				Order previousValue = this._Order.Entity;
-				if (((previousValue != value) 
-							|| (this._Order.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Order.Entity = null;
-						previousValue.OrderHistory = null;
-					}
-					this._Order.Entity = value;
-					if ((value != null))
-					{
-						value.OrderHistory = this;
-						this._orderId = value.id;
-					}
-					else
-					{
-						this._orderId = default(int);
-					}
-					this.SendPropertyChanged("Order");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -4210,6 +2865,133 @@ namespace DatabaseAccessLibrary
 		{
 			this.SendPropertyChanging();
 			entity.Restaurant = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _customerId;
+		
+		private string _password;
+		
+		private EntityRef<Customer> _Customer;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OncustomerIdChanging(int value);
+    partial void OncustomerIdChanged();
+    partial void OnpasswordChanging(string value);
+    partial void OnpasswordChanged();
+    #endregion
+		
+		public User()
+		{
+			this._Customer = default(EntityRef<Customer>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customerId", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int customerId
+		{
+			get
+			{
+				return this._customerId;
+			}
+			set
+			{
+				if ((this._customerId != value))
+				{
+					if (this._Customer.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OncustomerIdChanging(value);
+					this.SendPropertyChanging();
+					this._customerId = value;
+					this.SendPropertyChanged("customerId");
+					this.OncustomerIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_password", DbType="VarChar(MAX)")]
+		public string password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if ((this._password != value))
+				{
+					this.OnpasswordChanging(value);
+					this.SendPropertyChanging();
+					this._password = value;
+					this.SendPropertyChanged("password");
+					this.OnpasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_User", Storage="_Customer", ThisKey="customerId", OtherKey="id", IsForeignKey=true)]
+		public Customer Customer
+		{
+			get
+			{
+				return this._Customer.Entity;
+			}
+			set
+			{
+				Customer previousValue = this._Customer.Entity;
+				if (((previousValue != value) 
+							|| (this._Customer.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Customer.Entity = null;
+						previousValue.User = null;
+					}
+					this._Customer.Entity = value;
+					if ((value != null))
+					{
+						value.User = this;
+						this._customerId = value.id;
+					}
+					else
+					{
+						this._customerId = default(int);
+					}
+					this.SendPropertyChanged("Customer");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

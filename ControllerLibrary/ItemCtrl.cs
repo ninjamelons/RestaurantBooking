@@ -136,9 +136,7 @@ namespace ControllerLibrary
             {
                 Id = dbItem.id,
                 Name = dbItem.name,
-                Description = dbItem.description,
-                ItemCat = ConvertItemCatToModel(dbItem.ItemCat),
-                Menu = menuCtrl.ConvertMenuToModel(dbItem.Menu)
+                Description = dbItem.description
 
             };
             return modelItem;
