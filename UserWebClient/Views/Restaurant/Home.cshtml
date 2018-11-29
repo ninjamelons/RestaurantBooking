@@ -1,4 +1,5 @@
-﻿@model UserWebClient.Models.RestaurantOrderModel
+﻿@using System.Web.Configuration
+@model UserWebClient.Models.RestaurantOrderModel
 
 @{
     ViewBag.Title = Model.Restaurant.Name;
@@ -10,7 +11,7 @@
 
 <div class="row">
     <div class="col-md-3">
-
+        @Html.ActionLink("Reserve Table","ReserveTable","Restaurant",Model,new {@class = "btn btn-danger"})
     </div>
     <div class="col-md-9">
         <table class="table">
@@ -20,14 +21,25 @@
             <th>Add to Cart</th>
             </thead>
             <tbody>
-            @foreach (var item in Model.Restaurant.Menu.Items)
+           @foreach (var item in Model.Restaurant.Menu.Items)
             {
                 <tr>
                     <td>@item.Name</td>
                     <td>@item.Price.VarPrice</td>
                     <td>
-                        @Html.ActionLink("Add to cart", "HomeCart", "Restaurant",
-                            new { resId = Model.Restaurant.Id, orderId = Model.OrderId, itemId = item.Id }, new {@class = "btn btn-info"})
+                       @if(Session["orderId"] == null)
+                        {
+                            <a>Reserve a table to add items</a>
+                        }
+                        else
+                        {
+                            Html.ActionLink("Add to cart", "HomeCart", "Restaurant",
+                                new
+                                {
+                                    resId = Model.Restaurant.Id, orderId = Model.OrderId,
+                                    itemId = item.Id
+                                }, new {@class = "btn btn-info"});
+                        }
                     </td>
                 </tr>
             }
