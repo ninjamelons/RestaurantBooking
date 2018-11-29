@@ -6,10 +6,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModelLibrary;
 using ControllerLibrary;
 
-namespace UnitTestProject1
+namespace UnitTests
 {
     [TestClass]
-    public class ItemTestcs
+    public class ItemTest
     {
         [TestMethod]
         [DataRow("ChickenSteak", "WeirdDescription", true, DisplayName = "All data correct")]
