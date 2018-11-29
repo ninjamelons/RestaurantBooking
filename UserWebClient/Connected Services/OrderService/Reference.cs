@@ -16,10 +16,10 @@ namespace UserWebClient.OrderService {
     public interface IOrderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/AddItemToOrder", ReplyAction="http://tempuri.org/IOrderService/AddItemToOrderResponse")]
-        void AddItemToOrder(int orderId, int itemId);
+        void AddItemToOrder(int orderId, int itemId, int resId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/AddItemToOrder", ReplyAction="http://tempuri.org/IOrderService/AddItemToOrderResponse")]
-        System.Threading.Tasks.Task AddItemToOrderAsync(int orderId, int itemId);
+        System.Threading.Tasks.Task AddItemToOrderAsync(int orderId, int itemId, int resId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
         void CreateOrder(DatabaseAccessLibrary.Order order);
@@ -38,6 +38,12 @@ namespace UserWebClient.OrderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/UpdateOrder", ReplyAction="http://tempuri.org/IOrderService/UpdateOrderResponse")]
         System.Threading.Tasks.Task UpdateOrderAsync(DatabaseAccessLibrary.Order order);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrder", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderResponse")]
+        void DeleteOrder(int orderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrder", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderResponse")]
+        System.Threading.Tasks.Task DeleteOrderAsync(int orderId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -67,12 +73,12 @@ namespace UserWebClient.OrderService {
                 base(binding, remoteAddress) {
         }
         
-        public void AddItemToOrder(int orderId, int itemId) {
-            base.Channel.AddItemToOrder(orderId, itemId);
+        public void AddItemToOrder(int orderId, int itemId, int resId) {
+            base.Channel.AddItemToOrder(orderId, itemId, resId);
         }
         
-        public System.Threading.Tasks.Task AddItemToOrderAsync(int orderId, int itemId) {
-            return base.Channel.AddItemToOrderAsync(orderId, itemId);
+        public System.Threading.Tasks.Task AddItemToOrderAsync(int orderId, int itemId, int resId) {
+            return base.Channel.AddItemToOrderAsync(orderId, itemId, resId);
         }
         
         public void CreateOrder(DatabaseAccessLibrary.Order order) {
@@ -97,6 +103,14 @@ namespace UserWebClient.OrderService {
         
         public System.Threading.Tasks.Task UpdateOrderAsync(DatabaseAccessLibrary.Order order) {
             return base.Channel.UpdateOrderAsync(order);
+        }
+        
+        public void DeleteOrder(int orderId) {
+            base.Channel.DeleteOrder(orderId);
+        }
+        
+        public System.Threading.Tasks.Task DeleteOrderAsync(int orderId) {
+            return base.Channel.DeleteOrderAsync(orderId);
         }
     }
 }

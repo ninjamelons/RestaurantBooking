@@ -63,7 +63,6 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ItemCat" nillable="true" type="tns:ItemCat" />
       <xs:element minOccurs="0" name="Menu" nillable="true" type="tns:Menu" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OrderLineItems" nillable="true" type="tns:ArrayOfOrderLineItem" />
       <xs:element minOccurs="0" name="Prices" nillable="true" type="tns:ArrayOfPrice" />
       <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />

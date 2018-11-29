@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/Content/custom.css">
     <title>@ViewBag.Title - JustFeast</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -31,11 +32,20 @@
                     <!--Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { replacewithat.class = "navbar-brand" })-->
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav active">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
+                        <li>@Html.ActionLink("Restaurants", "Browse", "Restaurant")</li>
+                        @if (Session["roleId"] != null)
+                        {
+                            if (Session["roleId"].ToString() == "1")
+                            {
+                                <li>@Html.ActionLink("AdminRestaurants", "Index", "Restaurant")</li>
+                            }
+                            if (Session["roleId"].ToString() == "2")
+                            {
+                                <li>@Html.ActionLink("My Restaurant", "Home", "Restaurant", new { id = Session["customerId"] })</li>
+                            }
+                        }
 
                     </ul>
                     @Html.Partial("_LoginPartial")

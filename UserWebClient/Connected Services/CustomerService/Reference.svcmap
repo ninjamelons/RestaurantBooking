@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3cd4b755-19c5-4c2f-b9fe-b6cce8928bb0" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/RestaurantService/CustomerService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="07fc2171-7ea0-4298-ab8b-444afe533440" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/CustomerService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="6cc4102a-1181-4954-83ce-7fe9ca992fc8" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/CustomerService/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="cbf1f9de-fa7a-49f8-aecf-835480ad98cd" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/CustomerService/mex" />
+    <MetadataFile FileName="ModelLibrary.xsd" MetadataType="Schema" ID="c5add680-52a4-497e-a0d7-15a4947f5037" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/CustomerService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -26,6 +26,11 @@ namespace UserWebClient.Controllers
         // GET: Restaurant
         public ActionResult Index()
         {
+            if (Session["roleId"] == null)
+                return RedirectToAction("Index", "Home");
+            if (Session["roleId"].ToString() != "1")
+                return RedirectToAction("Index", "Home");
+
             return View(_proxy.GetAllRestaurants());
         }
 
@@ -77,14 +82,10 @@ namespace UserWebClient.Controllers
         // GET: Restaurant/Edit/5
         public ActionResult Edit(int id)
         {
-            //  var rescats = new Dictionary<string, RestaurantCategory>();
-            //  rescats.Add("-No Category-", null);
-            //  foreach (RestaurantCategory x in proxy.GetAllRestaurantCategories())
-            //  {
-            //      rescats.Add(x.Name, x);
-            //  }
-            //
-            //  RestaurantViewModel model = new RestaurantViewModel { Restaurant = proxy.GetRestaurant(id), Categories = rescats };
+            if (Session["roleId"] == null)
+                return RedirectToAction("Index", "Home");
+            if (Session["roleId"].ToString() != "1")
+                return RedirectToAction("Index", "Home");
 
             var categories = new List<RestaurantCategory>();
             categories.Add(new RestaurantCategory { Id = 0, Name = "-No Category-" });
@@ -101,6 +102,11 @@ namespace UserWebClient.Controllers
         {
             try
             {
+                if (Session["roleId"] == null)
+                    return RedirectToAction("Index", "Home");
+                if (Session["roleId"].ToString() != "1")
+                    return RedirectToAction("Index", "Home");
+
                 var res = model.Restaurant;
                 res.Id = id;
                 res.Category = _proxy.GetRestaurantCategory(model.SelectedCategoryId);
@@ -119,6 +125,11 @@ namespace UserWebClient.Controllers
         {
             try
             {
+                if (Session["roleId"] == null)
+                    return RedirectToAction("Index", "Home");
+                if (Session["roleId"].ToString() != "1")
+                    return RedirectToAction("Index", "Home");
+
                 var model = _proxy.GetRestaurant(id);
                 return View(model);
             }
@@ -134,6 +145,11 @@ namespace UserWebClient.Controllers
         {
             try
             {
+                if (Session["roleId"] == null)
+                    return RedirectToAction("Index", "Home");
+                if (Session["roleId"].ToString() != "1")
+                    return RedirectToAction("Index", "Home");
+
                 _proxy.DeleteRestaurant(id);
                 return RedirectToAction("Index");
             }
@@ -171,7 +187,8 @@ namespace UserWebClient.Controllers
            [HttpGet]
         // GET: RestaurantHome
         public ActionResult Home(int id)
-        {
+           {
+               Session["order"] = 1000000;
             RestaurantOrderModel model = new RestaurantOrderModel();
             model.Restaurant = this._proxy.GetRestaurantWithMenu(id);
             model.menu = model.Restaurant.Menu;
@@ -179,13 +196,13 @@ namespace UserWebClient.Controllers
             return View("Home", model);
         }
 
-        [HttpPost]
+        [HttpGet]
         // POST add item to cart
         public ActionResult HomeCart(int resId, int orderId, int itemId)
         {
             #region Add item to cart
 
-            _orderProxy.AddItemToOrder(orderId, itemId);
+            _orderProxy.AddItemToOrder(orderId, itemId, resId);
 
             #endregion
 

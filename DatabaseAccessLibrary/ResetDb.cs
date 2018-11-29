@@ -1,27 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
+using System.Net;
 
 namespace DatabaseAccessLibrary
 {
     public partial class ResetDb
     {
-        protected void clean()
+        private readonly WebClient _client = new WebClient();
+
+        public string GetCreateFile()
+        {
+            var streamCreate = _client.OpenRead("https://www.dropbox.com/s/d4aibod4sffqtrx/Drop%20and%20Create%20all%20tables.sql?dl=1");
+            var streamReaderCreate = new StreamReader(streamCreate);
+            return streamReaderCreate.ReadToEnd();
+        }
+
+        public string GetInsertFile()
+        {
+            var streamInsert = _client.OpenRead("https://www.dropbox.com/s/7emfnd5vhnvdexn/TestData.sql?dl=1");
+            var streamReaderInsert = new StreamReader(streamInsert);
+            return streamReaderInsert.ReadToEnd();
+        }
+
+        public void Clean()
         {
             var db = new JustFeastDbDataContext();
-
-            string dropCreateScript =
-                File.ReadAllText(@"C:\Users\Golvin\Documents\UCN\3rd semester\Project\Drop and Create all tables.sql");
             var conn = db.Connection;
-
-            var cmd = new SqlCommand(dropCreateScript);
-            conn.BeginTransaction();
+            var cmdCreate = conn.CreateCommand();
+            var cmdInsert = conn.CreateCommand();
+            cmdCreate.CommandText = GetCreateFile();
             conn.Open();
-            cmd.ExecuteNonQuery();
+            cmdInsert.CommandText = GetInsertFile();
+            cmdCreate.ExecuteNonQuery();
+            cmdInsert.ExecuteNonQuery();
             conn.Close();
         }
     }

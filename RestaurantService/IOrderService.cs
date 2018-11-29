@@ -13,12 +13,14 @@ namespace RestaurantService
     public interface IOrderService
     {
         [OperationContract]
-        void AddItemToOrder(int orderId, int itemId);
+        void AddItemToOrder(int orderId, int itemId, int resId);
         [OperationContract]
         void CreateOrder(Order order);
         [OperationContract]
         Order GetOrderById(int id);
         [OperationContract]
         void UpdateOrder(Order order);
+        [OperationContract]
+        void DeleteOrder(int orderId);
     }
 }
