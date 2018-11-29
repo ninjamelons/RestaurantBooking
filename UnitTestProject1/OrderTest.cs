@@ -12,8 +12,15 @@ using OrderLineItem = ModelLibrary.OrderLineItem;
 namespace UnitTests
 {
     [TestClass]
-    public class OrderTest5
+    public class OrderTest
     {
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            ResetDb resetDb = new ResetDb();
+            resetDb.Clean();
+        }
+
         [TestMethod]
         [DataRow("1000000", "1000000", "1000000", "2018-11-08 12:22:33", "2018-11-08 18:00:00", "2", "200.00", true,
             true, DisplayName = "Valid Input: Order Accepted")]
@@ -172,6 +179,7 @@ namespace UnitTests
 
             var dbOrder = new DatabaseAccessLibrary.Order
             {
+                id = 1000000,
                 restaurantId = 1000000,
                 dateTime = dt,
                 reservation = newResDt,
@@ -179,7 +187,7 @@ namespace UnitTests
                 accepted = false
             };
             ordC.UpdateOrder(dbOrder);
-            Assert.IsTrue(ordC.GetOrderById(1000001).reservation == newResDt);
+            Assert.IsTrue(ordC.GetOrderById(1000000).reservation == newResDt);
         }
 
         [TestMethod]
@@ -187,7 +195,7 @@ namespace UnitTests
         {
             OrderCtrl ordC = new OrderCtrl();
 
-            Assert.IsTrue(ordC.GetLastOrderIdentity() == 1000001);
+            Assert.IsTrue(ordC.GetLastOrderIdentity() == 1000000);
         }
 
         [TestMethod]

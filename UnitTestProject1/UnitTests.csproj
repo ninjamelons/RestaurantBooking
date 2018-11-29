@@ -98,7 +98,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="ItemTestcs.cs" />
+    <Compile Include="ItemTest.cs" />
     <Compile Include="OrderTest.cs" />
     <Compile Include="RegisterRestaurantTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -51,20 +51,23 @@ namespace DatabaseAccessLibrary
         public Order GetOrderById(int id)
         {
             var db = new JustFeastDbDataContext();
-            return new Order();
+            return db.Orders.FirstOrDefault(o => o.id == id);
         }
 
         public void UpdateOrder(Order order)
         {
             var db = new JustFeastDbDataContext();
-            var ord = db.Orders.SingleOrDefault(o => o.id == Convert.ToInt32(order.id));
-            ord.OrderLineItems = order.OrderLineItems;
-            ord.restaurantId = order.restaurantId;
-            ord.accepted = order.accepted;
-            ord.dateTime = order.dateTime;
-            ord.reservation = order.reservation;
-            ord.noSeats = order.noSeats;
-            db.SubmitChanges();
+            var ord = db.Orders.SingleOrDefault(o => o.id == order.id);
+            if (ord != null)
+            {
+                ord.OrderLineItems = order.OrderLineItems;
+                ord.restaurantId = order.restaurantId;
+                ord.accepted = order.accepted;
+                ord.dateTime = order.dateTime;
+                ord.reservation = order.reservation;
+                ord.noSeats = order.noSeats;
+                db.SubmitChanges();
+            }
         }
 
         public int GetLastOrderIdentity()
