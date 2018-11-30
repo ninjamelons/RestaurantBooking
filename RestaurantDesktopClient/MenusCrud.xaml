@@ -11,16 +11,16 @@
     <Grid Margin="0,0,0,-0.4">
         <CheckBox x:Name="checkBoxActive" Content="" HorizontalAlignment="Left" Height="34" Margin="516,100,0,0" VerticalAlignment="Top" Width="28" FontWeight="Bold" FontSize="18" RenderTransformOrigin="0.773,0.821" />
         <Label x:Name="labelActive" Content="Active:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="433,86,0,0" Width="67" RenderTransformOrigin="-2.09,0.956"/>
-        <Button x:Name="buttonDelete" Content="Delete Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="113" Margin="645,400,0,0" Height="29" Click="buttonDelete_Click"/>
+        <Button x:Name="buttonDelete" Content="Delete Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="99" Margin="686,402,0,0" Height="29" Click="buttonDelete_Click"/>
         <Label x:Name="labelMenuName1" Content="Menu Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="388,30,0,0" Width="123" FontSize="18" FontWeight="Bold"/>
         <TextBox x:Name="textBoxName" FontSize="18" FontWeight="Bold"  HorizontalAlignment="Left" Height="33" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="269" Margin="516,30,0,0"/>
-        <Button x:Name="buttonSaveName" Content="Save Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="113" Margin="527,402,0,0" Height="29" Click="buttonSaveName_Click"/>
+        <Button x:Name="buttonSaveName" Content="Edit Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="99" Margin="582,402,0,0" Height="29" Click="buttonSaveName_Click"/>
         <Label x:Name="hiddenName" Visibility="Hidden"/>
         <Label x:Name="hiddenActive" Visibility="Hidden"/>
         <Label x:Name="labelRestaurantIdds" Visibility="Hidden" Content="RestaurantId:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="550,20,0,0" Width="123" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="labelRestaurantId" Visibility="Hidden" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="673,20,0,0" Width="123" FontSize="18" />
 
-        <DataGrid x:Name="dataGridItemList" AutoGenerateColumns="True" HorizontalAlignment="Left" Height="382" Margin="10,20,0,0" VerticalAlignment="Top" Width="336">
+        <DataGrid x:Name="dataGridItemList" SelectedItem="{Binding ChosenItem}" AutoGenerateColumns="True" HorizontalAlignment="Left" Height="382" Margin="10,20,0,0" VerticalAlignment="Top" Width="336" SelectionChanged="dataGridItemList_SelectionChanged">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="DarkGray"/>
@@ -38,7 +38,8 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="buttonCreateMenu" Content="Create Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="113" Margin="409,402,0,0" Height="29" Click="buttonCreateMenu_Click"/>
+        <Button x:Name="buttonCreateMenu" Content="Create Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="483,402,0,0" Height="29" Click="buttonCreateMenu_Click"/>
+        <Button x:Name="buttonCheckItem" Content="MenuItems" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="384,402,0,0" Height="29" Click="buttonCheckItem_Click"/>
 
     </Grid>
 </Page>

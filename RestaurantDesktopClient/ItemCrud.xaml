@@ -19,8 +19,7 @@
         <Button x:Name="buttonCreateCategory" Content="Create Category" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="663,35,0,0" Height="27" Click="buttonCreateCategory_Click"/>
         <Button x:Name="buttonEdit" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="550,397,0,0" Height="27" Click="buttonSave_Click"/>
         <ComboBox x:Name="comboBoxCategory" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Margin="514,140,0,0" SelectionChanged="comboBoxCategory_SelectionChanged"/>
-        <Label x:Name="labelIMenuId" Content="Menu:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="396,182,0,0" Width="109"/>
-        <DataGrid x:Name="dataGridItemList" AutoGenerateColumns="True" HorizontalAlignment="Left" Height="382" Margin="35,36,0,0" VerticalAlignment="Top" Width="289">
+        <DataGrid x:Name="dataGridItemList" AutoGenerateColumns="True" HorizontalAlignment="Left" Height="382" Margin="35,36,0,0" VerticalAlignment="Top" Width="289" SelectionChanged="dataGridItemList_SelectionChanged">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="DarkGray"/>
@@ -41,7 +40,8 @@
         </DataGrid>
         <Button x:Name="buttonDelete" Content="Delete" HorizontalAlignment="Left" Margin="663,398,0,0" VerticalAlignment="Top" Width="108" Height="28" Click="buttonDelete_Click"/>
         <Button x:Name="buttonCreate" Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="437,397,0,0" Height="28" Click="buttonCreate_Click"/>
-        <ComboBox x:Name="comboBoxMenuId" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Margin="514,194,0,0"/>
+        <Label x:Name="labelMenuName" Content="" FontWeight="Bold" HorizontalAlignment="Left" Margin="514,188,0,0" VerticalAlignment="Top" Width="132"/>
+        <Label x:Name="labelMenuId" Visibility="Hidden" Content="Label" HorizontalAlignment="Left" Margin="736,140,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>

@@ -36,72 +36,99 @@ namespace RestaurantDesktopClient
 
         private void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
-            var selectedItemCat = (ModelLibrary.ItemCat)dataGridItemCatList.SelectedItem; 
-            //labelRestaurantId = Convert.ToInt32()  
-            var proxy = new ItemServiceClient();
-            proxy.DeleteItemCat(selectedItemCat);
-            dataGridItemCatList.Items.Clear();
-            var modelMenu = proxy.GetAllItemCategories();
-            foreach (ItemCat item in modelMenu)
+            var selectedItemCat = (ModelLibrary.ItemCat)dataGridItemCatList.SelectedItem;
+            if (selectedItemCat == null)
             {
-                dataGridItemCatList.Items.Add(item);
-            };
+                MessageBox.Show("Nothing selected");
+            }
+            else
+            {
+                //labelRestaurantId = Convert.ToInt32()  
+                var proxy = new ItemServiceClient();
+                proxy.DeleteItemCat(selectedItemCat);
+                dataGridItemCatList.Items.Clear();
+                var modelMenu = proxy.GetAllItemCategories();
+                foreach (ItemCat item in modelMenu)
+                {
+                    dataGridItemCatList.Items.Add(item);
+                };
+            }
 
 
         }
 
         private void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
-            var newItemCat = new ItemCat
-            {
-                Name = textBoxName.Text
-            };
 
-            var proxy = new ItemServiceClient();
-            proxy.CreateItemCat(newItemCat);
-            dataGridItemCatList.Items.Clear();
-            var modelMenu = proxy.GetAllItemCategories();
-            foreach (ItemCat item in modelMenu)
+            if (textBoxName.Text.Length < 2)
             {
-                dataGridItemCatList.Items.Add(item);
-            };
+                MessageBox.Show("EmptyName");
+            }
+            else
+            {
+                var newItemCat = new ItemCat
+                {
+                    Name = textBoxName.Text
+                };
+
+                var proxy = new ItemServiceClient();
+                proxy.CreateItemCat(newItemCat);
+                dataGridItemCatList.Items.Clear();
+                var modelMenu = proxy.GetAllItemCategories();
+                foreach (ItemCat item in modelMenu)
+                {
+                    dataGridItemCatList.Items.Add(item);
+                };
+            }
         }
 
         private void buttonEdit_Click(object sender, RoutedEventArgs e)
         {
-            var proxy = new ItemServiceClient();
-            var slectedItemCat = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
-            var oldItem = new ItemCat
+            
+            if (textBoxName.Text.Length < 2 )
             {
-                Name = slectedItemCat.Name,
-                Id = slectedItemCat.Id
-                
-            };
-            var newItem = new ItemCat
+                MessageBox.Show("InvalidName");
+            }
+            else
             {
-                Name  =  textBoxName.Text,
-                Id = slectedItemCat.Id
-            };
-            proxy.UpdateItemCat(oldItem, newItem);
-            dataGridItemCatList.Items.Clear();
-            var modelMenu = proxy.GetAllItemCategories();
-            foreach (ItemCat item in modelMenu)
-            {
-                dataGridItemCatList.Items.Add(item);
-            };
-            var selectedItem = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
-            var name = selectedItem.Name;
-            textBoxName.Text = name;
+                var proxy = new ItemServiceClient();
+                var slectedItemCat = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
+                var oldItem = new ItemCat
+                {
+                    Name = slectedItemCat.Name,
+                    Id = slectedItemCat.Id
+
+                };
+                var newItem = new ItemCat
+                {
+                    Name = textBoxName.Text,
+                    Id = slectedItemCat.Id
+                };
+                proxy.UpdateItemCat(oldItem, newItem);
+                dataGridItemCatList.Items.Clear();
+                var modelMenu = proxy.GetAllItemCategories();
+                foreach (ItemCat item in modelMenu)
+                {
+                    dataGridItemCatList.Items.Add(item);
+                };
+                var selectedItem = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
+            }
 
         }
 
         private void dataGridItemCatList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var proxy = new ItemServiceClient();
+            
             var selectedItem = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
-            var name = selectedItem.Name;
-            //proxy.GetItemCats
-            //textBoxName.Text = name;
+            if (selectedItem == null)
+            {
+                textBoxName.Text = "";
+            }
+            else
+            {
+                textBoxName.Text = dataGridItemCatList.SelectedItem.ToString();
+            }                
         }
     }
 }

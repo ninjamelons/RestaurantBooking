@@ -27,15 +27,15 @@ namespace RestaurantService
             menuDb.DeleteMenu(dbMenu);
         }
 
-        public IEnumerable<DatabaseAccessLibrary.Menu> GetAllMenusByRestaurant(int restaurantId)
+        public IEnumerable<ModelLibrary.Menu> GetAllMenusByRestaurant(int restaurantId)
         {
-
+            var menuCtrl = new MenuCtrl();
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             var res = db.Menus.Where(x => x.restaurantId == restaurantId).ToList();
-            List<DatabaseAccessLibrary.Menu> modelMenu = new List<DatabaseAccessLibrary.Menu>();
+            List<ModelLibrary.Menu> modelMenu = new List<ModelLibrary.Menu>();
             foreach (var a in res)
             {
-                modelMenu.Add(a);
+                modelMenu.Add(menuCtrl.ConvertMenuToModel(a));
             }
             return modelMenu;
            
@@ -44,6 +44,11 @@ namespace RestaurantService
         public ModelLibrary.Menu GetMenu(ModelLibrary.Menu menu)
         {
             return menuCtrl.GetMenu(menu);
+        }
+
+        public ModelLibrary.Menu GetMenuById(int menuId)
+        {
+            return menuCtrl.GetMenuById(menuId);
         }
 
         public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu)

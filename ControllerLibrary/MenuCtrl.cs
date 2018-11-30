@@ -15,14 +15,14 @@ namespace ControllerLibrary
             var returnMenu = new DatabaseAccessLibrary.Menu();
             ItemCtrl itemCtrl = new ItemCtrl();
 
-            
+
             returnMenu.name = menu.Name;
             returnMenu.restaurantId = menu.RestaurantId;
             returnMenu.Items = null;
             DatabaseAccessLibrary.MenuDb menuDb = new DatabaseAccessLibrary.MenuDb();
             menuDb.AddMenu(returnMenu);
             return returnMenu;
-            
+
 
         }
 
@@ -45,7 +45,7 @@ namespace ControllerLibrary
             modelMenu.Items = itemList;
             modelMenu.Active = dbMenu.active;
 
-      
+
             return modelMenu;
         }
 
@@ -58,9 +58,9 @@ namespace ControllerLibrary
             menu.Items = itemCtrl.GetMenuItems(menu.Id);
             return menu;
         }
-        
 
-    
+
+
 
         public DatabaseAccessLibrary.Menu ConvertMenuToDb(ModelLibrary.Menu menu)
         {
@@ -80,7 +80,7 @@ namespace ControllerLibrary
             }
             DatabaseAccessLibrary.MenuDb menuDb = new DatabaseAccessLibrary.MenuDb();
             return returnMenu;
-            
+
         }
         public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu)
         {
@@ -106,12 +106,34 @@ namespace ControllerLibrary
                     Name = menu.name,
                     Active = menu.active,
                     Items = modelMenu.Items.AsEnumerable()
-  
+
                 };
             }
 
             return newMenu;
         }
 
+        public ModelLibrary.Menu GetMenuById(int menuId)
+        {
+            var menuDb = new MenuDb();
+            var itemCtrl = new ItemCtrl();
+            var menu = menuDb.GetMenu(menuId);
+            ModelLibrary.Menu newMenu = null;
+            var modelMenu = ConvertMenuToModel(menu);
+            if (menu != null)
+            {
+                newMenu = new ModelLibrary.Menu
+                {
+                    RestaurantId = menu.restaurantId,
+                    Name = menu.name,
+                    Active = menu.active,
+                    Items = modelMenu.Items.AsEnumerable()
+
+                };
+            }
+            return newMenu;
+
+        }
     }
 }
+

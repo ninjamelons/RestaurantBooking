@@ -12,6 +12,9 @@ namespace RestaurantService
     public interface IMenuService
     {
         [OperationContract]
+        ModelLibrary.Menu GetMenu(ModelLibrary.Menu menu);
+
+        [OperationContract]
         void CreateMenu(ModelLibrary.Menu menu);
 
         [OperationContract]
@@ -21,10 +24,10 @@ namespace RestaurantService
         void DeleteMenu(ModelLibrary.Menu menu);
 
         [OperationContract]
-        IEnumerable<DatabaseAccessLibrary.Menu> GetAllMenusByRestaurant(int restaurantId);
+        IEnumerable<ModelLibrary.Menu> GetAllMenusByRestaurant(int restaurantId);
 
         [OperationContract]
-        ModelLibrary.Menu GetMenu(ModelLibrary.Menu menu);
+        ModelLibrary.Menu GetMenuById(int menuId);
 
 
 
