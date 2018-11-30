@@ -69,6 +69,12 @@ namespace DatabaseAccessLibrary
             }
         }
 
+        public List<OrderLineItem> OliList(int id)
+        {
+            var db = new JustFeastDbDataContext();
+            return db.OrderLineItems.Where(x => x.orderId == id).ToList();
+        }
+
         public int GetLastOrderIdentity()
         {
             var db = new JustFeastDbDataContext();

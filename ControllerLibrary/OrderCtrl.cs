@@ -90,5 +90,11 @@ namespace ControllerLibrary
         {
             OrderDb db = new OrderDb();
         }
+
+        public List<OrderLineItem> GetOrderLineItemsById(int id)
+        {
+            var ordDb = new OrderDb();
+            return ordDb.OliList(id);
+        }
     }
 }

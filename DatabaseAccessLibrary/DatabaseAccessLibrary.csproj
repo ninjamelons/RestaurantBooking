@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerDb.cs" />
     <Compile Include="ItemCatDb.cs" />
     <Compile Include="ItemDb.cs" />
     <Compile Include="JustFeastDb.designer.cs">

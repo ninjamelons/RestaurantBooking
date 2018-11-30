@@ -18,5 +18,7 @@ namespace ModelLibrary
         [Required]
         public string Email { get; set; }
         public int RoleId { get; set; }
+
+        public List<OrderHistory> orderHistory { get; set; }
     }
 }
