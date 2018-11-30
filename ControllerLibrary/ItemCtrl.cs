@@ -37,6 +37,30 @@ namespace ControllerLibrary
 
             return modelItems;
         }
+        public ModelLibrary.Item GetItem2(ModelLibrary.Item item)
+        {
+            ItemCtrl itemCtrl = new ItemCtrl();
+            PriceCtrl priceCtrl = new PriceCtrl();
+            MenuCtrl menuCtrl = new MenuCtrl();
+            var itemDb = new ItemDb();
+            var itemo = itemDb.GetItem(item.Id);
+            ModelLibrary.Item newItem = null;
+            if (item != null)
+            {
+                newItem = new ModelLibrary.Item
+                {
+                    Description = itemo.description,
+                    Name = itemo.name,
+                    Id = itemo.id,
+                    ItemCat = itemCtrl.ConvertItemCatToModel(itemo.ItemCat),
+                    Menu = menuCtrl.ConvertMenuToModel(itemo.Menu),
+                    Price = priceCtrl.ConvertPriceToModel(itemo.Prices.Last())
+
+                };
+            }
+
+            return newItem;
+        }
 
         public IEnumerable<ModelLibrary.Item> GetMenuItems(int menuId)
         {
@@ -136,7 +160,9 @@ namespace ControllerLibrary
             {
                 Id = dbItem.id,
                 Name = dbItem.name,
-                Description = dbItem.description
+                Description = dbItem.description,
+                
+                
 
             };
             return modelItem;
@@ -152,10 +178,11 @@ namespace ControllerLibrary
             //var prices = db.Prices.Where(p => p.itemId == modelItem.Id).OrderByDescending(p => p.startDate);
             //var price = prices.First();
             var menuCtrl = new MenuCtrl();
-
+           
             var dbItem = new DatabaseAccessLibrary.Item
             {
                 menuId = modelItem.Menu.Id,
+                itemCatId = modelItem.ItemCat.Id,
                 id = modelItem.Id,
                 name = modelItem.Name,
                 description = modelItem.Description,

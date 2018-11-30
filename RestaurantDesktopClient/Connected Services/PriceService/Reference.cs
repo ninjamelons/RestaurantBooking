@@ -27,6 +27,12 @@ namespace RestaurantDesktopClient.PriceService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/DeletePrice", ReplyAction="http://tempuri.org/IPriceService/DeletePriceResponse")]
         System.Threading.Tasks.Task DeletePriceAsync(ModelLibrary.Price price, int itemId);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/GetPrice", ReplyAction="http://tempuri.org/IPriceService/GetPriceResponse")]
+        ModelLibrary.Price GetPrice(int itemId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/GetPrice", ReplyAction="http://tempuri.org/IPriceService/GetPriceResponse")]
+        System.Threading.Tasks.Task<ModelLibrary.Price> GetPriceAsync(int itemId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/GetAllPricesByItem", ReplyAction="http://tempuri.org/IPriceService/GetAllPricesByItemResponse")]
         ModelLibrary.Price[] GetAllPricesByItem(string id);
         
@@ -81,6 +87,14 @@ namespace RestaurantDesktopClient.PriceService {
         
         public System.Threading.Tasks.Task DeletePriceAsync(ModelLibrary.Price price, int itemId) {
             return base.Channel.DeletePriceAsync(price, itemId);
+        }
+        
+        public ModelLibrary.Price GetPrice(int itemId) {
+            return base.Channel.GetPrice(itemId);
+        }
+        
+        public System.Threading.Tasks.Task<ModelLibrary.Price> GetPriceAsync(int itemId) {
+            return base.Channel.GetPriceAsync(itemId);
         }
         
         public ModelLibrary.Price[] GetAllPricesByItem(string id) {

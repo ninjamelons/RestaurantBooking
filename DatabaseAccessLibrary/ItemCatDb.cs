@@ -15,8 +15,15 @@ namespace DatabaseAccessLibrary
             db.ItemCats.InsertOnSubmit(itemCat);
             db.SubmitChanges();
         }
-    
 
+        public ItemCat GetItemCatById(int id)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+
+            var item = db.ItemCats.Single(t => t.id == id);
+            return item;
+
+        }
         public  ItemCat GetItemCat(string name)
         {
                 JustFeastDbDataContext db = new JustFeastDbDataContext();

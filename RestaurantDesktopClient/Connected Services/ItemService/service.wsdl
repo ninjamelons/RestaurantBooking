@@ -7,11 +7,29 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/ModelLibrary" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IItemService_GetItem_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetItem" />
+  </wsdl:message>
+  <wsdl:message name="IItemService_GetItem_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="IItemService_GetItemWithPriceMath_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemWithPriceMath" />
+  </wsdl:message>
+  <wsdl:message name="IItemService_GetItemWithPriceMath_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemWithPriceMathResponse" />
+  </wsdl:message>
   <wsdl:message name="IItemService_GetItemByNameAndMenuId_InputMessage">
     <wsdl:part name="parameters" element="tns:GetItemByNameAndMenuId" />
   </wsdl:message>
   <wsdl:message name="IItemService_GetItemByNameAndMenuId_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetItemByNameAndMenuIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IItemService_GetItemByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemByName" />
+  </wsdl:message>
+  <wsdl:message name="IItemService_GetItemByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemByNameResponse" />
   </wsdl:message>
   <wsdl:message name="IItemService_GetItemPrice_InputMessage">
     <wsdl:part name="parameters" element="tns:GetItemPrice" />
@@ -85,10 +103,34 @@
   <wsdl:message name="IItemService_GetItemCats_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetItemCatsResponse" />
   </wsdl:message>
+  <wsdl:message name="IItemService_GetItemCatByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemCatByName" />
+  </wsdl:message>
+  <wsdl:message name="IItemService_GetItemCatByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemCatByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IItemService_GetItemCatById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemCatById" />
+  </wsdl:message>
+  <wsdl:message name="IItemService_GetItemCatById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemCatByIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="IItemService">
+    <wsdl:operation name="GetItem">
+      <wsdl:input wsaw:Action="http://tempuri.org/IItemService/GetItem" message="tns:IItemService_GetItem_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IItemService/GetItemResponse" message="tns:IItemService_GetItem_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemWithPriceMath">
+      <wsdl:input wsaw:Action="http://tempuri.org/IItemService/GetItemWithPriceMath" message="tns:IItemService_GetItemWithPriceMath_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IItemService/GetItemWithPriceMathResponse" message="tns:IItemService_GetItemWithPriceMath_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetItemByNameAndMenuId">
       <wsdl:input wsaw:Action="http://tempuri.org/IItemService/GetItemByNameAndMenuId" message="tns:IItemService_GetItemByNameAndMenuId_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IItemService/GetItemByNameAndMenuIdResponse" message="tns:IItemService_GetItemByNameAndMenuId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IItemService/GetItemByName" message="tns:IItemService_GetItemByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IItemService/GetItemByNameResponse" message="tns:IItemService_GetItemByName_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetItemPrice">
       <wsdl:input wsaw:Action="http://tempuri.org/IItemService/GetItemPrice" message="tns:IItemService_GetItemPrice_InputMessage" />
@@ -138,11 +180,46 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IItemService/GetItemCats" message="tns:IItemService_GetItemCats_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IItemService/GetItemCatsResponse" message="tns:IItemService_GetItemCats_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetItemCatByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IItemService/GetItemCatByName" message="tns:IItemService_GetItemCatByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IItemService/GetItemCatByNameResponse" message="tns:IItemService_GetItemCatByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemCatById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IItemService/GetItemCatById" message="tns:IItemService_GetItemCatById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IItemService/GetItemCatByIdResponse" message="tns:IItemService_GetItemCatById_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IItemService" type="tns:IItemService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetItem">
+      <soap:operation soapAction="http://tempuri.org/IItemService/GetItem" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemWithPriceMath">
+      <soap:operation soapAction="http://tempuri.org/IItemService/GetItemWithPriceMath" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetItemByNameAndMenuId">
       <soap:operation soapAction="http://tempuri.org/IItemService/GetItemByNameAndMenuId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemByName">
+      <soap:operation soapAction="http://tempuri.org/IItemService/GetItemByName" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -251,6 +328,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetItemCats">
       <soap:operation soapAction="http://tempuri.org/IItemService/GetItemCats" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemCatByName">
+      <soap:operation soapAction="http://tempuri.org/IItemService/GetItemCatByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemCatById">
+      <soap:operation soapAction="http://tempuri.org/IItemService/GetItemCatById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -19,6 +19,12 @@
   <wsdl:message name="IPriceService_DeletePrice_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeletePriceResponse" />
   </wsdl:message>
+  <wsdl:message name="IPriceService_GetPrice_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPrice" />
+  </wsdl:message>
+  <wsdl:message name="IPriceService_GetPrice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPriceResponse" />
+  </wsdl:message>
   <wsdl:message name="IPriceService_GetAllPricesByItem_InputMessage">
     <wsdl:part name="parameters" element="tns:GetAllPricesByItem" />
   </wsdl:message>
@@ -39,6 +45,10 @@
     <wsdl:operation name="DeletePrice">
       <wsdl:input wsaw:Action="http://tempuri.org/IPriceService/DeletePrice" message="tns:IPriceService_DeletePrice_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPriceService/DeletePriceResponse" message="tns:IPriceService_DeletePrice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPriceService/GetPrice" message="tns:IPriceService_GetPrice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPriceService/GetPriceResponse" message="tns:IPriceService_GetPrice_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetAllPricesByItem">
       <wsdl:input wsaw:Action="http://tempuri.org/IPriceService/GetAllPricesByItem" message="tns:IPriceService_GetAllPricesByItem_InputMessage" />
@@ -62,6 +72,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeletePrice">
       <soap:operation soapAction="http://tempuri.org/IPriceService/DeletePrice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrice">
+      <soap:operation soapAction="http://tempuri.org/IPriceService/GetPrice" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

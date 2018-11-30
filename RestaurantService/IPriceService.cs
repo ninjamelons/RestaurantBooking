@@ -16,6 +16,8 @@ namespace RestaurantService
 
         [OperationContract]
         void DeletePrice(ModelLibrary.Price price, int itemId);
+        [OperationContract]
+        ModelLibrary.Price GetPrice(int itemId);
 
         [OperationContract]
         IEnumerable<ModelLibrary.Price> GetAllPricesByItem(string id);

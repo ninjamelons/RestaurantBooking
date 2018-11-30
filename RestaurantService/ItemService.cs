@@ -26,6 +26,17 @@ namespace RestaurantService
         {
             itemCtrl.CreateItemCat(itemCat);
         }
+        public ModelLibrary.Item GetItemWithPriceMath(ModelLibrary.Item item)
+        {
+            ItemCtrl itemCtrl = new ItemCtrl();
+            return itemCtrl.GetItem(item);
+        }
+
+        public ModelLibrary.Item GetItem(ModelLibrary.Item item)
+        {
+            ItemCtrl itemCtrl = new ItemCtrl();
+            return itemCtrl.GetItem2(item);
+        }
 
         public void DeleteItem(ModelLibrary.Item item)
         {
@@ -52,14 +63,16 @@ namespace RestaurantService
 
         public IEnumerable<ModelLibrary.ItemCat> GetAllItemCategories()
         {
+            var itemCtrl = new ItemCtrl();
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var itemCat = db.ItemCats.ToList();
-            List<ModelLibrary.ItemCat> modelItemCats = new List<ModelLibrary.ItemCat>();
-            foreach (var a in itemCat)
+            var res = db.ItemCats.Where(x => x.id != null).ToList();
+            List<ModelLibrary.ItemCat> modelItemCat = new List<ModelLibrary.ItemCat>();
+            foreach (var a in res)
             {
-                modelItemCats.Add(itemCtrl.ConvertItemCatToModel(a));
+                modelItemCat.Add(itemCtrl.ConvertItemCatToModel(a));
             }
-            return modelItemCats;
+            return modelItemCat;
+            
         }
 
         public IEnumerable<ModelLibrary.Item> GetAllItemsByMenu(int menuId)
@@ -147,6 +160,20 @@ namespace RestaurantService
             var itemCatDb = new ItemCatDb();
 
             return itemCtrl.ConvertItemCatToModel(itemCatDb.GetItemCat(name));
+        }
+        public ModelLibrary.ItemCat GetItemCatById(int id)
+        {
+            var itemCtrl = new ItemCtrl();
+            var itemCatDb = new ItemCatDb();
+
+            return itemCtrl.ConvertItemCatToModel(itemCatDb.GetItemCatById(id));
+        }
+
+        public ModelLibrary.Item GetItemByName(string itemName)
+        {
+            var itemCtrl = new ItemCtrl();
+            var itemDb = new ItemDb();
+            return itemCtrl.ConvertItemToModel(itemDb.GetItemByName(itemName));
         }
     }
 }

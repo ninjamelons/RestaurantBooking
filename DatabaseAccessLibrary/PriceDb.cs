@@ -17,7 +17,13 @@ namespace DatabaseAccessLibrary
             db.SubmitChanges();
         }
     
+        public Price GetPriceById(int itemId)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
 
+            var pric = db.Prices.Last(t => t.itemId == itemId);
+            return pric;
+        }
         public  Price GetPrice(int itemId, DateTime startDate)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();

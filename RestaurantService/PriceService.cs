@@ -38,6 +38,13 @@ namespace RestaurantService
             return modelPrices;
         }
 
+        public ModelLibrary.Price GetPrice(int itemId)
+        {
+            var priceCtrl = new PriceCtrl();
+            var priceDb = new PriceDb();
+            return priceCtrl.ConvertPriceToModel(priceDb.GetPriceById(itemId));
+        }
+
         public void UpdatePrice(ModelLibrary.Price beforePrice, ModelLibrary.Price afterPrice)
         {
 

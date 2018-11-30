@@ -14,7 +14,13 @@ namespace RestaurantService
     public interface IItemService
     {
         [OperationContract]
+        ModelLibrary.Item GetItem(ModelLibrary.Item item);
+        [OperationContract]
+        ModelLibrary.Item GetItemWithPriceMath(ModelLibrary.Item item);
+        [OperationContract]
         ModelLibrary.Item GetItemByNameAndMenuId(string itemName, int menuId);
+        [OperationContract]
+        ModelLibrary.Item GetItemByName(string itemName);
         [OperationContract]
         ModelLibrary.Price GetItemPrice(ModelLibrary.Item item);
 
@@ -50,7 +56,8 @@ namespace RestaurantService
         IEnumerable<ModelLibrary.ItemCat> GetItemCats();
         [OperationContract]
         ModelLibrary.ItemCat GetItemCatByName(string name);
-
+        [OperationContract]
+        ModelLibrary.ItemCat GetItemCatById(int id);
 
 
     }

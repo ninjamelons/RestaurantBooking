@@ -27,6 +27,20 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetPrice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="itemId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPriceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetPriceResult" nillable="true" type="q3:Price" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetAllPricesByItem">
     <xs:complexType>
       <xs:sequence>
@@ -37,15 +51,15 @@
   <xs:element name="GetAllPricesByItemResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllPricesByItemResult" nillable="true" type="q3:ArrayOfPrice" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllPricesByItemResult" nillable="true" type="q4:ArrayOfPrice" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdatePrice">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="beforePrice" nillable="true" type="q4:Price" />
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="afterPrice" nillable="true" type="q5:Price" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="beforePrice" nillable="true" type="q5:Price" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="afterPrice" nillable="true" type="q6:Price" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -205,18 +205,6 @@ namespace RestaurantDesktopClient
             }
         }
 
-        private void buttonCheckItem_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedItem = (ModelLibrary.Menu)dataGridItemList.SelectedItem;
-            if (selectedItem != null)
-            {
-                ItemCrud frm = new ItemCrud(selectedItem);
-                this.NavigationService.Navigate(frm);
-            }
-            else
-            {
-                MessageBox.Show("Select A Menu");
-            }
-        }
+                
     }
 }

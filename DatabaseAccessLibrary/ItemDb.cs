@@ -8,13 +8,28 @@ namespace DatabaseAccessLibrary
 {
     public class ItemDb
     {
+        public Item GetItem(int id)
+        {
+            var db = new JustFeastDbDataContext();
 
+            Item item = null;
+            item = db.Items.SingleOrDefault(t => t.id == id
+                                                );
+            return item;
+        }
         public  void AddItem(Item item)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
             db.Items.InsertOnSubmit(item);
             db.SubmitChanges();
+        }
+        public Item GetItemByName(string name)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+
+            var item = db.Items.First(t => t.name == name);
+            return item;
         }
         public Item GetItemByNameAndMenu(string name, int menuId)
         {

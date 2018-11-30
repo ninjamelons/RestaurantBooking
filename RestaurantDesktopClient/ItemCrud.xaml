@@ -13,13 +13,15 @@
         <Label x:Name="labelItemCat" Content="Category:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="396,128,0,0" Width="109"/>
         <Label x:Name="labelItemPrice" Content="Price:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="396,75,0,0" Width="109"/>
         <Label x:Name="labelItemPriceDescription" Content="Description:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="396,240,0,0" Width="113" Height="56"/>
-        <TextBox x:Name="textBoxDescription" HorizontalAlignment="Left" Height="125" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="257" Margin="514,240,0,0"/>
-        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132" Margin="514,36,0,0" TextChanged="textBoxName_TextChanged"/>
-        <TextBox x:Name="textBoxNamePrice" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132" Margin="514,86,0,0" TextChanged="textBoxName_TextChanged"/>
-        <Button x:Name="buttonCreateCategory" Content="Create Category" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="663,35,0,0" Height="27" Click="buttonCreateCategory_Click"/>
+        <TextBox x:Name="textBoxDescription" HorizontalAlignment="Left" Height="125" TextWrapping="Wrap" VerticalAlignment="Top" Width="257" Margin="514,240,0,0"/>
+        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Margin="514,36,0,0" />
+        <TextBox x:Name="textBoxNamePrice" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="132" Margin="514,86,0,0" />
         <Button x:Name="buttonEdit" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="550,397,0,0" Height="27" Click="buttonSave_Click"/>
-        <ComboBox x:Name="comboBoxCategory" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Margin="514,140,0,0" SelectionChanged="comboBoxCategory_SelectionChanged"/>
-        <DataGrid x:Name="dataGridItemList" AutoGenerateColumns="True" HorizontalAlignment="Left" Height="382" Margin="35,36,0,0" VerticalAlignment="Top" Width="289" SelectionChanged="dataGridItemList_SelectionChanged">
+        <ComboBox x:Name="comboBoxCategory" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Margin="514,140,0,0">
+            <ComboBox x:Name="comboBox" Width="120"/>
+            <TextBox x:Name="textBox" Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+        </ComboBox>
+        <DataGrid x:Name="dataGridItemList" AutoGenerateColumns="True" HorizontalAlignment="Left" Height="382" Margin="35,36,0,0" VerticalAlignment="Top" Width="289" SelectionChanged="dataGridItemList_SelectionChanged" RenderTransformOrigin="1.06,0.289">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="DarkGray"/>
@@ -40,8 +42,16 @@
         </DataGrid>
         <Button x:Name="buttonDelete" Content="Delete" HorizontalAlignment="Left" Margin="663,398,0,0" VerticalAlignment="Top" Width="108" Height="28" Click="buttonDelete_Click"/>
         <Button x:Name="buttonCreate" Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="437,397,0,0" Height="28" Click="buttonCreate_Click"/>
-        <Label x:Name="labelMenuName" Content="" FontWeight="Bold" HorizontalAlignment="Left" Margin="514,188,0,0" VerticalAlignment="Top" Width="132"/>
         <Label x:Name="labelMenuId" Visibility="Hidden" Content="Label" HorizontalAlignment="Left" Margin="736,140,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="labelItemCat_Copy" Content="Menu:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="396,167,0,0" Width="109"/>
+        <ComboBox x:Name="comboBoxMenu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Margin="514,179,0,0"/>
+        <Label x:Name="label" Visibility="Hidden"/>
+        <Label x:Name="label1" Visibility="Hidden"  />
+        <Label x:Name="label2" Visibility="Hidden" />
+        <Label x:Name="label3" Visibility="Hidden" />
+        <Label x:Name="label4" Visibility="Hidden" />
+        <TextBox x:Name="textBoxCategoryId" HorizontalAlignment="Left" Height="23" Margin="663,140,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBoxMenuId" HorizontalAlignment="Left" Height="23" Margin="663,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Page>

@@ -39,7 +39,6 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="buttonCreateMenu" Content="Create Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="483,402,0,0" Height="29" Click="buttonCreateMenu_Click"/>
-        <Button x:Name="buttonCheckItem" Content="MenuItems" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="384,402,0,0" Height="29" Click="buttonCheckItem_Click"/>
 
     </Grid>
 </Page>
