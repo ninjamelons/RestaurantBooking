@@ -19,12 +19,11 @@ namespace RestaurantService
             var menuCtrl = new MenuCtrl();
             menuCtrl.CreateMenu(menu);
         }
-        public void DeleteMenu(ModelLibrary.Menu menu)
+        public void DeleteMenu(int menuId)
         {
-            var menuCtrl = new MenuCtrl();
             var menuDb = new MenuDb();
-            var dbMenu = menuCtrl.ConvertMenuToDb(menu);
-            menuDb.DeleteMenu(dbMenu);
+            var menuCtrl = new MenuCtrl();
+            menuDb.DeleteMenu(menuId);
         }
 
         public IEnumerable<ModelLibrary.Menu> GetAllMenusByRestaurant(int restaurantId)
@@ -41,14 +40,19 @@ namespace RestaurantService
            
         }
 
-        public ModelLibrary.Menu GetMenu(ModelLibrary.Menu menu)
+        public ModelLibrary.Menu GetMenu(int menuId)
         {
-            return menuCtrl.GetMenu(menu);
+            return menuCtrl.GetMenuById(menuId);
         }
 
         public ModelLibrary.Menu GetMenuById(int menuId)
         {
             return menuCtrl.GetMenuById(menuId);
+        }
+
+        public ModelLibrary.Menu GetMenuByName(string name)
+        {
+            return menuCtrl.GetMenuByName(name);
         }
 
         public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu)

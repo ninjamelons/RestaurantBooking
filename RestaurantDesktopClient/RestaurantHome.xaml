@@ -15,10 +15,8 @@
             </Canvas>
         </Border>
         <Button x:Name="ToTablesPage" Content="Manage Tables" HorizontalAlignment="Right"
-                VerticalAlignment="Bottom" Margin="0,0,13,13" Padding="8 3" Click="ToTablesPage_OnClick" Width="106"/>
-        <Button x:Name="ButtonMenus"  Content="Manage Menus" HorizontalAlignment="Left" Height="24" Margin="579,413,0,0" VerticalAlignment="Top" Width="106" Click="ManageMenus_Click"/>
-        <Button x:Name="buttonItemCat" Content="Manage Categories" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="357,413,0,0" Height="23" Click="buttonItemCat_Click_1" />
-        <Button x:Name="buttonItem" Content="Manage Items" HorizontalAlignment="Left" VerticalAlignment="Top" Width="106" Margin="468,413,0,0" Height="23" Click="buttonItem_Click"/>
+                VerticalAlignment="Bottom" Margin="0,0,13,13" Padding="8 3" Click="ToTablesPage_OnClick" Width="106" Height="36"/>
+        <Button x:Name="ButtonMenus"  Content="Manage Menus" HorizontalAlignment="Left" Height="36" Margin="559,401,0,0" VerticalAlignment="Top" Width="104" Click="ManageMenus_Click"/>
 
     </Grid>
 </Page>

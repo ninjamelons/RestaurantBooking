@@ -21,29 +21,23 @@ namespace RestaurantDesktopClient.PriceService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/CreatePrice", ReplyAction="http://tempuri.org/IPriceService/CreatePriceResponse")]
         System.Threading.Tasks.Task CreatePriceAsync(ModelLibrary.Price price, int itemId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/DeletePrice", ReplyAction="http://tempuri.org/IPriceService/DeletePriceResponse")]
-        void DeletePrice(ModelLibrary.Price price, int itemId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/DeletePricesByItemId", ReplyAction="http://tempuri.org/IPriceService/DeletePricesByItemIdResponse")]
+        void DeletePricesByItemId(int itemId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/DeletePrice", ReplyAction="http://tempuri.org/IPriceService/DeletePriceResponse")]
-        System.Threading.Tasks.Task DeletePriceAsync(ModelLibrary.Price price, int itemId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/DeletePricesByItemId", ReplyAction="http://tempuri.org/IPriceService/DeletePricesByItemIdResponse")]
+        System.Threading.Tasks.Task DeletePricesByItemIdAsync(int itemId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/GetPrice", ReplyAction="http://tempuri.org/IPriceService/GetPriceResponse")]
-        ModelLibrary.Price GetPrice(int itemId);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/GetLatestPrice", ReplyAction="http://tempuri.org/IPriceService/GetLatestPriceResponse")]
+        ModelLibrary.Price GetLatestPrice(int itemId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/GetPrice", ReplyAction="http://tempuri.org/IPriceService/GetPriceResponse")]
-        System.Threading.Tasks.Task<ModelLibrary.Price> GetPriceAsync(int itemId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/GetAllPricesByItem", ReplyAction="http://tempuri.org/IPriceService/GetAllPricesByItemResponse")]
-        ModelLibrary.Price[] GetAllPricesByItem(string id);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/GetAllPricesByItem", ReplyAction="http://tempuri.org/IPriceService/GetAllPricesByItemResponse")]
-        System.Threading.Tasks.Task<ModelLibrary.Price[]> GetAllPricesByItemAsync(string id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/GetLatestPrice", ReplyAction="http://tempuri.org/IPriceService/GetLatestPriceResponse")]
+        System.Threading.Tasks.Task<ModelLibrary.Price> GetLatestPriceAsync(int itemId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/UpdatePrice", ReplyAction="http://tempuri.org/IPriceService/UpdatePriceResponse")]
-        void UpdatePrice(ModelLibrary.Price beforePrice, ModelLibrary.Price afterPrice);
+        void UpdatePrice(ModelLibrary.Price price, int itemId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IPriceService/UpdatePrice", ReplyAction="http://tempuri.org/IPriceService/UpdatePriceResponse")]
-        System.Threading.Tasks.Task UpdatePriceAsync(ModelLibrary.Price beforePrice, ModelLibrary.Price afterPrice);
+        System.Threading.Tasks.Task UpdatePriceAsync(ModelLibrary.Price price, int itemId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -81,36 +75,28 @@ namespace RestaurantDesktopClient.PriceService {
             return base.Channel.CreatePriceAsync(price, itemId);
         }
         
-        public void DeletePrice(ModelLibrary.Price price, int itemId) {
-            base.Channel.DeletePrice(price, itemId);
+        public void DeletePricesByItemId(int itemId) {
+            base.Channel.DeletePricesByItemId(itemId);
         }
         
-        public System.Threading.Tasks.Task DeletePriceAsync(ModelLibrary.Price price, int itemId) {
-            return base.Channel.DeletePriceAsync(price, itemId);
+        public System.Threading.Tasks.Task DeletePricesByItemIdAsync(int itemId) {
+            return base.Channel.DeletePricesByItemIdAsync(itemId);
         }
         
-        public ModelLibrary.Price GetPrice(int itemId) {
-            return base.Channel.GetPrice(itemId);
+        public ModelLibrary.Price GetLatestPrice(int itemId) {
+            return base.Channel.GetLatestPrice(itemId);
         }
         
-        public System.Threading.Tasks.Task<ModelLibrary.Price> GetPriceAsync(int itemId) {
-            return base.Channel.GetPriceAsync(itemId);
+        public System.Threading.Tasks.Task<ModelLibrary.Price> GetLatestPriceAsync(int itemId) {
+            return base.Channel.GetLatestPriceAsync(itemId);
         }
         
-        public ModelLibrary.Price[] GetAllPricesByItem(string id) {
-            return base.Channel.GetAllPricesByItem(id);
+        public void UpdatePrice(ModelLibrary.Price price, int itemId) {
+            base.Channel.UpdatePrice(price, itemId);
         }
         
-        public System.Threading.Tasks.Task<ModelLibrary.Price[]> GetAllPricesByItemAsync(string id) {
-            return base.Channel.GetAllPricesByItemAsync(id);
-        }
-        
-        public void UpdatePrice(ModelLibrary.Price beforePrice, ModelLibrary.Price afterPrice) {
-            base.Channel.UpdatePrice(beforePrice, afterPrice);
-        }
-        
-        public System.Threading.Tasks.Task UpdatePriceAsync(ModelLibrary.Price beforePrice, ModelLibrary.Price afterPrice) {
-            return base.Channel.UpdatePriceAsync(beforePrice, afterPrice);
+        public System.Threading.Tasks.Task UpdatePriceAsync(ModelLibrary.Price price, int itemId) {
+            return base.Channel.UpdatePriceAsync(price, itemId);
         }
     }
 }

@@ -13,42 +13,32 @@ namespace RestaurantService
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "PriceService" in both code and config file together.
     public class PriceService : IPriceService
     {
-        PriceCtrl priceCtrl = new PriceCtrl();
-        PriceDb priceDb = new PriceDb();
-        public void CreatePrice(ModelLibrary.Price price, int itemId)
+
+        public void CreatePrice(ModelLibrary.Price price, int itemId) //ModelLibrary.Price price, int itemId
         {
+            var priceCtrl = new PriceCtrl();
             priceCtrl.CreatePrice(price, itemId);
+            //priceCtrl.CreatePrice(price, itemId);
         }
 
-        public void DeletePrice(ModelLibrary.Price price,int itemId)
+        public void DeletePricesByItemId(int itemId)
         {
-            var dbPrice = priceCtrl.ConvertPriceToDb(price);
-            priceDb.DeletePrice(dbPrice, itemId);
+            var priceCtrl = new PriceCtrl();
+            priceCtrl.DeletePricesByItemId(itemId);
+
         }
 
-        public IEnumerable<ModelLibrary.Price> GetAllPricesByItem(string id)
-        {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var price = db.Prices.ToList();
-            List<ModelLibrary.Price> modelPrices = new List<ModelLibrary.Price>();
-            foreach (var a in price)
-            {
-                modelPrices.Add(priceCtrl.ConvertPriceToModel(a));
-            }
-            return modelPrices;
-        }
-
-        public ModelLibrary.Price GetPrice(int itemId)
+        public ModelLibrary.Price GetLatestPrice(int itemId)
         {
             var priceCtrl = new PriceCtrl();
             var priceDb = new PriceDb();
-            return priceCtrl.ConvertPriceToModel(priceDb.GetPriceById(itemId));
+            return priceCtrl.ConvertPriceToModel(priceDb.GetLatestPriceById(itemId));
         }
 
-        public void UpdatePrice(ModelLibrary.Price beforePrice, ModelLibrary.Price afterPrice)
+        public void UpdatePrice(ModelLibrary.Price price, int itemId)
         {
-
-            priceCtrl.UpdatePrice(beforePrice, afterPrice);
+            var priceCtrl = new PriceCtrl();
+            priceCtrl.UpdatePrice(price, itemId);
         }
        
     }

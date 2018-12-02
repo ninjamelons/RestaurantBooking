@@ -12,10 +12,13 @@ namespace DatabaseAccessLibrary
         {
             var db = new JustFeastDbDataContext();
 
-            Item item = null;
-            item = db.Items.SingleOrDefault(t => t.id == id
-                                                );
-            return item;
+
+            var item = db.Items.SingleOrDefault(t => t.id == id);
+            if (item != null)
+            {
+                return item;
+            }
+            return null;
         }
         public  void AddItem(Item item)
         {
@@ -29,47 +32,47 @@ namespace DatabaseAccessLibrary
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
             var item = db.Items.First(t => t.name == name);
+            if(item != null)
             return item;
+            else
+            {
+                return null;
+            }
         }
         public Item GetItemByNameAndMenu(string name, int menuId)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
             var item = db.Items.Single(t => t.name == name && t.menuId == menuId);
-            return item;
-        }
-        public  Item GetItem(int id, string name)
-        {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-
-            var item = db.Items.Single(t => t.name == name && t.id == id);
-            return item;
+            if (item != null)
+                return item;
+            else
+            {
+                return null;
+            }
         }
 
-        public  void DeleteItem(Item item)
+        public  void DeleteItem(int itemId)
         {
             var db = new JustFeastDbDataContext();
-            DatabaseAccessLibrary.Item dbItem = db.Items.First(t => t.name == item.name
-                                                        && t.id == item.id);
+            DatabaseAccessLibrary.Item dbItem = db.Items.First(t => t.id == itemId);
             if (dbItem != null)
             {
-                db.Items.DeleteOnSubmit(db.Items.First(t => t.name == item.name
-                                                        && t.id == item.id));
+                db.Items.DeleteOnSubmit(db.Items.First(t => t.id == itemId));
                 db.SubmitChanges();
             }
         }
 
-        public void UpdateItem(Item beforeItem, Item afterItem)
+        public void UpdateItem(Item updatedItem)
         {
             var db = new JustFeastDbDataContext();
-            var dbItem = db.Items.SingleOrDefault(t => t.id == beforeItem.id
-                                                  && t.menuId == beforeItem.menuId && beforeItem.id == afterItem.id);
+            var dbItem = db.Items.First(t => t.id == updatedItem.id);
 
-            dbItem.menuId = afterItem.menuId;
-            dbItem.name = afterItem.name;
-            dbItem.Prices = afterItem.Prices;
-            dbItem.description = afterItem.description;
-            dbItem.ItemCat = afterItem.ItemCat;
+            dbItem.menuId = updatedItem.menuId;
+            dbItem.name = updatedItem.name;
+            dbItem.description = updatedItem.description;
+            dbItem.itemCatId = updatedItem.itemCatId;
+
             db.SubmitChanges();
 
         }
@@ -86,6 +89,12 @@ namespace DatabaseAccessLibrary
         {
             var db = new JustFeastDbDataContext();
             return db.Items.Where(t => t.menuId == menuId).AsEnumerable().ToList();
+        }
+
+        public IEnumerable<Item> GetCategoryItems(int itemCatId)
+        {
+            var db = new JustFeastDbDataContext();
+            return db.Items.Where(t => t.itemCatId == itemCatId).AsEnumerable().ToList();
         }
     }
 }

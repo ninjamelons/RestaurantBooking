@@ -20,20 +20,11 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="ItemCat" nillable="true" type="tns:ItemCat" />
-      <xs:element minOccurs="0" name="Menu" nillable="true" type="tns:Menu" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Price" nillable="true" type="tns:Price" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Item" nillable="true" type="tns:Item" />
-  <xs:complexType name="ItemCat">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ItemCat" nillable="true" type="tns:ItemCat" />
   <xs:complexType name="Price">
     <xs:sequence>
       <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />

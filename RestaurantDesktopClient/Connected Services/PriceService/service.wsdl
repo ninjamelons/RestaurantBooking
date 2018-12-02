@@ -13,23 +13,17 @@
   <wsdl:message name="IPriceService_CreatePrice_OutputMessage">
     <wsdl:part name="parameters" element="tns:CreatePriceResponse" />
   </wsdl:message>
-  <wsdl:message name="IPriceService_DeletePrice_InputMessage">
-    <wsdl:part name="parameters" element="tns:DeletePrice" />
+  <wsdl:message name="IPriceService_DeletePricesByItemId_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePricesByItemId" />
   </wsdl:message>
-  <wsdl:message name="IPriceService_DeletePrice_OutputMessage">
-    <wsdl:part name="parameters" element="tns:DeletePriceResponse" />
+  <wsdl:message name="IPriceService_DeletePricesByItemId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePricesByItemIdResponse" />
   </wsdl:message>
-  <wsdl:message name="IPriceService_GetPrice_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetPrice" />
+  <wsdl:message name="IPriceService_GetLatestPrice_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetLatestPrice" />
   </wsdl:message>
-  <wsdl:message name="IPriceService_GetPrice_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetPriceResponse" />
-  </wsdl:message>
-  <wsdl:message name="IPriceService_GetAllPricesByItem_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllPricesByItem" />
-  </wsdl:message>
-  <wsdl:message name="IPriceService_GetAllPricesByItem_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllPricesByItemResponse" />
+  <wsdl:message name="IPriceService_GetLatestPrice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetLatestPriceResponse" />
   </wsdl:message>
   <wsdl:message name="IPriceService_UpdatePrice_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdatePrice" />
@@ -42,17 +36,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IPriceService/CreatePrice" message="tns:IPriceService_CreatePrice_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IPriceService/CreatePriceResponse" message="tns:IPriceService_CreatePrice_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="DeletePrice">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPriceService/DeletePrice" message="tns:IPriceService_DeletePrice_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPriceService/DeletePriceResponse" message="tns:IPriceService_DeletePrice_OutputMessage" />
+    <wsdl:operation name="DeletePricesByItemId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPriceService/DeletePricesByItemId" message="tns:IPriceService_DeletePricesByItemId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPriceService/DeletePricesByItemIdResponse" message="tns:IPriceService_DeletePricesByItemId_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetPrice">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPriceService/GetPrice" message="tns:IPriceService_GetPrice_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPriceService/GetPriceResponse" message="tns:IPriceService_GetPrice_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetAllPricesByItem">
-      <wsdl:input wsaw:Action="http://tempuri.org/IPriceService/GetAllPricesByItem" message="tns:IPriceService_GetAllPricesByItem_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IPriceService/GetAllPricesByItemResponse" message="tns:IPriceService_GetAllPricesByItem_OutputMessage" />
+    <wsdl:operation name="GetLatestPrice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPriceService/GetLatestPrice" message="tns:IPriceService_GetLatestPrice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPriceService/GetLatestPriceResponse" message="tns:IPriceService_GetLatestPrice_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdatePrice">
       <wsdl:input wsaw:Action="http://tempuri.org/IPriceService/UpdatePrice" message="tns:IPriceService_UpdatePrice_InputMessage" />
@@ -70,8 +60,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="DeletePrice">
-      <soap:operation soapAction="http://tempuri.org/IPriceService/DeletePrice" style="document" />
+    <wsdl:operation name="DeletePricesByItemId">
+      <soap:operation soapAction="http://tempuri.org/IPriceService/DeletePricesByItemId" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -79,17 +69,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetPrice">
-      <soap:operation soapAction="http://tempuri.org/IPriceService/GetPrice" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetAllPricesByItem">
-      <soap:operation soapAction="http://tempuri.org/IPriceService/GetAllPricesByItem" style="document" />
+    <wsdl:operation name="GetLatestPrice">
+      <soap:operation soapAction="http://tempuri.org/IPriceService/GetLatestPrice" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

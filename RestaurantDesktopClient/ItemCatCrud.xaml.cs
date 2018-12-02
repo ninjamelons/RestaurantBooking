@@ -45,7 +45,7 @@ namespace RestaurantDesktopClient
             {
                 //labelRestaurantId = Convert.ToInt32()  
                 var proxy = new ItemServiceClient();
-                proxy.DeleteItemCat(selectedItemCat);
+                proxy.DeleteItemCat(selectedItemCat.Id);
                 dataGridItemCatList.Items.Clear();
                 var modelMenu = proxy.GetAllItemCategories();
                 foreach (ItemCat item in modelMenu)

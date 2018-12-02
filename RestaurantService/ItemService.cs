@@ -16,93 +16,62 @@ namespace RestaurantService
         ItemDb itemDb = new ItemDb();
         ItemCatDb itemCatDb = new ItemCatDb();
         ItemCtrl itemCtrl = new ItemCtrl();
-        public void CreateItem(ModelLibrary.Item item)
+        public void CreateItem(ModelLibrary.Item item, int menuId, int itemCatId)
         {
-            itemCtrl.CreateItem(item);
-            
+            itemCtrl.CreateItem(item, menuId, itemCatId);
         }
 
         public void CreateItemCat(ModelLibrary.ItemCat itemCat)
         {
             itemCtrl.CreateItemCat(itemCat);
         }
-        public ModelLibrary.Item GetItemWithPriceMath(ModelLibrary.Item item)
+        public ModelLibrary.Item GetItem(int itemId)
         {
             ItemCtrl itemCtrl = new ItemCtrl();
-            return itemCtrl.GetItem(item);
+            return itemCtrl.GetItem(itemId);
         }
 
-        public ModelLibrary.Item GetItem(ModelLibrary.Item item)
+        public void DeleteItem(int itemId)
         {
-            ItemCtrl itemCtrl = new ItemCtrl();
-            return itemCtrl.GetItem2(item);
+
+            itemDb.DeleteItem(itemId);
         }
 
-        public void DeleteItem(ModelLibrary.Item item)
-        {
-            var dbItem = itemCtrl.ConvertItemToDb(item);
-            itemDb.DeleteItem(dbItem);
-        }
-
-        public void DeleteItemCat(ModelLibrary.ItemCat itemCat)
+        public void DeleteItemCat(int itemCatId)
         {
             ItemCtrl itemCatCtrl = new ItemCtrl();
-            var db = new JustFeastDbDataContext();
-            
-            if (itemCat.Id > 0)
-            {
-                var dbItemCat = itemCatCtrl.ConvertItemCatToDb(itemCat);
-                var existing = db.ItemCats.Single(p => p.id == itemCat.Id);
-
-                db.ItemCats.DeleteOnSubmit(existing);
-            }
-            
-            db.SubmitChanges();
+            itemCatCtrl.DeleteItemCat(itemCatId);
 
         }
 
         public IEnumerable<ModelLibrary.ItemCat> GetAllItemCategories()
         {
-            var itemCtrl = new ItemCtrl();
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var res = db.ItemCats.Where(x => x.id != null).ToList();
-            List<ModelLibrary.ItemCat> modelItemCat = new List<ModelLibrary.ItemCat>();
-            foreach (var a in res)
+            var res = db.ItemCats.ToList();
+            List<ModelLibrary.ItemCat> mRes = new List<ModelLibrary.ItemCat>();
+            foreach (var x in res)
             {
-                modelItemCat.Add(itemCtrl.ConvertItemCatToModel(a));
+                mRes.Add(itemCtrl.ConvertItemCatToModel(x));
             }
-            return modelItemCat;
-            
+            return mRes;
+
         }
 
         public IEnumerable<ModelLibrary.Item> GetAllItemsByMenu(int menuId)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var res = db.Items.Where(x => x.menuId == menuId).ToList();
-            List<ModelLibrary.Item> modelItem = new List<ModelLibrary.Item>();
-            foreach (var x in res)
-            {
-                modelItem.Add(itemCtrl.ConvertItemToModel(x));
-            }
-            return modelItem;
+            return itemCtrl.GetMenuItems(menuId);
+            
 
         }
 
         public IEnumerable<ModelLibrary.Item> GetAllItemsByCategory(int categoryId)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var res = db.Items.Where(x => x.itemCatId == categoryId).ToList();
-            List<ModelLibrary.Item> modelItem = new List<ModelLibrary.Item>();
-            foreach (var x in res)
-            {
-                modelItem.Add(itemCtrl.ConvertItemToModel(x));
-            }
-            return modelItem;
+            return (IEnumerable<ModelLibrary.Item>)itemDb.GetCategoryItems(categoryId); // is this legal?
         }
 
-        public void UpdateItem(ModelLibrary.Item beforeItem, ModelLibrary.Item afterItem)
+        public void UpdateItem(ModelLibrary.Item updatedItem, int menuId, int itemCatId)
         {
-            itemCtrl.UpdateItem(beforeItem, afterItem);
+            itemCtrl.UpdateItem(updatedItem, menuId, itemCatId);
         }
 
         public void UpdateItemCat(ModelLibrary.ItemCat beforeItemCat, ModelLibrary.ItemCat afterItemCat)
@@ -112,13 +81,11 @@ namespace RestaurantService
             itemCtrl.UpdateItemCat(beforeItemCat, afterItemCat);
         }
 
-        public ModelLibrary.Price GetItemPrice(ModelLibrary.Item item)
+        public ModelLibrary.Price GetItemPrice(ModelLibrary.Item item, int menuId, int itemCatId)
         {
             ItemCtrl itemCtrl = new ItemCtrl();
-            var itemo = itemCtrl.ConvertItemToDb(item);
-            return itemCtrl.GetItemPrice(itemo);
-            
-
+            var itemo = itemCtrl.ConvertItemToDb(item, menuId, itemCatId);
+            return itemCtrl.GetItemPrice(1000000);
         }
 
         public IEnumerable<ModelLibrary.ItemCat> GetItemCats()
@@ -154,13 +121,6 @@ namespace RestaurantService
             return itemCtrl.ConvertItemToModel(itemDb.GetItemByNameAndMenu(itemName, menuId));
         }
 
-        public ModelLibrary.ItemCat GetItemCatByName(string name)
-        {
-            var itemCtrl = new ItemCtrl();
-            var itemCatDb = new ItemCatDb();
-
-            return itemCtrl.ConvertItemCatToModel(itemCatDb.GetItemCat(name));
-        }
         public ModelLibrary.ItemCat GetItemCatById(int id)
         {
             var itemCtrl = new ItemCtrl();
@@ -173,7 +133,17 @@ namespace RestaurantService
         {
             var itemCtrl = new ItemCtrl();
             var itemDb = new ItemDb();
-            return itemCtrl.ConvertItemToModel(itemDb.GetItemByName(itemName));
+            return itemCtrl.ConvertItemToModelWithoutPrice(itemDb.GetItemByName(itemName));
+        }
+
+        public ModelLibrary.ItemCat GetItemCatByName(string itemCatName)
+        {
+            return itemCtrl.GetItemCatByName(itemCatName);
+        }
+
+        public ModelLibrary.ItemCat GetCatByItemCatId(int itemId)
+        {
+            return itemCtrl.GetItemCatByItemCatId(itemId);
         }
     }
 }

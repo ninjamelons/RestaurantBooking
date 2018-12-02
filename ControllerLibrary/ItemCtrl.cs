@@ -12,56 +12,6 @@ namespace ControllerLibrary
     public class ItemCtrl
     {
 
-        public IEnumerable<ModelLibrary.Item> GetItems()
-        {
-            var itemDb = new ItemDb();
-            var items = itemDb.GetItems();
-            var modelItems = new List<ModelLibrary.Item>();
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            PriceCtrl priceCtrl = new PriceCtrl();
-
-            foreach (var item in items)
-            {
-                var CheckItem = db.Items.Single(a => a.id == item.id);
-                var prices = db.Prices.Where(p => p.itemId == item.id).OrderByDescending(p => p.startDate);
-                var price = prices.First();
-                modelItems.Add(new ModelLibrary.Item
-                {
-                    Name = item.name,
-                    Description = item.description,
-                    ItemCat = ConvertItemCatToModel(CheckItem.ItemCat),
-                    Id = item.id,
-                    Price = priceCtrl.ConvertPriceToModel(price)
-                });
-            }
-
-            return modelItems;
-        }
-        public ModelLibrary.Item GetItem2(ModelLibrary.Item item)
-        {
-            ItemCtrl itemCtrl = new ItemCtrl();
-            PriceCtrl priceCtrl = new PriceCtrl();
-            MenuCtrl menuCtrl = new MenuCtrl();
-            var itemDb = new ItemDb();
-            var itemo = itemDb.GetItem(item.Id);
-            ModelLibrary.Item newItem = null;
-            if (item != null)
-            {
-                newItem = new ModelLibrary.Item
-                {
-                    Description = itemo.description,
-                    Name = itemo.name,
-                    Id = itemo.id,
-                    ItemCat = itemCtrl.ConvertItemCatToModel(itemo.ItemCat),
-                    Menu = menuCtrl.ConvertMenuToModel(itemo.Menu),
-                    Price = priceCtrl.ConvertPriceToModel(itemo.Prices.Last())
-
-                };
-            }
-
-            return newItem;
-        }
-
         public IEnumerable<ModelLibrary.Item> GetMenuItems(int menuId)
         {
             var itemDb = new ItemDb();
@@ -80,62 +30,83 @@ namespace ControllerLibrary
 
             return items;
         }
-       
 
-        public ModelLibrary.Price GetItemPrice(DatabaseAccessLibrary.Item item)
-        {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            PriceCtrl priceCtrl = new PriceCtrl();
-            var prices = db.Prices.Where(p => p.itemId == item.id).OrderByDescending(p => p.startDate);
-            var price = prices.First();
-
-            ModelLibrary.Price varPrice = new ModelLibrary.Price
-            {
-                StartDate = price.startDate,
-                EndDate = price.endDate,
-                VarPrice = price.price1
-            };
-
-            return varPrice;
-        }
-        public ModelLibrary.Item GetItem(ModelLibrary.Item item)
-        {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            PriceCtrl priceCtrl = new PriceCtrl();
-            var CheckItem = db.Items.Single(a => a.id == item.Id);
-            var prices = db.Prices.Where(p => p.itemId == item.Id).OrderByDescending(p => p.startDate);
-            var price = prices.First();
-
-
-            ModelLibrary.Item returnItem = null;
-            if (CheckItem != null)
-            {
-
-                returnItem = new ModelLibrary.Item
-                {
-
-                    Name = CheckItem.name,
-                    Description = CheckItem.description,
-                    ItemCat = ConvertItemCatToModel(CheckItem.ItemCat),
-                    Id = CheckItem.id,
-                    Price = priceCtrl.ConvertPriceToModel(price)
-
-                };
-                return returnItem;
-            }
-            else { return returnItem; }
-        }
-
-        public DatabaseAccessLibrary.Item CreateItem(ModelLibrary.Item item)
+        public IEnumerable<ModelLibrary.Item> GetCatItems(int itemCatId)
         {
             var itemDb = new ItemDb();
-            var returnItem = new DatabaseAccessLibrary.Item
-            {
-                
-                name = item.Name,
-                menuId = item.Menu.Id,
-                description = item.Description,
+            var priceCtrl = new PriceCtrl();
 
+            var itemsDb = itemDb.GetCategoryItems(itemCatId);
+            var items = new List<ModelLibrary.Item>();
+
+            foreach (var item in itemsDb)
+            {
+                var itemo = ConvertItemToModel(item);
+                itemo.Price = priceCtrl.GetLatestPriceById(item.id);
+                if (itemo.Price != null)
+                    items.Add(itemo);
+            }
+
+            return items;
+        }
+       
+
+        public ModelLibrary.Price GetItemPrice(int itemId)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            PriceCtrl priceCtrl = new PriceCtrl();
+            var prices = db.Prices.Where(p => p.itemId == itemId).OrderByDescending(p => p.startDate);
+            var price = prices.First();
+            if(price !=null)
+            {
+                ModelLibrary.Price varPrice = new ModelLibrary.Price
+                {
+                    StartDate = price.startDate,
+                    EndDate = price.endDate,
+                    VarPrice = price.price1
+                };
+
+                return varPrice;
+            }
+            return null;
+        }
+        public ModelLibrary.Item GetItem(int itemId)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var itemDb = new ItemDb();
+            PriceCtrl priceCtrl = new PriceCtrl();
+            return ConvertItemToModel(itemDb.GetItem(itemId));
+
+        }
+        public ModelLibrary.ItemCat GetItemCatById(int itemCatId)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var itemCatDb = new ItemCatDb();
+            PriceCtrl priceCtrl = new PriceCtrl();
+            return ConvertItemCatToModel(itemCatDb.GetItemCatById(itemCatId));
+        }
+        public ModelLibrary.ItemCat GetItemCatByName(string name)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var itemCatDb = new ItemCatDb();
+            PriceCtrl priceCtrl = new PriceCtrl();
+            return ConvertItemCatToModel(itemCatDb.GetITemCatByName(name));
+        }
+        public ModelLibrary.Item CreateItem(ModelLibrary.Item item, int menuId, int itemCatId)
+        {
+            var itemDb = new ItemDb();
+            var dbItem = new DatabaseAccessLibrary.Item
+            { 
+                name = item.Name,
+                menuId = menuId,
+                description = item.Description,
+                itemCatId = itemCatId,
+
+            };
+            var modelItem = new ModelLibrary.Item
+            {
+                Name = item.Name,
+                Description = item.Description,
                 
             };
 
@@ -145,116 +116,178 @@ namespace ControllerLibrary
             if (!isModelStateValid)
                 throw new ValidationException();
 
-            itemDb.AddItem(returnItem);
+            itemDb.AddItem(dbItem);
 
-            return returnItem;
+            return modelItem;
         }
+        public ModelLibrary.Item ConvertItemToModelWithoutPrice(DatabaseAccessLibrary.Item dbItem)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            PriceCtrl priceCtrl = new PriceCtrl();
+            MenuCtrl menuCtrl = new MenuCtrl();
+            
+            if (dbItem != null)
+            {
+
+                var modelItem = new ModelLibrary.Item
+                {
+                    Id = dbItem.id,
+                    Name = dbItem.name,
+                    Description = dbItem.description,
+                    
+                };
+                return modelItem;
+            }
+            else
+            {
+                var modelItem = new ModelLibrary.Item
+                {
+                    Id = dbItem.id,
+                    Name = dbItem.name,
+                    Description = dbItem.description,
+                };
+                return modelItem;
+            }
+
+
+        }
+
 
         public ModelLibrary.Item ConvertItemToModel(DatabaseAccessLibrary.Item dbItem)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             PriceCtrl priceCtrl = new PriceCtrl();
             MenuCtrl menuCtrl = new MenuCtrl();
+            //var CheckItem = db.Items.Single(a => a.id == dbItem.id);
 
-            var modelItem = new ModelLibrary.Item
+            DatabaseAccessLibrary.Price price = db.Prices.Where(p => p.itemId == dbItem.id).OrderByDescending(p => p.startDate).First();
+            if (dbItem != null && price != null)
             {
-                Id = dbItem.id,
-                Name = dbItem.name,
-                Description = dbItem.description,
                 
-                
-
-            };
-            return modelItem;
+                var modelItem = new ModelLibrary.Item
+                {
+                    Id = dbItem.id,
+                    Name = dbItem.name,
+                    Description = dbItem.description,
+                    Price =  priceCtrl.ConvertPriceToModel(price),
+                };
+                return modelItem;
+            }
+            else
+            {
+                var modelItem = new ModelLibrary.Item
+                {
+                    Id = dbItem.id,
+                    Name = dbItem.name,
+                    Description = dbItem.description,
+                };
+                return modelItem;
+            }
+            
+            
         }
 
-        public DatabaseAccessLibrary.Item ConvertItemToDb(ModelLibrary.Item modelItem)// , int menuId menuId = menuId 
+        public DatabaseAccessLibrary.Item ConvertItemToDb(ModelLibrary.Item modelItem, int menuId, int itemCatId)
         {
-            if (modelItem == null)
-                return null;
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             PriceCtrl priceCtrl = new PriceCtrl();
             //var CheckItem = db.Items.Single(a => a.id == modelItem.Id);
-            //var prices = db.Prices.Where(p => p.itemId == modelItem.Id).OrderByDescending(p => p.startDate);
-            //var price = prices.First();
-            var menuCtrl = new MenuCtrl();
-           
-            var dbItem = new DatabaseAccessLibrary.Item
+            var menu = db.Menus.SingleOrDefault(p => p.id == menuId);
+            var itemCat = db.ItemCats.SingleOrDefault(p => p.id == itemCatId);
+            if( menu != null && itemCat != null && modelItem != null)
             {
-                menuId = modelItem.Menu.Id,
-                itemCatId = modelItem.ItemCat.Id,
-                id = modelItem.Id,
-                name = modelItem.Name,
-                description = modelItem.Description,
-                ItemCat = ConvertItemCatToDb(modelItem.ItemCat),
-                Menu = menuCtrl.ConvertMenuToDb(modelItem.Menu)
-                
-                
-            };
-            return dbItem;
+                var dbItem = new DatabaseAccessLibrary.Item
+                {
+                    id = modelItem.Id,
+                    description = modelItem.Description,
+                    itemCatId = itemCatId,
+                    menuId = menuId,
+                    name = modelItem.Name,
+
+                };
+                return dbItem;
+            }
+            return null;
         }
 
-        public DatabaseAccessLibrary.ItemCat CreateItemCat(ModelLibrary.ItemCat itemCat)
+        public ModelLibrary.ItemCat CreateItemCat(ModelLibrary.ItemCat itemCat)
         {
+            var itemDb = new ItemDb();
             var itemCatDb = new ItemCatDb();
-            var returnItemCat = new DatabaseAccessLibrary.ItemCat
+            
+            var returnItemCat = new ModelLibrary.ItemCat
             {
-                name = itemCat.Name,
-                id = itemCat.Id
+                Name = itemCat.Name,
+                
+            };
+            var dbItemCat = new DatabaseAccessLibrary.ItemCat
+            {
+                name = itemCat.Name
             };
 
-            itemCatDb.AddItemCat(returnItemCat);
+            itemCatDb.AddItemCat(dbItemCat);
 
             return returnItemCat;
         }
         public ModelLibrary.ItemCat ConvertItemCatToModel(DatabaseAccessLibrary.ItemCat dbItemCat)
         {
+            var itemDb = new ItemDb();
+            var modelItemCat = new ModelLibrary.ItemCat();
+            List<ModelLibrary.Item> itemList = new List<ModelLibrary.Item>();
+            ItemCtrl itemCtrl = new ItemCtrl();
             if (dbItemCat == null)
-                return null;
+                return modelItemCat;
 
-            var modelItemCat = new ModelLibrary.ItemCat
+            foreach (var Item in dbItemCat.Items)
             {
-                Id = dbItemCat.id,
-                Name = dbItemCat.name
-            };
-            
+                itemList.Add(itemCtrl.ConvertItemToModel(Item));
+            }
+            if (itemList.Count > 0)
+            {
+                modelItemCat.Name = dbItemCat.name;
+                modelItemCat.Id = dbItemCat.id;
+                modelItemCat.Items = itemList;
+
+                return modelItemCat;
+            }
+            modelItemCat.Name = dbItemCat.name;
+            modelItemCat.Id = dbItemCat.id;
 
             return modelItemCat;
+
         }
 
         public DatabaseAccessLibrary.ItemCat ConvertItemCatToDb(ModelLibrary.ItemCat modelItemCat)
         {
             if (modelItemCat == null)
                 return null;
-            var itemCat = new DatabaseAccessLibrary.ItemCat();
-            itemCat.id = modelItemCat.Id;
-            itemCat.name = modelItemCat.Name;
+            var itemCat = new DatabaseAccessLibrary.ItemCat
+            {
+                id = modelItemCat.Id,
+                name = modelItemCat.Name,
+            };
             
             return itemCat;
 
         }
 
-        public void DeleteItem(ModelLibrary.Item item)
+        public void DeleteItem(int itemId)
         {
             var itemDb = new ItemDb();
-            var dbItem = ConvertItemToDb(item);
-            itemDb.DeleteItem(dbItem);
+            itemDb.DeleteItem(itemId);
         }
 
-        public void UpdateItem(ModelLibrary.Item beforeItem, ModelLibrary.Item afterItem)
+        public void UpdateItem(ModelLibrary.Item item, int menuId, int itemCatId)
         {
             var itemDb = new ItemDb();
-
-            var beforeDbItem = ConvertItemToDb(beforeItem);
-            var afterDbItem = ConvertItemToDb(afterItem);
-            itemDb.UpdateItem(beforeDbItem, afterDbItem);
+            var dbItem = ConvertItemToDb(item, menuId, itemCatId); 
+            itemDb.UpdateItem(dbItem);
 
         }
-        public void DeleteItemCat(ModelLibrary.ItemCat itemCat)
+        public void DeleteItemCat(int itemCatId)
         {
             var itemCatDb = new ItemCatDb();
-            var dbItemCat = ConvertItemCatToDb(itemCat);
-            itemCatDb.DeleteItemCat(dbItemCat);
+            itemCatDb.DeleteItemCat(itemCatId);
         }
 
         public void UpdateItemCat(ModelLibrary.ItemCat beforeItemCat, ModelLibrary.ItemCat afterItemCat)
@@ -267,6 +300,11 @@ namespace ControllerLibrary
 
         }
 
-       //maybe get itemCats
+        public ModelLibrary.ItemCat GetItemCatByItemCatId(int itemId)
+        {
+            ItemCatDb itemCatDb = new ItemCatDb();
+            return ConvertItemCatToModel(itemCatDb.GetItemCatByItemCatId(itemId));
+        }
+
     }
 }

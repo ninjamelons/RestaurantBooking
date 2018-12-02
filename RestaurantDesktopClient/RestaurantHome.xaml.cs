@@ -38,24 +38,5 @@ namespace RestaurantDesktopClient
             MenusCrud menuPage = new MenusCrud();
             this.NavigationService.Navigate(menuPage);
         }
-
-        private void buttonItemCat_Click(object sender, RoutedEventArgs e)
-        {
-            ItemCatCrud itemPage = new ItemCatCrud();
-            this.NavigationService.Navigate(itemPage);
-        }
-
-        private void buttonItemCat_Click_1(object sender, RoutedEventArgs e)
-        {
-            ItemCatCrud itemPage = new ItemCatCrud();
-            this.NavigationService.Navigate(itemPage);
-            
-        }
-
-        private void buttonItem_Click(object sender, RoutedEventArgs e)
-        {
-            ItemCrud itemPage = new ItemCrud();
-            this.NavigationService.Navigate(itemPage);
-        }
     }
 }

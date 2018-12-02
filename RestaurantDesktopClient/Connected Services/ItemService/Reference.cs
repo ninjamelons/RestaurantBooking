@@ -15,17 +15,23 @@ namespace RestaurantDesktopClient.ItemService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ItemService.IItemService")]
     public interface IItemService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItem", ReplyAction="http://tempuri.org/IItemService/GetItemResponse")]
-        ModelLibrary.Item GetItem(ModelLibrary.Item item);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemCatById", ReplyAction="http://tempuri.org/IItemService/GetItemCatByIdResponse")]
+        ModelLibrary.ItemCat GetItemCatById(int itemCatId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemCatById", ReplyAction="http://tempuri.org/IItemService/GetItemCatByIdResponse")]
+        System.Threading.Tasks.Task<ModelLibrary.ItemCat> GetItemCatByIdAsync(int itemCatId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemCatByName", ReplyAction="http://tempuri.org/IItemService/GetItemCatByNameResponse")]
+        ModelLibrary.ItemCat GetItemCatByName(string itemCatName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemCatByName", ReplyAction="http://tempuri.org/IItemService/GetItemCatByNameResponse")]
+        System.Threading.Tasks.Task<ModelLibrary.ItemCat> GetItemCatByNameAsync(string itemCatName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItem", ReplyAction="http://tempuri.org/IItemService/GetItemResponse")]
-        System.Threading.Tasks.Task<ModelLibrary.Item> GetItemAsync(ModelLibrary.Item item);
+        ModelLibrary.Item GetItem(int itemId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemWithPriceMath", ReplyAction="http://tempuri.org/IItemService/GetItemWithPriceMathResponse")]
-        ModelLibrary.Item GetItemWithPriceMath(ModelLibrary.Item item);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemWithPriceMath", ReplyAction="http://tempuri.org/IItemService/GetItemWithPriceMathResponse")]
-        System.Threading.Tasks.Task<ModelLibrary.Item> GetItemWithPriceMathAsync(ModelLibrary.Item item);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItem", ReplyAction="http://tempuri.org/IItemService/GetItemResponse")]
+        System.Threading.Tasks.Task<ModelLibrary.Item> GetItemAsync(int itemId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemByNameAndMenuId", ReplyAction="http://tempuri.org/IItemService/GetItemByNameAndMenuIdResponse")]
         ModelLibrary.Item GetItemByNameAndMenuId(string itemName, int menuId);
@@ -40,28 +46,28 @@ namespace RestaurantDesktopClient.ItemService {
         System.Threading.Tasks.Task<ModelLibrary.Item> GetItemByNameAsync(string itemName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemPrice", ReplyAction="http://tempuri.org/IItemService/GetItemPriceResponse")]
-        ModelLibrary.Price GetItemPrice(ModelLibrary.Item item);
+        ModelLibrary.Price GetItemPrice(ModelLibrary.Item item, int menuId, int itemCatId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemPrice", ReplyAction="http://tempuri.org/IItemService/GetItemPriceResponse")]
-        System.Threading.Tasks.Task<ModelLibrary.Price> GetItemPriceAsync(ModelLibrary.Item item);
+        System.Threading.Tasks.Task<ModelLibrary.Price> GetItemPriceAsync(ModelLibrary.Item item, int menuId, int itemCatId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/CreateItem", ReplyAction="http://tempuri.org/IItemService/CreateItemResponse")]
-        void CreateItem(ModelLibrary.Item item);
+        void CreateItem(ModelLibrary.Item item, int menuId, int itemCatId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/CreateItem", ReplyAction="http://tempuri.org/IItemService/CreateItemResponse")]
-        System.Threading.Tasks.Task CreateItemAsync(ModelLibrary.Item item);
+        System.Threading.Tasks.Task CreateItemAsync(ModelLibrary.Item item, int menuId, int itemCatId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/UpdateItem", ReplyAction="http://tempuri.org/IItemService/UpdateItemResponse")]
-        void UpdateItem(ModelLibrary.Item beforeItem, ModelLibrary.Item afterItem);
+        void UpdateItem(ModelLibrary.Item updatedItem, int menuId, int itemCatId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/UpdateItem", ReplyAction="http://tempuri.org/IItemService/UpdateItemResponse")]
-        System.Threading.Tasks.Task UpdateItemAsync(ModelLibrary.Item beforeItem, ModelLibrary.Item afterItem);
+        System.Threading.Tasks.Task UpdateItemAsync(ModelLibrary.Item updatedItem, int menuId, int itemCatId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/DeleteItem", ReplyAction="http://tempuri.org/IItemService/DeleteItemResponse")]
-        void DeleteItem(ModelLibrary.Item item);
+        void DeleteItem(int itemId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/DeleteItem", ReplyAction="http://tempuri.org/IItemService/DeleteItemResponse")]
-        System.Threading.Tasks.Task DeleteItemAsync(ModelLibrary.Item item);
+        System.Threading.Tasks.Task DeleteItemAsync(int itemId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetAllItemsByCategory", ReplyAction="http://tempuri.org/IItemService/GetAllItemsByCategoryResponse")]
         ModelLibrary.Item[] GetAllItemsByCategory(int categoryId);
@@ -94,10 +100,10 @@ namespace RestaurantDesktopClient.ItemService {
         System.Threading.Tasks.Task UpdateItemCatAsync(ModelLibrary.ItemCat beforeItemCat, ModelLibrary.ItemCat afterItemCat);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/DeleteItemCat", ReplyAction="http://tempuri.org/IItemService/DeleteItemCatResponse")]
-        void DeleteItemCat(ModelLibrary.ItemCat itemCat);
+        void DeleteItemCat(int itemCatId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/DeleteItemCat", ReplyAction="http://tempuri.org/IItemService/DeleteItemCatResponse")]
-        System.Threading.Tasks.Task DeleteItemCatAsync(ModelLibrary.ItemCat itemCat);
+        System.Threading.Tasks.Task DeleteItemCatAsync(int itemCatId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetAllItemCategories", ReplyAction="http://tempuri.org/IItemService/GetAllItemCategoriesResponse")]
         ModelLibrary.ItemCat[] GetAllItemCategories();
@@ -111,17 +117,11 @@ namespace RestaurantDesktopClient.ItemService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemCats", ReplyAction="http://tempuri.org/IItemService/GetItemCatsResponse")]
         System.Threading.Tasks.Task<ModelLibrary.ItemCat[]> GetItemCatsAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemCatByName", ReplyAction="http://tempuri.org/IItemService/GetItemCatByNameResponse")]
-        ModelLibrary.ItemCat GetItemCatByName(string name);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetCatByItemCatId", ReplyAction="http://tempuri.org/IItemService/GetCatByItemCatIdResponse")]
+        ModelLibrary.ItemCat GetCatByItemCatId(int itemId);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemCatByName", ReplyAction="http://tempuri.org/IItemService/GetItemCatByNameResponse")]
-        System.Threading.Tasks.Task<ModelLibrary.ItemCat> GetItemCatByNameAsync(string name);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemCatById", ReplyAction="http://tempuri.org/IItemService/GetItemCatByIdResponse")]
-        ModelLibrary.ItemCat GetItemCatById(int id);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetItemCatById", ReplyAction="http://tempuri.org/IItemService/GetItemCatByIdResponse")]
-        System.Threading.Tasks.Task<ModelLibrary.ItemCat> GetItemCatByIdAsync(int id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IItemService/GetCatByItemCatId", ReplyAction="http://tempuri.org/IItemService/GetCatByItemCatIdResponse")]
+        System.Threading.Tasks.Task<ModelLibrary.ItemCat> GetCatByItemCatIdAsync(int itemId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -151,20 +151,28 @@ namespace RestaurantDesktopClient.ItemService {
                 base(binding, remoteAddress) {
         }
         
-        public ModelLibrary.Item GetItem(ModelLibrary.Item item) {
-            return base.Channel.GetItem(item);
+        public ModelLibrary.ItemCat GetItemCatById(int itemCatId) {
+            return base.Channel.GetItemCatById(itemCatId);
         }
         
-        public System.Threading.Tasks.Task<ModelLibrary.Item> GetItemAsync(ModelLibrary.Item item) {
-            return base.Channel.GetItemAsync(item);
+        public System.Threading.Tasks.Task<ModelLibrary.ItemCat> GetItemCatByIdAsync(int itemCatId) {
+            return base.Channel.GetItemCatByIdAsync(itemCatId);
         }
         
-        public ModelLibrary.Item GetItemWithPriceMath(ModelLibrary.Item item) {
-            return base.Channel.GetItemWithPriceMath(item);
+        public ModelLibrary.ItemCat GetItemCatByName(string itemCatName) {
+            return base.Channel.GetItemCatByName(itemCatName);
         }
         
-        public System.Threading.Tasks.Task<ModelLibrary.Item> GetItemWithPriceMathAsync(ModelLibrary.Item item) {
-            return base.Channel.GetItemWithPriceMathAsync(item);
+        public System.Threading.Tasks.Task<ModelLibrary.ItemCat> GetItemCatByNameAsync(string itemCatName) {
+            return base.Channel.GetItemCatByNameAsync(itemCatName);
+        }
+        
+        public ModelLibrary.Item GetItem(int itemId) {
+            return base.Channel.GetItem(itemId);
+        }
+        
+        public System.Threading.Tasks.Task<ModelLibrary.Item> GetItemAsync(int itemId) {
+            return base.Channel.GetItemAsync(itemId);
         }
         
         public ModelLibrary.Item GetItemByNameAndMenuId(string itemName, int menuId) {
@@ -183,36 +191,36 @@ namespace RestaurantDesktopClient.ItemService {
             return base.Channel.GetItemByNameAsync(itemName);
         }
         
-        public ModelLibrary.Price GetItemPrice(ModelLibrary.Item item) {
-            return base.Channel.GetItemPrice(item);
+        public ModelLibrary.Price GetItemPrice(ModelLibrary.Item item, int menuId, int itemCatId) {
+            return base.Channel.GetItemPrice(item, menuId, itemCatId);
         }
         
-        public System.Threading.Tasks.Task<ModelLibrary.Price> GetItemPriceAsync(ModelLibrary.Item item) {
-            return base.Channel.GetItemPriceAsync(item);
+        public System.Threading.Tasks.Task<ModelLibrary.Price> GetItemPriceAsync(ModelLibrary.Item item, int menuId, int itemCatId) {
+            return base.Channel.GetItemPriceAsync(item, menuId, itemCatId);
         }
         
-        public void CreateItem(ModelLibrary.Item item) {
-            base.Channel.CreateItem(item);
+        public void CreateItem(ModelLibrary.Item item, int menuId, int itemCatId) {
+            base.Channel.CreateItem(item, menuId, itemCatId);
         }
         
-        public System.Threading.Tasks.Task CreateItemAsync(ModelLibrary.Item item) {
-            return base.Channel.CreateItemAsync(item);
+        public System.Threading.Tasks.Task CreateItemAsync(ModelLibrary.Item item, int menuId, int itemCatId) {
+            return base.Channel.CreateItemAsync(item, menuId, itemCatId);
         }
         
-        public void UpdateItem(ModelLibrary.Item beforeItem, ModelLibrary.Item afterItem) {
-            base.Channel.UpdateItem(beforeItem, afterItem);
+        public void UpdateItem(ModelLibrary.Item updatedItem, int menuId, int itemCatId) {
+            base.Channel.UpdateItem(updatedItem, menuId, itemCatId);
         }
         
-        public System.Threading.Tasks.Task UpdateItemAsync(ModelLibrary.Item beforeItem, ModelLibrary.Item afterItem) {
-            return base.Channel.UpdateItemAsync(beforeItem, afterItem);
+        public System.Threading.Tasks.Task UpdateItemAsync(ModelLibrary.Item updatedItem, int menuId, int itemCatId) {
+            return base.Channel.UpdateItemAsync(updatedItem, menuId, itemCatId);
         }
         
-        public void DeleteItem(ModelLibrary.Item item) {
-            base.Channel.DeleteItem(item);
+        public void DeleteItem(int itemId) {
+            base.Channel.DeleteItem(itemId);
         }
         
-        public System.Threading.Tasks.Task DeleteItemAsync(ModelLibrary.Item item) {
-            return base.Channel.DeleteItemAsync(item);
+        public System.Threading.Tasks.Task DeleteItemAsync(int itemId) {
+            return base.Channel.DeleteItemAsync(itemId);
         }
         
         public ModelLibrary.Item[] GetAllItemsByCategory(int categoryId) {
@@ -255,12 +263,12 @@ namespace RestaurantDesktopClient.ItemService {
             return base.Channel.UpdateItemCatAsync(beforeItemCat, afterItemCat);
         }
         
-        public void DeleteItemCat(ModelLibrary.ItemCat itemCat) {
-            base.Channel.DeleteItemCat(itemCat);
+        public void DeleteItemCat(int itemCatId) {
+            base.Channel.DeleteItemCat(itemCatId);
         }
         
-        public System.Threading.Tasks.Task DeleteItemCatAsync(ModelLibrary.ItemCat itemCat) {
-            return base.Channel.DeleteItemCatAsync(itemCat);
+        public System.Threading.Tasks.Task DeleteItemCatAsync(int itemCatId) {
+            return base.Channel.DeleteItemCatAsync(itemCatId);
         }
         
         public ModelLibrary.ItemCat[] GetAllItemCategories() {
@@ -279,20 +287,12 @@ namespace RestaurantDesktopClient.ItemService {
             return base.Channel.GetItemCatsAsync();
         }
         
-        public ModelLibrary.ItemCat GetItemCatByName(string name) {
-            return base.Channel.GetItemCatByName(name);
+        public ModelLibrary.ItemCat GetCatByItemCatId(int itemId) {
+            return base.Channel.GetCatByItemCatId(itemId);
         }
         
-        public System.Threading.Tasks.Task<ModelLibrary.ItemCat> GetItemCatByNameAsync(string name) {
-            return base.Channel.GetItemCatByNameAsync(name);
-        }
-        
-        public ModelLibrary.ItemCat GetItemCatById(int id) {
-            return base.Channel.GetItemCatById(id);
-        }
-        
-        public System.Threading.Tasks.Task<ModelLibrary.ItemCat> GetItemCatByIdAsync(int id) {
-            return base.Channel.GetItemCatByIdAsync(id);
+        public System.Threading.Tasks.Task<ModelLibrary.ItemCat> GetCatByItemCatIdAsync(int itemId) {
+            return base.Channel.GetCatByItemCatIdAsync(itemId);
         }
     }
 }

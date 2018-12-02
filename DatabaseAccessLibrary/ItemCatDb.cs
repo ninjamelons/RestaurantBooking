@@ -24,25 +24,36 @@ namespace DatabaseAccessLibrary
             return item;
 
         }
-        public  ItemCat GetItemCat(string name)
-        {
-                JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-                var item = db.ItemCats.Single(t => t.name == name);
-                return item;
+        public ItemCat GetItemCatByItemCatId(int itemId)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var item = db.Items.Where(t => t.id == itemId).SingleOrDefault();
+            var itemCat = db.ItemCats.Where(t => t.id == item.itemCatId).SingleOrDefault();
+
+            return itemCat;
+            
             
         }
+        public ItemCat GetITemCatByName(string name)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-        public  void DeleteItemCat(ItemCat itemCat)
+            var item = db.ItemCats.First(t => t.name == name);
+            return item;
+        }
+
+
+        public  void DeleteItemCat(int itemCatId)
         {
             var db = new JustFeastDbDataContext();
-            //DatabaseAccessLibrary.ItemCat dbItemCat = db.ItemCats.First(t => t.name == itemCat.name);
-                                                        
-            //if (dbItemCat != null)
-           // {
-                db.Items.DeleteOnSubmit(db.Items.First(t => t.id == itemCat.id && t.name ==  itemCat.name));
+            var check = db.ItemCats.SingleOrDefault(t => t.id == itemCatId);
+            if (check != null)
+            {
+                db.ItemCats.DeleteOnSubmit(db.ItemCats.First(t => t.id == itemCatId));
                 db.SubmitChanges();
-           // }
+            }
+           
         }
 
         public  void UpdateItemCat(ItemCat beforeItemCat, ItemCat afterItemCat)
@@ -52,6 +63,7 @@ namespace DatabaseAccessLibrary
 
             dbItemCat.id = afterItemCat.id;
             dbItemCat.name = afterItemCat.name;
+
            
             db.SubmitChanges();
         }

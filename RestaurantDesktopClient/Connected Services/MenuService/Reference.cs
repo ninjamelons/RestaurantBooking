@@ -15,12 +15,6 @@ namespace RestaurantDesktopClient.MenuService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MenuService.IMenuService")]
     public interface IMenuService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/GetMenu", ReplyAction="http://tempuri.org/IMenuService/GetMenuResponse")]
-        ModelLibrary.Menu GetMenu(ModelLibrary.Menu menu);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/GetMenu", ReplyAction="http://tempuri.org/IMenuService/GetMenuResponse")]
-        System.Threading.Tasks.Task<ModelLibrary.Menu> GetMenuAsync(ModelLibrary.Menu menu);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/CreateMenu", ReplyAction="http://tempuri.org/IMenuService/CreateMenuResponse")]
         void CreateMenu(ModelLibrary.Menu menu);
         
@@ -34,10 +28,10 @@ namespace RestaurantDesktopClient.MenuService {
         System.Threading.Tasks.Task UpdateMenuAsync(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/DeleteMenu", ReplyAction="http://tempuri.org/IMenuService/DeleteMenuResponse")]
-        void DeleteMenu(ModelLibrary.Menu menu);
+        void DeleteMenu(int menuId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/DeleteMenu", ReplyAction="http://tempuri.org/IMenuService/DeleteMenuResponse")]
-        System.Threading.Tasks.Task DeleteMenuAsync(ModelLibrary.Menu menu);
+        System.Threading.Tasks.Task DeleteMenuAsync(int menuId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/GetAllMenusByRestaurant", ReplyAction="http://tempuri.org/IMenuService/GetAllMenusByRestaurantResponse")]
         ModelLibrary.Menu[] GetAllMenusByRestaurant(int restaurantId);
@@ -50,6 +44,12 @@ namespace RestaurantDesktopClient.MenuService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/GetMenuById", ReplyAction="http://tempuri.org/IMenuService/GetMenuByIdResponse")]
         System.Threading.Tasks.Task<ModelLibrary.Menu> GetMenuByIdAsync(int menuId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/GetMenuByName", ReplyAction="http://tempuri.org/IMenuService/GetMenuByNameResponse")]
+        ModelLibrary.Menu GetMenuByName(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMenuService/GetMenuByName", ReplyAction="http://tempuri.org/IMenuService/GetMenuByNameResponse")]
+        System.Threading.Tasks.Task<ModelLibrary.Menu> GetMenuByNameAsync(string name);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -79,14 +79,6 @@ namespace RestaurantDesktopClient.MenuService {
                 base(binding, remoteAddress) {
         }
         
-        public ModelLibrary.Menu GetMenu(ModelLibrary.Menu menu) {
-            return base.Channel.GetMenu(menu);
-        }
-        
-        public System.Threading.Tasks.Task<ModelLibrary.Menu> GetMenuAsync(ModelLibrary.Menu menu) {
-            return base.Channel.GetMenuAsync(menu);
-        }
-        
         public void CreateMenu(ModelLibrary.Menu menu) {
             base.Channel.CreateMenu(menu);
         }
@@ -103,12 +95,12 @@ namespace RestaurantDesktopClient.MenuService {
             return base.Channel.UpdateMenuAsync(beforeMenu, afterMenu);
         }
         
-        public void DeleteMenu(ModelLibrary.Menu menu) {
-            base.Channel.DeleteMenu(menu);
+        public void DeleteMenu(int menuId) {
+            base.Channel.DeleteMenu(menuId);
         }
         
-        public System.Threading.Tasks.Task DeleteMenuAsync(ModelLibrary.Menu menu) {
-            return base.Channel.DeleteMenuAsync(menu);
+        public System.Threading.Tasks.Task DeleteMenuAsync(int menuId) {
+            return base.Channel.DeleteMenuAsync(menuId);
         }
         
         public ModelLibrary.Menu[] GetAllMenusByRestaurant(int restaurantId) {
@@ -125,6 +117,14 @@ namespace RestaurantDesktopClient.MenuService {
         
         public System.Threading.Tasks.Task<ModelLibrary.Menu> GetMenuByIdAsync(int menuId) {
             return base.Channel.GetMenuByIdAsync(menuId);
+        }
+        
+        public ModelLibrary.Menu GetMenuByName(string name) {
+            return base.Channel.GetMenuByName(name);
+        }
+        
+        public System.Threading.Tasks.Task<ModelLibrary.Menu> GetMenuByNameAsync(string name) {
+            return base.Channel.GetMenuByNameAsync(name);
         }
     }
 }

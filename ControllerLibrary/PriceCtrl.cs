@@ -9,18 +9,24 @@ namespace ControllerLibrary
 {
     public class PriceCtrl
     {
-        public DatabaseAccessLibrary.Price CreatePrice(ModelLibrary.Price price, int itemId)
+        public ModelLibrary.Price CreatePrice(ModelLibrary.Price price, int itemId)
         {
             var priceDb = new PriceDb();
-            var returnPrice = new DatabaseAccessLibrary.Price
+            var returnPrice = new ModelLibrary.Price
             {
-                itemId = itemId,
-                endDate = price.EndDate,
-                startDate = price.StartDate,
-                price1 = price.VarPrice,
+                EndDate = price.EndDate,
+                StartDate = price.StartDate,
+                VarPrice = price.VarPrice
             };
 
-            priceDb.AddPrice(returnPrice);
+            var dbPrice = new DatabaseAccessLibrary.Price
+            {
+                endDate =  price.EndDate,
+                startDate = price.StartDate,
+                price1 = price.VarPrice,
+                itemId  = itemId
+            };
+            priceDb.AddPrice(dbPrice);
 
             return returnPrice;
         }
@@ -36,29 +42,38 @@ namespace ControllerLibrary
                 VarPrice = price.price1,
                 StartDate = price.startDate,
                 EndDate = price.endDate,
-                
+
             };
             return modelPrice;
         }
 
-        public  DatabaseAccessLibrary.Price ConvertPriceToDb(ModelLibrary.Price price)
+        public  DatabaseAccessLibrary.Price ConvertPriceToDb(ModelLibrary.Price price, int itemId)
         {
-            var dbPrice = new DatabaseAccessLibrary.Price
+
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var prico = db.Prices.Where(t => t.itemId == itemId).OrderByDescending(t=> t.startDate);
+            var pric = prico.First();
+            if(pric != null)
             {
-                price1 = price.VarPrice,
-                startDate = price.StartDate,
-                endDate = price.EndDate
-            };
-            return dbPrice;
+                var dbPrice = new DatabaseAccessLibrary.Price
+                {
+                    price1 = price.VarPrice,
+                    startDate = price.StartDate,
+                    endDate = price.EndDate,
+                    itemId = pric.itemId
+
+                };
+                return dbPrice;
+            }
+            return null;
         }
 
-        public void UpdatePrice(ModelLibrary.Price beforePrice, ModelLibrary.Price afterPrice)
+        public void UpdatePrice(ModelLibrary.Price newPrice, int itemId)
         {
             var priceDb = new PriceDb();
 
-            var beforeDbPrice = ConvertPriceToDb(beforePrice);
-            var afterDbPrice = ConvertPriceToDb(afterPrice);
-            priceDb.UpdatePrice(beforeDbPrice, afterDbPrice);
+            var updPrice = ConvertPriceToDb(newPrice, itemId);
+            priceDb.UpdatePrice(updPrice);
         }
 
         internal ModelLibrary.Price GetPriceItemId(int itemId)
@@ -66,12 +81,16 @@ namespace ControllerLibrary
             var priceDb = new PriceDb();
             return ConvertPriceToModel(priceDb.GetPriceItemId(itemId));
         }
+        public ModelLibrary.Price GetLatestPriceById(int itemId)
+        {
+            PriceDb priceDb = new PriceDb();
+            return ConvertPriceToModel(priceDb.GetLatestPriceById(itemId));
+        }
 
-        public void DeletePrice(ModelLibrary.Price price, int itemId)
+        public void DeletePricesByItemId(int itemId)
         {
             var priceDb = new PriceDb();
-            var dbPrice = ConvertPriceToDb(price);
-            priceDb.DeletePrice(dbPrice, itemId);
+            priceDb.DeletePricesByItemId(itemId);
         }
     }
 }

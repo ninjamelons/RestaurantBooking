@@ -14,24 +14,26 @@ namespace RestaurantService
     public interface IItemService
     {
         [OperationContract]
-        ModelLibrary.Item GetItem(ModelLibrary.Item item);
+        ModelLibrary.ItemCat GetItemCatById(int itemCatId);
         [OperationContract]
-        ModelLibrary.Item GetItemWithPriceMath(ModelLibrary.Item item);
+        ModelLibrary.ItemCat GetItemCatByName(string itemCatName);
+        [OperationContract]
+        ModelLibrary.Item GetItem(int itemId);
         [OperationContract]
         ModelLibrary.Item GetItemByNameAndMenuId(string itemName, int menuId);
         [OperationContract]
         ModelLibrary.Item GetItemByName(string itemName);
         [OperationContract]
-        ModelLibrary.Price GetItemPrice(ModelLibrary.Item item);
+        ModelLibrary.Price GetItemPrice(ModelLibrary.Item item, int menuId, int itemCatId);
 
         [OperationContract]
-        void CreateItem(ModelLibrary.Item item);
+        void CreateItem(ModelLibrary.Item item, int menuId, int itemCatId);
 
         [OperationContract]
-        void UpdateItem(ModelLibrary.Item beforeItem, ModelLibrary.Item afterItem);
+        void UpdateItem(ModelLibrary.Item updatedItem, int menuId, int itemCatId);
 
         [OperationContract]
-        void DeleteItem(ModelLibrary.Item item);
+        void DeleteItem(int itemId);
 
         [OperationContract]
         IEnumerable<ModelLibrary.Item> GetAllItemsByCategory(int categoryId);  // ????????
@@ -47,17 +49,16 @@ namespace RestaurantService
         void UpdateItemCat(ModelLibrary.ItemCat beforeItemCat, ModelLibrary.ItemCat afterItemCat);
 
         [OperationContract]
-        void DeleteItemCat(ModelLibrary.ItemCat itemCat);
+        void DeleteItemCat(int itemCatId);
 
         [OperationContract]
         IEnumerable<ModelLibrary.ItemCat> GetAllItemCategories();
 
         [OperationContract]
         IEnumerable<ModelLibrary.ItemCat> GetItemCats();
+
         [OperationContract]
-        ModelLibrary.ItemCat GetItemCatByName(string name);
-        [OperationContract]
-        ModelLibrary.ItemCat GetItemCatById(int id);
+        ModelLibrary.ItemCat GetCatByItemCatId(int itemId);
 
 
     }

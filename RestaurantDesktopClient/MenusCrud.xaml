@@ -20,7 +20,7 @@
         <Label x:Name="labelRestaurantIdds" Visibility="Hidden" Content="RestaurantId:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="550,20,0,0" Width="123" FontSize="18" FontWeight="Bold"/>
         <Label x:Name="labelRestaurantId" Visibility="Hidden" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="673,20,0,0" Width="123" FontSize="18" />
 
-        <DataGrid x:Name="dataGridItemList" SelectedItem="{Binding ChosenItem}" AutoGenerateColumns="True" HorizontalAlignment="Left" Height="382" Margin="10,20,0,0" VerticalAlignment="Top" Width="336" SelectionChanged="dataGridItemList_SelectionChanged">
+        <DataGrid x:Name="dataGridItemList" SelectedItem="{Binding ChosenItem}" AutoGenerateColumns="True" HorizontalAlignment="Left" Height="354" Margin="10,20,0,0" VerticalAlignment="Top" Width="336" SelectionChanged="dataGridItemList_SelectionChanged">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="DarkGray"/>
@@ -39,6 +39,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="buttonCreateMenu" Content="Create Menu" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Margin="483,402,0,0" Height="29" Click="buttonCreateMenu_Click"/>
+        <Button x:Name="buttonItems" Content="Items" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="388,402,0,0" Height="29" Click="buttonItems_Click"/>
+        <Button x:Name="buttonItemCats" Content="Item Categories" HorizontalAlignment="Left" Margin="293,402,0,0" VerticalAlignment="Top" Width="90" Height="29" Click="buttonItemCats_Click"/>
 
     </Grid>
 </Page>

@@ -8,10 +8,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Price" nillable="true" type="tns:Price" />
-  <xs:complexType name="ArrayOfPrice">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Price" nillable="true" type="tns:Price" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfPrice" nillable="true" type="tns:ArrayOfPrice" />
 </xs:schema>
