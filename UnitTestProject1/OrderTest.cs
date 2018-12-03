@@ -71,7 +71,7 @@ namespace UnitTests
             //Setup
             var oli = new List<OrderLineItem>();
             var ordCtrl = new OrderCtrl();
-            var ordDb = new OrderDb();
+            var ordDb = new Order();
             var order = new Order
             {
                 OrderId = "1000002",
@@ -114,7 +114,7 @@ namespace UnitTests
         {
             //Setup
             var ordCtrl = new OrderCtrl();
-            var ordDb = new OrderDb();
+            var ordDb = new Order();
             var dt = new DateTime(2018, 11, 08, 12, 22, 33);
             var resDt = new DateTime(2018, 11, 08, 18, 00, 00);
             var oli = new List<OrderLineItem>();
@@ -191,7 +191,7 @@ namespace UnitTests
         public void Update_Order_Test()
         {
             //Setup
-            var ordC = new OrderCtrl(); var ordDb = new OrderDb();
+            var ordC = new OrderCtrl(); var ordDb = new Order();
             var dt = new DateTime(2018, 11, 08, 12, 22, 33);
             var newResDt = new DateTime(2018, 11, 08, 19, 00, 00);
 

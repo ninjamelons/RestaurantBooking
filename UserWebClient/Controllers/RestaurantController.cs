@@ -198,22 +198,10 @@ namespace UserWebClient.Controllers
 
         [HttpGet]
         // POST add item to cart
-        public ActionResult HomeCart(int resId, int orderId, int itemId)
+        public ActionResult AddToCart(int id)
         {
-            #region Add item to cart
-
-            _orderProxy.AddItemToOrder(orderId, itemId, resId);
-
-            #endregion
-
-            #region Assign values
-            var model = new RestaurantOrderModel();
-            model.Restaurant = this._proxy.GetRestaurantWithMenu(resId);
-            model.menu = model.Restaurant.Menu;
-            model.OrderId = orderId;
-            #endregion
-
-            return RedirectToAction("Home", model);
+            AddToCart(id);
+            return RedirectToAction("Index");
         }
     }
 }
