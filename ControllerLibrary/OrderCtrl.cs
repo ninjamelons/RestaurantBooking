@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Linq;
 using DatabaseAccessLibrary;
+using ModelLibrary;
+using Order = DatabaseAccessLibrary.Order;
+using OrderLineItem = DatabaseAccessLibrary.OrderLineItem;
 
 namespace ControllerLibrary
 {
@@ -35,6 +38,13 @@ namespace ControllerLibrary
                 NoSeats = order.noSeats.ToString(),
                 Accepted = order.accepted
             };
+            var oli = new List<DatabaseAccessLibrary.OrderLineItem>();
+            foreach (var item in order.OrderLineItems)
+            {
+                oli.Add(item);
+            }
+
+            returnOrder.ItemsList.AddRange((ConvertOrderLineItemsToModel(oli)));
             return returnOrder;
         }
 
@@ -53,6 +63,18 @@ namespace ControllerLibrary
             return returnOliList;
         }
 
+        public List<ModelLibrary.OrderLineItem> ConvertOrderLineItemsToModel(List<DatabaseAccessLibrary.OrderLineItem> olis)
+        {
+            var modelItems = new List<ModelLibrary.OrderLineItem>();
+            var itemC = new ItemCtrl();
+            for (int i = 0; i < olis.Count; i++)
+            {
+                modelItems.Add(new ModelLibrary.OrderLineItem(itemC.GetItem(olis[i].itemId), olis[i].quantity));
+            }
+
+            return modelItems;
+        }
+
         public int AddOrder(ModelLibrary.Order order)
         {
             OrderDb ordDb = new OrderDb();
@@ -68,10 +90,10 @@ namespace ControllerLibrary
             ordDb.AddItemToOrder(orderId, itemId);
         }
 
-        public Order GetOrderById(int id)
+        public ModelLibrary.Order GetOrderById(int id)
         {
             OrderDb ordDb = new OrderDb();
-            return ordDb.GetOrderById(id);
+            return ConvertOrderToModel(ordDb.GetOrderById(id));
         }
 
         public void UpdateOrder(Order order)
