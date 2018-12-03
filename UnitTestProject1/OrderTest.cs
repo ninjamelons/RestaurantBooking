@@ -171,7 +171,7 @@ namespace UnitTests
             ordC.AddItemToOrder(1000000, 1000000);
 
             //Assert
-            Assert.IsTrue(ordC.GetOrderById(1000000).OrderLineItems[0].quantity == 3);
+            Assert.IsTrue(ordC.GetOrderById(1000000).ItemsList[0].Quantity == 3);
         }
 
         [TestMethod]
@@ -184,7 +184,7 @@ namespace UnitTests
             ordC.AddItemToOrder(1000000, 1000001);
 
             //Assert
-            Assert.IsTrue(ordC.GetOrderById(1000000).OrderLineItems[1].itemId == 1000001);
+            Assert.IsTrue(ordC.GetOrderById(1000000).ItemsList[1].LineItem.Id == 1000001);
         }
 
         [TestMethod]
@@ -197,7 +197,7 @@ namespace UnitTests
             var dbO = ordC.GetOrderById(1000000);
 
             //Assert
-            Assert.IsTrue(dbO.id == 1000000);
+            Assert.IsTrue(dbO.OrderId == "1000000");
         }
 
         [TestMethod]
@@ -222,7 +222,7 @@ namespace UnitTests
             ordC.UpdateOrder(dbOrder);
 
             //Assert
-            Assert.IsTrue(ordC.GetOrderById(1000000).reservation == newResDt);
+            Assert.IsTrue(ordC.GetOrderById(1000000).ReservationDateTime == newResDt.ToString());
         }
 
         [TestMethod]

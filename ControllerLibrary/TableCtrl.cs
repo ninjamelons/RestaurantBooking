@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using DatabaseAccessLibrary;
 using ModelLibrary;
@@ -8,6 +9,8 @@ namespace ControllerLibrary
 {
     public class TableCtrl
     {
+
+        private List<Table> tableListPerOrder = new List<Table>();
         /*private ResTable ConvertTable(Table table)
         {
             var returnTable = new ResTable();
@@ -215,14 +218,57 @@ namespace ControllerLibrary
         {
             Dictionary<int,int> modulo = new Dictionary<int, int>();
             int modItr = 0;
+            var seatsLeftInOrder = new int[tables.Count];
 
             foreach (var table in tables)
             {
                 modulo[modItr] = tempSeats % table.NoSeats;
+                seatsLeftInOrder[modItr] = tempSeats - table.NoSeats;
                 modItr++;
             }
 
             return modulo;
+        }
+
+        public List<Table> LeastNumberOfTables(List<Table> tables, int tempSeats)
+        {
+            int modItr = 0;
+            var seatsLeftInOrder = new int[tables.Count];
+
+            foreach (var table in tables)
+            {
+                seatsLeftInOrder[modItr] = tempSeats - table.NoSeats;
+                modItr++;
+            }
+
+            int index = -1;
+            int mostSeats = 0;
+            for (int i = 0; i < seatsLeftInOrder.Length; i++)
+            {
+                if (seatsLeftInOrder[i] <= mostSeats && -2 < seatsLeftInOrder[i])
+                {
+                    mostSeats = seatsLeftInOrder[i];
+                    if (mostSeats == 0)
+                    {
+                        index = i;
+                        break;
+                    }
+                    index = i;
+                }
+                else if(i == seatsLeftInOrder.Length - 1)
+                {
+                    index = i;
+                }
+            }
+
+            tableListPerOrder.Add(tables[index]);
+            tables.RemoveAt(index);
+            if (seatsLeftInOrder[index] > 0)
+            {
+                LeastNumberOfTables(tables, seatsLeftInOrder[index]);
+            }
+
+            return tableListPerOrder;
         }
 
         public Dictionary<int,int> FindSmallestModulo(Dictionary<int,int> modulo)

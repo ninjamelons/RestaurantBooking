@@ -90,6 +90,11 @@ namespace ControllerLibrary
             ordDb.AddItemToOrder(orderId, itemId);
         }
 
+        public List<OrderLineItem> GetOrderLineItemsById(int id)
+        {
+            return new List<OrderLineItem>();
+        }
+
         public ModelLibrary.Order GetOrderById(int id)
         {
             OrderDb ordDb = new OrderDb();
