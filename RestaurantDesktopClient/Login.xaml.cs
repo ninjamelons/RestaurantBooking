@@ -35,6 +35,7 @@ namespace RestaurantDesktopClient
                 RestaurantHome homePage = new RestaurantHome();
                 this.NavigationService.Navigate(homePage);
             }
+            InvalidLabel.Visibility = Visibility.Hidden;
             InvalidLabel.Visibility = Visibility.Visible;
         }
 

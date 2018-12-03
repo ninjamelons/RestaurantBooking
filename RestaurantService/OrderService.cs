@@ -53,7 +53,7 @@ namespace RestaurantService
             db.SubmitChanges();
         }
 
-        public Order GetOrderById(int id)
+        public ModelLibrary.Order GetOrderById(int id)
         {
             var ordC = new OrderCtrl();
             return ordC.GetOrderById(id);
@@ -69,7 +69,7 @@ namespace RestaurantService
         public void DeleteOrder(int orderId)
         {
             var ctrl = new OrderCtrl();
-            ctrl.DeleteOrder(orderId);
+            //ctrl.DeleteOrder(orderId);
         }
     }
 }
