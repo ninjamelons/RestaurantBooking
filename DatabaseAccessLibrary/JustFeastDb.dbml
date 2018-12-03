@@ -8,9 +8,16 @@
       <Column Name="phoneNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="roleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_User" Member="User" ThisKey="id" OtherKey="customerId" Type="User" Cardinality="One" />
       <Association Name="Customer_OrderHistory" Member="OrderHistories" ThisKey="id" OtherKey="customerId" Type="OrderHistory" />
       <Association Name="Customer_Restaurant" Member="Restaurant" ThisKey="id" OtherKey="id" Type="Restaurant" Cardinality="One" />
-      <Association Name="Customer_User" Member="User" ThisKey="id" OtherKey="customerId" Type="User" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="customerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Customer_User" Member="Customer" ThisKey="customerId" OtherKey="id" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Item" Member="Items">
@@ -33,15 +40,6 @@
       <Association Name="ItemCat_Item" Member="Items" ThisKey="id" OtherKey="itemCatId" Type="Item" />
     </Type>
   </Table>
-  <Table Name="dbo.OrderHistory" Member="OrderHistories">
-    <Type Name="OrderHistory">
-      <Column Name="orderId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="customerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="payment" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Association Name="Customer_OrderHistory" Member="Customer" ThisKey="customerId" OtherKey="id" Type="Customer" IsForeignKey="true" />
-      <Association Name="Order_OrderHistory" Member="Order" ThisKey="orderId" OtherKey="id" Type="Order" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Menu" Member="Menus">
     <Type Name="Menu">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -50,6 +48,15 @@
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Menu_Item" Member="Items" ThisKey="id" OtherKey="menuId" Type="Item" />
       <Association Name="Restaurant_Menu" Member="Restaurant" ThisKey="restaurantId" OtherKey="id" Type="Restaurant" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderHistory" Member="OrderHistories">
+    <Type Name="OrderHistory">
+      <Column Name="orderId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="customerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="payment" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_OrderHistory" Member="Customer" ThisKey="customerId" OtherKey="id" Type="Customer" IsForeignKey="true" />
+      <Association Name="Order_OrderHistory" Member="Order" ThisKey="orderId" OtherKey="id" Type="Order" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.OrderLineItem" Member="OrderLineItems">
@@ -125,13 +132,6 @@
       <Association Name="Restaurant_ResTable" Member="ResTables" ThisKey="id" OtherKey="restaurantId" Type="ResTable" />
       <Association Name="Customer_Restaurant" Member="Customer" ThisKey="id" OtherKey="id" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="ResCat_Restaurant" Member="ResCat" ThisKey="resCatId" OtherKey="id" Type="ResCat" IsForeignKey="true" DeleteRule="CASCADE" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="customerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="password" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="Customer_User" Member="Customer" ThisKey="customerId" OtherKey="id" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

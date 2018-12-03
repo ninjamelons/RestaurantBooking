@@ -53,13 +53,13 @@ namespace ControllerLibrary
             return returnOliList;
         }
 
-        public void AddOrder(ModelLibrary.Order order)
+        public int AddOrder(ModelLibrary.Order order)
         {
             OrderDb ordDb = new OrderDb();
             Order dbOrder = ConvertOrder(order);
             dbOrder.OrderLineItems.AddRange(ConvertOrderLineItemsToDb(order));
 
-            ordDb.AddOrder(dbOrder);
+            return ordDb.AddOrder(dbOrder);
         }
 
         public void AddItemToOrder(int orderId, int itemId)
@@ -84,17 +84,6 @@ namespace ControllerLibrary
         {
             OrderDb ordDb = new OrderDb();
             return ordDb.GetLastOrderIdentity();
-        }
-
-        public void DeleteOrder(int orderId)
-        {
-            OrderDb db = new OrderDb();
-        }
-
-        public List<OrderLineItem> GetOrderLineItemsById(int id)
-        {
-            var ordDb = new OrderDb();
-            return ordDb.OliList(id);
         }
     }
 }

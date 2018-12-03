@@ -87,8 +87,5 @@ namespace DatabaseAccessLibrary
             var menus = db.Menus.AsEnumerable();
             return menus;
         }
-
-
-
     }
 }
