@@ -34,12 +34,6 @@ namespace UserWebClient.Controllers
             return View(_proxy.GetAllRestaurants());
         }
 
-        // GET: Restaurant/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: Restaurant/Create
         public ActionResult Create()
         {
@@ -187,21 +181,64 @@ namespace UserWebClient.Controllers
            [HttpGet]
         // GET: RestaurantHome
         public ActionResult Home(int id)
-           {
-               Session["order"] = 1000000;
+        {
             RestaurantOrderModel model = new RestaurantOrderModel();
             model.Restaurant = this._proxy.GetRestaurantWithMenu(id);
-            model.menu = model.Restaurant.Menu;
-            model.OrderId = 1000000;
             return View("Home", model);
         }
 
         [HttpGet]
-        // POST add item to cart
-        public ActionResult AddToCart(int id)
+        // GET Home menu with RestaurantOrderModel parameter
+        public ActionResult HomeModel(RestaurantOrderModel model)
         {
-            AddToCart(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Home", model);
+        }
+
+        [HttpGet]
+        // GET add item to cart
+        public ActionResult HomeCart(int resId, int orderId, int itemId)
+        {
+            #region Add item to cart
+
+            _orderProxy.AddItemToOrder(orderId, itemId, resId);
+
+            #endregion
+
+            #region Assign values
+            var model = new RestaurantOrderModel();
+            model.Restaurant = this._proxy.GetRestaurantWithMenu(resId);
+            #endregion
+
+            return RedirectToAction("HomeModel", model);
+        }
+
+        [HttpGet]
+        public ActionResult ReserveTable()
+        {
+            return View("ReserveTable");
+        }
+
+        [HttpPost]
+        // POST Reserve a table and add orderId to SessionId
+        public ActionResult ReserveTable(RestaurantOrderModel order)
+        {
+            try
+            {
+                order.Restaurant = (Restaurant)Session["Restaurant"];
+                Session["Restaurant"] = null;
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                if(errors.Count() > 1)
+                    return View("ReserveTable", order);
+
+                Session["orderId"] = this._proxy.ReserveTables(order.Restaurant.Id, order.NoSeats,
+                    order.ReserveDateTime);
+
+                return RedirectToAction("HomeModel", order);
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
         }
     }
 }

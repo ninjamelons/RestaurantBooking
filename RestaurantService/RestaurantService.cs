@@ -14,7 +14,7 @@ namespace RestaurantService
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "RestaurantService" in both code and config file together.
     public class RestaurantService : IRestaurantService
     {
-        public void CreateTable(Table table)
+        /*public void CreateTable(Table table)
         {
             TableCtrl tableCtrl = new TableCtrl();
             tableCtrl.CreateTable(table);
@@ -38,7 +38,7 @@ namespace RestaurantService
         {
             TableCtrl tableCtrl = new TableCtrl();
             tableCtrl.DeleteTable(table);
-        }
+        }*/
 
 
         public IEnumerable<ModelLibrary.Restaurant> GetAllRestaurants()
@@ -157,10 +157,17 @@ namespace RestaurantService
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             return RestaurantCtrl.ConvertRestaurantCategoryToModel(db.ResCats.FirstOrDefault(x => x.id == id));
         }
-
         public List<ModelLibrary.Restaurant> GetRestaurantsPaged(int zipcode = 0, int categoryId = 0, int page = 0, int amount = 10, bool verified = true, bool discontinued = false)
         {
             return RestaurantCtrl.GetRestaurantsPaged(zipcode, categoryId, page, amount, verified, discontinued);
+        }
+
+
+        public int ReserveTables(int resId, int NoSeats, DateTime dateTime)
+        {
+            TableCtrl tblCtrl = new TableCtrl();
+            var orderId = tblCtrl.ReserveTables(resId, NoSeats, dateTime);
+            return orderId;
         }
     }
 }

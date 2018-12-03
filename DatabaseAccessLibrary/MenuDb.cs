@@ -11,13 +11,12 @@ namespace DatabaseAccessLibrary
     {
         public void AddMenu(Menu menu)
         {
-
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
             if (db.Menus.Any(t => !(t.restaurantId == menu.restaurantId && t.active == menu.active && t.active == true)))
 
                 db.Menus.InsertOnSubmit(menu);
-            db.SubmitChanges();
+                db.SubmitChanges();
         }
 
         public Menu GetMenu(int id)
@@ -30,15 +29,23 @@ namespace DatabaseAccessLibrary
             return dbMenu;
         }
 
-        public void DeleteMenu(DatabaseAccessLibrary.Menu menu)
+        public Menu GetMenuByName(string name)
         {
             var db = new JustFeastDbDataContext();
-            DatabaseAccessLibrary.Menu dbMenu = db.Menus.First(t => t.name == menu.name
-                                                        && t.id == menu.id);
+
+            Menu dbMenu = null;
+            dbMenu = db.Menus.First(t => t.name == name);
+
+            return dbMenu;
+        }
+
+        public void DeleteMenu(int menuId)
+        {
+            var db = new JustFeastDbDataContext();
+            DatabaseAccessLibrary.Menu dbMenu = db.Menus.First(t => t.id == menuId);
             if (dbMenu != null)
             {
-                db.Menus.DeleteOnSubmit(db.Menus.First(t => t.name == menu.name
-                                                        && t.id == menu.id));
+                db.Menus.DeleteOnSubmit(db.Menus.First(t => t.id == menuId));
                 db.SubmitChanges();
             }
 
@@ -49,7 +56,7 @@ namespace DatabaseAccessLibrary
         {
             var db = new JustFeastDbDataContext();
             var menu = db.Menus.FirstOrDefault(t => t.restaurantId == restaurantId
-                                                     && t.active);
+                                                     && t.active == true);
             return menu;
         }
 
@@ -63,12 +70,12 @@ namespace DatabaseAccessLibrary
         public void UpdateMenu(Menu beforeMenu, Menu afterMenu)
         {
             var db = new JustFeastDbDataContext();
-            var dbMenu = db.Menus.SingleOrDefault(t => t.id == beforeMenu.id
-                                                   && beforeMenu.id == afterMenu.id);
+            var dbMenu = db.Menus.SingleOrDefault(t => t.id == beforeMenu.id && t.id == afterMenu.id);
 
                 dbMenu.restaurantId = afterMenu.restaurantId;
                 dbMenu.name = afterMenu.name;
                 dbMenu.Items = afterMenu.Items;
+                dbMenu.active = afterMenu.active;
                 db.SubmitChanges();
 
         }
@@ -80,8 +87,5 @@ namespace DatabaseAccessLibrary
             var menus = db.Menus.AsEnumerable();
             return menus;
         }
-
-
-
     }
 }

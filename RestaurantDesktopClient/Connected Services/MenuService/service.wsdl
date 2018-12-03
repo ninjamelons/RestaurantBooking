@@ -31,11 +31,17 @@
   <wsdl:message name="IMenuService_GetAllMenusByRestaurant_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllMenusByRestaurantResponse" />
   </wsdl:message>
-  <wsdl:message name="IMenuService_GetMenu_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetMenu" />
+  <wsdl:message name="IMenuService_GetMenuById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMenuById" />
   </wsdl:message>
-  <wsdl:message name="IMenuService_GetMenu_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetMenuResponse" />
+  <wsdl:message name="IMenuService_GetMenuById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMenuByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMenuService_GetMenuByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMenuByName" />
+  </wsdl:message>
+  <wsdl:message name="IMenuService_GetMenuByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMenuByNameResponse" />
   </wsdl:message>
   <wsdl:portType name="IMenuService">
     <wsdl:operation name="CreateMenu">
@@ -54,9 +60,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMenuService/GetAllMenusByRestaurant" message="tns:IMenuService_GetAllMenusByRestaurant_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMenuService/GetAllMenusByRestaurantResponse" message="tns:IMenuService_GetAllMenusByRestaurant_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetMenu">
-      <wsdl:input wsaw:Action="http://tempuri.org/IMenuService/GetMenu" message="tns:IMenuService_GetMenu_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMenuService/GetMenuResponse" message="tns:IMenuService_GetMenu_OutputMessage" />
+    <wsdl:operation name="GetMenuById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMenuService/GetMenuById" message="tns:IMenuService_GetMenuById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMenuService/GetMenuByIdResponse" message="tns:IMenuService_GetMenuById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMenuByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMenuService/GetMenuByName" message="tns:IMenuService_GetMenuByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMenuService/GetMenuByNameResponse" message="tns:IMenuService_GetMenuByName_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IMenuService" type="tns:IMenuService">
@@ -97,8 +107,17 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetMenu">
-      <soap:operation soapAction="http://tempuri.org/IMenuService/GetMenu" style="document" />
+    <wsdl:operation name="GetMenuById">
+      <soap:operation soapAction="http://tempuri.org/IMenuService/GetMenuById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMenuByName">
+      <soap:operation soapAction="http://tempuri.org/IMenuService/GetMenuByName" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -8,13 +8,15 @@ namespace DatabaseAccessLibrary
 {
     public class Order
     {
-        public void AddOrder(Order order)
+        public int AddOrder(Order order)
         {
             var db = new JustFeastDbDataContext();
 
             db.Orders.InsertOnSubmit(order);
             db.OrderLineItems.InsertAllOnSubmit(order.OrderLineItems);
             db.SubmitChanges();
+
+            return order.id;
         }
 
         public void AddItemToCart(int orderId, int itemId)
@@ -67,6 +69,12 @@ namespace DatabaseAccessLibrary
                 ord.noSeats = order.noSeats;
                 db.SubmitChanges();
             }
+        }
+
+        public List<OrderLineItem> OliList(int id)
+        {
+            var db = new JustFeastDbDataContext();
+            return db.OrderLineItems.Where(x => x.orderId == id).ToList();
         }
 
         public int GetLastOrderIdentity()

@@ -13,35 +13,32 @@ namespace RestaurantService
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "PriceService" in both code and config file together.
     public class PriceService : IPriceService
     {
-        PriceCtrl priceCtrl = new PriceCtrl();
-        PriceDb priceDb = new PriceDb();
-        public void CreatePrice(ModelLibrary.Price price)
+
+        public void CreatePrice(ModelLibrary.Price price, int itemId) //ModelLibrary.Price price, int itemId
         {
-            priceCtrl.CreatePrice(price);
+            var priceCtrl = new PriceCtrl();
+            priceCtrl.CreatePrice(price, itemId);
+            //priceCtrl.CreatePrice(price, itemId);
         }
 
-        public void DeletePrice(ModelLibrary.Price price)
+        public void DeletePricesByItemId(int itemId)
         {
-            var dbPrice = priceCtrl.ConvertPriceToDb(price);
-            priceDb.DeletePrice(dbPrice);
+            var priceCtrl = new PriceCtrl();
+            priceCtrl.DeletePricesByItemId(itemId);
+
         }
 
-        public IEnumerable<ModelLibrary.Price> GetAllPricesByItem(string id)
+        public ModelLibrary.Price GetLatestPrice(int itemId)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var price = db.Prices.ToList();
-            List<ModelLibrary.Price> modelPrices = new List<ModelLibrary.Price>();
-            foreach (var a in price)
-            {
-                modelPrices.Add(priceCtrl.ConvertPriceToModel(a));
-            }
-            return modelPrices;
+            var priceCtrl = new PriceCtrl();
+            var priceDb = new PriceDb();
+            return priceCtrl.ConvertPriceToModel(priceDb.GetLatestPriceById(itemId));
         }
 
-        public void UpdatePrice(ModelLibrary.Price beforePrice, ModelLibrary.Price afterPrice)
+        public void UpdatePrice(ModelLibrary.Price price, int itemId)
         {
-
-            priceCtrl.UpdatePrice(beforePrice, afterPrice);
+            var priceCtrl = new PriceCtrl();
+            priceCtrl.UpdatePrice(price, itemId);
         }
        
     }

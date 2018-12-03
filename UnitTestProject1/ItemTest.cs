@@ -87,7 +87,7 @@ namespace UnitTests
             itemDb.AddItem(newItem);
 
             //Get Item(1,1,"PerfectlyGoodName");
-            DatabaseAccessLibrary.Item anotherItem = itemDb.GetItem(1, "PerfectlyGoodName");// PRICE!?
+            DatabaseAccessLibrary.Item anotherItem = itemDb.GetItem(1);// PRICE!?
 
             //Assert
             Assert.IsTrue(anotherItem.name == newItem.name
@@ -136,7 +136,7 @@ namespace UnitTests
 
 
             //Delete Item
-            itemDb.DeleteItem(newItem);
+            itemDb.DeleteItem(1);
 
             //Assert
             Assert.IsNull(newItem);
@@ -205,7 +205,7 @@ namespace UnitTests
 
             //Act
             //ItemCtrl.DeleteItem(item);
-            var resTable = itemCtrl.GetItem(item);
+            var resTable = itemCtrl.GetItem(1);
 
             //Assert
             Assert.IsNull(resTable);
@@ -216,10 +216,21 @@ namespace UnitTests
         {
             ItemCtrl itemCtrl = new ItemCtrl();
             //Setup
+            var menu = new ModelLibrary.Menu
+            {
+                 Active = false,
+                 Id = 1000000,
+                 Name = "newName",
+                 RestaurantId = 1000000, 
+                  
+
+            };
             var itemCat = new ModelLibrary.ItemCat
             {
                 Id = 1000000,
                 Name = "Soup"
+
+                
             };
             var price = new ModelLibrary.Price
             {
@@ -230,17 +241,17 @@ namespace UnitTests
             };
             var item = new ModelLibrary.Item
             {
+                Id = 1000000,
                 Name = "Controllerforabi",
                 Description = "Totallynotadescription",
-                ItemCat = itemCat,
-                Price = price
+                Price = price,
             };
 
             //Act
-            var itemdb = itemCtrl.CreateItem(item, 1000000);
+            var itemdb = itemCtrl.CreateItem(item, menu.Id, itemCat.Id);
 
             //Assert
-            Assert.AreEqual(item.Name, itemdb.name);
+            Assert.AreEqual(item.Name, itemdb.Name);
         }
         [TestMethod]
         public void Edit_Item_Service()
@@ -262,8 +273,8 @@ namespace UnitTests
             var item = new ModelLibrary.Item
             {
                 Name = "Controllerforabi",
+                Id = 1000000,
                 Description = "Totallynotadescription",
-                ItemCat = itemCat,
                 Price = price
             };
             //Act

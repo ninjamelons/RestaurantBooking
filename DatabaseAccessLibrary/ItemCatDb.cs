@@ -15,27 +15,45 @@ namespace DatabaseAccessLibrary
             db.ItemCats.InsertOnSubmit(itemCat);
             db.SubmitChanges();
         }
-    
 
-        public  ItemCat GetItemCat(string name, int itemCatId)
+        public ItemCat GetItemCatById(int id)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-            var itemCat = db.ItemCats.Single(t => t.name == name && t.id == itemCatId);
-            return itemCat;
+            var item = db.ItemCats.Single(t => t.id == id);
+            return item;
+
         }
 
-        public  void DeleteItemCat(ItemCat itemCat)
+        public ItemCat GetItemCatByItemCatId(int itemId)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var item = db.Items.Where(t => t.id == itemId).SingleOrDefault();
+            var itemCat = db.ItemCats.Where(t => t.id == item.itemCatId).SingleOrDefault();
+
+            return itemCat;
+            
+            
+        }
+        public ItemCat GetITemCatByName(string name)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+
+            var item = db.ItemCats.First(t => t.name == name);
+            return item;
+        }
+
+
+        public  void DeleteItemCat(int itemCatId)
         {
             var db = new JustFeastDbDataContext();
-            DatabaseAccessLibrary.ItemCat dbItemCat = db.ItemCats.First(t => t.name == itemCat.name
-                                                        && t.id == itemCat.id);
-            if (dbItemCat != null)
+            var check = db.ItemCats.SingleOrDefault(t => t.id == itemCatId);
+            if (check != null)
             {
-                db.Items.DeleteOnSubmit(db.Items.First(t => t.name == itemCat.name
-                                                        && t.id == itemCat.id));
+                db.ItemCats.DeleteOnSubmit(db.ItemCats.First(t => t.id == itemCatId));
                 db.SubmitChanges();
             }
+           
         }
 
         public  void UpdateItemCat(ItemCat beforeItemCat, ItemCat afterItemCat)
@@ -45,6 +63,7 @@ namespace DatabaseAccessLibrary
 
             dbItemCat.id = afterItemCat.id;
             dbItemCat.name = afterItemCat.name;
+
            
             db.SubmitChanges();
         }

@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using ModelLibrary;
 using DatabaseAccessLibrary;
+using OrderLineItem = ModelLibrary.OrderLineItem;
 
 namespace ControllerLibrary
 {
-    public static class CustomerCtrl
+    public class CustomerCtrl
     {
         public static ModelLibrary.Customer LoginCustomer(string email, string passwordHashed)
         {
@@ -39,6 +40,15 @@ namespace ControllerLibrary
             };
 
             return mCus;
+        }
+
+        public List<DatabaseAccessLibrary.Order> GetOrdersByCustomerId(int id)
+        {
+            var cusDb = new CustomerDb();
+            var ordC = new OrderCtrl();
+            var orderHistory = cusDb.GetOrderHistoryByCustomerId(id);
+            orderHistory.ForEach(x => x.OrderLineItems.AddRange(ordC.GetOrderLineItemsById(x.id)));
+            return orderHistory;
         }
 
         public static DatabaseAccessLibrary.Customer ConvertCustomerToDatabase(ModelLibrary.Customer mCus)

@@ -11,20 +11,24 @@ namespace RestaurantService
     [ServiceContract]
     public interface IMenuService
     {
-        [OperationContract]
-        void CreateMenu(ModelLibrary.Menu menu, int restaurantId);
 
         [OperationContract]
-        void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu, int restaurantId);
+        void CreateMenu(ModelLibrary.Menu menu);
 
         [OperationContract]
-        void DeleteMenu(ModelLibrary.Menu menu, int restaurantId);
+        void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu);
+
+        [OperationContract]
+        void DeleteMenu(int menuId);
 
         [OperationContract]
         IEnumerable<ModelLibrary.Menu> GetAllMenusByRestaurant(int restaurantId);
 
         [OperationContract]
-        ModelLibrary.Menu GetMenu(ModelLibrary.Menu menu);
+        ModelLibrary.Menu GetMenuById(int menuId);
+
+        [OperationContract]
+        ModelLibrary.Menu GetMenuByName(string name);
 
 
 

@@ -14,43 +14,52 @@ namespace RestaurantService
     public class MenuService : IMenuService
     {
         MenuCtrl menuCtrl = new MenuCtrl();
-        public void CreateMenu(ModelLibrary.Menu menu, int restaurantId)
+        public void CreateMenu(ModelLibrary.Menu menu)
         {
             var menuCtrl = new MenuCtrl();
-            menuCtrl.CreateMenu(menu, restaurantId);
+            menuCtrl.CreateMenu(menu);
         }
-        public void DeleteMenu(ModelLibrary.Menu menu, int restaurantId)
+        public void DeleteMenu(int menuId)
         {
-            var menuCtrl = new MenuCtrl();
             var menuDb = new MenuDb();
-            var dbMenu = menuCtrl.ConvertMenuToDb(menu, restaurantId);
-            menuDb.DeleteMenu(dbMenu);
+            var menuCtrl = new MenuCtrl();
+            menuDb.DeleteMenu(menuId);
         }
 
         public IEnumerable<ModelLibrary.Menu> GetAllMenusByRestaurant(int restaurantId)
         {
+            var menuCtrl = new MenuCtrl();
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            MenuCtrl menuCtrl = new MenuCtrl();
             var res = db.Menus.Where(x => x.restaurantId == restaurantId).ToList();
             List<ModelLibrary.Menu> modelMenu = new List<ModelLibrary.Menu>();
-            foreach (var x in res)
+            foreach (var a in res)
             {
-                modelMenu.Add(menuCtrl.ConvertMenuToModel(x));
+                modelMenu.Add(menuCtrl.ConvertMenuToModel(a));
             }
             return modelMenu;
            
         }
 
-        public ModelLibrary.Menu GetMenu(ModelLibrary.Menu menu)
+        public ModelLibrary.Menu GetMenu(int menuId)
         {
-            return menuCtrl.GetMenu(menu);
+            return menuCtrl.GetMenuById(menuId);
         }
 
-        public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu, int restaurantId)
+        public ModelLibrary.Menu GetMenuById(int menuId)
+        {
+            return menuCtrl.GetMenuById(menuId);
+        }
+
+        public ModelLibrary.Menu GetMenuByName(string name)
+        {
+            return menuCtrl.GetMenuByName(name);
+        }
+
+        public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             MenuCtrl menuCtrl = new MenuCtrl();
-            menuCtrl.UpdateMenu(beforeMenu, afterMenu, restaurantId);
+            menuCtrl.UpdateMenu(beforeMenu, afterMenu);
         }
     }
 }

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Linq;
 using ControllerLibrary;
 using DatabaseAccessLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ModelLibrary;
 using Order = ModelLibrary.Order;
 using OrderLineItem = ModelLibrary.OrderLineItem;
 
@@ -14,10 +12,12 @@ namespace UnitTests
     [TestClass]
     public class OrderTest
     {
+//        private readonly CustomerService
+
         [TestInitialize]
         public void TestInitialize()
         {
-            ResetDb resetDb = new ResetDb();
+            var resetDb = new ResetDb();
             resetDb.Clean();
         }
 
@@ -63,6 +63,19 @@ namespace UnitTests
 
             //Assert
             Assert.IsTrue(shouldValidate == isModelStateValid);
+        }
+
+        [TestMethod]
+        public void Get_OrderHistory_By_CustomerId_Test()
+        {
+            //Setup
+            var cusC = new CustomerCtrl();
+
+            //Act
+            var orderHistory = cusC.GetOrdersByCustomerId(1000000);
+
+            //Assert
+            Assert.IsTrue(orderHistory[0].id == 1000000 && orderHistory[0].OrderLineItems[0].itemId == 1000000);
         }
 
         [TestMethod]
@@ -158,7 +171,7 @@ namespace UnitTests
             ordC.AddItemToOrder(1000000, 1000000);
 
             //Assert
-            Assert.IsTrue(ordC.GetOrderById(1000000).OrderLineItems[0].quantity == 3);
+            Assert.IsTrue(ordC.GetOrderById(1000000).ItemsList[0].Quantity == 3);
         }
 
         [TestMethod]
@@ -171,7 +184,7 @@ namespace UnitTests
             ordC.AddItemToOrder(1000000, 1000001);
 
             //Assert
-            Assert.IsTrue(ordC.GetOrderById(1000000).OrderLineItems[1].itemId == 1000001);
+            Assert.IsTrue(ordC.GetOrderById(1000000).ItemsList[1].LineItem.Id == 1000001);
         }
 
         [TestMethod]
@@ -184,7 +197,7 @@ namespace UnitTests
             var dbO = ordC.GetOrderById(1000000);
 
             //Assert
-            Assert.IsTrue(dbO.id == 1000000);
+            Assert.IsTrue(dbO.OrderId == "1000000");
         }
 
         [TestMethod]
@@ -209,7 +222,7 @@ namespace UnitTests
             ordC.UpdateOrder(dbOrder);
 
             //Assert
-            Assert.IsTrue(ordC.GetOrderById(1000000).reservation == newResDt);
+            Assert.IsTrue(ordC.GetOrderById(1000000).ReservationDateTime == newResDt.ToString());
         }
 
         [TestMethod]
