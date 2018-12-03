@@ -57,7 +57,17 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\ItemService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\MenuService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\PriceService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -66,6 +76,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ItemCatCrud.xaml.cs">
+      <DependentUpon>ItemCatCrud.xaml</DependentUpon>
     </Compile>
     <Compile Include="ItemCrud.xaml.cs">
       <DependentUpon>ItemCrud.xaml</DependentUpon>
@@ -86,6 +99,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="ItemCatCrud.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ItemCrud.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -133,6 +150,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Connected Services\ItemService\ModelLibrary.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ItemService\service.wsdl" />
+    <None Include="Connected Services\ItemService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\ItemService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\MenuService\ModelLibrary.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -141,6 +168,16 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\MenuService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PriceService\ModelLibrary.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PriceService\service.wsdl" />
+    <None Include="Connected Services\PriceService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\PriceService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\RestaurantService\ModelLibrary.xsd">
@@ -153,7 +190,10 @@
     <None Include="Connected Services\RestaurantService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\ModelLibrary.Item.datasource" />
+    <None Include="Properties\DataSources\ModelLibrary.ItemCat.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.Menu.datasource" />
+    <None Include="Properties\DataSources\ModelLibrary.Price.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.Restaurant.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.RestaurantCategory.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.Table.datasource" />
@@ -187,7 +227,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ItemService\" />
     <WCFMetadataStorage Include="Connected Services\MenuService\" />
+    <WCFMetadataStorage Include="Connected Services\PriceService\" />
     <WCFMetadataStorage Include="Connected Services\RestaurantService\" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +252,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\MenuService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ItemService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ItemService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ItemService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PriceService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PriceService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\PriceService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

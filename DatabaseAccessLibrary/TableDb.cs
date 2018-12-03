@@ -78,7 +78,7 @@ namespace DatabaseAccessLibrary
 
             resTable.restaurantId = newTable.restaurantId;
             resTable.noSeats = newTable.noSeats;
-            resTable.total = newTable.total;
+           // resTable.total = newTable.total;
             resTable.reserved = newTable.reserved;
             db.SubmitChanges();
         }

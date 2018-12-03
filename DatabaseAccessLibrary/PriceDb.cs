@@ -17,8 +17,15 @@ namespace DatabaseAccessLibrary
             db.SubmitChanges();
         }
     
+        public Price GetLatestPriceById(int itemId)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
 
-        public  Price GetPrice(int itemId, DateTime startDate)
+            var prico = db.Prices.Where(t => t.itemId == itemId).OrderByDescending(t => t.startDate);
+            var pric = prico.First();
+            return pric;
+        }
+        public  Price GetPriceByIdAndStartDate(int itemId, DateTime startDate)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
 
@@ -26,29 +33,24 @@ namespace DatabaseAccessLibrary
             return pric;
         }
 
-        public  void DeletePrice(Price price)
+        public void DeletePricesByItemId(int itemId)
         {
             var db = new JustFeastDbDataContext();
-            DatabaseAccessLibrary.Price dbPrice = db.Prices.First(t => t.itemId == price.itemId
-                                                        && t.startDate == price.startDate);
+            var dbPrice = db.Prices.Where(t => t.itemId == itemId);
             if (dbPrice != null)
             {
-                db.Prices.DeleteOnSubmit(db.Prices.First(t => t.itemId == price.itemId
-                                                        && t.startDate == price.startDate));
+                db.Prices.DeleteAllOnSubmit(dbPrice);
                 db.SubmitChanges();
             }
         }
 
-        public  void UpdatePrice(Price priceBefore, Price priceAfter)
+        public  void UpdatePrice(Price price)
         {
             var db = new JustFeastDbDataContext();
-            var dbPrice = db.Prices.SingleOrDefault(t => t.itemId == priceBefore.itemId
-                                                  && t.startDate == priceBefore.startDate);
+            var pric = db.Prices.FirstOrDefault(x => x.itemId == price.itemId );
 
-            dbPrice.itemId = priceAfter.itemId;
-            dbPrice.startDate = priceAfter.startDate;
-            dbPrice.endDate = priceAfter.endDate;
-            dbPrice.price1 = priceAfter.price1;
+            pric.price1 = price.price1;
+
             db.SubmitChanges();
         }
 
@@ -56,14 +58,6 @@ namespace DatabaseAccessLibrary
         {
             var db = new JustFeastDbDataContext();
             return db.Prices.FirstOrDefault(p => p.itemId == itemId);
-        }
-
-        public IEnumerable<Price> GetPrices()
-        {
-            var db = new JustFeastDbDataContext();
-
-            var prices = db.Prices.AsEnumerable();
-            return prices;
         }
 
     }

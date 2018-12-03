@@ -5,7 +5,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="menu" nillable="true" type="q1:Menu" />
-        <xs:element minOccurs="0" name="restaurantId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -19,7 +18,6 @@
       <xs:sequence>
         <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="beforeMenu" nillable="true" type="q2:Menu" />
         <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="afterMenu" nillable="true" type="q3:Menu" />
-        <xs:element minOccurs="0" name="restaurantId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -31,8 +29,7 @@
   <xs:element name="DeleteMenu">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="menu" nillable="true" type="q4:Menu" />
-        <xs:element minOccurs="0" name="restaurantId" type="xs:int" />
+        <xs:element minOccurs="0" name="menuId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -51,21 +48,35 @@
   <xs:element name="GetAllMenusByRestaurantResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllMenusByRestaurantResult" nillable="true" type="q5:ArrayOfMenu" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetAllMenusByRestaurantResult" nillable="true" type="q4:ArrayOfMenu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetMenu">
+  <xs:element name="GetMenuById">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="menu" nillable="true" type="q6:Menu" />
+        <xs:element minOccurs="0" name="menuId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetMenuResponse">
+  <xs:element name="GetMenuByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetMenuResult" nillable="true" type="q7:Menu" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetMenuByIdResult" nillable="true" type="q5:Menu" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMenuByName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetMenuByNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetMenuByNameResult" nillable="true" type="q6:Menu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

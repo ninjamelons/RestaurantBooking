@@ -20,5 +20,15 @@ namespace UserWebClient
             UnityConfig.RegisterComponents();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        protected void Session_OnEnd(object sender, EventArgs e)
+        {
+            var orderId = Session["orderId"] as int?;
+            if(orderId != null)
+            {
+                OrderService.OrderServiceClient proxy = new OrderService.OrderServiceClient();
+                proxy.DeleteOrder(orderId.Value);
+            }
+        }
     }
 }

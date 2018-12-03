@@ -20,5 +20,7 @@ namespace RestaurantService
         Order GetOrderById(int id);
         [OperationContract]
         void UpdateOrder(Order order);
+        [OperationContract]
+        void DeleteOrder(int orderId);
     }
 }

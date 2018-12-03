@@ -8,23 +8,48 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ItemCrud">
 
-    <Grid>
-        <Label x:Name="labelName" Content="Name:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,25,0,0" Width="109"/>
-        <Label x:Name="labelItemCat" Content="Category:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,74,0,0" Width="109"/>
-        <Label x:Name="labelItemPrice" Content="Price:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,128,0,0" Width="109"/>
-        <Label x:Name="labelItemPriceDate" Content="Price Date:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="406,128,0,0" Width="103"/>
-        <Label x:Name="labelItemPriceDescription" Content="Description:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,167,0,0" Width="109"/>
-        <TextBox x:Name="textBoxDescription" HorizontalAlignment="Left" Height="182" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="726" Margin="21,201,0,0"/>
-        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="118,36,0,0" TextChanged="textBoxName_TextChanged"/>
-        <TextBox x:Name="textBoxNameCategory" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123" Margin="514,86,0,0" TextChanged="textBoxName_TextChanged" RenderTransformOrigin="0.411,0.599"/>
-        <TextBox x:Name="textBoxNamePrice" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Margin="118,139,0,0" TextChanged="textBoxName_TextChanged"/>
-        <TextBox x:Name="textBoxNamePriceEnd" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123" Margin="652,139,0,0" TextChanged="textBoxName_TextChanged"/>
-        <Button x:Name="buttonCancel" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="639,399,0,0" Height="27"/>
-        <Button x:Name="buttonSave" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="514,399,0,0" Height="27"/>
-        <ComboBox x:Name="comboBoxCategory" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="118,86,0,0"/>
-        <Label x:Name="labelItemNewCatName" Content="New Category Name:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,74,0,0" Width="189"/>
-        <Button x:Name="buttonSaveCategory" Content="Save Category" HorizontalAlignment="Left" VerticalAlignment="Top" Width="123" Margin="652,87,0,0" Height="22"/>
-        <TextBox x:Name="textBoxNamePriceStart" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123" Margin="514,139,0,0" TextChanged="textBoxName_TextChanged"/>
+    <Grid Margin="0,-1,0,1">
+        <Label x:Name="labelName" Content="Name:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="396,30,0,0" Width="109"/>
+        <Label x:Name="labelItemCat" Content="Category:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="396,128,0,0" Width="109"/>
+        <Label x:Name="labelItemPrice" Content="Price:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="396,75,0,0" Width="109"/>
+        <Label x:Name="labelItemPriceDescription" Content="Description:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="396,240,0,0" Width="113" Height="56"/>
+        <TextBox x:Name="textBoxDescription" HorizontalAlignment="Left" Height="125" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" Margin="514,240,0,0"/>
+        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Margin="514,36,0,0" />
+        <TextBox x:Name="textBoxNamePrice" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="132" Margin="514,86,0,0" />
+        <Button x:Name="buttonEdit" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="569,397,0,0" Height="29" Click="buttonSave_Click"/>
+        <ComboBox x:Name="comboBoxCategory" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Margin="514,140,0,0" />
+
+        <DataGrid x:Name="dataGridItemList" AutoGenerateColumns="True" HorizontalAlignment="Left" Height="382" Margin="35,36,0,0" VerticalAlignment="Top" Width="289" SelectionChanged="dataGridItemList_SelectionChanged" RenderTransformOrigin="1.06,0.289">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="DarkGray"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="BorderThickness" Value="01,2,1,2"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="FontSize" Value="14"/>
+
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header=" Id" Binding="{Binding Id}"  Width="*"/>
+                <DataGridTextColumn Header=" Name" Binding="{Binding Name}" Width="*"/>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="buttonDelete" Content="Delete" HorizontalAlignment="Left" Margin="682,398,0,0" VerticalAlignment="Top" Width="108" Height="28" Click="buttonDelete_Click"/>
+        <Button x:Name="buttonCreate" Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="456,397,0,0" Height="28" Click="buttonCreate_Click"/>
+        <Label x:Name="labelItemCat_Copy" Content="Menu:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="396,167,0,0" Width="109"/>
+        <Label x:Name="label" Visibility="Hidden"/>
+        <Label x:Name="label1" Visibility="Hidden"  />
+        <Label x:Name="label2" Visibility="Hidden" />
+        <Label x:Name="label3" Visibility="Hidden" />
+        <Label x:Name="label4" Visibility="Hidden" />
+        <Label x:Name="labelMenuId" Visibility="Hidden"/>
+        <Label x:Name="LabelItemCatId" Visibility="Hidden"/>
+        <Label x:Name="LabelItemId" Visibility="Hidden"/>
+        <Label x:Name="labelMenuName"  HorizontalAlignment="Left" Margin="514,175,0,0" FontWeight="Bold" FontSize="15" VerticalAlignment="Top" Width="132" Height="26"/>
 
     </Grid>
 </Page>

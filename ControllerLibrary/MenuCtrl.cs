@@ -10,23 +10,24 @@ namespace ControllerLibrary
 {
     public class MenuCtrl
     {
-        public DatabaseAccessLibrary.Menu CreateMenu(ModelLibrary.Menu menu, int restaurantId)
+        public ModelLibrary.Menu CreateMenu(ModelLibrary.Menu menu)
         {
-            var returnMenu = new DatabaseAccessLibrary.Menu();
+            var dbMenu = new DatabaseAccessLibrary.Menu();
             ItemCtrl itemCtrl = new ItemCtrl();
 
-            
-            returnMenu.name = menu.Name;
-            returnMenu.restaurantId = restaurantId;
-            foreach(var Item in menu.Items)
-            {
-                returnMenu.Items.Add(itemCtrl.ConvertItemToDb(Item, returnMenu.id)); //64
-            }
+            dbMenu.name = menu.Name;
+            dbMenu.restaurantId = menu.RestaurantId;
+            dbMenu.active = menu.Active;
             DatabaseAccessLibrary.MenuDb menuDb = new DatabaseAccessLibrary.MenuDb();
-            menuDb.AddMenu(returnMenu);
-            return returnMenu;
-            
+            menuDb.AddMenu(dbMenu);
+            return menu;
 
+
+        }
+        public void DleteMenu(int menuId)
+        {
+            var menuDb = new MenuDb();
+            menuDb.DeleteMenu(menuId);
         }
 
         public ModelLibrary.Menu ConvertMenuToModel(DatabaseAccessLibrary.Menu dbMenu)
@@ -41,14 +42,23 @@ namespace ControllerLibrary
             {
                 itemList.Add(itemCtrl.ConvertItemToModel(Item));
             }
+            if(itemList.Count > 0)
+            {
+                modelMenu.RestaurantId = dbMenu.restaurantId;
+                modelMenu.Id = dbMenu.id;
+                modelMenu.Name = dbMenu.name;
+                modelMenu.Items = itemList;
+                modelMenu.Active = dbMenu.active;
 
+                return modelMenu;
+            }
+            modelMenu.RestaurantId = dbMenu.restaurantId;
             modelMenu.Id = dbMenu.id;
             modelMenu.Name = dbMenu.name;
-            modelMenu.Items = itemList;
             modelMenu.Active = dbMenu.active;
 
-      
             return modelMenu;
+
         }
 
         public ModelLibrary.Menu GetActiveMenu(int restaurantId)
@@ -60,58 +70,63 @@ namespace ControllerLibrary
             menu.Items = itemCtrl.GetMenuItems(menu.Id);
             return menu;
         }
-        
 
-    
 
-        public DatabaseAccessLibrary.Menu ConvertMenuToDb(ModelLibrary.Menu menu, int restaurantId)
+
+
+        public DatabaseAccessLibrary.Menu ConvertMenuToDb(ModelLibrary.Menu menu)
         {
 
             if (menu == null)
                 return null;
-            var returnMenu = new DatabaseAccessLibrary.Menu();
-            ItemCtrl itemCtrl = new ItemCtrl();
 
-            returnMenu.id = menu.Id;
-            returnMenu.name = menu.Name;
-            returnMenu.restaurantId = restaurantId;
-            foreach (var Item in menu.Items)
+            var dbMenu = new DatabaseAccessLibrary.Menu
             {
-                returnMenu.Items.Add(itemCtrl.ConvertItemToDb(Item, returnMenu.id));
-            }
-            DatabaseAccessLibrary.MenuDb menuDb = new DatabaseAccessLibrary.MenuDb();
-            return returnMenu;
-            
+                id = menu.Id,
+                active = menu.Active,
+                name = menu.Name,
+                restaurantId = menu.RestaurantId
+            };
+            return dbMenu;
+
         }
-        public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu, int restaurantId)
+        public void UpdateMenu(ModelLibrary.Menu beforeMenu, ModelLibrary.Menu afterMenu)
         {
             var menuDb = new MenuDb();
 
-            var beforeDbMenu = ConvertMenuToDb(beforeMenu, restaurantId);
-            var afterDbMenu = ConvertMenuToDb(afterMenu, restaurantId);
+            var beforeDbMenu = ConvertMenuToDb(beforeMenu);
+            var afterDbMenu = ConvertMenuToDb(afterMenu);
             menuDb.UpdateMenu(beforeDbMenu, afterDbMenu);
 
         }
-        public ModelLibrary.Menu GetMenu(ModelLibrary.Menu menuModel)
+
+        public ModelLibrary.Menu GetMenuById(int menuId)
         {
             var menuDb = new MenuDb();
-            var itemCtrl = new ItemCtrl();
-            var menu = menuDb.GetMenu(menuModel.Id);
+            var menu = menuDb.GetMenu(menuId);
             ModelLibrary.Menu newMenu = null;
             var modelMenu = ConvertMenuToModel(menu);
             if (menu != null)
             {
-                newMenu = new ModelLibrary.Menu
-                {
-                    Name = menu.name,
-                    Active = menu.active,
-                    Items = modelMenu.Items.AsEnumerable()
-  
-                };
+                return modelMenu;
             }
-
             return newMenu;
+
         }
 
+        public ModelLibrary.Menu GetMenuByName(string name)
+        {
+            var menuDb = new MenuDb();
+            var menu = menuDb.GetMenuByName(name);
+            ModelLibrary.Menu newMenu = null;
+            var modelMenu = ConvertMenuToModel(menu);
+            if (menu != null)
+            {
+                return modelMenu;
+            }
+            return newMenu;
+
+        }
     }
 }
+

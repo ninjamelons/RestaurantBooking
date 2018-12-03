@@ -8,14 +8,19 @@ using ModelLibrary;
 
 namespace UserWebClient.Controllers
 {
-    public class RestaurantCategoryController : Controller
+    public class RestaurantCategoryController : AdminController
     {
-        RestaurantService.RestaurantServiceClient proxy = new RestaurantService.RestaurantServiceClient();
+        private readonly RestaurantService.IRestaurantService _proxy;
+
+        public RestaurantCategoryController(RestaurantService.IRestaurantService proxy)
+        {
+            this._proxy = proxy;
+        }
 
         // GET: RestaurantCategory
         public ActionResult Index()
         {
-            return View(proxy.GetAllRestaurantCategories());
+            return View(_proxy.GetAllRestaurantCategories());
         }
 
         // GET: RestaurantCategory/Details/5
@@ -36,7 +41,7 @@ namespace UserWebClient.Controllers
         {
             try
             {
-                proxy.CreateRestaurantCategory(cat);
+                _proxy.CreateRestaurantCategory(cat);
 
                 return RedirectToAction("Index");
             }
@@ -49,7 +54,7 @@ namespace UserWebClient.Controllers
         // GET: RestaurantCategory/Edit/5
         public ActionResult Edit(int id)
         {
-            var cat = proxy.GetRestaurantCategory(id);
+            var cat = _proxy.GetRestaurantCategory(id);
             return View("Edit", cat);
         }
 
@@ -72,7 +77,7 @@ namespace UserWebClient.Controllers
         // GET: RestaurantCategory/Delete/5
         public ActionResult Delete(int id)
         {
-            var cat = proxy.GetRestaurantCategory(id);
+            var cat = _proxy.GetRestaurantCategory(id);
             return View("Delete", cat);
         }
 
@@ -82,7 +87,7 @@ namespace UserWebClient.Controllers
         {
             try
             {
-                proxy.DeleteRestaurantCategory(id);
+                _proxy.DeleteRestaurantCategory(id);
 
                 return RedirectToAction("Index");
             }

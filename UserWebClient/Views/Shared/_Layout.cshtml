@@ -35,8 +35,18 @@
                     <ul class="nav navbar-nav active">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("Restaurants", "Browse", "Restaurant")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        @if (Session["roleId"] != null)
+                        {
+                            if (Session["roleId"].ToString() == "1")
+                            {
+                                <li>@Html.ActionLink("AdminRestaurants", "Index", "Restaurant")</li>
+                            }
+                            if (Session["roleId"].ToString() == "2")
+                            {
+                                <li>@Html.ActionLink("My Restaurant", "Home", "Restaurant", new { id = Session["customerId"] })</li>
+                            }
+                        }
+
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>

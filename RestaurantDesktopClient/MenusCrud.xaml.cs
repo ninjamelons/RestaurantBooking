@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using ControllerLibrary;
 using ModelLibrary;
+using RestaurantDesktopClient.ItemService;
 using RestaurantDesktopClient.MenuService;
 
 
@@ -17,11 +18,18 @@ namespace RestaurantDesktopClient
     /// </summary>
     public partial class MenusCrud : Page
     {
+        int restaurantId = 1000000;
         public MenusCrud()
         {
             InitializeComponent();
-            menuNameBox.ItemsSource = GetMenus(1000000);
-            labelRestaurantId.Content = 1000000;
+            var proxy = new MenuServiceClient();
+            var modelMenu = proxy.GetAllMenusByRestaurant(restaurantId);
+            foreach (ModelLibrary.Menu item in modelMenu)
+            {
+                dataGridItemList.Items.Add(item);
+            };
+            InitializeComponent();
+            labelRestaurantId.Content = restaurantId;
         }
         
         private IEnumerable<ModelLibrary.Menu> GetMenus(int restaurantId)
@@ -29,60 +37,130 @@ namespace RestaurantDesktopClient
             var proxy = new MenuServiceClient();
             return proxy.GetAllMenusByRestaurant(restaurantId);
         }
-        private void menuNameBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            dataGridItemList.Items.Clear();
-
-            ItemCtrl itemCtrl = new ItemCtrl();
-            var proxy = new MenuServiceClient();
-            var selectedMenu = (ModelLibrary.Menu)menuNameBox.SelectedItem;
-            var modelMenu = proxy.GetMenu(selectedMenu);
-            textBoxName.Text = modelMenu.Name;
-            hiddenName.Content = modelMenu.Name;
-            // put restaurant id here when possible
-            checkBoxActive.IsChecked = modelMenu.Active;
-            //dataGridItemList.Items.Add = itemCtrl.GetMenuItems(modelMenu.Id);
-            //itemTable.RowGroups.Add(new TableRowGroup());
-            //itemTable.RowGroups[itemTable.RowGroups.Count].Rows.Add(new TableRow());
-            
-            foreach (Item item in modelMenu.Items)
-            {
-                dataGridItemList.Items.Add(item);
-                
-            };
-            
-
-
-        }
-
+       
 
         private void buttonAdd_Click(object sender, RoutedEventArgs e) // save menu
         {
-            MenuCtrl menuCtrl = new MenuCtrl();
-            var selectedMenu = (ModelLibrary.Menu)menuNameBox.SelectedItem;
-            var proxy = new MenuServiceClient();
-            var oldMenu = new ModelLibrary.Menu
-            {
-                Id = selectedMenu.Id,
-                Name = selectedMenu.Name,
-                Active = selectedMenu.Active,
-                Items = selectedMenu.Items
-                 
-            };
-            bool newBool = checkBoxActive.IsChecked ?? false;
-            var newMenu = new ModelLibrary.Menu
-            {
-                Id = selectedMenu.Id,
-                Name = textBoxName.Text,
-                Active = newBool,
-                Items = selectedMenu.Items
-            };
-            proxy.UpdateMenu(oldMenu, newMenu, 1000000);
-            MessageBox.Show("Menu updated!");
+            
 
         }
-        
 
-        
+        private void buttonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedMenu = (ModelLibrary.Menu)dataGridItemList.SelectedItem;
+            if (selectedMenu == null)
+            {
+                MessageBox.Show("Nothing selected");
+            }
+            else
+            {
+                //labelRestaurantId = Convert.ToInt32()  
+                var proxy = new MenuServiceClient();
+                proxy.DeleteMenu(selectedMenu.Id);
+                dataGridItemList.Items.Clear();
+                var modelMenu = proxy.GetAllMenusByRestaurant(restaurantId);
+                foreach (ModelLibrary.Menu item in modelMenu)
+                {
+                    dataGridItemList.Items.Add(item);
+                };
+            }
+
+        }
+
+        private void buttonCreateMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (textBoxName.Text.Length < 2)
+            {
+                MessageBox.Show("InvalidName");
+            }
+            else
+            {
+                bool newBool = checkBoxActive.IsChecked ?? false;
+                var proxy = new MenuServiceClient();
+                ModelLibrary.Menu modelMenu = new ModelLibrary.Menu
+                {
+                    RestaurantId = restaurantId,
+                    Name = textBoxName.Text,
+                    Items = null,
+                    Active = newBool //////////////////////////CHECK BOXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+                };
+                
+                proxy.CreateMenu(modelMenu);
+                dataGridItemList.Items.Clear();
+                var modelMenu1 = proxy.GetAllMenusByRestaurant(restaurantId);
+                foreach (ModelLibrary.Menu item in modelMenu1)
+                {
+                    dataGridItemList.Items.Add(item);
+                };
+
+            }
+        }
+
+        private void buttonSaveName_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = (ModelLibrary.Menu)dataGridItemList.SelectedItem;
+            bool newBool = checkBoxActive.IsChecked ?? false;
+            if (textBoxName.Text.Length < 2)
+            {
+                MessageBox.Show("NameInvalid");
+            }
+            else 
+            {
+                var proxy = new MenuServiceClient();
+                var oldMenu = new ModelLibrary.Menu
+                {
+                    Id = selectedItem.Id,
+                    Active = selectedItem.Active,
+                    Items = selectedItem.Items,
+                    Name = selectedItem.Name,
+                    RestaurantId = restaurantId
+
+                };
+                var newMenu = new ModelLibrary.Menu
+                {
+                    Id = selectedItem.Id,
+                    Items = selectedItem.Items,
+                    Active = newBool,
+                    Name = textBoxName.Text,
+                    RestaurantId = restaurantId
+                };
+                proxy.UpdateMenu(oldMenu, newMenu);
+                dataGridItemList.Items.Clear();
+                var modelMenu = proxy.GetAllMenusByRestaurant(restaurantId);
+                foreach (ModelLibrary.Menu item in modelMenu)
+                {
+                    dataGridItemList.Items.Add(item);
+                };
+            }
+        }
+
+        private void dataGridItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedItem = dataGridItemList.SelectedItem as ModelLibrary.Menu;
+            if (selectedItem == null)
+            {
+                textBoxName.Text = "";
+            }
+            else
+            {
+                textBoxName.Text = dataGridItemList.SelectedItem.ToString();
+                checkBoxActive.IsChecked = selectedItem.Active;
+            }
+        }
+
+        private void buttonItems_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedItem = (ModelLibrary.Menu)dataGridItemList.SelectedItem;
+            ItemCrud tablesPage = new ItemCrud(selectedItem.Id, restaurantId);
+            this.NavigationService.Navigate(tablesPage);
+        }
+
+        private void buttonItemCats_Click(object sender, RoutedEventArgs e)
+        {
+
+            ItemCatCrud tablesPage = new ItemCatCrud();
+            this.NavigationService.Navigate(tablesPage);
+        }
     }
 }
