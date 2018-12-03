@@ -27,7 +27,8 @@
             <Label Name="passLabel" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" FontSize="14">
                 Password</Label>
             <PasswordBox Name="passText" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Margin="10"></PasswordBox>
-            <Button Name="loginButton" Grid.Column="1" Grid.Row="3" Margin="50 5" Click="LoginButton_OnClick"></Button>
+            <Button Name="loginButton" Content="Log in" Grid.Column="1" Grid.Row="3" Margin="50 5" Click="LoginButton_OnClick"></Button>
         </Grid>
+        <Label Name="InvalidLabel" Visibility="Hidden" Content="Email/password is invalid" HorizontalAlignment="Left" Margin="320,313,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Page>

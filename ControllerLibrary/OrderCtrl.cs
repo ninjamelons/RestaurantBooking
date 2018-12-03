@@ -53,13 +53,13 @@ namespace ControllerLibrary
             return returnOliList;
         }
 
-        public int AddOrder(ModelLibrary.Order order)
+        public void AddOrder(ModelLibrary.Order order)
         {
-            OrderDb ordDb = new OrderDb();
+            Order ordDb = new Order();
             Order dbOrder = ConvertOrder(order);
             dbOrder.OrderLineItems.AddRange(ConvertOrderLineItemsToDb(order));
 
-            return ordDb.AddOrder(dbOrder);
+            ordDb.AddOrder(dbOrder);
         }
 
         public IEnumerable<OrderLineItem> GetOrderLineItemsById(int id)
@@ -74,26 +74,38 @@ namespace ControllerLibrary
 
         public void AddItemToOrder(int orderId, int itemId)
         {
-            OrderDb ordDb = new OrderDb();
-            ordDb.AddItemToOrder(orderId, itemId);
+            Order ordDb = new Order();
+            ordDb.AddItemToCart(orderId, itemId);
         }
 
         public Order GetOrderById(int id)
         {
-            OrderDb ordDb = new OrderDb();
+            Order ordDb = new Order();
             return ordDb.GetOrderById(id);
         }
 
         public void UpdateOrder(Order order)
         {
-            OrderDb ordDb = new OrderDb();
+            Order ordDb = new Order();
             ordDb.UpdateOrder(order);
         }
 
         public int GetLastOrderIdentity()
         {
-            OrderDb ordDb = new OrderDb();
+            Order ordDb = new Order();
             return ordDb.GetLastOrderIdentity();
         }
+
+        public void DeleteOrder(int orderId)
+        {
+            Order db = new Order();
+        }
+
+        public void DeleteItemById(int orderId, int itemId)
+        {
+            Order db = new Order();
+        }
+
     }
+
 }

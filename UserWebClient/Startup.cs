@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
 using UserWebClient.Models;
-using UserWebClient.Views.ViewModels;
+
 
 [assembly: OwinStartupAttribute(typeof(UserWebClient.Startup))]
 namespace UserWebClient

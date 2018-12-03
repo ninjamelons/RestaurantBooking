@@ -98,11 +98,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\CustomerService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="ItemTest.cs" />
     <Compile Include="OrderTest.cs" />
     <Compile Include="RegisterRestaurantTest.cs" />
@@ -124,16 +119,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="app.config" />
-    <None Include="Connected Services\CustomerService\ModelLibrary.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\CustomerService\service.wsdl" />
-    <None Include="Connected Services\CustomerService\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\CustomerService\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\ModelLibrary.Customer.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.Restaurant.datasource" />
@@ -163,7 +148,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\RestaurantService\" />
-    <WCFMetadataStorage Include="Connected Services\CustomerService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\RestaurantService\configuration91.svcinfo" />
@@ -173,18 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\RestaurantService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\CustomerService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\CustomerService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\CustomerService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
