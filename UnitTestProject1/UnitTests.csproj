@@ -103,6 +103,7 @@
     <Compile Include="RegisterRestaurantTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CRUDTablesTest.cs" />
+    <Compile Include="ReserveTablesAlgorithm.cs" />
     <Compile Include="VerifyRestaurantTest.cs" />
   </ItemGroup>
   <ItemGroup>

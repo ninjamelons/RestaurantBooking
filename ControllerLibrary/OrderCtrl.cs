@@ -53,36 +53,13 @@ namespace ControllerLibrary
             return returnOliList;
         }
 
-        public ModelLibrary.Order CreateOrder(string id, string customerId, string resId, string dateTime, string reservationDateTime,
-            List<ModelLibrary.Item> orderLineItems, string noSeats, string payment)
-        {
-            var order = new ModelLibrary.Order
-            {
-                OrderId = id,
-                CustomerId = customerId,
-                RestaurantId = resId,
-                DateTime = dateTime,
-                ReservationDateTime = reservationDateTime,
-                //ItemsList = orderLineItems,
-                NoSeats = noSeats,
-                Payment = payment,
-                Accepted = false
-            };
-            var context = new ValidationContext(order, null, null);
-            var result = new List<ValidationResult>();
-            var isModelStateValid = Validator.TryValidateObject(order, context, result, true);
-            if (!isModelStateValid)
-                throw new ValidationException();
-            return order;
-        }
-
-        public void AddOrder(ModelLibrary.Order order)
+        public int AddOrder(ModelLibrary.Order order)
         {
             OrderDb ordDb = new OrderDb();
             Order dbOrder = ConvertOrder(order);
             dbOrder.OrderLineItems.AddRange(ConvertOrderLineItemsToDb(order));
 
-            ordDb.AddOrder(dbOrder);
+            return ordDb.AddOrder(dbOrder);
         }
 
         public void AddItemToOrder(int orderId, int itemId)

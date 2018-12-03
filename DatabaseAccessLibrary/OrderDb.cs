@@ -8,13 +8,15 @@ namespace DatabaseAccessLibrary
 {
     public class OrderDb
     {
-        public void AddOrder(Order order)
+        public int AddOrder(Order order)
         {
             var db = new JustFeastDbDataContext();
 
             db.Orders.InsertOnSubmit(order);
             db.OrderLineItems.InsertAllOnSubmit(order.OrderLineItems);
             db.SubmitChanges();
+
+            return order.id;
         }
 
         public void AddItemToOrder(int orderId, int itemId)

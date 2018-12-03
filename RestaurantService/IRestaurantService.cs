@@ -43,7 +43,7 @@ namespace RestaurantService
         ModelLibrary.Restaurant GetRestaurantWithMenu(int id);
 
 
-        [OperationContract]
+        /*[OperationContract]
         void CreateTable(Table table);
         [OperationContract]
         IEnumerable<Table> GetAllTables(int restaurantId);
@@ -52,7 +52,11 @@ namespace RestaurantService
         [OperationContract]
         void UpdateTable(Table oldTable, Table newTable);
         [OperationContract]
-        void DeleteTable(Table table);
+        void DeleteTable(Table table);*/
+
+        //return newly created orderId
+        [OperationContract]
+        int ReserveTables(int resId, int NoSeats, DateTime dateTime);
 
     }
 }

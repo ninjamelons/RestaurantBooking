@@ -10,11 +10,14 @@ namespace UserWebClient.Models
     public class RestaurantOrderModel
     {
         public Restaurant Restaurant { get; set; }
-        public int OrderId { get; set; }
+
+        [Required]
+        [Display(Name = "Number of Persons")]
         public int NoSeats { get; set; }
         
+        [Required]
         [Display(Name = "Reservation Date")]
-        [DisplayFormat(DataFormatString = "{0:dd-MMM-yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-mm-dd hh:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime ReserveDateTime { get; set; }
     }
 }

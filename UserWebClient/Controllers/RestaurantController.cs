@@ -184,14 +184,13 @@ namespace UserWebClient.Controllers
         {
             #region Add item to cart
 
-            _orderProxy.AddItemToOrder(orderId, itemId);
+            _orderProxy.AddItemToOrder(orderId, itemId, resId);
 
             #endregion
 
             #region Assign values
             var model = new RestaurantOrderModel();
             model.Restaurant = this._proxy.GetRestaurantWithMenu(resId);
-            model.OrderId = orderId;
             #endregion
 
             return RedirectToAction("HomeModel", model);
@@ -209,12 +208,14 @@ namespace UserWebClient.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
+                order.Restaurant = (Restaurant)Session["Restaurant"];
+                Session["Restaurant"] = null;
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                if(errors.Count() > 1)
                     return View("ReserveTable", order);
 
-                //Session["orderId"] = this._proxy.ReserveTables();
-                //restaurantId, tableId, datetime
-
+                Session["orderId"] = this._proxy.ReserveTables(order.Restaurant.Id, order.NoSeats,
+                    order.ReserveDateTime);
 
                 return RedirectToAction("HomeModel", order);
             }
