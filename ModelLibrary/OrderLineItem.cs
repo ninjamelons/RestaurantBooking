@@ -4,6 +4,10 @@ namespace ModelLibrary
 {
     public class OrderLineItem
     {
+        public OrderLineItem()
+        {
+        }
+
         public OrderLineItem(Item item, int quantity)
         {
             LineItem = item;
