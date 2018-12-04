@@ -33,12 +33,6 @@ namespace UserWebClient.Controllers
             return View("HomeCart", order);
         }
 
-        // GET: Order/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
        //Get: Delete Item from order by ID
        public ActionResult Delete(int itemId )
         {

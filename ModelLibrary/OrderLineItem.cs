@@ -11,13 +11,11 @@ namespace ModelLibrary
         {
             LineItem = item;
             Quantity = quantity;
-            
+
         }
+
         public Item LineItem { get; set; }
 
         public int Quantity { get; set; }
-
-        
-
-        
+    }
 }

@@ -53,13 +53,13 @@ namespace ControllerLibrary
             return returnOliList;
         }
 
-        public void AddOrder(ModelLibrary.Order order)
+        public int AddOrder(ModelLibrary.Order order)
         {
-            Order ordDb = new Order();
+            OrderDb ordDb = new OrderDb();
             Order dbOrder = ConvertOrder(order);
             dbOrder.OrderLineItems.AddRange(ConvertOrderLineItemsToDb(order));
 
-            ordDb.AddOrder(dbOrder);
+            return ordDb.AddOrder(dbOrder);
         }
 
         public IEnumerable<OrderLineItem> GetOrderLineItemsById(int id)
@@ -67,43 +67,38 @@ namespace ControllerLibrary
             throw new NotImplementedException();
         }
 
-        public void DeleteOrder(int orderId)
-        {
-            throw new NotImplementedException();
-        }
-
         public void AddItemToOrder(int orderId, int itemId)
         {
-            Order ordDb = new Order();
+            OrderDb ordDb = new OrderDb();
             ordDb.AddItemToCart(orderId, itemId);
         }
 
-        public Order GetOrderById(int id)
+        public ModelLibrary.Order GetOrderById(int id)
         {
-            Order ordDb = new Order();
-            return ordDb.GetOrderById(id);
+            OrderDb ordDb = new OrderDb();
+            return ConvertOrderToModel(ordDb.GetOrderById(id));
         }
 
         public void UpdateOrder(Order order)
         {
-            Order ordDb = new Order();
+            OrderDb ordDb = new OrderDb();
             ordDb.UpdateOrder(order);
         }
 
         public int GetLastOrderIdentity()
         {
-            Order ordDb = new Order();
+            OrderDb ordDb = new OrderDb();
             return ordDb.GetLastOrderIdentity();
         }
 
         public void DeleteOrder(int orderId)
         {
-            Order db = new Order();
+            OrderDb db = new OrderDb();
         }
 
         public void DeleteItemById(int orderId, int itemId)
         {
-            Order db = new Order();
+            OrderDb db = new OrderDb();
         }
 
     }

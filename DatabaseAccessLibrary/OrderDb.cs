@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseAccessLibrary
 {
-    public class Order
+    public class OrderDb
     {
         public int AddOrder(Order order)
         {
