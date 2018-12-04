@@ -44,12 +44,6 @@ namespace UserWebClient.OrderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteItemById", ReplyAction="http://tempuri.org/IOrderService/DeleteItemByIdResponse")]
         System.Threading.Tasks.Task DeleteItemByIdAsync(int orderId, int itemId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetOrderById", ReplyAction="http://tempuri.org/IOrderService/GetOrderByIdResponse")]
-        RestaurantService.Order GetOrderById(int orderId);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetOrderById", ReplyAction="http://tempuri.org/IOrderService/GetOrderByIdResponse")]
-        System.Threading.Tasks.Task<RestaurantService.Order> GetOrderByIdAsync(int orderId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -117,14 +111,6 @@ namespace UserWebClient.OrderService {
         
         public System.Threading.Tasks.Task DeleteItemByIdAsync(int orderId, int itemId) {
             return base.Channel.DeleteItemByIdAsync(orderId, itemId);
-        }
-        
-        public RestaurantService.Order GetOrderById(int orderId) {
-            return base.Channel.GetOrderById(orderId);
-        }
-        
-        public System.Threading.Tasks.Task<RestaurantService.Order> GetOrderByIdAsync(int orderId) {
-            return base.Channel.GetOrderByIdAsync(orderId);
         }
     }
 }

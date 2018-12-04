@@ -22,10 +22,10 @@ namespace RestaurantService
         [OperationContract]
         void DeleteItemById(int orderId, int itemId);
 
-        [OperationContract]
-        Order GetOrderById(int orderId);
+        /*[OperationContract]
+        ModelLibrary.Order GetOrderById(int orderId);*/
     }
-
+    
     [DataContract]
     public class Order
     {
