@@ -53,11 +53,21 @@ namespace RestaurantService
             db.SubmitChanges();
         }
 
+        public void DeleteOrder(int orderId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Order GetOrderById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        /*public Order GetOrderById(int id)
         {
             var ordC = new OrderCtrl();
             return ordC.GetOrderById(id);
-        }
+        }*/
 
         public void UpdateOrder(Order order)
         {
@@ -66,10 +76,10 @@ namespace RestaurantService
             db.SubmitChanges();
         }
 
-        public void DeleteOrder(int orderId)
+       /* public void DeleteOrder(int orderId)
         {
             var ctrl = new OrderCtrl();
             ctrl.DeleteOrder(orderId);
-        }
+        } */
     }
 }

@@ -5,49 +5,56 @@
     ViewBag.Title = Model.Restaurant.Name;
 }
 
-<div class="jumbotron">
-    <h1>@ViewBag.Title</h1>
-</div>
-<div class="container body-content">
-    <div class="row">
-        <div class="col-md-3">
-            @{Session["Restaurant"] = Model.Restaurant;}
-            @Html.ActionLink("Reserve Table", "ReserveTable", "Restaurant", Model, new {@class = "btn btn-danger"})
-        </div>
-        <div class="col-md-9">
-            <table class="table">
-                <thead>
-                <th>@Html.DisplayNameFor(model => model.Restaurant.Menu.Items)</th>
-                <th>@Html.DisplayNameFor(model => model.Restaurant.Menu.Items.First().Price)</th>
-                <th>Add to Cart</th>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Restaurant.Menu.Items)
-                    {
-                        <tr>
-                            <td>@item.Name</td>
-                            <td>@item.Price.VarPrice</td>
-                            <td>
-                                @if (Session["orderId"] == null)
-                                {
-                                    <p>Reserve a table to add items</p>
-                                }
-                                else
-                                {
-                                    Html.ActionLink("Add to cart", "HomeCart", "Restaurant",
-                                        new
-                                        {
-                                            resId = Model.Restaurant.Id,
-                                            orderId = Convert.ToInt32(Session["orderId"]),
-                                            itemId = item.Id
-                                        }, new { @class = "btn btn-info" });
-                                }
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/custom.css">
+</head>
+<body>
+    <div class="jumbotron">
+        <h1 class="marine-h1">@ViewBag.Title</h1>
+    </div>
+    <div class="container body-content">
+        <div class="row">
+            <div class="col-md-3">
+                @{Session["Restaurant"] = Model.Restaurant;}
+                @Html.ActionLink("Reserve Table", "ReserveTable", "Restaurant", Model, new { @class = "btn btn-danger" })
+            </div>
+            <div class="col-md-9">
+                <table class="table">
+                    <thead>
+                    <th>@Html.DisplayNameFor(model => model.Restaurant.Menu.Items)</th>
+                    <th>@Html.DisplayNameFor(model => model.Restaurant.Menu.Items.First().Price)</th>
+                    <th>Add to Cart</th>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Restaurant.Menu.Items)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Price.VarPrice</td>
+                                <td>
+                                    @if (Session["orderId"] == null)
+                                    {
+                                        <p>Reserve a table to add items</p>
+                                    }
+                                    else
+                                    {
+                                        Html.ActionLink("Add to cart", "HomeCart", "Restaurant",
+                                            new
+                                            {
+                                                resId = Model.Restaurant.Id,
+                                                orderId = Convert.ToInt32(Session["orderId"]),
+                                                itemId = item.Id
+                                            }, new { @class = "btn btn-info" });
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
+</body>
 
