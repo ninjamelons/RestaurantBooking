@@ -11,25 +11,19 @@
 </div>
 <div class="container body-content">
     <div class="row">
-        @if (Session["customerId"] != null)
-        {
-            if(Session["customerId"].ToString() == Model.Restaurant.Id.ToString())
-            {
-                @Html.ActionLink("Edit Restaurant", "Owner", "Restaurant")
-            }
-        }
         <div class="col-md-3">
+            @{Session["Restaurant"] = Model.Restaurant;}
             @Html.ActionLink("Reserve Table", "ReserveTable", "Restaurant", Model, new {@class = "btn btn-danger"})
         </div>
         <div class="col-md-9">
             <table class="table">
                 <thead>
-                <th>Items</th>
-                <th>Price</th>
+                <th>@Html.DisplayNameFor(model => model.Restaurant.Menu.Items)</th>
+                <th>@Html.DisplayNameFor(model => model.Restaurant.Menu.Items.First().Price)</th>
                 <th>Add to Cart</th>
                 </thead>
                 <tbody>
-                    @foreach (var item in restaurant.Menu.Items)
+                    @foreach (var item in Model.Restaurant.Menu.Items)
                     {
                         <tr>
                             <td>@item.Name</td>
@@ -44,7 +38,7 @@
                                     Html.ActionLink("Add to cart", "HomeCart", "Restaurant",
                                         new
                                         {
-                                            resId = restaurant.Id,
+                                            resId = Model.Restaurant.Id,
                                             orderId = Convert.ToInt32(Session["orderId"]),
                                             itemId = item.Id
                                         }, new { @class = "btn btn-info" });
