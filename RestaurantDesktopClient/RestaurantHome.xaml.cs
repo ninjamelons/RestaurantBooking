@@ -20,11 +20,13 @@ namespace RestaurantDesktopClient
     /// </summary>
     public partial class RestaurantHome : Page
     {
-        public RestaurantHome()
+        
+        public RestaurantHome(int restaurantId)
         {
+            resId = restaurantId;
             InitializeComponent();
         }
-
+        public int resId;
         private void ToTablesPage_OnClick(object sender, RoutedEventArgs e)
         {
             // View TablesCrud Page
@@ -35,7 +37,7 @@ namespace RestaurantDesktopClient
         private void ManageMenus_Click(object sender, RoutedEventArgs e)
         {
             //View MenusCrud Page
-            MenusCrud menuPage = new MenusCrud();
+            MenusCrud menuPage = new MenusCrud(resId);
             this.NavigationService.Navigate(menuPage);
         }
     }

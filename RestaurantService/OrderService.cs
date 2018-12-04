@@ -71,5 +71,16 @@ namespace RestaurantService
             var ctrl = new OrderCtrl();
             //ctrl.DeleteOrder(orderId);
         }
+
+        public void DeleteItemById(int orderId, int itemId)
+        {
+            var ctrl = new OrderCtrl();
+            ctrl.DeleteItemById(orderId, itemId);
+        }
+
+        public void DeleteItemById(int orderId, int itemId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
