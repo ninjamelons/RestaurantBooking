@@ -39,6 +39,16 @@ namespace RestaurantDesktopClient
             InvalidLabel.Visibility = Visibility.Visible;
         }
 
+        
+        private void TextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key != System.Windows.Input.Key.Enter) return;
+
+            // your event handler here
+            e.Handled = true;
+            MessageBox.Show("Enter pressed");
+        }
+        
         private Customer LoginCustomer()
         {
             var proxy = new CustomerServiceClient();

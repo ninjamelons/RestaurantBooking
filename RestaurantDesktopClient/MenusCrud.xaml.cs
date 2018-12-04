@@ -24,6 +24,7 @@ namespace RestaurantDesktopClient
             restaurantId = resId;
             InitializeComponent();
             var proxy = new MenuServiceClient();
+            dataGridItemList.SelectedItem = proxy.GetMenuById(1000000);
             var modelMenu = proxy.GetAllMenusByRestaurant(restaurantId);
             foreach (ModelLibrary.Menu item in modelMenu)
             {
@@ -152,9 +153,19 @@ namespace RestaurantDesktopClient
 
         private void buttonItems_Click(object sender, RoutedEventArgs e)
         {
+            
             var selectedItem = (ModelLibrary.Menu)dataGridItemList.SelectedItem;
-            ItemCrud tablesPage = new ItemCrud(selectedItem.Id, restaurantId);
-            this.NavigationService.Navigate(tablesPage);
+            if (selectedItem != null)
+            {
+                ItemCrud tablesPage = new ItemCrud(selectedItem.Id, restaurantId);
+                this.NavigationService.Navigate(tablesPage);
+            }
+            else
+            {
+                MessageBox.Show("select an Item First");
+            }
+           
+           
         }
 
         private void buttonItemCats_Click(object sender, RoutedEventArgs e)
