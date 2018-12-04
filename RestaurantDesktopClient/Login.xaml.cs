@@ -32,7 +32,7 @@ namespace RestaurantDesktopClient
             // View TablesCrud Page
             var cust = LoginCustomer();
             if (cust != null) {
-                RestaurantHome homePage = new RestaurantHome();
+                RestaurantHome homePage = new RestaurantHome(cust.Id);
                 this.NavigationService.Navigate(homePage);
             }
             InvalidLabel.Visibility = Visibility.Hidden;

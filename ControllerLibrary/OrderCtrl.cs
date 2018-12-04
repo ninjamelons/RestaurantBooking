@@ -62,6 +62,16 @@ namespace ControllerLibrary
             ordDb.AddOrder(dbOrder);
         }
 
+        public IEnumerable<OrderLineItem> GetOrderLineItemsById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteOrder(int orderId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddItemToOrder(int orderId, int itemId)
         {
             Order ordDb = new Order();

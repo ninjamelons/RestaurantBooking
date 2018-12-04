@@ -159,7 +159,7 @@ namespace ControllerLibrary
             PriceCtrl priceCtrl = new PriceCtrl();
             MenuCtrl menuCtrl = new MenuCtrl();
             //var CheckItem = db.Items.Single(a => a.id == dbItem.id);
-
+            
             DatabaseAccessLibrary.Price price = db.Prices.Where(p => p.itemId == dbItem.id).OrderByDescending(p => p.startDate).First();
             if (dbItem != null && price != null)
             {
