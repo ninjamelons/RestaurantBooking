@@ -17,10 +17,12 @@ namespace RestaurantService
         [OperationContract]
         void CreateOrder(Order order);
         [OperationContract]
-        Order GetOrderById(int id);
+        ModelLibrary.Order GetOrderById(int id);
         [OperationContract]
         void UpdateOrder(Order order);
         [OperationContract]
         void DeleteOrder(int orderId);
+        [OperationContract]
+        void DeleteItemById(int orderId, int itemId);
     }
 }

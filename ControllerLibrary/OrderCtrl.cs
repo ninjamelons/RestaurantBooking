@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Linq;
 using DatabaseAccessLibrary;
-using ModelLibrary;
-using Order = DatabaseAccessLibrary.Order;
-using OrderLineItem = DatabaseAccessLibrary.OrderLineItem;
 
 namespace ControllerLibrary
 {
@@ -38,13 +35,6 @@ namespace ControllerLibrary
                 NoSeats = order.noSeats.ToString(),
                 Accepted = order.accepted
             };
-            var oli = new List<DatabaseAccessLibrary.OrderLineItem>();
-            foreach (var item in order.OrderLineItems)
-            {
-                oli.Add(item);
-            }
-
-            returnOrder.ItemsList.AddRange((ConvertOrderLineItemsToModel(oli)));
             return returnOrder;
         }
 
@@ -63,54 +53,59 @@ namespace ControllerLibrary
             return returnOliList;
         }
 
-        public List<ModelLibrary.OrderLineItem> ConvertOrderLineItemsToModel(List<DatabaseAccessLibrary.OrderLineItem> olis)
+        public void AddOrder(ModelLibrary.Order order)
         {
-            var modelItems = new List<ModelLibrary.OrderLineItem>();
-            var itemC = new ItemCtrl();
-            for (int i = 0; i < olis.Count; i++)
-            {
-                modelItems.Add(new ModelLibrary.OrderLineItem(itemC.GetItem(olis[i].itemId), olis[i].quantity));
-            }
-
-            return modelItems;
-        }
-
-        public int AddOrder(ModelLibrary.Order order)
-        {
-            OrderDb ordDb = new OrderDb();
+            Order ordDb = new Order();
             Order dbOrder = ConvertOrder(order);
             dbOrder.OrderLineItems.AddRange(ConvertOrderLineItemsToDb(order));
 
-            return ordDb.AddOrder(dbOrder);
+            ordDb.AddOrder(dbOrder);
+        }
+
+        public IEnumerable<OrderLineItem> GetOrderLineItemsById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteOrder(int orderId)
+        {
+            throw new NotImplementedException();
         }
 
         public void AddItemToOrder(int orderId, int itemId)
         {
-            OrderDb ordDb = new OrderDb();
-            ordDb.AddItemToOrder(orderId, itemId);
+            Order ordDb = new Order();
+            ordDb.AddItemToCart(orderId, itemId);
         }
 
-        public List<OrderLineItem> GetOrderLineItemsById(int id)
+        public Order GetOrderById(int id)
         {
-            return new List<OrderLineItem>();
-        }
-
-        public ModelLibrary.Order GetOrderById(int id)
-        {
-            OrderDb ordDb = new OrderDb();
-            return ConvertOrderToModel(ordDb.GetOrderById(id));
+            Order ordDb = new Order();
+            return ordDb.GetOrderById(id);
         }
 
         public void UpdateOrder(Order order)
         {
-            OrderDb ordDb = new OrderDb();
+            Order ordDb = new Order();
             ordDb.UpdateOrder(order);
         }
 
         public int GetLastOrderIdentity()
         {
-            OrderDb ordDb = new OrderDb();
+            Order ordDb = new Order();
             return ordDb.GetLastOrderIdentity();
         }
+
+        public void DeleteOrder(int orderId)
+        {
+            Order db = new Order();
+        }
+
+        public void DeleteItemById(int orderId, int itemId)
+        {
+            Order db = new Order();
+        }
+
     }
+
 }

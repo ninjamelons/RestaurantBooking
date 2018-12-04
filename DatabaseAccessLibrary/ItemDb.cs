@@ -26,6 +26,8 @@ namespace DatabaseAccessLibrary
 
             db.Items.InsertOnSubmit(item);
             db.SubmitChanges();
+
+            int id = item.id;
         }
         public Item GetItemByName(string name)
         {

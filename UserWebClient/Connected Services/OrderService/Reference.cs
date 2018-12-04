@@ -44,6 +44,12 @@ namespace UserWebClient.OrderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrder", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderResponse")]
         System.Threading.Tasks.Task DeleteOrderAsync(int orderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteItemById", ReplyAction="http://tempuri.org/IOrderService/DeleteItemByIdResponse")]
+        void DeleteItemById(int orderId, int itemId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteItemById", ReplyAction="http://tempuri.org/IOrderService/DeleteItemByIdResponse")]
+        System.Threading.Tasks.Task DeleteItemByIdAsync(int orderId, int itemId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +117,14 @@ namespace UserWebClient.OrderService {
         
         public System.Threading.Tasks.Task DeleteOrderAsync(int orderId) {
             return base.Channel.DeleteOrderAsync(orderId);
+        }
+        
+        public void DeleteItemById(int orderId, int itemId) {
+            base.Channel.DeleteItemById(orderId, itemId);
+        }
+        
+        public System.Threading.Tasks.Task DeleteItemByIdAsync(int orderId, int itemId) {
+            return base.Channel.DeleteItemByIdAsync(orderId, itemId);
         }
     }
 }

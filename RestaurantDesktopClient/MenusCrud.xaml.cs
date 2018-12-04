@@ -18,9 +18,10 @@ namespace RestaurantDesktopClient
     /// </summary>
     public partial class MenusCrud : Page
     {
-        int restaurantId = 1000000;
-        public MenusCrud()
+        
+        public MenusCrud(int resId)
         {
+            restaurantId = resId;
             InitializeComponent();
             var proxy = new MenuServiceClient();
             var modelMenu = proxy.GetAllMenusByRestaurant(restaurantId);
@@ -31,7 +32,7 @@ namespace RestaurantDesktopClient
             InitializeComponent();
             labelRestaurantId.Content = restaurantId;
         }
-        
+        int restaurantId;
         private IEnumerable<ModelLibrary.Menu> GetMenus(int restaurantId)
         {
             var proxy = new MenuServiceClient();

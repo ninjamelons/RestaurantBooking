@@ -183,7 +183,7 @@ namespace UserWebClient.Controllers
         public ActionResult Home(int id)
         {
             RestaurantOrderModel model = new RestaurantOrderModel();
-            model.Restaurant = this._proxy.GetRestaurantWithMenu(id);
+            Session["Restaurant"] = this._proxy.GetRestaurantWithMenu(id);
             return View("Home", model);
         }
 
@@ -191,7 +191,7 @@ namespace UserWebClient.Controllers
         // GET Home menu with RestaurantOrderModel parameter
         public ActionResult HomeModel(RestaurantOrderModel model)
         {
-            return RedirectToAction("Home", model);
+            return View("Home", model);
         }
 
         [HttpGet]
@@ -206,7 +206,7 @@ namespace UserWebClient.Controllers
 
             #region Assign values
             var model = new RestaurantOrderModel();
-            model.Restaurant = this._proxy.GetRestaurantWithMenu(resId);
+            Session["Restaurant"] = this._proxy.GetRestaurantWithMenu(resId);
             #endregion
 
             return RedirectToAction("HomeModel", model);
@@ -224,20 +224,45 @@ namespace UserWebClient.Controllers
         {
             try
             {
-                order.Restaurant = (Restaurant)Session["Restaurant"];
-                Session["Restaurant"] = null;
                 var errors = ModelState.Values.SelectMany(v => v.Errors);
                 if(errors.Count() > 1)
                     return View("ReserveTable", order);
 
-                Session["orderId"] = this._proxy.ReserveTables(order.Restaurant.Id, order.NoSeats,
-                    order.ReserveDateTime);
-
+                /*Session["orderId"] = this._proxy.ReserveTables(order.Restaurant.Id, order.NoSeats,
+                    order.ReserveDateTime);*/
+                
                 return RedirectToAction("HomeModel", order);
             }
             catch
             {
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Owner()
+        {
+            if (Session["customerId"] == null)
+                return RedirectToAction("Index", "Home");
+
+            int id = (int) Session["customerId"];
+            var model = _proxy.GetRestaurant(id);
+            if(model == null)
+                return RedirectToAction("Index", "Home");
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Owner(Restaurant res)
+        {
+            try
+            {
+                _proxy.UpdateRestaurant(res);
+                return RedirectToAction("Home", new { id = res.Id });
+            } catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
         }
     }

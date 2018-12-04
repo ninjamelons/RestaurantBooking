@@ -26,8 +26,8 @@ namespace RestaurantDesktopClient
             var proxy = new RestaurantServiceClient();
             var oldTable = new Table
             {
-                NoSeats = hiddenNoSeats.Content.ToString(),
-                RestaurantId = hiddenResId.Content.ToString()
+         //       NoSeats = hiddenNoSeats.Content.ToString(),
+          //      RestaurantId = hiddenResId.Content.ToString()
             };
             var newTable = CreateTable();
 
@@ -37,11 +37,11 @@ namespace RestaurantDesktopClient
                 {
                     proxy.UpdateTable(oldTable,newTable);
                 }
-                else if (newTable.RestaurantId != hiddenResId.Content.ToString()
-                         && newTable.NoSeats != hiddenNoSeats.Content.ToString())
-                {
-                    proxy.CreateTable(newTable);
-                }
+            //    else if (newTable.RestaurantId != hiddenResId.Content.ToString()
+           //              && newTable.NoSeats != hiddenNoSeats.Content.ToString())
+           //     {
+             //       proxy.CreateTable(newTable);
+           //     }
                 else
                 {
                     MessageBoxResult prompt =
@@ -79,9 +79,9 @@ namespace RestaurantDesktopClient
             var selectedTable = (ModelLibrary.Table)TableCombo.SelectedItem;
             var dbTable = proxy.GetTable(selectedTable);
             hiddenNoSeats.Content = dbTable.NoSeats;
-            NoSeats.Text = dbTable.NoSeats;
-            NoReserved.Text = dbTable.Reserved;
-            NoTotal.Text = dbTable.Total;
+       //     NoSeats.Text = dbTable.NoSeats;
+       //     NoReserved.Text = dbTable.Reserved;
+       //     NoTotal.Text = dbTable.Total;
         }
 
         private bool ValidateTable(ModelLibrary.Table table)
@@ -96,8 +96,8 @@ namespace RestaurantDesktopClient
         {
             return new ModelLibrary.Table
             {
-                NoSeats = NoSeats.Text, Reserved = NoReserved.Text,
-                RestaurantId = hiddenResId.Content.ToString(), Total = NoTotal.Text
+             //   NoSeats = NoSeats.Text, Reserved = NoReserved.Text,
+             //   RestaurantId = hiddenResId.Content.ToString(), Total = NoTotal.Text
             };
         }
 

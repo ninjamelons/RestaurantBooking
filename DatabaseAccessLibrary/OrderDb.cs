@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseAccessLibrary
 {
-    public class OrderDb
+    public class Order
     {
         public int AddOrder(Order order)
         {
@@ -19,7 +19,7 @@ namespace DatabaseAccessLibrary
             return order.id;
         }
 
-        public void AddItemToOrder(int orderId, int itemId)
+        public void AddItemToCart(int orderId, int itemId)
         {
             var db = new JustFeastDbDataContext();
             var item = db.Items.SingleOrDefault(i => i.id == itemId);
