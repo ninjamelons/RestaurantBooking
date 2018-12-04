@@ -5,12 +5,21 @@ using DatabaseAccessLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModelLibrary;
 using ControllerLibrary;
+using System.Linq;
+using RestaurantService;
 
 namespace UnitTests
 {
     [TestClass]
     public class ItemTest
     {
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            var resetDb = new ResetDb();
+            resetDb.Clean();
+        }
+
         [TestMethod]
         [DataRow("ChickenSteak", "WeirdDescription", true, DisplayName = "All data correct")]
         [DataRow("a", "WeirderDescription", false, DisplayName = "Name too short")]
@@ -39,107 +48,99 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void Create_Item_Added_To_Db()
+        public void Create_Item_With_Price_Service_Test()
         {
+            ItemCtrl itemCtrl = new ItemCtrl();
             ItemDb itemDb = new ItemDb();
             //Setup
-            #region creates Item,Menu,Restaurant,Price
-            DatabaseAccessLibrary.Restaurant newRestaurant = new DatabaseAccessLibrary.Restaurant
+            #region creates ModelItem, ModelPrice
+            ModelLibrary.Price newPrice = new ModelLibrary.Price
             {
-
-                name = "RestaurantNameExample",
-                address = "RestaurantAddressExample",
-                email = "RestaurantEmailExample",
-                zipcode = 1231223
+                VarPrice = 12,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddYears(100)
             };
-
-            DatabaseAccessLibrary.Menu newMenu = new DatabaseAccessLibrary.Menu
+            ModelLibrary.Item newItem = new ModelLibrary.Item
             {
-
-                name = "aMenuName",
-                active = true
+                Name = "testName",
+                Description = "testDescr",
+                Price = newPrice
 
             };
-
-            DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
-            {
-                description = "PerfectlyGoodDescription",
-
-                name = "PerfectlyGoodName",
-            };
-
-
-
-            DateTime startDate = new DateTime(2011, 6, 10);
-            DateTime endDate = new DateTime(2011, 7, 11);
-            DatabaseAccessLibrary.Price newPrice = new DatabaseAccessLibrary.Price
-            {
-                price1 = 12, // price int?
-                startDate = startDate,
-                endDate = endDate
-
-            };
+            ItemService itemService = new ItemService();
+            PriceService priceService = new PriceService();
             #endregion
-
-
-            itemDb.AddItem(newItem);
             //Act
-            itemDb.AddItem(newItem);
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            itemService.CreateItem(newItem, 1000000, 1000000);
+            var checkItem = db.Items.SingleOrDefault(p => p.name == newItem.Name && p.description == newItem.Description);
+            priceService.CreatePrice(newPrice, checkItem.id);
+
 
             //Get Item(1,1,"PerfectlyGoodName");
-            DatabaseAccessLibrary.Item anotherItem = itemDb.GetItem(1);// PRICE!?
 
             //Assert
-            Assert.IsTrue(anotherItem.name == newItem.name
-                          && anotherItem.menuId == newItem.menuId
-                          && anotherItem.id == newItem.id
-                          && anotherItem.description == newItem.description
-                          && anotherItem.itemCatId == newItem.itemCatId); //
-
+            
+            Assert.IsNotNull( db.Items.SingleOrDefault(p=> p.id == checkItem.id));
+            Assert.IsNotNull(db.Prices.Where(p => p.itemId == checkItem.id).OrderByDescending(p => p.startDate).First());
         }
 
         [TestMethod]
-        public void Item_Deleted_From_Db()
+        public void Edit_Item_With_Price()
         {
+            ItemCtrl itemCtrl = new ItemCtrl();
             ItemDb itemDb = new ItemDb();
             //Setup
-            #region creates Item,Menu,Restaurant
-
-            DatabaseAccessLibrary.Item newItem = new DatabaseAccessLibrary.Item
+            #region creates ModelItem, ModelPrice
+            ModelLibrary.Price newPrice = new ModelLibrary.Price
             {
-                description = "PerfectlyGoodDescription",
-                //ItemCat = itemCat1
-                menuId = 1,
-                name = "PerfectlyGoodName",
+                VarPrice = 12,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddYears(100)
             };
-            DatabaseAccessLibrary.Menu newMenu = new DatabaseAccessLibrary.Menu
+            ModelLibrary.Price newPriceUpdated = new ModelLibrary.Price
             {
-                id = 1,
-                restaurantId = 1,
-                active = true
+                VarPrice = 20,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddYears(100)
+            };
+            ModelLibrary.Item newItem = new ModelLibrary.Item
+            {
+                Name = "testName",
+                Description = "testDescr",
+                Price = newPrice
 
             };
-
-            DatabaseAccessLibrary.Restaurant newRestaurant = new DatabaseAccessLibrary.Restaurant
-            {
-                id = 1,
-                name = "RestaurantNameExample",
-                address = "RestaurantAddressExample",
-                email = "RestaurantEmailExample",
-                zipcode = 1231223
-            };
+            
+            ItemService itemService = new ItemService();
+            PriceService priceService = new PriceService();
             #endregion
-
-            itemDb.AddItem(newItem);
-
             //Act
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            itemService.CreateItem(newItem, 1000000, 1000000);
+            var checkItem = db.Items.SingleOrDefault(p => p.name == newItem.Name && p.description == newItem.Description);
+            ModelLibrary.Item newItemUpdated = new ModelLibrary.Item
+            {
+                Id = checkItem.id,
+                Name = "testNameUpdated",
+                Description = "testDescrUpdated",
+                Price = newPrice
 
-
-            //Delete Item
-            itemDb.DeleteItem(1);
+            };
+            priceService.CreatePrice(newPrice, checkItem.id);
+            itemService.UpdateItem(newItemUpdated, 1000000,1000000);
+            var checkItemUpdated = db.Items.Single(p => p.id == newItemUpdated.Id &&p.name == newItemUpdated.Name 
+                                                            && p.description == newItemUpdated.Description);
+            priceService.UpdatePrice(newPriceUpdated,checkItemUpdated.id);
+            var checkPriceUpdated = db.Prices.SingleOrDefault(p=> p.itemId == checkItemUpdated.id && p.price1 == newPriceUpdated.VarPrice);
 
             //Assert
-            Assert.IsNull(newItem);
+            Assert.IsFalse(newItem.Name == checkItemUpdated.name && newItem.Description == checkItemUpdated.description);
+            Assert.IsFalse(newPrice.VarPrice == checkPriceUpdated.price1);
+            Assert.IsNull(db.Prices.SingleOrDefault(p => p.itemId == checkItem.id && p.price1 == newPrice.VarPrice));
+            Assert.IsTrue(newItemUpdated.Name == checkItemUpdated.name
+                          && newItemUpdated.Description == checkItemUpdated.description);
+            Assert.IsTrue(newPriceUpdated.VarPrice == checkPriceUpdated.price1);
         }/*
         [TestMethod]
         public void Update_Item(string description, double price, string name )

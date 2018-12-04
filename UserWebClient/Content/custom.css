@@ -9,6 +9,10 @@
     text-decoration: none;
 }
 
+body {
+    padding-top: 80px;
+}
+
 .navbar-brand {
     float: left;
     height: 40px;
@@ -45,26 +49,23 @@
     color: #b8fce3;
 }
 
-.input-group homesearch {
-    margin-bottom: 20px;
-}
-
-.align-middle {
-    margin: 0 auto;
-    vertical-align:middle;
-    text-align:center;
-    align-content: center;
-}
-
 .landing {
     background-image: url('../source/lefteris-kallergis-581884-unsplash-min.jpg');
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
     border-style:none;
-    padding-top: 300px;
-    padding-bottom: 300px;
+    padding-top: 400px;
+    padding-bottom: 400px;
     overflow: hidden;
+}
+
+.landing-h1 {
+    text-align: center;
+}
+.marine-h1 {
+    color:mediumaquamarine;
+    font-weight:300;
 }
 
 h1 {
@@ -77,15 +78,73 @@ col-md-4 {
     align-content:center;
 }
 
-.btn {
-    float: left;
-}
-
 .input-group {
-    padding-left: 10%;
+    padding-top: 0.1%;
+    padding-left: 9%;
+    padding-right: 10%;
 }
 
 
+input {
+    max-height: 90px;
+    max-width: inherit;
+    position: relative;
+    line-height: 33.5px;
+    display: flex;
+    box-sizing:padding-box;
+    width: 450px;
+}
 
+.btn-color-style {
+    display: block;
+    margin: 0 auto;
+    background-color: transparent;
+    border-width: 3px;
+    border-color: mediumaquamarine;
+    color: mediumaquamarine;
+    width: 100px;
+    font-weight: 300;
+    
+}
 
+.btn-color-style:hover {
+    color: #b8fce3;
+    transition: 0.4s ease;
+    background-color: transparent;
+    border-color: #b8fce3;
+}
+
+.form-control:active {
+    box-shadow: none;
+}
+
+.padding-left {
+    padding-left: 5%;
+}
+
+.padding-right {
+    padding-right: 5%;
+}
+
+.float-left {
+    float:left;
+}
+
+.float-right {
+    float:right;
+}
+
+label {
+    color: mediumaquamarine;
+    font-weight:300;
+}
+
+.jumbotron h1 {
+    color: mediumaquamarine;
+}
+
+footer {
+    text-align: center;
+    margin: 0 auto;
+}
 

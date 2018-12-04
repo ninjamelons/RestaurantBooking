@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="~/Content/custom.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel="stylesheet">
     <title>@ViewBag.Title - JustFeast</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -23,7 +24,7 @@
                     <nav class="navbar navbar-left">
                         <div class="container-fluid">
                             <div class="navbar-header">
-                                <a class="navbar-brand" href="~/Views/Home/Index.cshtml">
+                                <a class="navbar-brand" href="@Url.Action("Index","Home")">
                                     <img alt="Brand" src="~/source/LogoMakr_9ofBtV.png" width="80" height="50">
                                 </a>
                             </div>
@@ -39,7 +40,7 @@
                         {
                             if (Session["roleId"].ToString() == "1")
                             {
-                                <li>@Html.ActionLink("AdminRestaurants", "Index", "Restaurant")</li>
+                                <li>@Html.ActionLink("Admin", "Index", "Restaurant")</li>
                             }
                             if (Session["roleId"].ToString() == "2")
                             {
@@ -57,7 +58,9 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <div class="container body-content">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </div>
         </footer>
     </div>
 

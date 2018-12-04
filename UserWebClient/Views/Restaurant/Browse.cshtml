@@ -11,55 +11,66 @@
     <link rel="stylesheet" type="text/css" href="~/Content/custom.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel="stylesheet">
 </head>
-<h2>Browse Restaurants</h2>
+<body>
+    <h1 class="marine-h1">Browse Restaurants</h1>
+    <div class="container body-content">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-@using (Html.BeginForm())
-{
-    <div class="input-group" style="margin-bottom: 20px;">
-        @Html.TextBox("zipcode", "", new { @class = "form-control", placeholder = "Search by Zip Code" }) <br />
-        @Html.DropDownList("categoryId", Model.CategoryList)
-        <span class="input-group-btn">
-            <button class="btn btn-default" value="Filter" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-        </span>
-    </div>
-}
+            <div class="form-group">
+                <div class="input-group">
+                    @Html.TextBox("zipcode", "", new { @class = "form-control", placeholder = "Search by Zip Code", @style = "width:250px;" })
+                    <span class="input-group-btn float-left">
+                        <button class="btn btn-default" value="Filter" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </span>
+                </div>
+                @Html.DropDownList("categoryId", Model.CategoryList, new { @class = "float-right form-control" })
+            </div>
+            }
+        </div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Restaurants[0].Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Restaurants[0].Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Restaurants[0].ZipCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Restaurants[0].Category.Name)
-        </th>
-        <th></th>
-    </tr>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].ZipCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Restaurants[0].Category.Name)
+                    </th>
+                    <th></th>
+                </tr>
 
-    @foreach (var item in Model.Restaurants)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ZipCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Home", new { id = item.Id })
-            </td>
-        </tr>
-    }
+                @foreach (var item in Model.Restaurants)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ZipCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.Name)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details", "Home", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
 
-</table>
+            </table>
+        </div>
+</body>

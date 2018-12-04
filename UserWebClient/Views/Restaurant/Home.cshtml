@@ -11,6 +11,13 @@
 </div>
 <div class="container body-content">
     <div class="row">
+        @if (Session["customerId"] != null)
+        {
+            if(Session["customerId"].ToString() == Model.Restaurant.Id.ToString())
+            {
+                @Html.ActionLink("Edit Restaurant", "Owner", "Restaurant")
+            }
+        }
         <div class="col-md-3">
             @Html.ActionLink("Reserve Table", "ReserveTable", "Restaurant", Model, new {@class = "btn btn-danger"})
         </div>
