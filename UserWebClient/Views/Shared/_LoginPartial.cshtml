@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
+﻿ @using Microsoft.AspNet.Identity
 @if (HttpContext.Current.Session["customerId"] != null)
 {
     using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
