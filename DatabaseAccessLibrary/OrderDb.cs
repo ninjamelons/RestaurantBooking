@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace DatabaseAccessLibrary
 {
-    public class OrderDb
+    public class Order
     {
-        public void AddOrder(Order order)
+        public int AddOrder(Order order)
         {
             var db = new JustFeastDbDataContext();
 
             db.Orders.InsertOnSubmit(order);
             db.OrderLineItems.InsertAllOnSubmit(order.OrderLineItems);
             db.SubmitChanges();
+
+            return order.id;
         }
 
-        public void AddItemToOrder(int orderId, int itemId)
+        public void AddItemToCart(int orderId, int itemId)
         {
             var db = new JustFeastDbDataContext();
             var item = db.Items.SingleOrDefault(i => i.id == itemId);

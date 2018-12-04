@@ -55,46 +55,57 @@ namespace ControllerLibrary
 
         public void AddOrder(ModelLibrary.Order order)
         {
-            OrderDb ordDb = new OrderDb();
+            Order ordDb = new Order();
             Order dbOrder = ConvertOrder(order);
             dbOrder.OrderLineItems.AddRange(ConvertOrderLineItemsToDb(order));
 
             ordDb.AddOrder(dbOrder);
         }
 
+        public IEnumerable<OrderLineItem> GetOrderLineItemsById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteOrder(int orderId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddItemToOrder(int orderId, int itemId)
         {
-            OrderDb ordDb = new OrderDb();
-            ordDb.AddItemToOrder(orderId, itemId);
+            Order ordDb = new Order();
+            ordDb.AddItemToCart(orderId, itemId);
         }
 
         public Order GetOrderById(int id)
         {
-            OrderDb ordDb = new OrderDb();
+            Order ordDb = new Order();
             return ordDb.GetOrderById(id);
         }
 
         public void UpdateOrder(Order order)
         {
-            OrderDb ordDb = new OrderDb();
+            Order ordDb = new Order();
             ordDb.UpdateOrder(order);
         }
 
         public int GetLastOrderIdentity()
         {
-            OrderDb ordDb = new OrderDb();
+            Order ordDb = new Order();
             return ordDb.GetLastOrderIdentity();
         }
 
         public void DeleteOrder(int orderId)
         {
-            OrderDb db = new OrderDb();
+            Order db = new Order();
         }
 
-        public List<OrderLineItem> GetOrderLineItemsById(int id)
+        public void DeleteItemById(int orderId, int itemId)
         {
-            var ordDb = new OrderDb();
-            return ordDb.OliList(id);
+            Order db = new Order();
         }
+
     }
+
 }

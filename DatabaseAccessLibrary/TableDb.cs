@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,31 @@ namespace DatabaseAccessLibrary
 {
     public class TableDb
     {
+        private JustFeastDbDataContext db;
+
+        public TableDb()
+        {
+            db = new JustFeastDbDataContext();
+        }
+
+        public IEnumerable<ResTable> GetRestaurantTables(int resId)
+        {
+            var tables = db.ResTables.Where(t => t.restaurantId == resId).AsEnumerable();
+            return tables;
+        }
+
+        public IEnumerable<ResTable> GetAvailableRestaurantTables(int resId)
+        {
+            var tables = GetRestaurantTables(resId);
+
+            tables = from table in tables
+                where table.reserved == false
+                select table;
+
+            return tables;
+        }
+
+        /*
         public void AddTable(ResTable resTable)
         {
             var db = new JustFeastDbDataContext();
@@ -19,6 +45,7 @@ namespace DatabaseAccessLibrary
                 db.SubmitChanges();
             }
         }
+
         public ResTable GetTable(int noSeats, int restaurantId)
         {
             var db = new JustFeastDbDataContext();
@@ -66,6 +93,6 @@ namespace DatabaseAccessLibrary
                                                         && t.restaurantId == resTable.restaurantId));
                 db.SubmitChanges();
             }
-        }
+        }*/
     }
 }

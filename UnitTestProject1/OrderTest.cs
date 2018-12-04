@@ -84,7 +84,7 @@ namespace UnitTests
             //Setup
             var oli = new List<OrderLineItem>();
             var ordCtrl = new OrderCtrl();
-            var ordDb = new OrderDb();
+            var ordDb = new Order();
             var order = new Order
             {
                 OrderId = "1000002",
@@ -127,7 +127,7 @@ namespace UnitTests
         {
             //Setup
             var ordCtrl = new OrderCtrl();
-            var ordDb = new OrderDb();
+            var ordDb = new Order();
             var dt = new DateTime(2018, 11, 08, 12, 22, 33);
             var resDt = new DateTime(2018, 11, 08, 18, 00, 00);
             var oli = new List<OrderLineItem>();
@@ -171,7 +171,7 @@ namespace UnitTests
             ordC.AddItemToOrder(1000000, 1000000);
 
             //Assert
-            Assert.IsTrue(ordC.GetOrderById(1000000).OrderLineItems[0].quantity == 3);
+            Assert.IsTrue(ordC.GetOrderById(1000000).ItemsList[0].Quantity == 3);
         }
 
         [TestMethod]
@@ -184,7 +184,7 @@ namespace UnitTests
             ordC.AddItemToOrder(1000000, 1000001);
 
             //Assert
-            Assert.IsTrue(ordC.GetOrderById(1000000).OrderLineItems[1].itemId == 1000001);
+            Assert.IsTrue(ordC.GetOrderById(1000000).ItemsList[1].LineItem.Id == 1000001);
         }
 
         [TestMethod]
@@ -197,14 +197,14 @@ namespace UnitTests
             var dbO = ordC.GetOrderById(1000000);
 
             //Assert
-            Assert.IsTrue(dbO.id == 1000000);
+            Assert.IsTrue(dbO.OrderId == "1000000");
         }
 
         [TestMethod]
         public void Update_Order_Test()
         {
             //Setup
-            var ordC = new OrderCtrl(); var ordDb = new OrderDb();
+            var ordC = new OrderCtrl(); var ordDb = new Order();
             var dt = new DateTime(2018, 11, 08, 12, 22, 33);
             var newResDt = new DateTime(2018, 11, 08, 19, 00, 00);
 
@@ -222,7 +222,7 @@ namespace UnitTests
             ordC.UpdateOrder(dbOrder);
 
             //Assert
-            Assert.IsTrue(ordC.GetOrderById(1000000).reservation == newResDt);
+            Assert.IsTrue(ordC.GetOrderById(1000000).ReservationDateTime == newResDt.ToString());
         }
 
         [TestMethod]

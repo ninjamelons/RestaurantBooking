@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RestaurantDesktopClient.CustomerService;
+using ModelLibrary;
 
 namespace RestaurantDesktopClient
 {
@@ -28,8 +30,25 @@ namespace RestaurantDesktopClient
         private void LoginButton_OnClick(object sender, RoutedEventArgs e)
         {
             // View TablesCrud Page
-            RestaurantHome homePage = new RestaurantHome();
-            this.NavigationService.Navigate(homePage);
+            var cust = LoginCustomer();
+            if (cust != null) {
+                RestaurantHome homePage = new RestaurantHome();
+                this.NavigationService.Navigate(homePage);
+            }
+            InvalidLabel.Visibility = Visibility.Hidden;
+            InvalidLabel.Visibility = Visibility.Visible;
+        }
+
+        private Customer LoginCustomer()
+        {
+            var proxy = new CustomerServiceClient();
+            string email = mailText.Text;
+            string password = passText.Password;
+            password = PasswordEncrypt.HashPasswordString(email, password);
+            var customer = proxy.LoginCustomer(email, password);
+
+            return customer == null ? null :
+                customer.RoleId != 2 ? null : customer;
         }
     }
 }

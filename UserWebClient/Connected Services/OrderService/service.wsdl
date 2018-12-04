@@ -5,7 +5,6 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/DatabaseAccessLibrary" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Data.Linq" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IOrderService_AddItemToOrder_InputMessage">
@@ -38,6 +37,12 @@
   <wsdl:message name="IOrderService_DeleteOrder_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteOrderResponse" />
   </wsdl:message>
+  <wsdl:message name="IOrderService_DeleteItemById_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteItemById" />
+  </wsdl:message>
+  <wsdl:message name="IOrderService_DeleteItemById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteItemByIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="IOrderService">
     <wsdl:operation name="AddItemToOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/AddItemToOrder" message="tns:IOrderService_AddItemToOrder_InputMessage" />
@@ -58,6 +63,10 @@
     <wsdl:operation name="DeleteOrder">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/DeleteOrder" message="tns:IOrderService_DeleteOrder_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/DeleteOrderResponse" message="tns:IOrderService_DeleteOrder_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrderService/DeleteItemById" message="tns:IOrderService_DeleteItemById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrderService/DeleteItemByIdResponse" message="tns:IOrderService_DeleteItemById_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IOrderService" type="tns:IOrderService">
@@ -100,6 +109,15 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteOrder">
       <soap:operation soapAction="http://tempuri.org/IOrderService/DeleteOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteItemById">
+      <soap:operation soapAction="http://tempuri.org/IOrderService/DeleteItemById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

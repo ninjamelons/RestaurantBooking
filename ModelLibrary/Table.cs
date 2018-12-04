@@ -10,18 +10,12 @@ namespace ModelLibrary
 {
     public class Table
     {
-        public string RestaurantId { get; set; }
+        public int TableId { get; set; }
 
-        [Required]
-        [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number: Cannot contain spaces, symbols, or letters")]
-        public string NoSeats { get; set; }
+        public int RestaurantId { get; set; }
+
+        public int NoSeats { get; set; }
         
-        [Required]
-        [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number: Cannot contain spaces, symbols, or letters")]
-        public string Total { get; set; }
-        
-        [Required]
-        [RegularExpression("^(\\d)*$",ErrorMessage = "Invalid number: Cannot contain spaces, symbols, or letters")]
-        public string Reserved { get; set; }
+        public bool Reserved { get; set; }
     }
 }
