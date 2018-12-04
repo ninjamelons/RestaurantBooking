@@ -240,5 +240,32 @@ namespace UserWebClient.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
+
+        [HttpGet]
+        public ActionResult Owner()
+        {
+            if (Session["customerId"] == null)
+                return RedirectToAction("Index", "Home");
+
+            int id = (int) Session["customerId"];
+            var model = _proxy.GetRestaurant(id);
+            if(model == null)
+                return RedirectToAction("Index", "Home");
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Owner(Restaurant res)
+        {
+            try
+            {
+                _proxy.UpdateRestaurant(res);
+                return RedirectToAction("Home", new { id = res.Id });
+            } catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        }
     }
 }

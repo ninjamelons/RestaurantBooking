@@ -99,6 +99,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="ItemTest.cs" />
+    <Compile Include="LoginTest.cs" />
     <Compile Include="OrderTest.cs" />
     <Compile Include="RegisterRestaurantTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
