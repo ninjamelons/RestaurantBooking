@@ -74,7 +74,6 @@ namespace DatabaseAccessLibrary
 
                 dbMenu.restaurantId = afterMenu.restaurantId;
                 dbMenu.name = afterMenu.name;
-                dbMenu.Items = afterMenu.Items;
                 dbMenu.active = afterMenu.active;
                 db.SubmitChanges();
 
