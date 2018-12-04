@@ -73,13 +73,13 @@ namespace RestaurantService
             ctrl.DeleteItemById(orderId, itemId);
         }
 
-        public Order GetOrderById(int orderId)
+        /*public ModelLibrary.Order GetOrderById(int orderId)
         {
             var ctrl = new OrderCtrl();
             var order = ctrl.GetOrderById(orderId);
             Order retOrder = new Order();
             retOrder.OrderId = Convert.ToInt32(order.OrderId);
-            return retOrder;
-        }
+            return order;
+        }*/
     }
 }
