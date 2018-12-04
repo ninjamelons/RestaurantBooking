@@ -127,7 +127,7 @@ namespace UnitTests
         {
             //Setup
             var ordCtrl = new OrderCtrl();
-            var ordDb = new Order();
+            var ordDb = new OrderDb();
             var dt = new DateTime(2018, 11, 08, 12, 22, 33);
             var resDt = new DateTime(2018, 11, 08, 18, 00, 00);
             var oli = new List<OrderLineItem>();
