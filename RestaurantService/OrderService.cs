@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ControllerLibrary;
 using DatabaseAccessLibrary;
+using ModelLibrary;
 using Order = DatabaseAccessLibrary.Order;
 
 namespace RestaurantService
@@ -21,7 +22,7 @@ namespace RestaurantService
             if (orderId == 0)
             {
                 orderId = ordC.GetLastOrderIdentity() + 1;
-                var order = new Order
+                var order = new DatabaseAccessLibrary.Order
                 {
                     id = orderId,
                     restaurantId = resId
@@ -35,7 +36,7 @@ namespace RestaurantService
             }
             else if (item != null)
             {
-                var oli = new OrderLineItem
+                var oli = new DatabaseAccessLibrary.OrderLineItem
                 {
                     orderId = orderId,
                     itemId = item.id,
@@ -46,20 +47,14 @@ namespace RestaurantService
             db.SubmitChanges();
         }
 
-        public void CreateOrder(Order order)
+        public void CreateOrder(DatabaseAccessLibrary.Order order)
         {
             var db = new JustFeastDbDataContext();
             db.Orders.InsertOnSubmit(order);
             db.SubmitChanges();
         }
 
-        public ModelLibrary.Order GetOrderById(int id)
-        {
-            var ordC = new OrderCtrl();
-            return ordC.GetOrderById(id);
-        }
-
-        public void UpdateOrder(Order order)
+        public void UpdateOrder(DatabaseAccessLibrary.Order order)
         {
             var db = new JustFeastDbDataContext();
             var ord = db.Orders.SingleOrDefault(o => o.id == Convert.ToInt32(order.id));
@@ -78,9 +73,13 @@ namespace RestaurantService
             ctrl.DeleteItemById(orderId, itemId);
         }
 
-        public void DeleteItemById(int orderId, int itemId)
+        public Order GetOrderById(int orderId)
         {
-            throw new NotImplementedException();
+            var ctrl = new OrderCtrl();
+            var order = ctrl.GetOrderById(orderId);
+            Order retOrder = new Order();
+            retOrder.OrderId = Convert.ToInt32(order.OrderId);
+            return retOrder;
         }
     }
 }

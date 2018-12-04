@@ -246,11 +246,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\OrderService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Connected Services\RestaurantService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -291,28 +286,9 @@
     <None Include="Connected Services\CustomerService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderService\DatabaseAccessLibrary.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderService\service.wsdl" />
-    <None Include="Connected Services\OrderService\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderService\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\OrderService\System.Data.Linq.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\RestaurantService\configuration91.svcinfo" />
     <None Include="Connected Services\RestaurantService\configuration.svcinfo" />
     <None Include="Connected Services\RestaurantService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Connected Services\OrderService\configuration91.svcinfo" />
-    <None Include="Connected Services\OrderService\configuration.svcinfo" />
-    <None Include="Connected Services\OrderService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -399,6 +375,7 @@
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Restaurant\ReserveTable.cshtml" />
+    <Content Include="Views\ShoppingCart\HomeCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -440,7 +417,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\CustomerService\" />
-    <WCFMetadataStorage Include="Connected Services\OrderService\" />
     <WCFMetadataStorage Include="Connected Services\RestaurantService\" />
   </ItemGroup>
   <PropertyGroup>

@@ -1,5 +1,4 @@
-﻿using DatabaseAccessLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -15,14 +14,21 @@ namespace RestaurantService
         [OperationContract]
         void AddItemToOrder(int orderId, int itemId, int resId);
         [OperationContract]
-        void CreateOrder(Order order);
+        void CreateOrder(DatabaseAccessLibrary.Order order);
         [OperationContract]
-        ModelLibrary.Order GetOrderById(int id);
-        [OperationContract]
-        void UpdateOrder(Order order);
+        void UpdateOrder(DatabaseAccessLibrary.Order order);
         [OperationContract]
         void DeleteOrder(int orderId);
         [OperationContract]
         void DeleteItemById(int orderId, int itemId);
+
+        [OperationContract]
+        Order GetOrderById(int orderId);
+    }
+
+    [DataContract]
+    public class Order
+    {
+        [DataMember] public int OrderId { get; set; }
     }
 }
