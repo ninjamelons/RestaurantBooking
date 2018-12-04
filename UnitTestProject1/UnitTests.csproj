@@ -98,11 +98,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\CustomerService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="ItemTest.cs" />
     <Compile Include="OrderTest.cs" />
     <Compile Include="RegisterRestaurantTest.cs" />
@@ -123,16 +118,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="app.config" />
-    <None Include="Connected Services\CustomerService\ModelLibrary.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\CustomerService\service.wsdl" />
-    <None Include="Connected Services\CustomerService\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\CustomerService\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\ModelLibrary.Customer.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.Restaurant.datasource" />
@@ -152,6 +137,10 @@
       <Project>{29a08a63-6222-4321-8d3a-9663ee89c12c}</Project>
       <Name>ModelLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RestaurantService\RestaurantService.csproj">
+      <Project>{42A6ED34-8511-4A4E-8D7E-82BF17688F7F}</Project>
+      <Name>RestaurantService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserWebClient\UserWebClient.csproj">
       <Project>{B26B7D4D-9A59-462C-9778-F9C241D7DD24}</Project>
       <Name>UserWebClient</Name>
@@ -162,7 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\RestaurantService\" />
-    <WCFMetadataStorage Include="Connected Services\CustomerService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\RestaurantService\configuration91.svcinfo" />
@@ -172,18 +160,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\RestaurantService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\CustomerService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\CustomerService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\CustomerService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
