@@ -4,6 +4,7 @@ using System.Data.Linq;
 using System.Linq;
 using DatabaseAccessLibrary;
 using ModelLibrary;
+using Restaurant = DatabaseAccessLibrary.Restaurant;
 
 namespace ControllerLibrary
 {
@@ -130,67 +131,47 @@ namespace ControllerLibrary
 
         public int ReserveTables(int resId, int noSeats, DateTime dateTime)
         {
+            var tableDb = new TableDb();
+            int orderId = 0;
+            List<Table> tables = (List<Table>)GetAvailableRestaurantTables(resId, dateTime);
+            
             //Algorithm to find suitable tables
-            List<Table> tables = (List<Table>)GetAvailableRestaurantTables(resId);
-            int tempSeats = noSeats;
-            List<Table> reserveTables = new List<Table>();
-
-            //Repeat until remaining seats found are equal to 0
-            for (int i = 0; tempSeats > 0; i++)
-            {
-                //First check if there is a table that matches perfectly the noSeats required
-                if (noSeats == tables[i].NoSeats)
-                {
-                    reserveTables.Add(tables[i]);
-                    tempSeats = 0;
-                }
-                /*noSeats is a weird number that doesn't match any table,
-                 Find the largest table with the smallest modulo,
-                 Decrement available restaurants to not double down,
-                 Decrease tempSeats by seats being taken away
-                */
-                else
-                {
-                    //Get all modulo for tables
-                    var modulo = GetAllModulo(tables, tempSeats);
-
-                    //Get smallest modulo
-                    var smallDict = FindSmallestModulo(modulo);
-
-                    //Get tables with matching smallest modulo
-                    var tablesModulo = GetTablesSmallestModulo(smallDict, tables);
-
-                    //Get largest table
-                    var largestTable = GetLargestTable(tablesModulo);
-
-                    //Increment and decrement table found
-                    var largeTable = tables[largestTable];
-                    tables.Remove(largeTable);
-                    reserveTables.Add(largeTable);
-
-                    //Decrement noSeats
-                    tempSeats -= largeTable.NoSeats;
-                }
-            }
-
-            for (int i = 0; tempSeats != 0; i++)
-            {
-                tempSeats -= tables[i].NoSeats;
-                reserveTables.Add(tables[i]);
-            }
-
-            //Create a new order and get its orderId
-            int orderId = CreateNewOrder(resId, noSeats, dateTime);
-
             //Reserve tables found in the reserveTables list --Handle concurrency
+            var reserveTablesIds = ConvertTablesToDb(LeastNumberOfTables(tables, noSeats));
+
+            //Reserve the tables in the database -- Concurrency in the database layer
+            try
+            {
+                //Create a new order and get its orderId
+                orderId = CreateNewOrder(resId, noSeats, dateTime);
+                tableDb.ReserveTables(reserveTablesIds, orderId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
 
             return orderId;
         }
 
-        private IEnumerable<Table> GetAvailableRestaurantTables(int resId)
+        private IEnumerable<ResTable> ConvertTablesToDb(List<Table> tables)
+        {
+            List<ResTable> resTables = new List<ResTable>();
+            foreach (var table in tables)
+            {
+                resTables.Add(new ResTable
+                {
+                    id = table.TableId, noSeats = table.NoSeats
+                });
+            }
+            return resTables;
+        }
+
+        private IEnumerable<Table> GetAvailableRestaurantTables(int resId, DateTime datetime)
         {
             TableDb tblDb = new TableDb();
-            return ConvertTableListToModel(tblDb.GetAvailableRestaurantTables(resId));
+            return ConvertTableListToModel(tblDb.GetAvailableRestaurantTables(resId, datetime));
         }
 
         private int CreateNewOrder(int resId, int noSeats, DateTime date)
@@ -271,48 +252,6 @@ namespace ControllerLibrary
             return tableListPerOrder;
         }
 
-        public Dictionary<int,int> FindSmallestModulo(Dictionary<int,int> modulo)
-        {
-            int min = modulo.Min(entry => entry.Value);
-            Dictionary<int,int> keyValuePair = new Dictionary<int, int>();
-            foreach (var entry in modulo)
-            {
-                if(entry.Value == min)
-                    keyValuePair.Add(entry.Key,entry.Value);
-            }
-
-            return keyValuePair;
-        }
-
-        public Dictionary<int, int> GetTablesSmallestModulo(Dictionary<int,int> smallDict, List<Table> tables)
-        {
-            var dictEnum = smallDict.GetEnumerator();
-            var tablesSmallModulo = new Dictionary<int, int>();
-
-            for (int j = 0; j < smallDict.Count; j++)
-            {
-                tablesSmallModulo.Add(dictEnum.Current.Key,tables[dictEnum.Current.Key].NoSeats);
-                j++;
-            }
-
-            dictEnum.Dispose();
-
-            return tablesSmallModulo;
-        }
-
-        //Returns the key used to find the table in the tables list, then remove it from the list
-        public int GetLargestTable(Dictionary<int,int> tablesModulo)
-        {
-            int tableKey = 0;
-
-            int maxNoSeats = tablesModulo.Max(entry => entry.Value);
-            foreach (var table in tablesModulo)
-            {
-                if (table.Value == maxNoSeats)
-                    tableKey = table.Key;
-            }
-
-            return tableKey;
-        }
+   
     }
 }

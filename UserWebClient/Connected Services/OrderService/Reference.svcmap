@@ -26,6 +26,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="7d7f032a-754c-480c-992e-5647c03d23e1" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/OrderService/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="cbcadc4b-a8cc-468a-8d64-a747ef7bb82f" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/OrderService/mex" />
     <MetadataFile FileName="DatabaseAccessLibrary.xsd" MetadataType="Schema" ID="3ace1689-a66f-475c-830a-121865162c23" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/OrderService/mex" />
+    <MetadataFile FileName="ModelLibrary.xsd" MetadataType="Schema" ID="650b1edd-d9f6-449e-930e-43aea5e9efc8" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/RestaurantService/OrderService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace DatabaseAccessLibrary
 {
@@ -22,15 +24,50 @@ namespace DatabaseAccessLibrary
             return tables;
         }
 
-        public IEnumerable<ResTable> GetAvailableRestaurantTables(int resId)
+        public IEnumerable<ResTable> GetAvailableRestaurantTables(int resId, DateTime dateTime)
         {
+            
+            //Check if the tables are already reserved for the time
+            var order = db.Orders.Where(o => o.reservation == dateTime);
+            if (order.Any())
+            {
+
+            }
+
             var tables = GetRestaurantTables(resId);
 
-            tables = from table in tables
-                where table.reserved == false
-                select table;
-
             return tables;
+        }
+
+        public bool ReserveTables(IEnumerable<ResTable> reserveTables, int orderId)
+        {
+            bool success = false;
+
+            try
+            {
+                //CONCURRENCY -- makes a transaction that stops others from entering???
+                using (var scope = new TransactionScope())
+                {
+                    foreach (var table in reserveTables)
+                    {
+                        var reservedTable = new ReservedTable();
+                        reservedTable.orderId = orderId;
+                        reservedTable.tableId = table.id;
+
+                        db.ReservedTables.InsertOnSubmit(reservedTable);
+                    }
+                    db.SubmitChanges();
+                    scope.Complete();
+                }
+                success = true;
+            }
+            catch (TransactionAbortedException ex)
+            {
+                success = false;
+                Console.WriteLine("TransactionAbortedException Message: {0}", ex.Message);
+            }
+
+            return success;
         }
 
         /*

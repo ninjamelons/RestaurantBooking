@@ -228,9 +228,10 @@ namespace UserWebClient.Controllers
                 if(errors.Count() > 1)
                     return View("ReserveTable", order);
 
-                /*Session["orderId"] = this._proxy.ReserveTables(order.Restaurant.Id, order.NoSeats,
-                    order.ReserveDateTime);*/
-                Session["orderId"] = 1000000;
+                var restaurant = (Restaurant)Session["Restaurant"];
+
+                Session["orderId"] = this._proxy.ReserveTables(restaurant.Id, order.NoSeats,
+                    order.ReserveDateTime);
                 
                 return RedirectToAction("HomeModel", order);
             }
