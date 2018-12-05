@@ -4,61 +4,61 @@
     ViewBag.Title = "HomeCart";
     ViewBag.Description = "";
 }
-
-
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="~/Content/custom.css">
 </head>
-<div class="container body-content">
-    <div id="cart" data-bind="visible: cart().length > 0">
-        <h1 class="marine-h1">Your Cart</h1>
+<body>
+    <div class="container body-content">
+        <div id="cart" data-bind="visible: cart().length > 0">
+            <h1 class="marine-h1">Your Cart</h1>
 
 
-        <table class="table">
-            <thead>
-            <th>Name</th>
+            <table class="table">
+                <thead>
+                <th>Name</th>
 
 
-            <th>Quantity</th>
+                <th>Quantity</th>
 
 
-            <th>Price</th>
+                <th>Price</th>
 
 
-            <th>Actions</th>
+                <th>Actions</th>
 
 
-            </thead>
-            @if (Model != null)
-            {
-                <tbody>
-                    @foreach (var item in Model.ItemsList)
-                    {
-                        <tr>
-                            <td>@item.LineItem.Name</td>
-                            <td>@item.Quantity</td>
-                            <td>@item.Price</td>
-                            <td>
-                                @Html.ActionLink("Delete", "HomeCart", "ShoppingCart", new { Id = item.LineItem.Id }, new { @class = "btn btn-danger col-md-5 col-md-offset-2" })
-                            </td>
+                </thead>
+                @if (Model != null)
+                {
+                    <tbody>
+                        @foreach (var item in Model.ItemsList)
+                        {
+                            <tr>
+                                <td>@item.LineItem.Name</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Price</td>
+                                <td>
+                                    @Html.ActionLink("Delete", "HomeCart", "ShoppingCart", new { Id = item.LineItem.Id }, new { @class = "btn btn-danger col-md-5 col-md-offset-2" })
+                                </td>
 
 
 
-                            <td>
-                                @Html.ActionLink("HomeCart", "HomeCart", "ShoppingCart",
-                                    new { itemId = item.LineItem.Id }, new {@class = "btn btn-info"})
-                            </td>
+                                <td>
+                                    @Html.ActionLink("HomeCart", "HomeCart", "ShoppingCart",
+                                        new { itemId = item.LineItem.Id }, new {@class = "btn btn-info"})
+                                </td>
 
 
-                        </tr>
-                    }
-                </tbody>
-            }
+                            </tr>
+                        }
+                    </tbody>
+                }
 
-        </table>
+            </table>
 
 
+        </div>
     </div>
-</div>
+</body>
