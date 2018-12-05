@@ -230,6 +230,7 @@ namespace UserWebClient.Controllers
 
                 /*Session["orderId"] = this._proxy.ReserveTables(order.Restaurant.Id, order.NoSeats,
                     order.ReserveDateTime);*/
+                Session["orderId"] = 1000000;
                 
                 return RedirectToAction("HomeModel", order);
             }

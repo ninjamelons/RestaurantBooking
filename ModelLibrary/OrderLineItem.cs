@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace ModelLibrary
 {
+    /*[KnownType(typeof(Item))]*/
     public class OrderLineItem
     {
-        public int Price;
+        public OrderLineItem(){}
 
         public OrderLineItem(Item item, int quantity)
         {
