@@ -18,7 +18,7 @@
                  {
                   @Html.AntiForgeryToken()
                      <div class="form-group">
-                         <div class="input-group">
+                         <div class="input-group float-right center-with-padding">
                              @Html.TextBoxFor(model => model.Zipcode, new { htmlAttributes = new { placeholder="Zipcode" , @class = "form-control" } })
                              <span class="input-group-btn">
                                  <button class="btn btn-default" value="Filter" type="submit">
