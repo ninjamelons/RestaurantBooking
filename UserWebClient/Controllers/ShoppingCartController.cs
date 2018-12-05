@@ -22,7 +22,7 @@ namespace UserWebClient.Controllers
 
             if (Session["orderId"] != null)
             {
-               // order = _orderProxy.GetOrderById((int)Session["orderId"]);
+                order = _orderProxy.GetOrderById((int)Session["orderId"]);
             }
 
             return View("HomeCart", order);
@@ -36,7 +36,7 @@ namespace UserWebClient.Controllers
             ModelLibrary.Order order = null;
             if (Session["orderId"] != null)
             {
-                //order = _orderProxy.GetOrderById((int)Session["orderId"]);
+                order = _orderProxy.GetOrderById((int)Session["orderId"]);
             }
 
             return View("HomeCart", order);

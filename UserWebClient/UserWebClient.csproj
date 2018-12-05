@@ -281,6 +281,9 @@
   <ItemGroup>
     <None Include="Connected Services\OrderService\configuration91.svcinfo" />
     <None Include="Connected Services\OrderService\configuration.svcinfo" />
+    <None Include="Connected Services\OrderService\ModelLibrary.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\OrderService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -467,6 +470,7 @@
     <Content Include="Properties\DataSources\ModelLibrary.Customer.datasource" />
     <Content Include="libman.json" />
     <Content Include="Properties\DataSources\RestaurantService.Order.datasource" />
+    <Content Include="Properties\DataSources\ModelLibrary.Order.datasource" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
