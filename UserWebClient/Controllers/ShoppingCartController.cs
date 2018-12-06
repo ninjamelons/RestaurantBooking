@@ -11,6 +11,7 @@ namespace UserWebClient.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly OrderService.IOrderService _orderProxy;
+        public double TotalPrice { get; private set; }
 
         public ShoppingCartController(OrderService.IOrderService orderProxy)
         {
@@ -88,5 +89,8 @@ namespace UserWebClient.Controllers
         {
             return View();
         }
+
+
+        
     }
 }
