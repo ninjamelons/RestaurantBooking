@@ -3,78 +3,92 @@
 @{
     ViewBag.Title = "Delete";
 }
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/custom.css">
+</head>
+<body>
+    <div class="container body-content">
+        
+        <h1 class="marine-h1">Delete Restaurant</h1>
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+        <h3>Are you sure you want to delete this restaurant?</h3>
+            <h4>Restaurant</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
 
-<h2>Delete Restaurant</h2>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
 
-<h3>Are you sure you want to delete this restaurant?</h3>
-<div>
-    <h4>Restaurant</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ZipCode)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.ZipCode)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ZipCode)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.PhoneNo)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ZipCode)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.PhoneNo)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNo)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNo)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Verified)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Verified)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Verified)
-        </dt>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Category)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Verified)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.Category.Name)
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
+            </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.Name)
-        </dd>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
-</div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 padding-horizontal">
+                    <input type="submit" value="Delete" class="btn btn-default btn-color-style" />
+                </div>
+            </div>
+                }
+                <div class="col-md-3">
+                    @Html.ActionLink("Back to List", "Index", "Restaurant", new { @class = "btn btn-default btn-color-style" })
+                </div>
+            </div>
+    </div>
+</body>

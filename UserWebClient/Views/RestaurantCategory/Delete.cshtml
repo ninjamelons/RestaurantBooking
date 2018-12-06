@@ -3,24 +3,32 @@
 @{
     ViewBag.Title = "Delete";
 }
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/custom.css">
+</head>
+<body>
+    <div class="container body-content">
+        <h1 class="marine-h1">Delete</h1>
 
-<h2>Delete</h2>
+        <h3>Are you sure you want to delete this?</h3>
+        <div>
+            <h4>@Html.DisplayFor(model => model.Name)</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                @Html.DisplayFor(model => model.Restaurants)
+            </dl>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>@Html.DisplayFor(model => model.Name)</h4>
-    <hr />
-    <dl class="dl-horizontal">
-     @Html.DisplayFor(model => model.Restaurants)
-    </dl>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-default" /> |
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            }
         </div>
-    }
-</div>
+    </div>
+</body>
