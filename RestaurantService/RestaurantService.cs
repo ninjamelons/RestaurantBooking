@@ -159,5 +159,12 @@ namespace RestaurantService
 
             return possibleExc;
         }
+
+        public IEnumerable<Table> GetTablesWithReserved(int resId)
+        {
+            var tableCtrl = new TableCtrl();
+            var tables = tableCtrl.GetTablesWithReserved(resId);
+            return tables;
+        }
     }
 }

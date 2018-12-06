@@ -59,6 +59,9 @@ namespace RestaurantService
         int ReserveTables(int resId, int NoSeats, DateTime dateTime);
 
         [OperationContract]
+        IEnumerable<ModelLibrary.Table> GetTablesWithReserved(int resId);
+
+        [OperationContract]
         string ReserveSingleTable(int tableId, int orderId);
     }
 }

@@ -213,6 +213,13 @@ namespace ControllerLibrary
             }
         }
 
+        public IEnumerable<Table> GetTablesWithReserved(int resId)
+        {
+            var tblDb = new TableDb();
+            var tables = ConvertTableListToModel(tblDb.GetTablesWithReserved(resId));
+            return tables;
+        }
+
         private IEnumerable<Table> GetAvailableRestaurantTables(int resId, DateTime dateTime)
         {
             TableDb tblDb = new TableDb();
