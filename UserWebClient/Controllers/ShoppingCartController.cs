@@ -11,11 +11,15 @@ namespace UserWebClient.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly OrderService.IOrderService _orderProxy;
-        public double TotalPrice { get; private set; }
 
         public ShoppingCartController(OrderService.IOrderService orderProxy)
         {
             this._orderProxy = orderProxy;
+        }
+
+        public ActionResult Index()
+        {
+            return View("HomeCart");
         }
 
         //Get Order (Cart)
@@ -27,8 +31,8 @@ namespace UserWebClient.Controllers
                 TotalPrice = 0
             };
 
-            //Test methods, remove after
-            model.Order.ItemsList.Add(new ModelLibrary.OrderLineItem { Quantity = 1, LineItem = new ModelLibrary.Item { Name = "Catgirl", Price = new ModelLibrary.Price { VarPrice = 1000000 } } });
+            //Test stubs, remove after
+            model.Order.ItemsList.Add(new ModelLibrary.OrderLineItem { Quantity = 1, LineItem = new ModelLibrary.Item { Name = "Catgirl", Price = new ModelLibrary.Price { VarPrice = 50000 } } });
             model.TotalPrice = model.Order.TotalPriceCent;
 
             if (Session["orderId"] != null)
@@ -61,11 +65,15 @@ namespace UserWebClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Charge(HomeCartViewModel model, string stripeEmail, string stripeToken)
+        public ActionResult Charge(string stripeEmail, string stripeToken)
         {
             // Set your secret key: remember to change this to your live secret key in production
             // See your keys here: https://dashboard.stripe.com/account/apikeys
             StripeConfiguration.SetApiKey("sk_test_qNmHozWgCoVNFhqTVVytWScL");
+
+            var order = new ModelLibrary.Order { ItemsList = new List<ModelLibrary.OrderLineItem>() };
+            order.ItemsList.Add(new ModelLibrary.OrderLineItem { Quantity = 1, LineItem = new ModelLibrary.Item { Name = "Catgirl", Price = new ModelLibrary.Price { VarPrice = 50000 } } });
+
 
             // Token is created using Checkout or Elements!
             // Get the payment token submitted by the form:
@@ -73,24 +81,25 @@ namespace UserWebClient.Controllers
 
             var options = new ChargeCreateOptions
             {
-                Amount = model.TotalPrice,
+                Amount = order.TotalPriceCent,
                 Currency = "dkk",
                 Description = "Example charge",
                 SourceId = stripeToken
             };
             var service = new ChargeService();
             Charge charge = service.Create(options);
-            
-            
-            return View("OrderConfirmation", new { status = charge.Status, amount = charge.Amount });
+
+            string chargeResult = "";
+            if (charge.Paid)
+            {
+                chargeResult = $"Payment succeeded.";
+                order.Accepted = true;
+                //_orderProxy.UpdateOrder(order);
+            }
+            else
+                chargeResult = charge.Outcome.Reason;
+
+            return View("OrderConfirmation", new PaymentConfirmationViewModel { Result = chargeResult, OrderId = order.OrderId, Amount = charge.Amount});
         }
-
-        public ActionResult OrderConfirmation(string status, int amount)
-        {
-            return View();
-        }
-
-
-        
     }
 }
