@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace ModelLibrary
 {
@@ -28,6 +29,11 @@ namespace ModelLibrary
 
         public bool Accepted { get; set; }
 
-       
+
+        public int TotalPriceCent { get
+            {
+                return (int)(ItemsList.Sum(x => x.LineItem.Price.VarPrice * x.Quantity) * 100);
+            }
+        }
     }
 }
