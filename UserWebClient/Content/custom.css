@@ -70,8 +70,35 @@ body {
 
 h1 {
     color: azure;
-    font-weight: 100;
+    font-weight: 200;
     text-align: center;
+}
+
+h2 {
+    font-weight: 400;
+    color: mediumaquamarine;
+    text-align: center;
+}
+
+h3 {
+    font-weight: 400;
+    color: mediumaquamarine;
+    text-align: center;
+}
+
+h4 {
+    font-weight: 400;
+    color: mediumaquamarine;
+    text-align: center;
+}
+
+th {
+    font-weight:500;
+}
+
+select option:hover {
+    background-color: red;
+    box-shadow: rgba(102, 205, 170, 0.90) 10px 10px inset;
 }
 
 col-md-4 {
@@ -88,7 +115,7 @@ col-md-4 {
 input {
     max-width: 100%;
     position: relative;
-    line-height: 33px;
+    line-height: 30.5px;
     box-sizing:padding-box;
 }
 
@@ -104,6 +131,7 @@ input {
 }
 
 .btn-default:hover {
+    color: mediumaquamarine;
     background-color:azure;
     transition: 0.4s ease;
     border-color: #b8fce3;
@@ -163,11 +191,6 @@ footer {
     margin-left: auto;
 }
 
-#Zipcode {
-    height: 100%;
-    width: 100%;
-}
-
 #categoryId :hover {
     background-color:aquamarine;
 }
@@ -182,7 +205,26 @@ footer {
     width: 60% !important;
 }
 
+.form-control {
+    border: 1px solid #868686;
+}
+
+.form-control:active {
+    box-shadow: #99f2d4 10px 10px inset;
+}
+
 .form-control:focus {
-    border-color: #b8fce3;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(127,255,212,0.6);
+    border-color: #9ee0c4;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(128, 225, 192, 0.89);
+}
+a {
+    text-decoration: none;
+    color: mediumaquamarine
+}
+
+a:hover {
+    color:#95e2c8;
+    text-decoration: none;
+    transition: ease-in-out 0.3s;
 }

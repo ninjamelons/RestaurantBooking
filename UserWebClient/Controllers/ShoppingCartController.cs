@@ -9,6 +9,7 @@ namespace UserWebClient.Controllers
     public class ShoppingCartController : Controller
     {
         private readonly OrderService.IOrderService _orderProxy;
+        public double TotalPrice { get; private set; }
 
         public ShoppingCartController(OrderService.IOrderService orderProxy)
         {
@@ -22,7 +23,7 @@ namespace UserWebClient.Controllers
 
             if (Session["orderId"] != null)
             {
-               // order = _orderProxy.GetOrderById((int)Session["orderId"]);
+                order = _orderProxy.GetOrderById((int)Session["orderId"]);
             }
 
             return View("HomeCart", order);
@@ -36,10 +37,13 @@ namespace UserWebClient.Controllers
             ModelLibrary.Order order = null;
             if (Session["orderId"] != null)
             {
-                //order = _orderProxy.GetOrderById((int)Session["orderId"]);
+                order = _orderProxy.GetOrderById((int)Session["orderId"]);
             }
 
             return View("HomeCart", order);
         }
+
+
+        
     }
 }

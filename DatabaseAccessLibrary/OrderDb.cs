@@ -90,6 +90,13 @@ namespace DatabaseAccessLibrary
             db.Orders.DeleteOnSubmit(db.Orders.FirstOrDefault(x => x.id == id));
             db.SubmitChanges();
         }
+
+        public IEnumerable<OrderLineItem> GetOrderLineItemsById(int id)
+        {
+            var db = new JustFeastDbDataContext();
+            var items = db.OrderLineItems.Where(oi => oi.orderId == id).AsEnumerable();
+            return items;
+        }
     }
 
 }

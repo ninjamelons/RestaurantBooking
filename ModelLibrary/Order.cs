@@ -27,5 +27,7 @@ namespace ModelLibrary
         public string Payment { get; set; }
 
         public bool Accepted { get; set; }
+
+       
     }
 }

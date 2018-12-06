@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
+using System.Transactions;
 using DatabaseAccessLibrary;
 using ModelLibrary;
 
@@ -110,6 +111,7 @@ namespace ControllerLibrary
         {
             var modelTable = new Table();
 
+            modelTable.TableId = table.id;
             modelTable.NoSeats = table.noSeats;
             modelTable.Reserved = table.reserved;
             modelTable.RestaurantId = table.restaurantId;
@@ -130,67 +132,72 @@ namespace ControllerLibrary
 
         public int ReserveTables(int resId, int noSeats, DateTime dateTime)
         {
-            //Algorithm to find suitable tables
-            List<Table> tables = (List<Table>)GetAvailableRestaurantTables(resId);
-            int tempSeats = noSeats;
-            List<Table> reserveTables = new List<Table>();
+            var tableDb = new TableDb();
+            int orderId = 0;
 
-            //Repeat until remaining seats found are equal to 0
-            for (int i = 0; tempSeats > 0; i++)
+            try
             {
-                //First check if there is a table that matches perfectly the noSeats required
-                if (noSeats == tables[i].NoSeats)
+                //CONCURRENCY -- makes a transaction that stops others from entering???
+                using (var scope = new TransactionScope())
                 {
-                    reserveTables.Add(tables[i]);
-                    tempSeats = 0;
-                }
-                /*noSeats is a weird number that doesn't match any table,
-                 Find the largest table with the smallest modulo,
-                 Decrement available restaurants to not double down,
-                 Decrease tempSeats by seats being taken away
-                */
-                else
-                {
-                    //Get all modulo for tables
-                    var modulo = GetAllModulo(tables, tempSeats);
+                    var tables = (List<Table>) GetAvailableRestaurantTables(resId, dateTime);
 
-                    //Get smallest modulo
-                    var smallDict = FindSmallestModulo(modulo);
+                    //Algorithm to find suitable tables
+                    //Reserve tables found in the reserveTables list --Handle concurrency
+                    var reserveTablesIds = ConvertTablesToDb(LeastNumberOfTables(tables, noSeats));
 
-                    //Get tables with matching smallest modulo
-                    var tablesModulo = GetTablesSmallestModulo(smallDict, tables);
+                    //Reserve the tables in the database -- Concurrency in the database layer
+                    try
+                    {
+                        //Create a new order and get its orderId
+                        orderId = CreateNewOrder(resId, noSeats, dateTime);
+                        tableDb.ReserveTables(reserveTablesIds, orderId);
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+                    catch(TransactionManagerCommunicationException e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
 
-                    //Get largest table
-                    var largestTable = GetLargestTable(tablesModulo);
-
-                    //Increment and decrement table found
-                    var largeTable = tables[largestTable];
-                    tables.Remove(largeTable);
-                    reserveTables.Add(largeTable);
-
-                    //Decrement noSeats
-                    tempSeats -= largeTable.NoSeats;
+                    scope.Complete();
                 }
             }
-
-            for (int i = 0; tempSeats != 0; i++)
+            catch (TransactionAbortedException ex)
             {
-                tempSeats -= tables[i].NoSeats;
-                reserveTables.Add(tables[i]);
+                Console.WriteLine("TransactionAbortedException Message: {0}", ex.Message);
+                return 0;
             }
-
-            //Create a new order and get its orderId
-            int orderId = CreateNewOrder(resId, noSeats, dateTime);
-
-            //Reserve tables found in the reserveTables list --Handle concurrency
 
             return orderId;
         }
 
-        private IEnumerable<Table> GetAvailableRestaurantTables(int resId)
+        private IEnumerable<ResTable> ConvertTablesToDb(List<Table> tables)
+        {
+            List<ResTable> resTables = new List<ResTable>();
+            foreach (var table in tables)
+            {
+                resTables.Add(new ResTable
+                {
+                    id = table.TableId, noSeats = table.NoSeats
+                });
+            }
+            return resTables;
+        }
+
+        private IEnumerable<Table> GetAvailableRestaurantTables(int resId, DateTime dateTime)
         {
             TableDb tblDb = new TableDb();
-            return ConvertTableListToModel(tblDb.GetAvailableRestaurantTables(resId));
+            return ConvertTableListToModel(tblDb.GetAvailableRestaurantTables(resId, dateTime));
         }
 
         private int CreateNewOrder(int resId, int noSeats, DateTime date)
@@ -206,28 +213,14 @@ namespace ControllerLibrary
             var order = new ModelLibrary.Order
             {
                 RestaurantId = Convert.ToString(resId),
-                DateTime = nowDate,
+                DateTime = Convert.ToString(now),
                 ReservationDateTime = dateTime,
+                //DateTime = nowDate,
+                //ReservationDateTime = dateTime,
                 NoSeats = Convert.ToString(noSeats),
                 Accepted = false
             };
             return orderCtrl.AddOrder(order);
-        }
-
-        public Dictionary<int, int> GetAllModulo(List<Table> tables, int tempSeats)
-        {
-            Dictionary<int,int> modulo = new Dictionary<int, int>();
-            int modItr = 0;
-            var seatsLeftInOrder = new int[tables.Count];
-
-            foreach (var table in tables)
-            {
-                modulo[modItr] = tempSeats % table.NoSeats;
-                seatsLeftInOrder[modItr] = tempSeats - table.NoSeats;
-                modItr++;
-            }
-
-            return modulo;
         }
 
         public List<Table> LeastNumberOfTables(List<Table> tables, int tempSeats)
@@ -269,50 +262,6 @@ namespace ControllerLibrary
             }
 
             return tableListPerOrder;
-        }
-
-        public Dictionary<int,int> FindSmallestModulo(Dictionary<int,int> modulo)
-        {
-            int min = modulo.Min(entry => entry.Value);
-            Dictionary<int,int> keyValuePair = new Dictionary<int, int>();
-            foreach (var entry in modulo)
-            {
-                if(entry.Value == min)
-                    keyValuePair.Add(entry.Key,entry.Value);
-            }
-
-            return keyValuePair;
-        }
-
-        public Dictionary<int, int> GetTablesSmallestModulo(Dictionary<int,int> smallDict, List<Table> tables)
-        {
-            var dictEnum = smallDict.GetEnumerator();
-            var tablesSmallModulo = new Dictionary<int, int>();
-
-            for (int j = 0; j < smallDict.Count; j++)
-            {
-                tablesSmallModulo.Add(dictEnum.Current.Key,tables[dictEnum.Current.Key].NoSeats);
-                j++;
-            }
-
-            dictEnum.Dispose();
-
-            return tablesSmallModulo;
-        }
-
-        //Returns the key used to find the table in the tables list, then remove it from the list
-        public int GetLargestTable(Dictionary<int,int> tablesModulo)
-        {
-            int tableKey = 0;
-
-            int maxNoSeats = tablesModulo.Max(entry => entry.Value);
-            foreach (var table in tablesModulo)
-            {
-                if (table.Value == maxNoSeats)
-                    tableKey = table.Key;
-            }
-
-            return tableKey;
         }
     }
 }
