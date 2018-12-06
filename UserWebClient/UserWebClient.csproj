@@ -271,6 +271,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logic\AuthenticationUtil.cs" />
+    <Compile Include="Models\HomeCartViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
@@ -518,6 +519,7 @@
     <Content Include="Views\Restaurant\Owner.cshtml" />
     <Content Include="Views\Restaurant\ReserveTable.cshtml" />
     <Content Include="Views\ShoppingCart\HomeCart.cshtml" />
+    <Content Include="Views\ShoppingCart\OrderConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
