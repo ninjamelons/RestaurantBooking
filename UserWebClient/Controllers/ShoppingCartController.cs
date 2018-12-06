@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stripe;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -40,6 +41,32 @@ namespace UserWebClient.Controllers
             }
 
             return View("HomeCart", order);
+        }
+
+        [HttpPost]
+        public ActionResult Charge(string stripeEmail, string stripeToken)
+        {
+            // Set your secret key: remember to change this to your live secret key in production
+            // See your keys here: https://dashboard.stripe.com/account/apikeys
+            StripeConfiguration.SetApiKey("sk_test_qNmHozWgCoVNFhqTVVytWScL");
+
+            // Token is created using Checkout or Elements!
+            // Get the payment token submitted by the form:
+            //var token = model.Token; // Using ASP.NET MVC
+
+            var options = new ChargeCreateOptions
+            {
+                Amount = 999,
+                Currency = "usd",
+                Description = "Example charge",
+                SourceId = stripeToken,
+
+            };
+            var service = new ChargeService();
+            Charge charge = service.Create(options);
+            
+            
+            return View();
         }
     }
 }
