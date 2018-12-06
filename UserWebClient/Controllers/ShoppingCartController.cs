@@ -73,7 +73,7 @@ namespace UserWebClient.Controllers
 
             var options = new ChargeCreateOptions
             {
-                Amount = 999,
+                Amount = model.TotalPrice,
                 Currency = "dkk",
                 Description = "Example charge",
                 SourceId = stripeToken
