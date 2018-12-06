@@ -74,6 +74,33 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    font-weight: 400;
+    color: mediumaquamarine;
+    text-align: center;
+}
+
+h3 {
+    font-weight: 400;
+    color: mediumaquamarine;
+    text-align: center;
+}
+
+h4 {
+    font-weight: 400;
+    color: mediumaquamarine;
+    text-align: center;
+}
+
+th {
+    font-weight:500;
+}
+
+select option:hover {
+    background-color: red;
+    box-shadow: rgba(102, 205, 170, 0.90) 10px 10px inset;
+}
+
 col-md-4 {
     align-content:center;
 }
@@ -88,7 +115,7 @@ col-md-4 {
 input {
     max-width: 100%;
     position: relative;
-    line-height: 33px;
+    line-height: 30.5px;
     box-sizing:padding-box;
 }
 
@@ -104,6 +131,7 @@ input {
 }
 
 .btn-default:hover {
+    color: mediumaquamarine;
     background-color:azure;
     transition: 0.4s ease;
     border-color: #b8fce3;
@@ -166,6 +194,7 @@ footer {
 #Zipcode {
     height: 100%;
     width: 100%;
+    border-radius: 4px;
 }
 
 #categoryId :hover {
