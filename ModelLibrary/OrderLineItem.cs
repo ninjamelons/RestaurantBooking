@@ -5,7 +5,7 @@ namespace ModelLibrary
 {
     public class OrderLineItem
     {
-        public int Price;
+        public OrderLineItem(){}
 
         public OrderLineItem(Item item, int quantity)
         {

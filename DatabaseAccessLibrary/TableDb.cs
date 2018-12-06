@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace DatabaseAccessLibrary
 {
@@ -22,15 +23,49 @@ namespace DatabaseAccessLibrary
             return tables;
         }
 
-        public IEnumerable<ResTable> GetAvailableRestaurantTables(int resId)
+        //Returns the available restaurant tables within 1 hour of reservation
+        public IEnumerable<ResTable> GetAvailableRestaurantTables(int resId, DateTime dateTime)
         {
-            var tables = GetRestaurantTables(resId);
+            //Check if the tables are already reserved for the time
+            //If the dateTime is between the reservation time and the reservation time + 1 hour
+            //  then it should fail
+            var order = db.Orders.Where(o => o.reservation < dateTime 
+                                             && dateTime < o.reservation.Value.AddHours(1));
 
-            tables = from table in tables
-                where table.reserved == false
-                select table;
+            //List of ResTables
+            var unavailableTables = new List<ResTable>();
+            if (order.Any())
+            {
+                foreach (var o in order)
+                {
+                    //List of ReservedTables where their orderId matches an id found in a conflicting time frame
+                    var reservedTables = db.ReservedTables.Where(rt => rt.orderId == o.id);
+                    //Populates list of ResTables using ReservedTables ids
+                    foreach (var table in reservedTables)
+                    {
+                        unavailableTables.Add(db.ResTables.FirstOrDefault(t => t.id == table.tableId));
+                    }
+                }
+            }
+            //Get all tables for said restaurant
+            var tables = GetRestaurantTables(resId).ToList();
 
-            return tables;
+            //Get all tables for restaurant that aren't booked in a one hour time slot
+            var availableTables = tables.Except(unavailableTables).ToList();
+
+            return availableTables;
+        }
+
+        public void ReserveTables(IEnumerable<ResTable> reserveTables, int orderId)
+        {
+            foreach (var table in reserveTables)
+            {
+                var reservedTable = new ReservedTable();
+                reservedTable.orderId = orderId;
+                reservedTable.tableId = table.id;
+                db.ReservedTables.InsertOnSubmit(reservedTable);
+            }
+            db.SubmitChanges();
         }
 
         /*
