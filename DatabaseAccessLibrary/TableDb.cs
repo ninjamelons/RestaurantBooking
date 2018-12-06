@@ -29,8 +29,8 @@ namespace DatabaseAccessLibrary
             //Check if the tables are already reserved for the time
             //If the dateTime is between the reservation time and the reservation time + 1 hour
             //  then it should fail
-            var order = db.Orders.Where(o => o.reservation < dateTime 
-                                             && dateTime < o.reservation.Value.AddHours(1));
+            var order = db.Orders.Where(o => o.reservation <= dateTime 
+                                             && dateTime <= o.reservation.Value.AddHours(1));
 
             //List of ResTables
             var unavailableTables = new List<ResTable>();
