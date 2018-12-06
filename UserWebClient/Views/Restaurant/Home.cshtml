@@ -5,11 +5,13 @@
     ModelLibrary.Restaurant restaurant = (ModelLibrary.Restaurant) Session["Restaurant"];
     ViewBag.Title = restaurant.Name;
 }
+
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="~/Content/custom.css">
 </head>
+
 <div class="jumbotron">
     <h1 class="marine-h1">@ViewBag.Title</h1>
 </div>

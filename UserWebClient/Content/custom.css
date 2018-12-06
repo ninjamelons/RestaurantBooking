@@ -55,8 +55,8 @@ body {
     background-size: cover;
     background-attachment: fixed;
     border-style:none;
-    padding-top: 400px;
-    padding-bottom: 400px;
+    padding-top: 22%;
+    padding-bottom: 22%;
     overflow: hidden;
 }
 
@@ -74,11 +74,38 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    font-weight: 400;
+    color: mediumaquamarine;
+    text-align: center;
+}
+
+h3 {
+    font-weight: 400;
+    color: mediumaquamarine;
+    text-align: center;
+}
+
+h4 {
+    font-weight: 400;
+    color: mediumaquamarine;
+    text-align: center;
+}
+
+th {
+    font-weight:500;
+}
+
+select option:hover {
+    background-color: red;
+    box-shadow: rgba(102, 205, 170, 0.90) 10px 10px inset;
+}
+
 col-md-4 {
     align-content:center;
 }
 
-.input-group {
+.center-with-padding {
     padding-top: 0.1%;
     padding-left: 9%;
     padding-right: 10%;
@@ -86,31 +113,27 @@ col-md-4 {
 
 
 input {
-    max-height: 90px;
-    max-width: inherit;
+    max-width: 100%;
     position: relative;
-    line-height: 33.5px;
-    display: flex;
+    line-height: 30.5px;
     box-sizing:padding-box;
-    width: 450px;
 }
 
 .btn-color-style {
-    display: block;
-    margin: 0 auto;
     background-color: transparent;
     border-width: 3px;
     border-color: mediumaquamarine;
     color: mediumaquamarine;
-    width: 100px;
+    width: 100%;
     font-weight: 300;
+    text-align: center;
     
 }
 
-.btn-color-style:hover {
-    color: #b8fce3;
+.btn-default:hover {
+    color: mediumaquamarine;
+    background-color:azure;
     transition: 0.4s ease;
-    background-color: transparent;
     border-color: #b8fce3;
 }
 
@@ -118,12 +141,25 @@ input {
     box-shadow: none;
 }
 
-.padding-left {
+.padding-left-2 {
+    padding-left: 2%;
+}
+
+.padding-left-5 {
     padding-left: 5%;
 }
 
-.padding-right {
+.padding-right-2 {
+    padding-right: 2%;
+}
+
+.padding-right-5 {
     padding-right: 5%;
+}
+
+.padding-horizontal{
+    padding-top:2%;
+    padding-bottom: 3%;
 }
 
 .float-left {
@@ -148,3 +184,34 @@ footer {
     margin: 0 auto;
 }
 
+.container-custom {
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#Zipcode {
+    height: 100%;
+    width: 100%;
+    border-radius: 4px;
+}
+
+#categoryId :hover {
+    background-color:aquamarine;
+}
+
+#categoryId {
+    float: left;
+    overflow: auto;
+    width: auto;
+}
+
+#zipcode {
+    width: 60% !important;
+}
+
+.form-control:focus {
+    border-color: #b8fce3;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(127,255,212,0.6);
+}
