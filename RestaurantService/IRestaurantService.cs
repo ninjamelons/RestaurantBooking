@@ -58,5 +58,7 @@ namespace RestaurantService
         [OperationContract]
         int ReserveTables(int resId, int NoSeats, DateTime dateTime);
 
+        [OperationContract]
+        string ReserveSingleTable(int tableId, int orderId);
     }
 }

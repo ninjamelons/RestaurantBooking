@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Transactions;
 using DatabaseAccessLibrary;
 using ModelLibrary;
 using ControllerLibrary;
@@ -141,6 +142,22 @@ namespace RestaurantService
             TableCtrl tblCtrl = new TableCtrl();
             var orderId = tblCtrl.ReserveTables(resId, noSeats, dateTime);
             return orderId;
+        }
+
+        public string ReserveSingleTable(int tableId, int resId)
+        {
+            var possibleExc = "Successfully reserved table";
+            try
+            {
+                var tblCtrl = new TableCtrl();
+                tblCtrl.ReserveSingleTable(tableId, resId);
+            }
+            catch (TransactionAbortedException ex)
+            {
+                possibleExc = "Failed to reserve table, Table possibly reserved by another customer";
+            }
+
+            return possibleExc;
         }
     }
 }

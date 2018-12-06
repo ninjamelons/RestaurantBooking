@@ -68,6 +68,16 @@ namespace DatabaseAccessLibrary
             db.SubmitChanges();
         }
 
+        public void ReserveSingleTable(int tableId, int orderId)
+        {
+            var db = new JustFeastDbDataContext();
+            db.ReservedTables.InsertOnSubmit(new ReservedTable
+            {
+                orderId = orderId, tableId = tableId
+            });
+            db.SubmitChanges();
+        }
+
         /*
         public void AddTable(ResTable resTable)
         {

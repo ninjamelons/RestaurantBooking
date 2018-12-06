@@ -194,6 +194,25 @@ namespace ControllerLibrary
             return resTables;
         }
 
+        public void ReserveSingleTable(int tableId, int resId)
+        {
+            var tblDb = new TableDb();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    var orderId = CreateNewOrder(resId, 0, DateTime.Now);
+                    tblDb.ReserveSingleTable(tableId, orderId);
+                    scope.Complete();
+                }
+            }
+            catch (TransactionAbortedException ex)
+            {
+                Console.WriteLine("TransactionAbortedException Message: {0}", ex.Message);
+                throw;
+            }
+        }
+
         private IEnumerable<Table> GetAvailableRestaurantTables(int resId, DateTime dateTime)
         {
             TableDb tblDb = new TableDb();
