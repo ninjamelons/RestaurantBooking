@@ -422,9 +422,6 @@
     <None Include="Connected Services\CustomerService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderService\DatabaseAccessLibrary.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\OrderService\service.wsdl" />
     <None Include="Connected Services\OrderService\service.xsd">
       <SubType>Designer</SubType>
