@@ -27,35 +27,37 @@ namespace RestaurantDesktopClient
             InitializeComponent();
         }
 
-        private void LoginButton_OnClick(object sender, RoutedEventArgs e)
+        private async void LoginButton_OnClick(object sender, RoutedEventArgs e)
         {
             // View TablesCrud Page
-            var cust = LoginCustomer();
-            if (cust != null) {
+            var cust = await LoginCustomerAsync();
+            if (cust != null)
+            {
                 RestaurantHome homePage = new RestaurantHome(cust.Id);
                 this.NavigationService.Navigate(homePage);
             }
-            InvalidLabel.Visibility = Visibility.Hidden;
-            InvalidLabel.Visibility = Visibility.Visible;
+            else
+            {
+                InvalidLabel.Visibility = Visibility.Hidden;
+                InvalidLabel.Visibility = Visibility.Visible;
+            }
         }
 
         
         private void TextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key != System.Windows.Input.Key.Enter) return;
-
-            // your event handler here
+            
             e.Handled = true;
             MessageBox.Show("Enter pressed");
         }
         
-        private Customer LoginCustomer()
+        private async Task<Customer> LoginCustomerAsync()
         {
-            var proxy = new CustomerServiceClient();
             string email = mailText.Text;
             string password = passText.Password;
             password = PasswordEncrypt.HashPasswordString(email, password);
-            var customer = proxy.LoginCustomer(email, password);
+            var customer = await Services._CustomerProxy.LoginCustomerAsync(email, password);
 
             return customer == null ? null :
                 customer.RoleId != 2 ? null : customer;
