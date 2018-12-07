@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantDesktopClient.RestaurantService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,13 @@ namespace RestaurantDesktopClient
         {
             resId = restaurantId;
             InitializeComponent();
+            dataGrid.ItemSource = GetTables();
+        }
+
+        public IEnumerable<ModelLibrary.Table> GetTables()
+        {
+            var proxy = new RestaurantServiceClient();
+            proxy.GetTables();
         }
         public int resId;
         private void ToTablesPage_OnClick(object sender, RoutedEventArgs e)
@@ -39,6 +47,17 @@ namespace RestaurantDesktopClient
             //View MenusCrud Page
             MenusCrud menuPage = new MenusCrud(resId);
             this.NavigationService.Navigate(menuPage);
+        }
+
+        private void buttonRestaurant_Click(object sender, RoutedEventArgs e)
+        {
+            RestaurantUpdate resPage = new RestaurantUpdate(resId);
+            this.NavigationService.Navigate(resPage);
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

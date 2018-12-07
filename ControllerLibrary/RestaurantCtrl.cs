@@ -64,6 +64,7 @@ namespace ControllerLibrary
                 Category = ConvertRestaurantCategoryToModel(dbRestaurant.ResCat),
                 Discontinued = dbRestaurant.discontinued,
             };
+           //mRes.Category = ConvertRestaurantCategoryToModel(dbRestaurant.ResCat);
 
            // if(dbRestaurant.resCatId != null)
            //     mRes.CategoryId = dbRestaurant.resCatId.Value;

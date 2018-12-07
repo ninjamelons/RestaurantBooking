@@ -18,7 +18,7 @@ namespace RestaurantDesktopClient
             InitializeComponent();
             hiddenResId.Content = "1000000";
             //hiddenResId.Content = GetRestaurantId();
-            TableCombo.ItemsSource = GetTables();
+            //TableCombo.ItemsSource = GetTables();
         }
 
         private void UpdateAddTable_OnClick(object sender, RoutedEventArgs e)
@@ -35,7 +35,7 @@ namespace RestaurantDesktopClient
             {
                 if (CheckOldTableMatchesDb(oldTable))
                 {
-                    proxy.UpdateTable(oldTable,newTable);
+                //    proxy.UpdateTable(oldTable,newTable);
                 }
             //    else if (newTable.RestaurantId != hiddenResId.Content.ToString()
            //              && newTable.NoSeats != hiddenNoSeats.Content.ToString())
@@ -53,7 +53,7 @@ namespace RestaurantDesktopClient
         private bool CheckOldTableMatchesDb(Table oldTable)
         {
             var proxy = new RestaurantServiceClient();
-            if (proxy.GetTable(oldTable) != null)
+            //if (proxy.GetTable(oldTable) != null)
                 return true;
             return false;
         }
@@ -65,7 +65,7 @@ namespace RestaurantDesktopClient
 
             if (ValidateTable(table))
             {
-                proxy.DeleteTable(table);
+                //proxy.DeleteTable(table);
             }
             else
             {
@@ -77,8 +77,8 @@ namespace RestaurantDesktopClient
         {
             var proxy = new RestaurantServiceClient();
             var selectedTable = (ModelLibrary.Table)TableCombo.SelectedItem;
-            var dbTable = proxy.GetTable(selectedTable);
-            hiddenNoSeats.Content = dbTable.NoSeats;
+           // var dbTable = proxy.GetTable(selectedTable);
+            //hiddenNoSeats.Content = dbTable.NoSeats;
        //     NoSeats.Text = dbTable.NoSeats;
        //     NoReserved.Text = dbTable.Reserved;
        //     NoTotal.Text = dbTable.Total;
@@ -101,10 +101,10 @@ namespace RestaurantDesktopClient
             };
         }
 
-        private IEnumerable<Table> GetTables()
+        /*private IEnumerable<Table> GetTables()
         {
             var proxy = new RestaurantServiceClient();
-            return proxy.GetAllTables(Convert.ToInt32(hiddenResId.Content.ToString()));
-        }
+            //return proxy.GetAllTables(Convert.ToInt32(hiddenResId.Content.ToString()));
+        }*/
     }
 }
