@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using UserWebClient.Models;
@@ -28,7 +29,7 @@ namespace UserWebClient.Controllers
         }
 
         //Get Order (Cart)
-        public ActionResult HomeCart()
+        public async Task<ActionResult> HomeCart()
         {
             HomeCartViewModel model = new HomeCartViewModel
             {
@@ -38,7 +39,7 @@ namespace UserWebClient.Controllers
 
             if (Session["orderId"] != null)
             {
-                model.Order = _orderProxy.GetOrderById((int)Session["orderId"]);
+                model.Order = await _orderProxy.GetOrderByIdAsync((int)Session["orderId"]);
                 model.TotalPrice = model.Order.TotalPriceCent;
             }
             
@@ -46,9 +47,9 @@ namespace UserWebClient.Controllers
         }
 
        //Get: Delete Item from order by ID
-       public ActionResult Delete(int itemId)
+       public async Task<ActionResult> Delete(int itemId)
         {
-            _orderProxy.DeleteItemById((int)Session["orderId"], itemId);
+            await _orderProxy.DeleteItemByIdAsync((int)Session["orderId"], itemId);
 
             HomeCartViewModel model = new HomeCartViewModel
             {
@@ -66,13 +67,13 @@ namespace UserWebClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Charge(string stripeEmail, string stripeToken)
+        public async Task<ActionResult> Charge(string stripeEmail, string stripeToken)
         {
             // Set your secret key: remember to change this to your live secret key in production
             // See your keys here: https://dashboard.stripe.com/account/apikeys
             StripeConfiguration.SetApiKey("sk_test_qNmHozWgCoVNFhqTVVytWScL");
 
-            var order = _orderProxy.GetOrderById((int)Session["orderId"]);
+            var order = await _orderProxy.GetOrderByIdAsync((int)Session["orderId"]);
 
             // Token is created using Checkout or Elements!
             // Get the payment token submitted by the form:
@@ -93,7 +94,7 @@ namespace UserWebClient.Controllers
             {
                 chargeResult = $"Payment succeeded.";
                 order.Accepted = true;
-                _orderProxy.UpdateOrder(order);
+                await _orderProxy.UpdateOrderAsync(order);
             }
             else
                 chargeResult = charge.Outcome.Reason;

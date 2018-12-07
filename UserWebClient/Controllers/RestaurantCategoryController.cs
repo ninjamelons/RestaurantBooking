@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ModelLibrary;
@@ -18,9 +19,9 @@ namespace UserWebClient.Controllers
         }
 
         // GET: RestaurantCategory
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(_proxy.GetAllRestaurantCategories());
+            return View(await _proxy.GetAllRestaurantCategoriesAsync());
         }
 
         // GET: RestaurantCategory/Details/5
@@ -37,11 +38,11 @@ namespace UserWebClient.Controllers
 
         // POST: RestaurantCategory/Create
         [HttpPost]
-        public ActionResult Create(RestaurantCategory cat)
+        public async Task<ActionResult> Create(RestaurantCategory cat)
         {
             try
             {
-                _proxy.CreateRestaurantCategory(cat);
+                await _proxy.CreateRestaurantCategoryAsync(cat);
 
                 return RedirectToAction("Index");
             }
@@ -52,9 +53,9 @@ namespace UserWebClient.Controllers
         }
 
         // GET: RestaurantCategory/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            var cat = _proxy.GetRestaurantCategory(id);
+            var cat = await _proxy.GetRestaurantCategoryAsync(id);
             return View("Edit", cat);
         }
 
@@ -64,8 +65,6 @@ namespace UserWebClient.Controllers
         {
             try
             {
-                // TODO: Add update logic here
-
                 return RedirectToAction("Index");
             }
             catch
@@ -75,19 +74,19 @@ namespace UserWebClient.Controllers
         }
 
         // GET: RestaurantCategory/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var cat = _proxy.GetRestaurantCategory(id);
+            var cat = await _proxy.GetRestaurantCategoryAsync(id);
             return View("Delete", cat);
         }
 
         // POST: RestaurantCategory/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, RestaurantCategory cat)
+        public async Task<ActionResult> Delete(int id, RestaurantCategory cat)
         {
             try
             {
-                _proxy.DeleteRestaurantCategory(id);
+                await _proxy.DeleteRestaurantCategoryAsync(id);
 
                 return RedirectToAction("Index");
             }
