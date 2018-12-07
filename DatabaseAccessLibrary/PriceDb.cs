@@ -60,5 +60,11 @@ namespace DatabaseAccessLibrary
             return db.Prices.FirstOrDefault(p => p.itemId == itemId);
         }
 
+        public IEnumerable<Price> GetPriceItemIdList(int itemId)
+        {
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            return db.Prices.Where(t => t.itemId == itemId).OrderByDescending(t=> t.startDate);
+        }
+
     }
 }
