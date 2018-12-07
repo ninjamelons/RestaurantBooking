@@ -29,8 +29,8 @@ namespace DatabaseAccessLibrary
             //Check if the tables are already reserved for the time
             //If the dateTime is between the reservation time and the reservation time + 1 hour
             //  then it should fail
-            var order = db.Orders.Where(o => o.reservation < dateTime 
-                                             && dateTime < o.reservation.Value.AddHours(1));
+            var order = db.Orders.Where(o => o.reservation <= dateTime 
+                                             && dateTime <= o.reservation.Value.AddHours(1));
 
             //List of ResTables
             var unavailableTables = new List<ResTable>();
@@ -66,6 +66,49 @@ namespace DatabaseAccessLibrary
                 db.ReservedTables.InsertOnSubmit(reservedTable);
             }
             db.SubmitChanges();
+        }
+
+        public void ReserveSingleTable(int tableId, int orderId)
+        {
+            var db = new JustFeastDbDataContext();
+            db.ReservedTables.InsertOnSubmit(new ReservedTable
+            {
+                orderId = orderId, tableId = tableId
+            });
+            db.SubmitChanges();
+        }
+
+        public IEnumerable<ResTable> GetTablesWithReserved(int resId)
+        {
+            var orders = db.Orders.Where(o => o.reservation <= DateTime.Now 
+                                             && DateTime.Now <= o.reservation.Value.AddHours(1));
+            
+            var unavailableTables = new List<ResTable>();
+            foreach (var order in orders)
+            {
+                var reservedTables = db.ReservedTables.Where(rt => rt.orderId == order.id);
+                foreach (var rt in reservedTables)
+                {
+                    var table = db.ResTables.FirstOrDefault(t => t.id == rt.tableId);
+                    table.reserved = true;
+                    unavailableTables.Add(table);
+                }
+            }
+            
+            //Get all tables for said restaurant
+            var allTables = GetRestaurantTables(resId).ToList();
+
+            //Get all tables for restaurant that aren't booked in a one hour time slot
+            var availableTables = allTables.Except(unavailableTables).ToList();
+
+            foreach (var table in availableTables)
+            {
+                table.reserved = false;
+            }
+
+            var tables = availableTables.Union(unavailableTables);
+            
+            return tables;
         }
 
         /*

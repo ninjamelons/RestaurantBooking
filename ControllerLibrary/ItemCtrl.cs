@@ -54,7 +54,6 @@ namespace ControllerLibrary
         public ModelLibrary.Price GetItemPrice(int itemId)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            PriceCtrl priceCtrl = new PriceCtrl();
             var prices = db.Prices.Where(p => p.itemId == itemId).OrderByDescending(p => p.startDate);
             var price = prices.First();
             if(price !=null)
@@ -72,24 +71,18 @@ namespace ControllerLibrary
         }
         public ModelLibrary.Item GetItem(int itemId)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
             var itemDb = new ItemDb();
-            PriceCtrl priceCtrl = new PriceCtrl();
             return ConvertItemToModel(itemDb.GetItem(itemId));
 
         }
         public ModelLibrary.ItemCat GetItemCatById(int itemCatId)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
             var itemCatDb = new ItemCatDb();
-            PriceCtrl priceCtrl = new PriceCtrl();
             return ConvertItemCatToModel(itemCatDb.GetItemCatById(itemCatId));
         }
         public ModelLibrary.ItemCat GetItemCatByName(string name)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
             var itemCatDb = new ItemCatDb();
-            PriceCtrl priceCtrl = new PriceCtrl();
             return ConvertItemCatToModel(itemCatDb.GetITemCatByName(name));
         }
         public ModelLibrary.Item CreateItem(ModelLibrary.Item item, int menuId, int itemCatId)
@@ -122,10 +115,6 @@ namespace ControllerLibrary
         }
         public ModelLibrary.Item ConvertItemToModelWithoutPrice(DatabaseAccessLibrary.Item dbItem)
         {
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            PriceCtrl priceCtrl = new PriceCtrl();
-            MenuCtrl menuCtrl = new MenuCtrl();
-            
             if (dbItem != null)
             {
 
@@ -157,7 +146,6 @@ namespace ControllerLibrary
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
             PriceCtrl priceCtrl = new PriceCtrl();
-            MenuCtrl menuCtrl = new MenuCtrl();
             //var CheckItem = db.Items.Single(a => a.id == dbItem.id);
 
             DatabaseAccessLibrary.Price price = db.Prices.Where(p => p.itemId == dbItem.id).OrderByDescending(p => p.startDate).FirstOrDefault();
@@ -190,7 +178,6 @@ namespace ControllerLibrary
         public DatabaseAccessLibrary.Item ConvertItemToDb(ModelLibrary.Item modelItem, int menuId, int itemCatId)
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
-            PriceCtrl priceCtrl = new PriceCtrl();
             //var CheckItem = db.Items.Single(a => a.id == modelItem.Id);
             var menu = db.Menus.SingleOrDefault(p => p.id == menuId);
             var itemCat = db.ItemCats.SingleOrDefault(p => p.id == itemCatId);
@@ -212,7 +199,6 @@ namespace ControllerLibrary
 
         public ModelLibrary.ItemCat CreateItemCat(ModelLibrary.ItemCat itemCat)
         {
-            var itemDb = new ItemDb();
             var itemCatDb = new ItemCatDb();
             
             var returnItemCat = new ModelLibrary.ItemCat
@@ -231,7 +217,6 @@ namespace ControllerLibrary
         }
         public ModelLibrary.ItemCat ConvertItemCatToModel(DatabaseAccessLibrary.ItemCat dbItemCat)
         {
-            var itemDb = new ItemDb();
             var modelItemCat = new ModelLibrary.ItemCat();
             List<ModelLibrary.Item> itemList = new List<ModelLibrary.Item>();
             ItemCtrl itemCtrl = new ItemCtrl();
