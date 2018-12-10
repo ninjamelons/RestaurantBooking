@@ -117,13 +117,13 @@ namespace RestaurantDesktopClient
         private IEnumerable<Table> GetTables()
         {
             var proxy = new RestaurantServiceClient();
-            return proxy.GetAllTables(Convert.ToInt32(HiddenResId.Content.ToString()));
+            return proxy.GetAllTablesByRestaurant(Convert.ToInt32(HiddenResId.Content.ToString()));
         }
 
         private DataGrid ToTableDataGrid()
         {
             var proxy = new RestaurantServiceClient();
-            var tables = proxy.GetAllTables(Convert.ToInt32(HiddenResId.Content.ToString())).ToList();
+            var tables = proxy.GetAllTablesByRestaurant(Convert.ToInt32(HiddenResId.Content.ToString())).ToList();
             var noSeats = new int[tables.Count];
             var noSeatsNoDuplicates = new int[5, 2];
             var j = 0;
