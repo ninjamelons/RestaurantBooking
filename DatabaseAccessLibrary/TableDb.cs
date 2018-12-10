@@ -115,8 +115,7 @@ namespace DatabaseAccessLibrary
         {
             var db = new JustFeastDbDataContext();
 
-            if (db.ResTables.FirstOrDefault(t => !(t.noSeats == resTable.noSeats
-                                                   && t.restaurantId == resTable.restaurantId)) == null)
+            if (db.ResTables.FirstOrDefault(t => (t.restaurantId == resTable.restaurantId)) != null)
             {
                 db.ResTables.InsertOnSubmit(resTable);
                 db.SubmitChanges();
@@ -128,7 +127,7 @@ namespace DatabaseAccessLibrary
             var db = new JustFeastDbDataContext();
 
             ResTable resTable = null;
-            resTable = db.ResTables.SingleOrDefault(t => t.noSeats == noSeats
+            resTable = db.ResTables.FirstOrDefault(t => t.noSeats == noSeats
                                                 && t.restaurantId == restaurantId);
             return resTable;
         }
@@ -143,13 +142,14 @@ namespace DatabaseAccessLibrary
 
         public void UpdateTable(ResTable oldTable, ResTable newTable)
         {
+            var testOldTable = oldTable;
+            var testNewTable = newTable;
             var db = new JustFeastDbDataContext();
-            var resTable = db.ResTables.SingleOrDefault(t => t.noSeats == oldTable.noSeats
+            var resTable = db.ResTables.FirstOrDefault(t => t.noSeats == oldTable.noSeats
                                               && t.restaurantId == oldTable.restaurantId);
 
             resTable.restaurantId = newTable.restaurantId;
             resTable.noSeats = newTable.noSeats;
-           // resTable.total = newTable.total;
             resTable.reserved = newTable.reserved;
             db.SubmitChanges();
         }
@@ -158,11 +158,13 @@ namespace DatabaseAccessLibrary
         {
             var db = new JustFeastDbDataContext();
             ResTable tableRes = db.ResTables.First(t => t.noSeats == resTable.noSeats 
-                                                        && t.restaurantId == resTable.restaurantId);
+                                                        && t.restaurantId == resTable.restaurantId
+                                                        && t.reserved != true);
             if (tableRes != null)
             {
                 db.ResTables.DeleteOnSubmit(db.ResTables.First(t => t.noSeats == resTable.noSeats 
-                                                        && t.restaurantId == resTable.restaurantId));
+                                                                    && t.restaurantId == resTable.restaurantId
+                                                                    && t.reserved != true));
                 db.SubmitChanges();
             }
         }
