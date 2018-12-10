@@ -167,5 +167,35 @@ namespace RestaurantService
             var tables = tableCtrl.GetTablesWithReserved(resId);
             return tables;
         }
+
+        public IEnumerable<Table> GetAllTablesByRestaurant(int resId)
+        {
+            var tableCtrl = new TableCtrl();
+            return tableCtrl.GetRestaurantTables(resId);
+        }
+
+        public void CreateTable(Table table)
+        {
+            var tableCtrl = new TableCtrl();
+            tableCtrl.CreateTable(table);
+        }
+
+        public void DeleteTable(Table table)
+        {
+            var tableCtrl = new TableCtrl();
+            tableCtrl.DeleteTable(table);
+        }
+
+        public Table GetTable(Table table)
+        {
+            var tableCtrl = new TableCtrl();
+            return tableCtrl.GetTable(table);
+        }
+
+        public void UpdateTable(Table oldTable, Table newTable)
+        {
+            var tableCtrl = new TableCtrl();
+            tableCtrl.UpdateTable(oldTable, newTable);
+        }
     }
 }

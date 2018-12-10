@@ -12,12 +12,12 @@ namespace ControllerLibrary
     {
 
         private List<Table> tableListPerOrder = new List<Table>();
-        /*private ResTable ConvertTable(Table table)
+        private ResTable ConvertTable(Table table)
         {
             var returnTable = new ResTable();
 
             returnTable.noSeats = Convert.ToInt32(table.NoSeats);
-            returnTable.reserved = Convert.ToInttable.Reserved);
+            returnTable.reserved = table.Reserved;
             returnTable.restaurantId = Convert.ToInt32(table.RestaurantId);
 
             return returnTable;
@@ -32,10 +32,10 @@ namespace ControllerLibrary
             {
                 newTable = new Table
                 {
-                    NoSeats = tbl.noSeats.ToString(),
-                    Reserved = tbl.reserved.ToString(),
-                    RestaurantId = tbl.restaurantId.ToString(),
-                    Total = tbl.total.ToString()
+                    TableId = tbl.id,
+                    NoSeats = tbl.noSeats,
+                    Reserved = tbl.reserved,
+                    RestaurantId = tbl.restaurantId
                 };
             }
 
@@ -52,10 +52,10 @@ namespace ControllerLibrary
             {
                 modelTables.Add(new Table
                 {
-                    NoSeats = table.noSeats.ToString(),
-                    Reserved = table.reserved.ToString(),
-                    RestaurantId = table.restaurantId.ToString(),
-                    Total = table.total.ToString()
+                    TableId = table.id,
+                    NoSeats = table.noSeats,
+                    Reserved = table.reserved,
+                    RestaurantId = table.restaurantId
                 });
             }
 
@@ -73,10 +73,10 @@ namespace ControllerLibrary
             {
                 modelTables.Add(new Table
                 {
-                    NoSeats = table.noSeats.ToString(),
-                    Reserved = table.reserved.ToString(),
-                    RestaurantId = table.restaurantId.ToString(),
-                    Total = table.total.ToString()
+                    TableId = table.id,
+                    NoSeats = table.noSeats,
+                    Reserved = table.reserved,
+                    RestaurantId = table.restaurantId
                 });
             }
 
@@ -105,7 +105,6 @@ namespace ControllerLibrary
             var resTable = ConvertTable(table);
             tableDb.DeleteTable(resTable);
         }
-        */
 
         private Table ConvertTableToModel(ResTable table)
         {
