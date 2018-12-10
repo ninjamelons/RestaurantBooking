@@ -110,8 +110,7 @@ namespace DatabaseAccessLibrary
             
             return tables;
         }
-
-        /*
+        
         public void AddTable(ResTable resTable)
         {
             var db = new JustFeastDbDataContext();
@@ -133,6 +132,7 @@ namespace DatabaseAccessLibrary
                                                 && t.restaurantId == restaurantId);
             return resTable;
         }
+
         public IEnumerable<ResTable> GetTables()
         {
             var db = new JustFeastDbDataContext();
@@ -140,14 +140,7 @@ namespace DatabaseAccessLibrary
             var resTables = db.ResTables.AsEnumerable();
             return resTables;
         }
-        public IEnumerable<ResTable> GetRestaurantTables(int restaurantId)
-        {
-            var allTables = GetTables();
-            var resTables = from table in allTables
-                where table.restaurantId == restaurantId
-                select table;
-            return resTables;
-        }
+
         public void UpdateTable(ResTable oldTable, ResTable newTable)
         {
             var db = new JustFeastDbDataContext();
@@ -160,6 +153,7 @@ namespace DatabaseAccessLibrary
             resTable.reserved = newTable.reserved;
             db.SubmitChanges();
         }
+
         public void DeleteTable(ResTable resTable)
         {
             var db = new JustFeastDbDataContext();
@@ -171,6 +165,6 @@ namespace DatabaseAccessLibrary
                                                         && t.restaurantId == resTable.restaurantId));
                 db.SubmitChanges();
             }
-        }*/
+        }
     }
 }

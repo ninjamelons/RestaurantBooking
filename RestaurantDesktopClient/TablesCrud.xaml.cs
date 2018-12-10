@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -50,7 +51,7 @@ namespace RestaurantDesktopClient
             var proxy = new RestaurantServiceClient();
             var table = new Table
             {
-                NoSeats = Convert.ToInt32(HiddenNoSeats.Content.ToString()),
+                NoSeats = Convert.ToInt32(TextBoxSeatsPerTable.Text),
                 RestaurantId = Convert.ToInt32(HiddenResId.Content.ToString())
             };
             if (ValidateTable(table))
@@ -88,9 +89,9 @@ namespace RestaurantDesktopClient
         private void DataGridTableList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var proxy = new RestaurantServiceClient();
-            var selectedTable = (ModelLibrary.Table)dataGridTableList.SelectedItem;
-            var dbTable = proxy.GetTable(selectedTable);
-            HiddenNoSeats.Content = dbTable.NoSeats;
+            //var selectedTable = (ModelLibrary.Table)dataGridTableList.SelectedItem;
+            //var dbTable = proxy.GetTable(selectedTable);
+           // HiddenNoSeats.Content = dbTable.NoSeats;
             //     NoSeats.Text = dbTable.NoSeats;
             //     NoReserved.Text = dbTable.Reserved;
             //     NoTotal.Text = dbTable.Total;
@@ -116,28 +117,56 @@ namespace RestaurantDesktopClient
         private IEnumerable<Table> GetTables()
         {
             var proxy = new RestaurantServiceClient();
-            return proxy.GetAllTables(Convert.ToInt32(HiddenResId.Content.ToString()));
+            return proxy.GetAllTablesByRestaurant(Convert.ToInt32(HiddenResId.Content.ToString()));
         }
 
         private DataGrid ToTableDataGrid()
         {
             var proxy = new RestaurantServiceClient();
-            var tables = proxy.GetAllTables(Convert.ToInt32(HiddenResId.Content.ToString())).ToList();
-            var tablesQty = new int[tables.Count - 1];
-            var tablesAndQty = new int[tables.Count - 1][];
-            var i = 0;
-            foreach (var table in tables)
+            var tables = proxy.GetAllTablesByRestaurant(Convert.ToInt32(HiddenResId.Content.ToString())).ToList();
+            var noSeats = new int[tables.Count];
+            var noSeatsNoDuplicates = new int[5, 2];
+            var j = 0;
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Number of Seats", typeof(int));
+            dt.Columns.Add("Number of Tables", typeof(int));
+
+            for (var i = 0; i < tables.Count; i++)
             {
-                if (i > 0 && tables[i].NoSeats == tables[i - 1].NoSeats)
+                noSeats[i] = tables[i].NoSeats;
+                if (i == 0 || noSeats[i] != noSeats[i-1])
                 {
-                    tables.Remove(tables[i]);
-                    tablesQty[i - 1]++;
+                    noSeatsNoDuplicates[j,0] = noSeats[i];
+                    j++;
+                }
+            }
+
+            foreach (var noSeat in noSeats)
+            {
+                for (var i = 0; i < noSeatsNoDuplicates.GetLength(0); i++)
+                {
+                    if (noSeat == noSeatsNoDuplicates[i,0])
+                    {
+                        noSeatsNoDuplicates[i,1]++;
+                    }
+                }
+            }
+
+            for (var i = 0; i < noSeatsNoDuplicates.GetLength(0); i++)
+            {
+                var dr = dt.NewRow();
+                for (var k = 0; k < 2; k++)
+                {
+                    dr[k] = noSeatsNoDuplicates[i,k];
                 }
 
-                tablesAndQty[i][0] = table.TableId;
-                tablesQty[i]++;
+                dt.Rows.Add(dr);
             }
-            dataGridTableList.Items.Add(tablesAndQty);
+
+            dataGridTableList.CanUserResizeRows = false;
+            dataGridTableList.CanUserResizeColumns = false;
+
+            dataGridTableList.ItemsSource = dt.DefaultView;
 
             return dataGridTableList;
         }

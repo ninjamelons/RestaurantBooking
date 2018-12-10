@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Linq;
 using DatabaseAccessLibrary;
+using System.Linq;
 
 namespace ControllerLibrary
 {
@@ -121,7 +122,13 @@ namespace ControllerLibrary
 
         public void DeleteItemById(int orderId, int itemId)
         {
-            OrderDb db = new OrderDb();
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var lineitem = db.OrderLineItems.FirstOrDefault(x => x.orderId == orderId && x.itemId == itemId);
+            if (lineitem.quantity > 1)
+                lineitem.quantity--;
+            else
+                db.OrderLineItems.DeleteOnSubmit(lineitem);
+            db.SubmitChanges();
         }
 
       

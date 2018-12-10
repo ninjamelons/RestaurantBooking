@@ -30,14 +30,12 @@ namespace RestaurantDesktopClient
         {
             amenuId = menuId;
             arestaurantId = restaurantId;
-            var proxyMenu = new MenuServiceClient();
             InitializeComponent();
-            var menu = proxyMenu.GetMenuById(amenuId);
+            var menu = Services._MenuProxy.GetMenuById(amenuId);
             labelMenuName.Content = menu.Id;
             comboBoxCategory.ItemsSource = GetItemCats();// ??????????????
             dataGridItemList.SelectedItem = 1;
-            var proxy = new ItemServiceClient();
-            var modelMenu = proxy.GetAllItemsByMenu(menuId);
+            var modelMenu = Services._ItemProxy.GetAllItemsByMenu(menuId);
             foreach (Item item in modelMenu)
             {
                 dataGridItemList.Items.Add(item);
@@ -47,26 +45,19 @@ namespace RestaurantDesktopClient
         public int arestaurantId;
         
 
-        private IEnumerable<ModelLibrary.Menu> GetMenus()
+        private async Task<IEnumerable<ModelLibrary.Menu>> GetMenus()
         {
-            var proxy = new MenuServiceClient();
-
-            return proxy.GetAllMenusByRestaurant(arestaurantId);
+            return await Services._MenuProxy.GetAllMenusByRestaurantAsync(arestaurantId);
         }
 
 
         private IEnumerable<ModelLibrary.ItemCat> GetItemCats()
         {
-            var proxy = new ItemServiceClient();
-
-            return proxy.GetAllItemCategories();
+            return Services._ItemProxy.GetAllItemCategories();
         }
 
-        private void buttonSave_Click(object sender, RoutedEventArgs e)
+        private async void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            var proxyPrice = new PriceServiceClient();
-            var proxy = new ItemServiceClient();
-            var proxyMenu = new MenuServiceClient();
             double price;
             ModelLibrary.Item selectedItem = (ModelLibrary.Item)dataGridItemList.SelectedItem;
             bool success = double.TryParse(textBoxNamePrice.Text, out price);
@@ -87,18 +78,16 @@ namespace RestaurantDesktopClient
                     Price = priceo
 
                 };
-                proxyPrice.UpdatePrice(priceo, selectedItem.Id);
-                //var categoryId = proxy.GetItemCatByName(comboBoxCategory.SelectedItem.ToString());
-                //var menuId = proxyMenu.GetMenuByName(comboBoxMenu.SelectedItem.ToString());
-                //var menuItem = (ModelLibrary.Menu)comboBoxMenu.SelectedItem;
+                await Services._PriceProxy.UpdatePriceAsync(priceo, selectedItem.Id);
+
                 var catItem = (ModelLibrary.ItemCat)comboBoxCategory.SelectedItem;
-                var selectedCatId = catItem.Id;
+                var selectedCatId = catItem == null ? 0 : catItem.Id;
                 
                 if ( catItem != null)
                 {
-                    proxy.UpdateItem(updatedItem, amenuId, selectedCatId); // IFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                    await Services._ItemProxy.UpdateItemAsync(updatedItem, amenuId, selectedCatId); // IFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
                     dataGridItemList.Items.Clear();
-                    var modelMenu = proxy.GetAllItemsByMenu(amenuId);
+                    var modelMenu = await Services._ItemProxy.GetAllItemsByMenuAsync(amenuId);
                     foreach (Item itemo in modelMenu)
                     {
                         dataGridItemList.Items.Add(itemo);
@@ -123,31 +112,27 @@ namespace RestaurantDesktopClient
             this.NavigationService.Navigate(var);
         }
 
-        private void buttonDelete_Click(object sender, RoutedEventArgs e)
+        private async void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
             
             ItemCtrl itemCtrl = new ItemCtrl();
-            var proxy = new ItemServiceClient();
             var selectedItem = (ModelLibrary.Item)dataGridItemList.SelectedItem;
-            var dbItem = proxy.GetItem(selectedItem.Id);
+            var dbItem = await Services._ItemProxy.GetItemAsync(selectedItem.Id);
             if(dbItem == null)
             {
                 MessageBox.Show("Select an item for deletion");
             }
-            proxy.DeleteItem(selectedItem.Id);
+            await Services._ItemProxy.DeleteItemAsync(selectedItem.Id);
             dataGridItemList.Items.Clear();
-            var modelMenu = proxy.GetAllItemsByMenu(amenuId);
+            var modelMenu = await Services._ItemProxy.GetAllItemsByMenuAsync(amenuId);
             foreach (Item item in modelMenu)
             {
                 dataGridItemList.Items.Add(item);
             };
         }
 
-        private void buttonCreate_Click(object sender, RoutedEventArgs e)
+        private async void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
-            var proxy = new ItemServiceClient();
-            var proxyPrice = new PriceServiceClient();
-            var proxyMenu = new MenuServiceClient();
             var selectedItem = (ModelLibrary.Item)dataGridItemList.SelectedItem;
             double price;
             bool success = double.TryParse(textBoxNamePrice.Text, out price);
@@ -173,11 +158,11 @@ namespace RestaurantDesktopClient
                     if (comboBoxCategory.SelectedItem != null)
                     {
                         var selectedCategory = (ModelLibrary.ItemCat)comboBoxCategory.SelectedItem;
-                        proxy.CreateItem(item, amenuId, selectedCategory.Id);
-                        var returnedItem = proxy.GetItemByName(item.Name);
-                        proxyPrice.CreatePrice(priceObj, returnedItem.Id);
+                        await Services._ItemProxy.CreateItemAsync(item, amenuId, selectedCategory.Id);
+                        var returnedItem = await Services._ItemProxy.GetItemByNameAsync(item.Name);
+                        await Services._PriceProxy.CreatePriceAsync(priceObj, returnedItem.Id);
                         dataGridItemList.Items.Clear();
-                        var modelMenu = proxy.GetAllItemsByMenu(amenuId);
+                        var modelMenu = await Services._ItemProxy.GetAllItemsByMenuAsync(amenuId);
                         foreach (Item itemo in modelMenu)
                         {
                             dataGridItemList.Items.Add(itemo);
@@ -195,24 +180,21 @@ namespace RestaurantDesktopClient
             }
         }
 
-        private void dataGridItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void dataGridItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var proxyPrice = new PriceServiceClient();
-            var proxy = new ItemServiceClient();
-            var proxyMenu = new MenuServiceClient();
             var selectedItem = (ModelLibrary.Item)dataGridItemList.SelectedItem;
             if (selectedItem != null)
             {
                 textBoxDescription.Text = selectedItem.Description;
                 textBoxName.Text = selectedItem.Name;
-                var price = proxyPrice.GetLatestPrice(selectedItem.Id);//proxyPrice.GetPrice(returnedItem.Id);
+                var price = await Services._PriceProxy.GetLatestPriceAsync(selectedItem.Id);//proxyPrice.GetPrice(returnedItem.Id);
                 textBoxNamePrice.Text = price.VarPrice.ToString();//price.VarPrice.ToString();
                 label1.Content = selectedItem.Id;
                 label2.Content = selectedItem.Description;
                 label3.Content = selectedItem.Name;
                 label4.Content = selectedItem.Id;
-                var mmenu = proxyMenu.GetMenuById(amenuId);
-                var categoryy = proxy.GetCatByItemCatId(selectedItem.Id);
+                var mmenu = await Services._MenuProxy.GetMenuByIdAsync(amenuId);
+                var categoryy = await Services._ItemProxy.GetCatByItemCatIdAsync(selectedItem.Id);
                 comboBoxCategory.SelectedItem = categoryy.Name;
                 
             }

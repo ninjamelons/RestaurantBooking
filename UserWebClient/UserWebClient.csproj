@@ -264,9 +264,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RestaurantCategoryController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
-    <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -422,9 +420,6 @@
     <None Include="Connected Services\CustomerService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\OrderService\DatabaseAccessLibrary.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Connected Services\OrderService\service.wsdl" />
     <None Include="Connected Services\OrderService\service.xsd">
       <SubType>Designer</SubType>
@@ -504,8 +499,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -517,11 +510,7 @@
     <Content Include="Views\RestaurantCategory\Create.cshtml" />
     <Content Include="Views\RestaurantCategory\Delete.cshtml" />
     <Content Include="Views\RestaurantCategory\Edit.cshtml" />
-    <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Home\AdminHome.cshtml" />
     <Content Include="Views\Restaurant\Browse.cshtml" />
-    <Content Include="Views\Checkout\Complete.cshtml" />
-    <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
     <Content Include="Views\Restaurant\Home.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
@@ -532,7 +521,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

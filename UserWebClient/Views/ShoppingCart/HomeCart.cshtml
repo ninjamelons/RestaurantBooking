@@ -39,8 +39,9 @@
                                 <td>@item.LineItem.Name</td>
                                 <td>@item.Quantity</td>
                                 <td>@item.LineItem.Price.VarPrice</td>
+                                <td>@item.LineItem.Id</td>
                                 <td>
-                                    @Html.ActionLink("Remove", "HomeCart", "ShoppingCart", new { Id = item.LineItem.Id }, new { @class = "btn btn-danger col-md-5 col-md-offset-2" })
+                                    @Html.ActionLink("Remove", "Delete", "ShoppingCart", new { itemId = item.LineItem.Id }, new { @class = "btn btn-danger col-md-5 col-md-offset-2" })
                                 </td>
                             </tr>
                         }

@@ -14,9 +14,9 @@ namespace RestaurantService
         [OperationContract]
         void AddItemToOrder(int orderId, int itemId, int resId);
         [OperationContract]
-        void CreateOrder(DatabaseAccessLibrary.Order order);
+        void CreateOrder(ModelLibrary.Order order);
         [OperationContract]
-        void UpdateOrder(DatabaseAccessLibrary.Order order);
+        void UpdateOrder(ModelLibrary.Order order);
         [OperationContract]
         void DeleteOrder(int orderId);
         [OperationContract]

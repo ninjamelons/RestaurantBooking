@@ -44,5 +44,15 @@ namespace DatabaseAccessLibrary.Properties {
                 return ((string)(this["RestaurantBookingConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=JustFeast;Integrated Security=True")]
+        public string JustFeastConnectionString {
+            get {
+                return ((string)(this["JustFeastConnectionString"]));
+            }
+        }
     }
 }
