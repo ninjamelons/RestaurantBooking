@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Linq;
 using DatabaseAccessLibrary;
+using System.Linq;
 
 namespace ControllerLibrary
 {
@@ -42,11 +43,13 @@ namespace ControllerLibrary
         {
             var oli = new OrderLineItem();
             var returnOliList = new List<OrderLineItem>();
-            for (int i = 0; i < order.ItemsList.Count; i++)
+            if (order.ItemsList == null) 
+                return returnOliList;
+            foreach (var item in order.ItemsList)
             {
                 oli.orderId = Convert.ToInt32(order.OrderId);
-                oli.itemId = Convert.ToInt32(order.ItemsList[i].LineItem.Id);
-                oli.quantity = Convert.ToInt32(order.ItemsList[i].Quantity);
+                oli.itemId = Convert.ToInt32(item.LineItem.Id);
+                oli.quantity = Convert.ToInt32(item.Quantity);
 
                 returnOliList.Add(oli);
             }
@@ -64,7 +67,9 @@ namespace ControllerLibrary
 
         public IEnumerable<OrderLineItem> GetOrderLineItemsById(int id)
         {
-            throw new NotImplementedException();
+            OrderDb ordDb = new OrderDb();
+            var items = ordDb.GetOrderLineItemsById(id);
+            return items;
         }
 
         public void AddItemToOrder(int orderId, int itemId)
@@ -76,7 +81,26 @@ namespace ControllerLibrary
         public ModelLibrary.Order GetOrderById(int id)
         {
             OrderDb ordDb = new OrderDb();
-            return ConvertOrderToModel(ordDb.GetOrderById(id));
+            var order = ConvertOrderToModel(ordDb.GetOrderById(id));
+            order.ItemsList = ConvertOrderLineItemsToModel(GetOrderLineItemsById(id));
+            return order;
+        }
+
+        private List<ModelLibrary.OrderLineItem> ConvertOrderLineItemsToModel(IEnumerable<OrderLineItem> orderLineItems)
+        {
+            var itemCtrl = new ItemCtrl();
+            var itemsList = new List<ModelLibrary.OrderLineItem>();
+            foreach (var item in orderLineItems)
+            {
+                var orderItem = new ModelLibrary.OrderLineItem
+                    {
+                        LineItem = itemCtrl.ConvertItemToModel(item.Item),
+                        Quantity = item.quantity
+                    };
+                itemsList.Add(orderItem);
+            }
+
+            return itemsList;
         }
 
         public void UpdateOrder(Order order)
@@ -98,9 +122,16 @@ namespace ControllerLibrary
 
         public void DeleteItemById(int orderId, int itemId)
         {
-            OrderDb db = new OrderDb();
+            JustFeastDbDataContext db = new JustFeastDbDataContext();
+            var lineitem = db.OrderLineItems.FirstOrDefault(x => x.orderId == orderId && x.itemId == itemId);
+            if (lineitem.quantity > 1)
+                lineitem.quantity--;
+            else
+                db.OrderLineItems.DeleteOnSubmit(lineitem);
+            db.SubmitChanges();
         }
 
+      
     }
 
 }

@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using ModelLibrary;
 using UserWebClient.Models;
+using System.Threading.Tasks;
 
 namespace UserWebClient.Controllers
 {
@@ -24,18 +25,20 @@ namespace UserWebClient.Controllers
         }
 
         // GET: Restaurant
-        public ActionResult Index()
+        public async Task<ActionResult> IndexAsync()
         {
             if (Session["roleId"] == null)
                 return RedirectToAction("Index", "Home");
             if (Session["roleId"].ToString() != "1")
                 return RedirectToAction("Index", "Home");
 
-            return View(_proxy.GetAllRestaurants());
+            var restaurants = await _proxy.GetAllRestaurantsAsync();
+
+            return View(restaurants);
         }
 
         // GET: Restaurant/Create
-        public ActionResult Create()
+        public async Task<ActionResult> CreateAsync()
         {
             //  var rescats = new Dictionary<string, RestaurantCategory>();
             //  rescats.Add("-No Category-", null);
@@ -48,7 +51,7 @@ namespace UserWebClient.Controllers
 
             var categories = new List<RestaurantCategory>();
             categories.Add(new RestaurantCategory { Id = 0, Name = "-No Category-" });
-            categories.AddRange(_proxy.GetAllRestaurantCategories());
+            categories.AddRange(await _proxy.GetAllRestaurantCategoriesAsync());
 
             var model = new RestaurantViewModel { Restaurant = new Restaurant(), CategoryList = new SelectList(categories, "Id", "Name", 1) };
 
@@ -57,13 +60,14 @@ namespace UserWebClient.Controllers
 
         // POST: Restaurant/Create
         [HttpPost]
-        public ActionResult Create(RestaurantViewModel model)
+        public async Task<ActionResult> CreateAsync(RestaurantViewModel model)
         {
             try
             {
                 var res = model.Restaurant;
-                res.Category = _proxy.GetRestaurantCategory(model.SelectedCategoryId);
-                _proxy.CreateRestaurant(res);
+                model.Restaurant.Id = (int)Session["customerId"];
+                res.Category = await _proxy.GetRestaurantCategoryAsync(model.SelectedCategoryId);
+                await _proxy.CreateRestaurantAsync(res);
 
                 return RedirectToAction("Index");
             }
@@ -74,7 +78,7 @@ namespace UserWebClient.Controllers
         }
 
         // GET: Restaurant/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             if (Session["roleId"] == null)
                 return RedirectToAction("Index", "Home");
@@ -83,16 +87,16 @@ namespace UserWebClient.Controllers
 
             var categories = new List<RestaurantCategory>();
             categories.Add(new RestaurantCategory { Id = 0, Name = "-No Category-" });
-            categories.AddRange(_proxy.GetAllRestaurantCategories());
+            categories.AddRange(await _proxy.GetAllRestaurantCategoriesAsync());
 
-            var model = new RestaurantViewModel { Restaurant = _proxy.GetRestaurant(id), CategoryList = new SelectList(categories, "Id", "Name", 1) };
+            var model = new RestaurantViewModel { Restaurant = await _proxy.GetRestaurantAsync(id), CategoryList = new SelectList(categories, "Id", "Name", 1) };
 
             return View("Edit", model);
         }
 
         // POST: Restaurant/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, RestaurantViewModel model)
+        public async Task<ActionResult> Edit(int id, RestaurantViewModel model)
         {
             try
             {
@@ -103,8 +107,8 @@ namespace UserWebClient.Controllers
 
                 var res = model.Restaurant;
                 res.Id = id;
-                res.Category = _proxy.GetRestaurantCategory(model.SelectedCategoryId);
-                _proxy.UpdateRestaurant(res);
+                res.Category = await _proxy.GetRestaurantCategoryAsync(model.SelectedCategoryId);
+                await _proxy.UpdateRestaurantAsync(res);
 
                 return RedirectToAction("Index");
             }
@@ -115,7 +119,7 @@ namespace UserWebClient.Controllers
         }
 
         // GET: Restaurant/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
@@ -124,7 +128,7 @@ namespace UserWebClient.Controllers
                 if (Session["roleId"].ToString() != "1")
                     return RedirectToAction("Index", "Home");
 
-                var model = _proxy.GetRestaurant(id);
+                var model = await _proxy.GetRestaurantAsync(id);
                 return View(model);
             }
             catch
@@ -135,7 +139,7 @@ namespace UserWebClient.Controllers
 
         // POST: Restaurant/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public async Task<ActionResult> Delete(int id, FormCollection collection)
         {
             try
             {
@@ -144,7 +148,7 @@ namespace UserWebClient.Controllers
                 if (Session["roleId"].ToString() != "1")
                     return RedirectToAction("Index", "Home");
 
-                _proxy.DeleteRestaurant(id);
+                await _proxy.DeleteRestaurantAsync(id);
                 return RedirectToAction("Index");
             }
             catch
@@ -154,13 +158,13 @@ namespace UserWebClient.Controllers
         }
 
         // GET: Restaurant/Browse
-        public ActionResult Browse(int? categoryId, int? zipcode)
+        public async Task<ActionResult> Browse(int? categoryId, int? zipcode)
         {
             var model = new RestaurantBrowseModel();
 
             var categories = new List<RestaurantCategory>();
             categories.Add(new RestaurantCategory { Id = 0, Name = "-No Category-" });
-            categories.AddRange(_proxy.GetAllRestaurantCategories());
+            categories.AddRange(await _proxy.GetAllRestaurantCategoriesAsync());
 
             model.CategoryList = new SelectList(categories, "Id", "Name", 0);
             model.SelectedRestaurantCategoryId = 0;
@@ -180,10 +184,10 @@ namespace UserWebClient.Controllers
 
            [HttpGet]
         // GET: RestaurantHome
-        public ActionResult Home(int id)
+        public async Task<ActionResult> Home(int id)
         {
             RestaurantOrderModel model = new RestaurantOrderModel();
-            Session["Restaurant"] = this._proxy.GetRestaurantWithMenu(id);
+            Session["Restaurant"] = await _proxy.GetRestaurantWithMenuAsync(id);
             return View("Home", model);
         }
 
@@ -196,18 +200,12 @@ namespace UserWebClient.Controllers
 
         [HttpGet]
         // GET add item to cart
-        public ActionResult HomeCart(int resId, int orderId, int itemId)
+        public async Task<ActionResult> HomeCart(int resId, int orderId, int itemId)
         {
-            #region Add item to cart
-
             _orderProxy.AddItemToOrder(orderId, itemId, resId);
-
-            #endregion
-
-            #region Assign values
+            
             var model = new RestaurantOrderModel();
-            Session["Restaurant"] = this._proxy.GetRestaurantWithMenu(resId);
-            #endregion
+            Session["Restaurant"] = await _proxy.GetRestaurantWithMenuAsync(resId);
 
             return RedirectToAction("HomeModel", model);
         }
@@ -220,7 +218,7 @@ namespace UserWebClient.Controllers
 
         [HttpPost]
         // POST Reserve a table and add orderId to SessionId
-        public ActionResult ReserveTable(RestaurantOrderModel order)
+        public async Task<ActionResult> ReserveTable(RestaurantOrderModel order)
         {
             try
             {
@@ -228,8 +226,10 @@ namespace UserWebClient.Controllers
                 if(errors.Count() > 1)
                     return View("ReserveTable", order);
 
-                /*Session["orderId"] = this._proxy.ReserveTables(order.Restaurant.Id, order.NoSeats,
-                    order.ReserveDateTime);*/
+                var res = (Restaurant)Session["Restaurant"];
+
+                Session["orderId"] = await _proxy.ReserveTablesAsync(res.Id, order.NoSeats,
+                    order.ReserveDateTime);
                 
                 return RedirectToAction("HomeModel", order);
             }
@@ -240,13 +240,13 @@ namespace UserWebClient.Controllers
         }
 
         [HttpGet]
-        public ActionResult Owner()
+        public async Task<ActionResult> Owner()
         {
             if (Session["customerId"] == null)
                 return RedirectToAction("Index", "Home");
 
             int id = (int) Session["customerId"];
-            var model = _proxy.GetRestaurant(id);
+            var model = await _proxy.GetRestaurantAsync(id);
             if(model == null)
                 return RedirectToAction("Index", "Home");
 
@@ -254,11 +254,11 @@ namespace UserWebClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Owner(Restaurant res)
+        public async Task<ActionResult> Owner(Restaurant res)
         {
             try
             {
-                _proxy.UpdateRestaurant(res);
+                await _proxy.UpdateRestaurantAsync(res);
                 return RedirectToAction("Home", new { id = res.Id });
             } catch
             {

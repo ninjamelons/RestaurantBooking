@@ -1,4 +1,4 @@
-﻿@model ModelLibrary.Order
+﻿@model UserWebClient.Models.HomeCartViewModel
 
 @{
     ViewBag.Title = "HomeCart";
@@ -33,32 +33,33 @@
                 @if (Model != null)
                 {
                     <tbody>
-                        @foreach (var item in Model.ItemsList)
+                        @foreach (var item in Model.Order.ItemsList)
                         {
                             <tr>
                                 <td>@item.LineItem.Name</td>
                                 <td>@item.Quantity</td>
-                                <td>@item.Price</td>
+                                <td>@item.LineItem.Price.VarPrice</td>
+                                <td>@item.LineItem.Id</td>
                                 <td>
-                                    @Html.ActionLink("Delete", "HomeCart", "ShoppingCart", new { Id = item.LineItem.Id }, new { @class = "btn btn-danger col-md-5 col-md-offset-2" })
+                                    @Html.ActionLink("Remove", "Delete", "ShoppingCart", new { itemId = item.LineItem.Id }, new { @class = "btn btn-danger col-md-5 col-md-offset-2" })
                                 </td>
-
-
-
-                                <td>
-                                    @Html.ActionLink("HomeCart", "HomeCart", "ShoppingCart",
-                                        new { itemId = item.LineItem.Id }, new {@class = "btn btn-info"})
-                                </td>
-
-
                             </tr>
                         }
                     </tbody>
                 }
 
             </table>
-
-
-        </div>
+        <form action="/ShoppingCart/Charge" method="POST">
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_B1gT8lUgILfjMzgZHOvmOPx5"
+                    data-amount= @Model.TotalPrice
+                    data-name="Just Feast"
+                    data-description="Pay for an order"
+                    data-image="https://i.imgur.com/vlF0Rc7.png"
+                    data-locale="auto"
+                    data-currency="dkk">
+            </script>
+        </form>
     </div>
+</div>
 </body>

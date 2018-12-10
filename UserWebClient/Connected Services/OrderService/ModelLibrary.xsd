@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ModelLibrary" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ModelLibrary" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Order">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Accepted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CustomerId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemsList" nillable="true" type="tns:ArrayOfOrderLineItem" />
+      <xs:element minOccurs="0" name="NoSeats" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Payment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReservationDateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RestaurantId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Order" nillable="true" type="tns:Order" />
+  <xs:complexType name="ArrayOfOrderLineItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrderLineItem" nillable="true" type="tns:OrderLineItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOrderLineItem" nillable="true" type="tns:ArrayOfOrderLineItem" />
+  <xs:complexType name="OrderLineItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LineItem" nillable="true" type="tns:Item" />
+      <xs:element minOccurs="0" name="Price" type="xs:double" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrderLineItem" nillable="true" type="tns:OrderLineItem" />
+  <xs:complexType name="Item">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="tns:Price" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Item" nillable="true" type="tns:Item" />
+  <xs:complexType name="Price">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="VarPrice" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Price" nillable="true" type="tns:Price" />
+</xs:schema>

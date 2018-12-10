@@ -111,6 +111,7 @@ namespace ControllerLibrary
         {
             var modelTable = new Table();
 
+            modelTable.TableId = table.id;
             modelTable.NoSeats = table.noSeats;
             modelTable.Reserved = table.reserved;
             modelTable.RestaurantId = table.restaurantId;
@@ -152,6 +153,16 @@ namespace ControllerLibrary
                         orderId = CreateNewOrder(resId, noSeats, dateTime);
                         tableDb.ReserveTables(reserveTablesIds, orderId);
                     }
+                    catch (NullReferenceException e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+                    catch(TransactionManagerCommunicationException e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
                     catch (Exception e)
                     {
                         Console.WriteLine(e);
@@ -164,6 +175,7 @@ namespace ControllerLibrary
             catch (TransactionAbortedException ex)
             {
                 Console.WriteLine("TransactionAbortedException Message: {0}", ex.Message);
+                return 0;
             }
 
             return orderId;
@@ -180,6 +192,32 @@ namespace ControllerLibrary
                 });
             }
             return resTables;
+        }
+
+        public void ReserveSingleTable(int tableId, int resId)
+        {
+            var tblDb = new TableDb();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    var orderId = CreateNewOrder(resId, 0, DateTime.Now);
+                    tblDb.ReserveSingleTable(tableId, orderId);
+                    scope.Complete();
+                }
+            }
+            catch (TransactionAbortedException ex)
+            {
+                Console.WriteLine("TransactionAbortedException Message: {0}", ex.Message);
+                throw;
+            }
+        }
+
+        public IEnumerable<Table> GetTablesWithReserved(int resId)
+        {
+            var tblDb = new TableDb();
+            var tables = ConvertTableListToModel(tblDb.GetTablesWithReserved(resId));
+            return tables;
         }
 
         private IEnumerable<Table> GetAvailableRestaurantTables(int resId, DateTime dateTime)

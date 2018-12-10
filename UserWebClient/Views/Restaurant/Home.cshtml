@@ -18,18 +18,18 @@
 <div class="container body-content">
     <div class="row">
         <div class="col-md-3">
-            @{Session["Restaurant"] = Model.Restaurant;}
+            @{Session["Restaurant"] = restaurant;}
             @Html.ActionLink("Reserve Table", "ReserveTable", "Restaurant", Model, new {@class = "btn btn-danger"})
         </div>
         <div class="col-md-9">
             <table class="table">
                 <thead>
-                <th>@Html.DisplayNameFor(model => model.Restaurant.Menu.Items)</th>
-                <th>@Html.DisplayNameFor(model => model.Restaurant.Menu.Items.First().Price)</th>
+                <th>@Html.DisplayNameFor(model => restaurant.Menu.Items)</th>
+                <th>@Html.DisplayNameFor(model => restaurant.Menu.Items.First().Price)</th>
                 <th>Add to Cart</th>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Restaurant.Menu.Items)
+                    @foreach (var item in restaurant.Menu.Items)
                     {
                         <tr>
                             <td>@item.Name</td>
@@ -41,10 +41,10 @@
                                 }
                                 else
                                 {
-                                    Html.ActionLink("Add to cart", "HomeCart", "Restaurant",
+                                    @Html.ActionLink("Add to cart", "HomeCart", "Restaurant",
                                         new
                                         {
-                                            resId = Model.Restaurant.Id,
+                                            resId = restaurant.Id,
                                             orderId = Convert.ToInt32(Session["orderId"]),
                                             itemId = item.Id
                                         }, new { @class = "btn btn-info" });
