@@ -95,6 +95,7 @@ namespace UserWebClient.Controllers
                 chargeResult = $"Payment succeeded.";
                 order.Accepted = true;
                 await _orderProxy.UpdateOrderAsync(order);
+                Session["orderId"] = null;
             }
             else
                 chargeResult = charge.Outcome.Reason;

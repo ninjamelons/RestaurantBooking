@@ -11,6 +11,7 @@ using Order = DatabaseAccessLibrary.Order;
 
 namespace RestaurantService
 {
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple)]
     class OrderService : IOrderService
     {
         public void AddItemToOrder(int orderId, int itemId, int resId)
