@@ -18,9 +18,9 @@ namespace RestaurantDesktopClient
         {
             InitializeComponent();
             HiddenResId.Content = resId;
-            ToTableDataGrid();
+            //ToTableDataGrid();
         }
-
+        /*
         private void UpdateTable_OnClick(object sender, RoutedEventArgs e)
         {
             var proxy = new RestaurantServiceClient();
@@ -54,7 +54,7 @@ namespace RestaurantDesktopClient
                 RestaurantId = Convert.ToInt32(HiddenResId.Content.ToString())
             };
             if (ValidateTable(table))
-                proxy.CreateTable(table);
+                //proxy.CreateTable(table);
             else
             {
                 MessageBoxResult prompt =
@@ -77,7 +77,7 @@ namespace RestaurantDesktopClient
 
             if (ValidateTable(table))
             {
-                proxy.DeleteTable(table);
+                //proxy.DeleteTable(table);
             }
             else
             {
@@ -113,7 +113,7 @@ namespace RestaurantDesktopClient
             };
         }
 
-        private IEnumerable<Table> GetTables()
+        /*private IEnumerable<Table> GetTables()
         {
             var proxy = new RestaurantServiceClient();
             return proxy.GetAllTables(Convert.ToInt32(HiddenResId.Content.ToString()));
@@ -140,6 +140,6 @@ namespace RestaurantDesktopClient
             dataGridTableList.Items.Add(tablesAndQty);
 
             return dataGridTableList;
-        }
+        }*/
     }
 }

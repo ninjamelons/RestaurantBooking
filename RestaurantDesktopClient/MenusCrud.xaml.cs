@@ -47,6 +47,11 @@ namespace RestaurantDesktopClient
 
         }
 
+        private void dataGridItemList_mouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("ujustdoubleclickednicexd");
+        }
+
         private void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
             var selectedMenu = (ModelLibrary.Menu)dataGridItemList.SelectedItem;

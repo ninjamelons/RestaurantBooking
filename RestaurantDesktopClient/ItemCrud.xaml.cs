@@ -34,7 +34,8 @@ namespace RestaurantDesktopClient
             InitializeComponent();
             var menu = proxyMenu.GetMenuById(amenuId);
             labelMenuName.Content = menu.Id;
-            comboBoxCategory.ItemsSource = GetItemCats();// ??????????????
+            comboBoxCategory.ItemsSource = GetItemCats();
+            //comboBoxCategory.SelectedItem = 
             dataGridItemList.SelectedItem = 1;
             var proxy = new ItemServiceClient();
             var modelMenu = proxy.GetAllItemsByMenu(menuId);
