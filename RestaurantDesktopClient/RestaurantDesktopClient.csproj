@@ -98,7 +98,9 @@
     <Compile Include="RestaurantHome.xaml.cs">
       <DependentUpon>RestaurantHome.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Services.cs" />
+    <Compile Include="RestaurantUpdate.xaml.cs">
+      <DependentUpon>RestaurantUpdate.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TablesCrud.xaml.cs">
       <DependentUpon>TablesCrud.xaml</DependentUpon>
     </Compile>
@@ -131,6 +133,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RestaurantHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RestaurantUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
