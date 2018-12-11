@@ -60,6 +60,6 @@ namespace RestaurantService
         IEnumerable<ModelLibrary.Table> GetTablesWithReserved(int resId);
 
         [OperationContract]
-        string ReserveSingleTable(int tableId, int orderId);
+        string ReserveSingleTable(int tableId, int resId);
     }
 }

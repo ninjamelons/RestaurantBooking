@@ -26,9 +26,6 @@
                 <th>Price</th>
 
 
-                <th>Actions</th>
-
-
                 </thead>
                 @if (Model != null)
                 {
@@ -38,8 +35,7 @@
                             <tr>
                                 <td>@item.LineItem.Name</td>
                                 <td>@item.Quantity</td>
-                                <td>@item.LineItem.Price.VarPrice</td>
-                                <td>@item.LineItem.Id</td>
+                                <td>@item.LineItem.Price.VarPrice dkk</td>
                                 <td>
                                     @Html.ActionLink("Remove", "Delete", "ShoppingCart", new { itemId = item.LineItem.Id }, new { @class = "btn btn-danger col-md-5 col-md-offset-2" })
                                 </td>
@@ -49,6 +45,7 @@
                 }
 
             </table>
+            <h4>Total Price: @(Model.TotalPrice/100) dkk</h4>
         <form action="/ShoppingCart/Charge" method="POST">
             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-key="pk_test_B1gT8lUgILfjMzgZHOvmOPx5"

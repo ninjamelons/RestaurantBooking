@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestaurantDesktopClient.RestaurantService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,8 +26,16 @@ namespace RestaurantDesktopClient
         {
             resId = restaurantId;
             InitializeComponent();
+            dataGrid.ItemsSource = GetTables();
         }
         public int resId;
+        //public event EventHandler<MyEventArgs> SomethingChanged;
+        public IEnumerable<ModelLibrary.Table> GetTables()
+        {
+            var proxy = new RestaurantServiceClient();
+            return proxy.GetTablesWithReserved(resId);
+        }
+        
         private void ToTablesPage_OnClick(object sender, RoutedEventArgs e)
         {
             // View TablesCrud Page
@@ -39,6 +48,40 @@ namespace RestaurantDesktopClient
             //View MenusCrud Page
             MenusCrud menuPage = new MenusCrud(resId);
             this.NavigationService.Navigate(menuPage);
+        }
+
+        private void buttonRestaurant_Click(object sender, RoutedEventArgs e)
+        {
+            RestaurantUpdate resPage = new RestaurantUpdate(resId);
+            this.NavigationService.Navigate(resPage);
+        }
+
+        
+        private void OnOnChecked(object sender, RoutedEventArgs e)
+        {
+            var selectedTable = (ModelLibrary.Table)dataGrid.SelectedItem;
+            var proxy = new RestaurantServiceClient();
+            MessageBoxResult result = MessageBox.Show("Do you really want to reserve this table?","Confirmation", MessageBoxButton.YesNo);
+            switch(result)
+            {
+                case MessageBoxResult.Yes:
+                    proxy.ReserveSingleTable(selectedTable.TableId, resId);
+                    dataGrid.ItemsSource = null;
+                    dataGrid.Items.Refresh();
+                    dataGrid.ItemsSource = GetTables();
+                    break;
+                case MessageBoxResult.No:
+                    dataGrid.ItemsSource = null;
+                    dataGrid.Items.Refresh();
+                    dataGrid.ItemsSource = GetTables();
+                    break;
+            }
+            
+        }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //dataGrid.SelectedItem
         }
     }
 }

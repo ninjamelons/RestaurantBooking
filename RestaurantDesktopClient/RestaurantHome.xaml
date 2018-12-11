@@ -9,14 +9,36 @@
       Title="Restaurant - Home">
 
     <Grid Margin="0,0,0,0">
-        <Border BorderThickness="2" BorderBrush="DarkGray" Background="LightGray" Margin="10,10,10,130">
-            <Canvas>
-
-            </Canvas>
-        </Border>
         <Button x:Name="ToTablesPage" Content="Manage Tables" HorizontalAlignment="Right"
                 VerticalAlignment="Bottom" Margin="0,0,13,13" Padding="8 3" Click="ToTablesPage_OnClick" Width="106" Height="36"/>
-        <Button x:Name="ButtonMenus"  Content="Manage Menus" HorizontalAlignment="Left" Height="36" Margin="559,401,0,0" VerticalAlignment="Top" Width="104" Click="ManageMenus_Click"/>
+        <Button x:Name="ButtonMenus"  Content="Manage Menus" HorizontalAlignment="Left" Height="36" Margin="572,401,0,0" VerticalAlignment="Top" Width="104" Click="ManageMenus_Click" RenderTransformOrigin="0.396,0.425"/>
+
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="427" Margin="10,10,0,0" VerticalAlignment="Top" Width="308" SelectionChanged="DataGrid_SelectionChanged">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="DarkGray"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="BorderThickness" Value="01,2,1,2"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="FontSize" Value="14"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding TableId}" Width="*"/>
+                <DataGridTextColumn Header="Number Of Seats" Binding="{Binding NoSeats}"  Width="*"/>
+                <DataGridCheckBoxColumn Header="Reserved" Binding="{Binding Reserverd}"  Width="70">
+                    <DataGridCheckBoxColumn.CellStyle>
+                        <Style>
+                            
+                            <EventSetter Event="CheckBox.Checked"  Handler="OnOnChecked"/>
+                        </Style>
+                        
+                    </DataGridCheckBoxColumn.CellStyle>
+                </DataGridCheckBoxColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="buttonRestaurant" Content="Edit Resaurant" HorizontalAlignment="Left" Margin="463,401,0,0" VerticalAlignment="Top" Width="104" Height="36" Click="buttonRestaurant_Click"/>
 
     </Grid>
 </Page>

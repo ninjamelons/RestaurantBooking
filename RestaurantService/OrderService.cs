@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using ControllerLibrary;
@@ -11,6 +12,7 @@ using Order = DatabaseAccessLibrary.Order;
 
 namespace RestaurantService
 {
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple)]
     class OrderService : IOrderService
     {
         public void AddItemToOrder(int orderId, int itemId, int resId)
