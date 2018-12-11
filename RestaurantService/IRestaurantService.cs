@@ -50,8 +50,6 @@ namespace RestaurantService
         [OperationContract]
         Table GetTable(Table table);
         [OperationContract]
-        void UpdateTable(Table oldTable, Table newTable);
-        [OperationContract]
         void DeleteTable(Table table);
 
         //return newly created orderId

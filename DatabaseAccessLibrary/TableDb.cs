@@ -140,33 +140,60 @@ namespace DatabaseAccessLibrary
             return resTables;
         }
 
-        public void UpdateTable(ResTable oldTable, ResTable newTable)
-        {
-            var testOldTable = oldTable;
-            var testNewTable = newTable;
-            var db = new JustFeastDbDataContext();
-            var resTable = db.ResTables.FirstOrDefault(t => t.noSeats == oldTable.noSeats
-                                              && t.restaurantId == oldTable.restaurantId);
 
-            resTable.restaurantId = newTable.restaurantId;
-            resTable.noSeats = newTable.noSeats;
-            resTable.reserved = newTable.reserved;
-            db.SubmitChanges();
+        public IEnumerable<ResTable> GetTablesWithReservedInTheFuture(int resId)
+        {
+            var orders = db.Orders.Where(o => o.reservation >= DateTime.Now);
+
+            var unavailableTables = new List<ResTable>();
+            foreach (var order in orders)
+            {
+                var reservedTables = db.ReservedTables.Where(rt => rt.orderId == order.id);
+                foreach (var rt in reservedTables)
+                {
+                    var table = db.ResTables.FirstOrDefault(t => t.id == rt.tableId);
+                    table.reserved = true;
+                    unavailableTables.Add(table);
+                }
+            }
+            return unavailableTables;
         }
 
-        public void DeleteTable(ResTable resTable)
+        public bool DeleteTable(ResTable resTable)
         {
             var db = new JustFeastDbDataContext();
             ResTable tableRes = db.ResTables.First(t => t.noSeats == resTable.noSeats 
-                                                        && t.restaurantId == resTable.restaurantId
-                                                        && t.reserved != true);
+                                                        && t.restaurantId == resTable.restaurantId);
+            var deleted = false;
             if (tableRes != null)
             {
-                db.ResTables.DeleteOnSubmit(db.ResTables.First(t => t.noSeats == resTable.noSeats 
-                                                                    && t.restaurantId == resTable.restaurantId
-                                                                    && t.reserved != true));
-                db.SubmitChanges();
+                var enumTables = GetTablesWithReservedInTheFuture(resTable.restaurantId);
+                foreach (var table in enumTables)
+                {
+                    if (table.reserved && resTable.noSeats == table.noSeats)
+                    {
+                        using (var transaction = new TransactionScope())
+                        {
+                            try
+                            {
+
+                                db.ResTables.DeleteOnSubmit(db.ResTables.First(t => t.id == table.id));
+                                db.ReservedTables.DeleteOnSubmit(db.ReservedTables.First(t => t.tableId == table.id));
+                                db.SubmitChanges();
+                                transaction.Complete();
+                                deleted = true;
+                                break;
+                            }
+                            catch (Exception ex)
+                            {
+                                deleted = false;
+                            }
+                        }
+                    }
+                }
             }
+
+            return deleted;
         }
     }
 }

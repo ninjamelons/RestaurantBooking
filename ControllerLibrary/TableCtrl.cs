@@ -90,15 +90,6 @@ namespace ControllerLibrary
             tableDb.AddTable(resTable);
         }
 
-        public void UpdateTable(Table oldTable, Table newTable)
-        {
-            var tableDb = new TableDb();
-            var oldResTable = ConvertTable(oldTable);
-            var newResTable = ConvertTable(newTable);
-
-            tableDb.UpdateTable(oldResTable, newResTable);
-        }
-
         public void DeleteTable(Table table)
         {
             var tableDb = new TableDb();
