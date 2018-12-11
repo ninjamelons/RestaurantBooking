@@ -14,21 +14,18 @@
 <body>
     <h1 class="marine-h1">Browse Restaurants</h1>
     <div class="container body-content">
-        <div class="col-md-2">
+        <div class="col-md-3">
         </div>
         <div class="col-md-8">
             @using (Html.BeginForm())
             {
+            <div class="padding-horizontal">
                 @Html.AntiForgeryToken()
-
-            <div class="form-group">
-                <div class="input-group">
-                    @Html.TextBox("zipcode", "", new { @class = "form-control", placeholder = "Search by Zip Code", @style = "width:250px;" })
-                    <span class="input-group-btn float-left">
-                        <button class="btn btn-default" value="Filter" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                    </span>
-                </div>
-                @Html.DropDownList("categoryId", Model.CategoryList, new { @class = "float-right form-control" })
+                @Html.TextBox("zipcode", "", new { @class = "form-control float-left", placeholder = "Search by Zip Code" })
+                <span class="input-group-btn">
+                    <button class="btn btn-default float-left" value="Filter" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        @Html.DropDownList("categoryId", Model.CategoryList, new { @class = "form-control" })
+                </span>
             </div>
             }
         </div>

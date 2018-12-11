@@ -5,54 +5,42 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RestaurantDesktopClient"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="800"
       Title="Restaurant - Tables">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="2*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="44*"/>
-            <RowDefinition Height="82*"/>
-            <RowDefinition Height="82*"/>
-            <RowDefinition Height="82*"/>
-            <RowDefinition Height="114*"/>
-        </Grid.RowDefinitions>
-        <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left"
-               Margin="80,-7,0,3" FontWeight="Bold" FontSize="28" Height="48" Width="235">
-            Edit/Create Table
-        </Label>
-        <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="top" HorizontalAlignment="Left"
-               Margin="50,1,0,0" FontWeight="Bold" FontSize="22" Height="40" Width="282">
-            Number of Seats per table
-        </Label>
-        <TextBox Name="NoSeats" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" 
-                 HorizontalAlignment="Stretch" Margin="70,0,250,10" Height="30"/>
-        <Label Grid.Column="1" Grid.Row="2" VerticalAlignment="top" HorizontalAlignment="Left"
-               Margin="50,3.4,0,0" FontWeight="Bold" FontSize="22" Height="40" Width="291">
-            Number of Reserved tables
-        </Label>
-        <TextBox Name="NoReserved" Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" 
-                 HorizontalAlignment="Stretch" Margin="70,0,250,10" Height="30"/>
-        <Label Grid.Column="1" Grid.Row="3" VerticalAlignment="top" HorizontalAlignment="Left"
-               Margin="50,1.8,0,0" FontWeight="Bold" FontSize="22" Height="40" Width="248">
-            Total Number of tables
-        </Label>
-        <TextBox Name="NoTotal" Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" 
-                 HorizontalAlignment="Stretch" Margin="70,0,250,10" Height="30"/>
-        <Button x:Name="RemoveTable" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" 
-                HorizontalAlignment="Center" Margin="125 0 0 0" Padding="8 5" Click="RemoveTable_OnClickTable_OnClick">Remove Table</Button>
-        <Button x:Name="UpdateAddTable" Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" 
-                HorizontalAlignment="Center" Margin="-125 0 0 0" Padding="8 5" Click="UpdateAddTable_OnClick">Update/Add Table</Button>
-        <Label Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center"
-               FontWeight="Bold" FontSize="28" Height="48" Margin="90,-7,90,3" Width="132">
-            Table List
-        </Label>
-        <ComboBox SelectionChanged="TableCombo_OnSelectionChanged" Name="TableCombo" Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Margin="10,11,10,0" Height="22"/>
-        <Label Name="hiddenResId" Visibility="Hidden"/>
-        <Label Name ="hiddenNoSeats" Visibility="Hidden"/>
+    <Grid Margin="0,-1,0,1">
+        <Label x:Name="LabelSeatsPerTable" Content="Seats Per Table:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="366,30,0,0" Width="156"/>
+        <Label x:Name="LabelNumberOfTables" Content="Number Of Tables:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="340,70,0,0" Width="178"/>
+        <Label x:Name="LabelTotalSeats" Content="Seats In Total:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="380,110,0,0" Width="156"/>
+        <TextBox x:Name="TextBoxSeatsPerTable" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Margin="514,36,0,0" />
+        <TextBox x:Name="TextBoxNumberOfTables" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="132" Margin="514,76,0,0" />
+        <TextBox x:Name="TextBoxTotalSeats" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="132" Margin="514,116,0,0" />
+        <Button x:Name="ButtonEdit" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="569,397,0,0" Height="29" Click="UpdateTable_OnClick"/>
+
+        <DataGrid x:Name="dataGridTableList" AutoGenerateColumns="True" HorizontalAlignment="Left" Height="382" Margin="35,36,0,0" VerticalAlignment="Top" Width="289" SelectionChanged="DataGridTableList_OnSelectionChanged" RenderTransformOrigin="1.06,0.289">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="DarkGray"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="BorderThickness" Value="01,2,1,2"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="FontSize" Value="14"/>
+
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header=" Number of Tables" Binding="{Binding NoTables}"  Width="*"/>
+                <DataGridTextColumn Header=" Seats per Table" Binding="{Binding NoSeats}" Width="*"/>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="ButtonDelete" Content="Delete" HorizontalAlignment="Left" Margin="682,398,0,0" VerticalAlignment="Top" Width="108" Height="28" Click="RemoveTable_OnClick"/>
+        <Button x:Name="ButtonCreate" Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="456,397,0,0" Height="28" Click="AddTable_OnClick"/>
+        <Label x:Name="HiddenResId" Visibility="Hidden"/>
+        <Label x:Name="HiddenNoSeats" Visibility="Hidden"/>
+
+
     </Grid>
 </Page>

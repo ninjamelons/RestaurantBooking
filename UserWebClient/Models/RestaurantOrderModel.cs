@@ -9,6 +9,10 @@ namespace UserWebClient.Models
 {
     public class RestaurantOrderModel
     {
+
+        public Restaurant Restaurant { get; set; }
+
+
         [Required]
         [Display(Name = "Number of Persons")]
         public int NoSeats { get; set; }

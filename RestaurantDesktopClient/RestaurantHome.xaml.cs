@@ -38,7 +38,7 @@ namespace RestaurantDesktopClient
         private void ToTablesPage_OnClick(object sender, RoutedEventArgs e)
         {
             // View TablesCrud Page
-            TablesCrud tablesPage = new TablesCrud();
+            var tablesPage = new TablesCrud(resId);
             this.NavigationService.Navigate(tablesPage);
         }
 

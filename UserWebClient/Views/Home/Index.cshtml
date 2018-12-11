@@ -5,21 +5,22 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="~/Content/custom.css">
 </head>
 
 <body>
     <div class="landing">
-            <h1 class="landing-h1">Search your area for restaurants</h1>
+            <h1 class="landing-h1">SEARCH YOUR AREA FOR RESTAURANTS</h1>
             <div class="col-md-4"></div>
             <div class="col-md-4">
                  @using (Html.BeginForm())
                  {
                   @Html.AntiForgeryToken()
                      <div class="form-group">
-                         <div class="input-group">
-                             @Html.TextBoxFor(model => model.Zipcode, new { htmlAttributes = new { placeholder="Zipcode" , @class = "form-control" } })
+                         <div class="input-group float-right center-with-padding">
+                             @Html.TextBoxFor(model => model.Zipcode,new { value = "", placeholder = "Search by Zipcode", @class = "form-control" } )
                              <span class="input-group-btn">
                                  <button class="btn btn-default" value="Filter" type="submit">
                                      <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
