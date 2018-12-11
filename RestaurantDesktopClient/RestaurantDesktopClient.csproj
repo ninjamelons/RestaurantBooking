@@ -101,6 +101,7 @@
     <Compile Include="RestaurantUpdate.xaml.cs">
       <DependentUpon>RestaurantUpdate.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services.cs" />
     <Compile Include="TablesCrud.xaml.cs">
       <DependentUpon>TablesCrud.xaml</DependentUpon>
     </Compile>
