@@ -14,6 +14,7 @@ using OrderLineItem = DatabaseAccessLibrary.OrderLineItem;
 
 namespace RestaurantService
 {
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple)]
     class CustomerService : ICustomerService
     {
         public ModelLibrary.Customer GetCustomerById(int id)

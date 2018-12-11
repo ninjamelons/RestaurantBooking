@@ -68,12 +68,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfRestaurantCategory" nillable="true" type="tns:ArrayOfRestaurantCategory" />
-  <xs:complexType name="ArrayOfTable">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Table" nillable="true" type="tns:Table" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfTable" nillable="true" type="tns:ArrayOfTable" />
   <xs:complexType name="Table">
     <xs:sequence>
       <xs:element minOccurs="0" name="NoSeats" type="xs:int" />
@@ -83,4 +77,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Table" nillable="true" type="tns:Table" />
+  <xs:complexType name="ArrayOfTable">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Table" nillable="true" type="tns:Table" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTable" nillable="true" type="tns:ArrayOfTable" />
 </xs:schema>

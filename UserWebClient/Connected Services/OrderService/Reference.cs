@@ -22,16 +22,16 @@ namespace UserWebClient.OrderService {
         System.Threading.Tasks.Task AddItemToOrderAsync(int orderId, int itemId, int resId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
-        void CreateOrder(DatabaseAccessLibrary.Order order);
+        void CreateOrder(ModelLibrary.Order order);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/CreateOrder", ReplyAction="http://tempuri.org/IOrderService/CreateOrderResponse")]
-        System.Threading.Tasks.Task CreateOrderAsync(DatabaseAccessLibrary.Order order);
+        System.Threading.Tasks.Task CreateOrderAsync(ModelLibrary.Order order);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/UpdateOrder", ReplyAction="http://tempuri.org/IOrderService/UpdateOrderResponse")]
-        void UpdateOrder(DatabaseAccessLibrary.Order order);
+        void UpdateOrder(ModelLibrary.Order order);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/UpdateOrder", ReplyAction="http://tempuri.org/IOrderService/UpdateOrderResponse")]
-        System.Threading.Tasks.Task UpdateOrderAsync(DatabaseAccessLibrary.Order order);
+        System.Threading.Tasks.Task UpdateOrderAsync(ModelLibrary.Order order);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/DeleteOrder", ReplyAction="http://tempuri.org/IOrderService/DeleteOrderResponse")]
         void DeleteOrder(int orderId);
@@ -87,19 +87,19 @@ namespace UserWebClient.OrderService {
             return base.Channel.AddItemToOrderAsync(orderId, itemId, resId);
         }
         
-        public void CreateOrder(DatabaseAccessLibrary.Order order) {
+        public void CreateOrder(ModelLibrary.Order order) {
             base.Channel.CreateOrder(order);
         }
         
-        public System.Threading.Tasks.Task CreateOrderAsync(DatabaseAccessLibrary.Order order) {
+        public System.Threading.Tasks.Task CreateOrderAsync(ModelLibrary.Order order) {
             return base.Channel.CreateOrderAsync(order);
         }
         
-        public void UpdateOrder(DatabaseAccessLibrary.Order order) {
+        public void UpdateOrder(ModelLibrary.Order order) {
             base.Channel.UpdateOrder(order);
         }
         
-        public System.Threading.Tasks.Task UpdateOrderAsync(DatabaseAccessLibrary.Order order) {
+        public System.Threading.Tasks.Task UpdateOrderAsync(ModelLibrary.Order order) {
             return base.Channel.UpdateOrderAsync(order);
         }
         

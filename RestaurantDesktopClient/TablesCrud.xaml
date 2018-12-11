@@ -12,6 +12,30 @@
         <Label x:Name="LabelSeatsPerTable" Content="Seats Per Table:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="366,30,0,0" Width="156"/>
         <Label x:Name="LabelNumberOfTables" Content="Number Of Tables:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="340,70,0,0" Width="178"/>
         <Label x:Name="LabelTotalSeats" Content="Seats In Total:" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="380,110,0,0" Width="156"/>
+        <TextBox x:Name="TextBoxSeatsPerTable" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Margin="514,36,0,0" />
+        <TextBox x:Name="TextBoxNumberOfTables" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="132" Margin="514,76,0,0" />
+        <TextBox x:Name="TextBoxTotalSeats" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="132" Margin="514,116,0,0" />
+        <Button x:Name="ButtonEdit" Content="Edit" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="569,397,0,0" Height="29" Click="UpdateTable_OnClick"/>
+
+        <DataGrid x:Name="dataGridTableList" AutoGenerateColumns="True" HorizontalAlignment="Left" Height="382" Margin="35,36,0,0" VerticalAlignment="Top" Width="290"
+                  SelectionChanged="DataGridTableList_OnSelectionChanged" RenderTransformOrigin="1.06,0.289" CanUserDeleteRows="False" AreRowDetailsFrozen="True">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Background" Value="DarkGray"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="BorderThickness" Value="01,2,1,2"/>
+                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Width" Value="141"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="ButtonDelete" Content="Delete" HorizontalAlignment="Left" Margin="682,398,0,0" VerticalAlignment="Top" Width="108" Height="28" Click="RemoveTable_OnClick"/>
+        <Button x:Name="ButtonCreate" Content="Create" HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Margin="456,397,0,0" Height="28" Click="AddTable_OnClick"/>
         <Label x:Name="HiddenResId" Visibility="Hidden"/>
         <Label x:Name="HiddenNoSeats" Visibility="Hidden"/>
 

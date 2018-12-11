@@ -12,7 +12,7 @@ namespace DatabaseAccessLibrary.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -48,11 +48,10 @@ namespace DatabaseAccessLibrary.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067303;User ID=dmai0917_106730" +
-            "3;Password=Password1!")]
-        public string dmai0917_1067303ConnectionString1 {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;Initial Catalog=JustFeast;Integrated Security=True")]
+        public string JustFeastConnectionString {
             get {
-                return ((string)(this["dmai0917_1067303ConnectionString1"]));
+                return ((string)(this["JustFeastConnectionString"]));
             }
         }
     }

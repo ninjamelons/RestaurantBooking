@@ -18,13 +18,13 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=HP-PAVILION-FIL\MELONESERVER;Initial Catalog=RestaurantBooking;Integrated Security=True</Value>
     </Setting>
-    <Setting Name="dmai0917_1067303ConnectionString1" Type="(Connection string)" Scope="Application">
+    <Setting Name="JustFeastConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067303;User ID=dmai0917_1067303;Password=Password1!&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=.\SQLEXPRESS;Initial Catalog=JustFeast;Integrated Security=True&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067303;User ID=dmai0917_1067303;Password=Password1!</Value>
+      <Value Profile="(Default)">Data Source=.\SQLEXPRESS;Initial Catalog=JustFeast;Integrated Security=True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

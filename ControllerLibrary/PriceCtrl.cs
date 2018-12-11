@@ -49,23 +49,20 @@ namespace ControllerLibrary
 
         public  DatabaseAccessLibrary.Price ConvertPriceToDb(ModelLibrary.Price price, int itemId)
         {
+            var priceDb = new PriceDb();
+            var prices = priceDb.GetPriceItemIdList(itemId);
 
-            JustFeastDbDataContext db = new JustFeastDbDataContext();
-            var prico = db.Prices.Where(t => t.itemId == itemId).OrderByDescending(t=> t.startDate);
-            var pric = prico.First();
-            if(pric != null)
+            var pric = prices.First();
+            if (pric == null) return null;
+            var dbPrice = new DatabaseAccessLibrary.Price
             {
-                var dbPrice = new DatabaseAccessLibrary.Price
-                {
-                    price1 = price.VarPrice,
-                    startDate = price.StartDate,
-                    endDate = price.EndDate,
-                    itemId = pric.itemId
+                price1 = price.VarPrice,
+                startDate = price.StartDate,
+                endDate = price.EndDate,
+                itemId = pric.itemId
 
-                };
-                return dbPrice;
-            }
-            return null;
+            };
+            return dbPrice;
         }
 
         public void UpdatePrice(ModelLibrary.Price newPrice, int itemId)

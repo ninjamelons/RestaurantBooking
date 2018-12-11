@@ -23,9 +23,8 @@ namespace RestaurantDesktopClient
         {
             restaurantId = resId;
             InitializeComponent();
-            var proxy = new MenuServiceClient();
-            dataGridItemList.SelectedItem = proxy.GetMenuById(1000000);
-            var modelMenu = proxy.GetAllMenusByRestaurant(restaurantId);
+            dataGridItemList.SelectedItem = Services._MenuProxy.GetMenuById(1000000);
+            var modelMenu = Services._MenuProxy.GetAllMenusByRestaurant(restaurantId);
             foreach (ModelLibrary.Menu item in modelMenu)
             {
                 dataGridItemList.Items.Add(item);
@@ -47,12 +46,7 @@ namespace RestaurantDesktopClient
 
         }
 
-        private void dataGridItemList_mouseDoubleClick(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("ujustdoubleclickednicexd");
-        }
-
-        private void buttonDelete_Click(object sender, RoutedEventArgs e)
+        private async void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
             var selectedMenu = (ModelLibrary.Menu)dataGridItemList.SelectedItem;
             if (selectedMenu == null)
@@ -62,10 +56,9 @@ namespace RestaurantDesktopClient
             else
             {
                 //labelRestaurantId = Convert.ToInt32()  
-                var proxy = new MenuServiceClient();
-                proxy.DeleteMenu(selectedMenu.Id);
+                await Services._MenuProxy.DeleteMenuAsync(selectedMenu.Id);
                 dataGridItemList.Items.Clear();
-                var modelMenu = proxy.GetAllMenusByRestaurant(restaurantId);
+                var modelMenu = await Services._MenuProxy.GetAllMenusByRestaurantAsync(restaurantId);
                 foreach (ModelLibrary.Menu item in modelMenu)
                 {
                     dataGridItemList.Items.Add(item);
@@ -74,7 +67,7 @@ namespace RestaurantDesktopClient
 
         }
 
-        private void buttonCreateMenu_Click(object sender, RoutedEventArgs e)
+        private async void buttonCreateMenu_Click(object sender, RoutedEventArgs e)
         {
             if (textBoxName.Text.Length < 2)
             {
@@ -83,7 +76,6 @@ namespace RestaurantDesktopClient
             else
             {
                 bool newBool = checkBoxActive.IsChecked ?? false;
-                var proxy = new MenuServiceClient();
                 ModelLibrary.Menu modelMenu = new ModelLibrary.Menu
                 {
                     RestaurantId = restaurantId,
@@ -92,10 +84,10 @@ namespace RestaurantDesktopClient
                     Active = newBool //////////////////////////CHECK BOXXXXXXXXXXXXXXXXXXXXXXXXXX
 
                 };
-                
-                proxy.CreateMenu(modelMenu);
+
+                await Services._MenuProxy.CreateMenuAsync(modelMenu);
                 dataGridItemList.Items.Clear();
-                var modelMenu1 = proxy.GetAllMenusByRestaurant(restaurantId);
+                var modelMenu1 = await Services._MenuProxy.GetAllMenusByRestaurantAsync(restaurantId);
                 foreach (ModelLibrary.Menu item in modelMenu1)
                 {
                     dataGridItemList.Items.Add(item);
@@ -104,7 +96,7 @@ namespace RestaurantDesktopClient
             }
         }
 
-        private void buttonSaveName_Click(object sender, RoutedEventArgs e)
+        private async void buttonSaveName_Click(object sender, RoutedEventArgs e)
         {
             var selectedItem = (ModelLibrary.Menu)dataGridItemList.SelectedItem;
             bool newBool = checkBoxActive.IsChecked ?? false;
@@ -114,7 +106,6 @@ namespace RestaurantDesktopClient
             }
             else 
             {
-                var proxy = new MenuServiceClient();
                 var oldMenu = new ModelLibrary.Menu
                 {
                     Id = selectedItem.Id,
@@ -132,9 +123,9 @@ namespace RestaurantDesktopClient
                     Name = textBoxName.Text,
                     RestaurantId = restaurantId
                 };
-                proxy.UpdateMenu(oldMenu, newMenu);
+                await Services._MenuProxy.UpdateMenuAsync(oldMenu, newMenu);
                 dataGridItemList.Items.Clear();
-                var modelMenu = proxy.GetAllMenusByRestaurant(restaurantId);
+                var modelMenu = await Services._MenuProxy.GetAllMenusByRestaurantAsync(restaurantId);
                 foreach (ModelLibrary.Menu item in modelMenu)
                 {
                     dataGridItemList.Items.Add(item);

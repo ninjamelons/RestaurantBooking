@@ -11,6 +11,7 @@ using Order = DatabaseAccessLibrary.Order;
 
 namespace RestaurantService
 {
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple)]
     class OrderService : IOrderService
     {
         public void AddItemToOrder(int orderId, int itemId, int resId)
@@ -47,17 +48,18 @@ namespace RestaurantService
             db.SubmitChanges();
         }
 
-        public void CreateOrder(DatabaseAccessLibrary.Order order)
+        public void CreateOrder(ModelLibrary.Order order)
         {
             var db = new JustFeastDbDataContext();
-            db.Orders.InsertOnSubmit(order);
+            db.Orders.InsertOnSubmit(new OrderCtrl().ConvertOrder(order));
             db.SubmitChanges();
         }
 
-        public void UpdateOrder(DatabaseAccessLibrary.Order order)
+        public void UpdateOrder(ModelLibrary.Order order)
         {
             var db = new JustFeastDbDataContext();
-            var ord = db.Orders.SingleOrDefault(o => o.id == Convert.ToInt32(order.id));
+            var dbOrder = db.Orders.FirstOrDefault(x => x.id == Convert.ToInt32(order.OrderId));
+            dbOrder.accepted = order.Accepted;
             db.SubmitChanges();
         }
 

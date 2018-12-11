@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using UserWebClient.Models;
 using UserWebClient.Logic;
+using System.Threading.Tasks;
 
 namespace UserWebClient.Controllers
 {
@@ -31,11 +32,11 @@ namespace UserWebClient.Controllers
 
         // POST: Login/Register
         [HttpPost]
-        public ActionResult Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
             try
             {
-                bool success = _proxy.RegisterUser(model.Customer, AuthenticationUtil.HashPasswordString(model.Customer.Email, model.Password));
+                bool success = await _proxy.RegisterUserAsync(model.Customer, AuthenticationUtil.HashPasswordString(model.Customer.Email, model.Password));
                 if (!success)
                     return View();
 
@@ -58,11 +59,11 @@ namespace UserWebClient.Controllers
 
         //POST: Login/Login
         [HttpPost]
-        public ActionResult Login(LoginViewModel model)
+        public async Task<ActionResult> Login(LoginViewModel model)
         {
             try
             { 
-                var customer = _proxy.LoginCustomer(model.Email, AuthenticationUtil.HashPasswordString(model.Email, model.Password));
+                var customer = await _proxy.LoginCustomerAsync(model.Email, AuthenticationUtil.HashPasswordString(model.Email, model.Password));
                 if (customer == null)
                     return RedirectToAction("Login");
 

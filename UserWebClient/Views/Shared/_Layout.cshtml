@@ -45,11 +45,11 @@
                             }
                             if (Session["roleId"].ToString() == "2")
                             {
-                                <li>@Html.ActionLink("My Restaurant", "Home", "Restaurant", new { id = Session["customerId"] })</li>
+                                <li>@Html.ActionLink("My Restaurant", "Owner", "Restaurant", new { id = Session["customerId"] }, new object())</li>
                             }
                         }
-
-                    </ul>
+                                                                      
+                    </ul>                                              
                     @Html.Partial("_LoginPartial")
                 </div>
             </div>

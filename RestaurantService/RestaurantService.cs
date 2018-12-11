@@ -13,6 +13,7 @@ using Item = ModelLibrary.Item;
 namespace RestaurantService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "RestaurantService" in both code and config file together.
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class RestaurantService : IRestaurantService
     {
         public IEnumerable<ModelLibrary.Restaurant> GetAllRestaurants()
@@ -165,6 +166,36 @@ namespace RestaurantService
             var tableCtrl = new TableCtrl();
             var tables = tableCtrl.GetTablesWithReserved(resId);
             return tables;
+        }
+
+        public IEnumerable<Table> GetAllTablesByRestaurant(int resId)
+        {
+            var tableCtrl = new TableCtrl();
+            return tableCtrl.GetRestaurantTables(resId);
+        }
+
+        public void CreateTable(Table table)
+        {
+            var tableCtrl = new TableCtrl();
+            tableCtrl.CreateTable(table);
+        }
+
+        public void DeleteTable(Table table)
+        {
+            var tableCtrl = new TableCtrl();
+            tableCtrl.DeleteTable(table);
+        }
+
+        public Table GetTable(Table table)
+        {
+            var tableCtrl = new TableCtrl();
+            return tableCtrl.GetTable(table);
+        }
+
+        public void UpdateTable(Table oldTable, Table newTable)
+        {
+            var tableCtrl = new TableCtrl();
+            tableCtrl.UpdateTable(oldTable, newTable);
         }
     }
 }

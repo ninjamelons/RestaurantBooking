@@ -13,27 +13,8 @@ namespace UserWebClient.Controllers
    
     public class HomeController : Controller
     {
-        private readonly RestaurantService.IRestaurantService _proxy;
-
-        public HomeController(RestaurantService.IRestaurantService proxy)
-        {
-            this._proxy = proxy;
-        }
-
         public ActionResult Index()
         {
-            //IEnumerable<ModelLibrary.Restaurant> serviceResult = _proxy.GetAllRestaurants();
-            /*var restaurants = serviceResult.Select(restaurantRes => new ModelLibrary.Restaurant
-            {
-                Name = restaurantRes.Name,
-                Address = restaurantRes.Address,
-                ZipCode = restaurantRes.ZipCode,
-                PhoneNo = restaurantRes.PhoneNo
-            });
-
-            if (Search != null && Search != "")
-                restaurants = restaurants.Where(x => x.ZipCode.Contains(Search));*/
-
             return View(new HomeViewModel { Zipcode = 0 });
         }
 

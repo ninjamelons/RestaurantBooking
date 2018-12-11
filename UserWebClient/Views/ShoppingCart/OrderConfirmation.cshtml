@@ -9,7 +9,7 @@
 </head>
 <body>
     <h2>Order Confirmation</h2>
-    <h4>@Model.Result <strong>@String.Format(new System.Globalization.CultureInfo("dk-DK"), "{0:C}", Convert.ToDecimal(Model.Amount)/100)</strong></h4>
+    <h4>@Model.Result @String.Format(new System.Globalization.CultureInfo("dk-DK"), "{0:C}", Convert.ToDecimal(Model.Amount)/100)</h4>
     <h4>Your order id is @Model.OrderId</h4>
 </body>
 
