@@ -171,7 +171,7 @@ namespace UnitTests
             ordC.AddItemToOrder(1000000, 1000000);
 
             //Assert
-            Assert.IsTrue(ordC.GetOrderById(1000000).ItemsList[0].Quantity == 3);
+            Assert.IsTrue(ordC.GetOrderById(1000000).ItemsList[0].Quantity == 2);
         }
 
         [TestMethod]
@@ -232,7 +232,7 @@ namespace UnitTests
             var ordC = new OrderCtrl();
 
             //Assert
-            Assert.IsTrue(ordC.GetLastOrderIdentity() == 1000000);
+            Assert.IsTrue(ordC.GetLastOrderIdentity() == 1000005);
         }
 
         [TestMethod]

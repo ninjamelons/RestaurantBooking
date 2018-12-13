@@ -197,19 +197,15 @@ namespace UnitTests
             var item = new ModelLibrary.Item
             {
                 Description = "PerfectlyGoodDescription",
-                Id = 1,
-                //ItemCatId = 1,
-                //MenuId = 1,
+                Id = 1000000,
                 Name = "PerfectlyGoodName",
-                //Price = 12
             };
 
             //Act
-            //ItemCtrl.DeleteItem(item);
-            var resTable = itemCtrl.GetItem(1);
+            itemCtrl.DeleteItem(1000000);
 
             //Assert
-            Assert.IsNull(resTable);
+            Assert.IsNull(itemCtrl.GetItem(1000000));
         }
 
         [TestMethod]
