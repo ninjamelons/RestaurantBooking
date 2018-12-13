@@ -22,7 +22,7 @@ namespace DatabaseAccessLibrary
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="JustFeast")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="RestaurantBooking")]
 	public partial class JustFeastDbDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -72,7 +72,7 @@ namespace DatabaseAccessLibrary
     #endregion
 		
 		public JustFeastDbDataContext() : 
-				base(global::DatabaseAccessLibrary.Properties.Settings.Default.JustFeastConnectionString, mappingSource)
+				base(global::DatabaseAccessLibrary.Properties.Settings.Default.RestaurantBookingConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
