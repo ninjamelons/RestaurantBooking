@@ -1,6 +1,7 @@
 ﻿using RestaurantDesktopClient.RestaurantService;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,6 +56,14 @@ namespace RestaurantDesktopClient
             
         }
         public int resId;
+
+        private bool ValidateRestaurant(ModelLibrary.Restaurant restaurant)
+        {
+            var context = new ValidationContext(restaurant, null, null);
+            var result = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+
+            return Validator.TryValidateObject(restaurant, context, result, true);
+        }
         private void button_Click(object sender, RoutedEventArgs e)
         {
             var proxyRestaurant = new RestaurantServiceClient();
@@ -72,7 +81,13 @@ namespace RestaurantDesktopClient
                 Id = resId
                 
             };
-            proxyRestaurant.UpdateRestaurant(modelRes);
+            var validation = ValidateRestaurant(modelRes);
+            if(validation == true)
+            {
+                proxyRestaurant.UpdateRestaurant(modelRes);
+            }
+            else { MessageBox.Show("Validation did not pass"); }
+            
         }
     }
 }

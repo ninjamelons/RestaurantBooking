@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ModelLibrary;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestaurantDesktopClient
 {
@@ -52,6 +53,13 @@ namespace RestaurantDesktopClient
             }
         }
 
+        private bool ValidateCat(ModelLibrary.ItemCat itemCat)
+        {
+            var context = new ValidationContext(itemCat, null, null);
+            var result = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+
+            return Validator.TryValidateObject(itemCat, context, result, true);
+        }
         private async void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
 
@@ -61,18 +69,24 @@ namespace RestaurantDesktopClient
             }
             else
             {
+                
                 var newItemCat = new ItemCat
                 {
                     Name = textBoxName.Text
                 };
-
-                await Services._ItemProxy.CreateItemCatAsync(newItemCat);
-                dataGridItemCatList.Items.Clear();
-                var modelMenu = await Services._ItemProxy.GetAllItemCategoriesAsync();
-                foreach (ItemCat item in modelMenu)
+                var validation = ValidateCat(newItemCat);
+                if(validation == true)
                 {
-                    dataGridItemCatList.Items.Add(item);
-                };
+                    await Services._ItemProxy.CreateItemCatAsync(newItemCat);
+                    dataGridItemCatList.Items.Clear();
+                    var modelMenu = await Services._ItemProxy.GetAllItemCategoriesAsync();
+                    foreach (ItemCat item in modelMenu)
+                    {
+                        dataGridItemCatList.Items.Add(item);
+                    };
+                }
+                else { MessageBox.Show("Validation did not pass!"); }
+                
             }
         }
 
@@ -97,14 +111,20 @@ namespace RestaurantDesktopClient
                     Name = textBoxName.Text,
                     Id = slectedItemCat.Id
                 };
-                await Services._ItemProxy.UpdateItemCatAsync(oldItem, newItem);
-                dataGridItemCatList.Items.Clear();
-                var modelMenu = await Services._ItemProxy.GetAllItemCategoriesAsync();
-                foreach (ItemCat item in modelMenu)
+                var validation = ValidateCat(newItem);
+                if (validation == true)
                 {
-                    dataGridItemCatList.Items.Add(item);
-                };
-                var selectedItem = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
+                    await Services._ItemProxy.UpdateItemCatAsync(oldItem, newItem);
+                    dataGridItemCatList.Items.Clear();
+                    var modelMenu = await Services._ItemProxy.GetAllItemCategoriesAsync();
+                    foreach (ItemCat item in modelMenu)
+                    {
+                        dataGridItemCatList.Items.Add(item);
+                    };
+                    var selectedItem = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
+                }
+                else { MessageBox.Show("Validation did not pass!"); }
+                    
             }
 
         }
