@@ -9,9 +9,11 @@
       Title="Restaurant - Home">
 
     <Grid Margin="0,0,0,0">
-        <Button x:Name="ToTablesPage" Content="Manage Tables" HorizontalAlignment="Right"
-                VerticalAlignment="Bottom" Margin="0,0,13,13" Padding="8 3" Click="ToTablesPage_OnClick" Width="106" Height="36"/>
-        <Button x:Name="ButtonMenus"  Content="Manage Menus" HorizontalAlignment="Left" Height="36" Margin="572,401,0,0" VerticalAlignment="Top" Width="104" Click="ManageMenus_Click" RenderTransformOrigin="0.396,0.425"/>
+        <Button x:Name="ToTablesPage" Content="Manage Tables" HorizontalAlignment="Left"
+                VerticalAlignment="Top" Margin="681,401,0,0" Padding="8 3" Click="ToTablesPage_OnClick" Width="106" Height="36"/>
+        <Button x:Name="ButtonMenus"  Content="Manage Menus" HorizontalAlignment="Left"
+                Height="36" Margin="572,401,0,0" VerticalAlignment="Top" Width="104" Click="ManageMenus_Click"
+                RenderTransformOrigin="0.396,0.425"/>
 
         <DataGrid x:Name="dataGrid" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="370" Margin="463,0,0,0" VerticalAlignment="Top" Width="324" SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.Resources>
@@ -38,7 +40,7 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="buttonRestaurant" Content="Edit Resaurant" HorizontalAlignment="Left" Margin="463,401,0,0" VerticalAlignment="Top" Width="104" Height="36" Click="buttonRestaurant_Click"/>
+        <Button x:Name="buttonRestaurant" Content="Edit Restaurant" HorizontalAlignment="Left" Margin="463,401,0,0" VerticalAlignment="Top" Width="104" Height="36" Click="buttonRestaurant_Click"/>
         <DataGrid x:Name="dataGridOrder" AutoGenerateColumns="False" MouseDoubleClick="DataGridOrder_DoubleClick" HorizontalAlignment="Left" SelectionChanged="DataGridOrder_SelectionChanged" Height="370" Margin="10,0,0,0" VerticalAlignment="Top" Width="420">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
