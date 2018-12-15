@@ -153,7 +153,7 @@ namespace RestaurantDesktopClient
             dataGridTableList.CanUserReorderColumns = false;
 
             dataGridTableList.ItemsSource = dt.DefaultView;
-
+            
             return dataGridTableList;
         }
 
