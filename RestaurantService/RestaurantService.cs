@@ -191,11 +191,5 @@ namespace RestaurantService
             var tableCtrl = new TableCtrl();
             return tableCtrl.GetTable(table);
         }
-
-        public void UpdateTable(Table oldTable, Table newTable)
-        {
-            var tableCtrl = new TableCtrl();
-            tableCtrl.UpdateTable(oldTable, newTable);
-        }
     }
 }
