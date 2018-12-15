@@ -1,5 +1,7 @@
 ﻿
 
+using RestaurantDesktopClient.OrderService;
+
 namespace RestaurantDesktopClient
 {
     public class Services
@@ -9,6 +11,9 @@ namespace RestaurantDesktopClient
         public readonly static MenuService.IMenuService _MenuProxy;
         public readonly static PriceService.IPriceService _PriceProxy;
         public readonly static RestaurantService.IRestaurantService _RestaurantProxy;
+        public readonly static OrderServiceClient _OrderProxy;
+
+        
 
         static Services()
         {
@@ -17,6 +22,7 @@ namespace RestaurantDesktopClient
             _MenuProxy = new MenuService.MenuServiceClient();
             _PriceProxy = new PriceService.PriceServiceClient();
             _RestaurantProxy = new RestaurantService.RestaurantServiceClient();
+            _OrderProxy = new OrderService.OrderServiceClient();
         }
     }
 }

@@ -241,13 +241,13 @@ namespace ControllerLibrary
 
         public List<Table> LeastNumberOfTables(List<Table> tables, int tempSeats)
         {
-            int modItr = 0;
+            int itr = 0;
             var seatsLeftInOrder = new int[tables.Count];
 
             foreach (var table in tables)
             {
-                seatsLeftInOrder[modItr] = tempSeats - table.NoSeats;
-                modItr++;
+                seatsLeftInOrder[itr] = tempSeats - table.NoSeats;
+                itr++;
             }
 
             int index = -1;

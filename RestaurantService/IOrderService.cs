@@ -24,5 +24,7 @@ namespace RestaurantService
 
         [OperationContract]
         ModelLibrary.Order GetOrderById(int orderId);
+        [OperationContract]
+        IEnumerable<ModelLibrary.Order> GetAllOrdersByRestaurant(int restaurantId);
     }
 }

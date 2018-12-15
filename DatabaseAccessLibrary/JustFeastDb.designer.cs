@@ -22,7 +22,7 @@ namespace DatabaseAccessLibrary
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="JustFeast")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="JustFeastDb")]
 	public partial class JustFeastDbDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -72,7 +72,7 @@ namespace DatabaseAccessLibrary
     #endregion
 		
 		public JustFeastDbDataContext() : 
-				base(global::DatabaseAccessLibrary.Properties.Settings.Default.JustFeastConnectionString, mappingSource)
+				base(global::DatabaseAccessLibrary.Properties.Settings.Default.JustFeastDbConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -552,7 +552,7 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_User", Storage="_Customer", ThisKey="customerId", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Customer_User", Storage="_Customer", ThisKey="customerId", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Customer Customer
 		{
 			get
@@ -790,7 +790,7 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ItemCat_Item", Storage="_ItemCat", ThisKey="itemCatId", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ItemCat_Item", Storage="_ItemCat", ThisKey="itemCatId", OtherKey="id", IsForeignKey=true)]
 		public ItemCat ItemCat
 		{
 			get
@@ -2317,7 +2317,7 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ResTable_ReservedTable", Storage="_ResTable", ThisKey="tableId", OtherKey="id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ResTable_ReservedTable", Storage="_ResTable", ThisKey="tableId", OtherKey="id", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public ResTable ResTable
 		{
 			get
@@ -2904,7 +2904,7 @@ namespace DatabaseAccessLibrary
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ResCat_Restaurant", Storage="_ResCat", ThisKey="resCatId", OtherKey="id", IsForeignKey=true, DeleteRule="CASCADE")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ResCat_Restaurant", Storage="_ResCat", ThisKey="resCatId", OtherKey="id", IsForeignKey=true)]
 		public ResCat ResCat
 		{
 			get

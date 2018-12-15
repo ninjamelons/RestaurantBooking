@@ -100,15 +100,15 @@ namespace DatabaseAccessLibrary
 
             //Get all tables for restaurant that aren't booked in a one hour time slot
             var availableTables = allTables.Except(unavailableTables).ToList();
-
+            
             foreach (var table in availableTables)
             {
                 table.reserved = false;
             }
 
-            var tables = availableTables.Union(unavailableTables);
+            //var tables = availableTables.Union(unavailableTables);
             
-            return tables;
+            return availableTables;
         }
         
         public void AddTable(ResTable resTable)

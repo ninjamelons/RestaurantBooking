@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using ModelLibrary;
 using RestaurantDesktopClient.RestaurantService;
 
@@ -40,14 +41,6 @@ namespace RestaurantDesktopClient
                 MessageBoxResult prompt =
                     MessageBox.Show("Please enter valid characters in all fields", "Invalid Input");
             }
-        }
-
-        private bool CheckOldTableMatchesDb(Table oldTable)
-        {
-            var proxy = new RestaurantServiceClient();
-            if (proxy.GetTableAsync(oldTable) != null)
-                return true;
-            return false;
         }
 
         private void RemoveTable_OnClick(object sender, RoutedEventArgs e)
@@ -106,10 +99,16 @@ namespace RestaurantDesktopClient
         {
             var noSeatsNoDuplicates = GetTablesInDictionary();
 
+
+
             var dt = new DataTable();
             dt.Columns.Add("Number of Seats", typeof(int));
             dt.Columns.Add("Number of Tables", typeof(int));
-            
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                dt.DefaultView.Delete(i);
+            }
 
             for (var i = 0; i < noSeatsNoDuplicates.Count; i++)
             {
@@ -123,8 +122,9 @@ namespace RestaurantDesktopClient
             dataGridTableList.CanUserResizeRows = false;
             dataGridTableList.CanUserResizeColumns = false;
             dataGridTableList.CanUserReorderColumns = false;
-
+            dataGridTableList.ItemsSource = null;
             dataGridTableList.ItemsSource = dt.DefaultView;
+            
 
             return dataGridTableList;
         }
