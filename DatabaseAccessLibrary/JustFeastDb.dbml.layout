@@ -2,187 +2,187 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14, 14.5" name="JustFeastDb">
   <DataContextMoniker Name="/JustFeastDbDataContext" />
   <nestedChildShapes>
-    <classShape Id="1f4eea37-39fe-42ee-a972-2e2b0a169e6e" absoluteBounds="0.75, 6.875, 2, 1.9631982421875005">
+    <classShape Id="44d5929d-b963-4cd1-938c-49cee2f0a7c0" absoluteBounds="0.75, 6.875, 2, 1.9631982421875005">
       <DataClassMoniker Name="/JustFeastDbDataContext/Customer" />
       <nestedChildShapes>
-        <elementListCompartment Id="e4e47798-f5dd-4667-8def-67a4db482114" absoluteBounds="0.765, 7.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b71ba739-bb7f-4d30-8e44-b2e27357ea37" absoluteBounds="0.765, 7.335, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="832aa3a0-cc91-4cc4-9471-409b0a618d69" absoluteBounds="3.5, 7.25, 2, 1.1939925130208344">
+    <classShape Id="b9278421-026e-4b2d-9923-63716d10c44e" absoluteBounds="3.5, 7.25, 2, 1.1939925130208344">
       <DataClassMoniker Name="/JustFeastDbDataContext/User" />
       <nestedChildShapes>
-        <elementListCompartment Id="ebc45288-2177-4767-8a85-95fc15e80d16" absoluteBounds="3.515, 7.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="25e4a870-b5f5-4a24-8937-12b118b54022" absoluteBounds="3.515, 7.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="cf9eeca0-d0d3-403a-b6a9-5fddb3eb442e" absoluteBounds="9, 7.5, 2, 1.7708968098958335">
+    <classShape Id="4328a800-2930-4d1f-9aa6-8ecb9f4fea3d" absoluteBounds="9, 7.5, 2, 1.7708968098958335">
       <DataClassMoniker Name="/JustFeastDbDataContext/Item" />
       <nestedChildShapes>
-        <elementListCompartment Id="ea334635-0c06-43ee-a9ef-3be5dbb6e600" absoluteBounds="9.015, 7.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="15ee5b34-5727-4457-9ec1-cb2f15afb0e0" absoluteBounds="9.015, 7.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="f231a921-5385-452a-b8a5-d026fbe24b93" absoluteBounds="6.25, 4.75, 2, 1.1939925130208344">
+    <classShape Id="fbd7235b-759c-4745-bd12-59ae243604bf" absoluteBounds="6.25, 4.75, 2, 1.1939925130208344">
       <DataClassMoniker Name="/JustFeastDbDataContext/ItemCat" />
       <nestedChildShapes>
-        <elementListCompartment Id="a53cfb22-d739-41b6-a868-89f3c52a3b1a" absoluteBounds="6.265, 5.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="48304d8c-3125-4156-9030-0579c8970592" absoluteBounds="6.265, 5.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="8928f249-47ee-4379-887b-ac554acc0909" absoluteBounds="6.25, 7.625, 2, 1.5785953776041666">
+    <classShape Id="3b923e24-4ac6-4d78-8678-32d5b239a597" absoluteBounds="6.25, 7.625, 2, 1.5785953776041666">
       <DataClassMoniker Name="/JustFeastDbDataContext/Menu" />
       <nestedChildShapes>
-        <elementListCompartment Id="b0631b2a-5418-49c4-9224-3be7dada82a5" absoluteBounds="6.265, 8.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="56854816-8d6d-4ba9-9260-0aeadbd3a7df" absoluteBounds="6.265, 8.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="eb22cd90-3826-44e0-a671-b02856669146" absoluteBounds="3.5, 4.25, 2, 1.3862939453125005">
+    <classShape Id="055dedbe-80b3-47f2-8d97-cb57ad00e618" absoluteBounds="3.5, 4.25, 2, 1.3862939453125005">
       <DataClassMoniker Name="/JustFeastDbDataContext/OrderHistory" />
       <nestedChildShapes>
-        <elementListCompartment Id="529c8279-d47e-4db6-be2e-f01c85acd189" absoluteBounds="3.515, 4.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="0521325e-3bcb-449e-b139-1f41216f99a8" absoluteBounds="3.515, 4.71, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b7e0ee4a-8f40-4f6a-9c84-c4d25e03cf52" absoluteBounds="11.75, 12.125, 2, 1.3862939453124987">
+    <classShape Id="51b37b16-27ed-45d9-8c82-f1913cb9adef" absoluteBounds="11.75, 12.125, 2, 1.3862939453124987">
       <DataClassMoniker Name="/JustFeastDbDataContext/OrderLineItem" />
       <nestedChildShapes>
-        <elementListCompartment Id="4039ff36-f827-4e0c-a7ee-a704fbe72a56" absoluteBounds="11.765, 12.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="876de74c-567c-4650-b1da-fdc19b7e53a9" absoluteBounds="11.765, 12.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="9ea1e084-95c0-4f66-8e46-8cda80c21c64" absoluteBounds="6.25, 12.25, 2, 1.9631982421874987">
+    <classShape Id="f9ec4616-aefb-467b-a68e-218b58fbc9db" absoluteBounds="6.25, 12.25, 2, 1.9631982421874987">
       <DataClassMoniker Name="/JustFeastDbDataContext/Order" />
       <nestedChildShapes>
-        <elementListCompartment Id="d635dd42-d21f-4851-96fa-47c80f70ce7b" absoluteBounds="6.265, 12.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="94d614fe-59e0-485b-80df-e0105628beda" absoluteBounds="6.265, 12.71, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="6a66a53a-f62a-4996-a9c0-17ea24fed773" absoluteBounds="11.75, 9.75, 2, 1.5785953776041666">
+    <classShape Id="c3773196-d09b-46fa-8dc2-21bf9664ebba" absoluteBounds="11.75, 9.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/JustFeastDbDataContext/Price" />
       <nestedChildShapes>
-        <elementListCompartment Id="93404224-f569-43a4-865d-359c54fae1e9" absoluteBounds="11.765, 10.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9aa7bd33-2db7-4c74-869d-0bb62ef7b775" absoluteBounds="11.765, 10.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="4e27db32-b29d-448a-b5be-17fc1003a340" absoluteBounds="0.75, 10.25, 2, 1.1939925130208344">
+    <classShape Id="f5720ead-6030-4598-a747-c1c04f6ff376" absoluteBounds="0.75, 10.25, 2, 1.1939925130208344">
       <DataClassMoniker Name="/JustFeastDbDataContext/ResCat" />
       <nestedChildShapes>
-        <elementListCompartment Id="c1002e0e-b7ed-4600-8bd2-010779794cb6" absoluteBounds="0.765, 10.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="b279c4fb-8f05-45ca-9309-f7393f957d92" absoluteBounds="0.765, 10.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="b33d337b-f385-42fe-8008-0c7e5483a3ba" absoluteBounds="9, 11.5, 2, 1.1939925130208344">
+    <classShape Id="aea47926-cfc9-4d0a-be4c-7a53643888b3" absoluteBounds="9, 11.5, 2, 1.1939925130208344">
       <DataClassMoniker Name="/JustFeastDbDataContext/ReservedTable" />
       <nestedChildShapes>
-        <elementListCompartment Id="1f83472d-494b-4e49-abee-85413be2d368" absoluteBounds="9.015, 11.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1c056bf3-ab23-4c42-9412-67ed78e7f84a" absoluteBounds="9.015, 11.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="573d045a-ec16-4f70-bcc6-c0e946bc630e" absoluteBounds="6.25, 9.875, 2, 1.5785953776041666">
+    <classShape Id="59acf3ac-d6e0-4e6d-b282-386e562ad64a" absoluteBounds="6.25, 9.875, 2, 1.5785953776041666">
       <DataClassMoniker Name="/JustFeastDbDataContext/ResTable" />
       <nestedChildShapes>
-        <elementListCompartment Id="5500358f-9a04-4c4d-a330-90b85f016147" absoluteBounds="6.265, 10.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="2d36cdfe-439b-4b65-9334-b259946d8744" absoluteBounds="6.265, 10.335, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="6b778ab7-8c5f-4371-b984-74c74a8475d8" absoluteBounds="3.5, 9.625, 2, 2.5401025390624987">
+    <classShape Id="11e1e0f8-f1ab-489a-a1ff-b6c22f8c8faf" absoluteBounds="3.5, 9.625, 2, 2.5401025390624987">
       <DataClassMoniker Name="/JustFeastDbDataContext/Restaurant" />
       <nestedChildShapes>
-        <elementListCompartment Id="6050ddad-0414-45e6-8107-ae58326d6380" absoluteBounds="3.515, 10.085, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="1161a3c5-7364-49c4-8b93-409919ee0f20" absoluteBounds="3.515, 10.085, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(2.75 : 7.84699625651042); (3.5 : 7.84699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/Customer/Customer_User" />
       <nodes>
-        <classShapeMoniker Id="1f4eea37-39fe-42ee-a972-2e2b0a169e6e" />
-        <classShapeMoniker Id="832aa3a0-cc91-4cc4-9471-409b0a618d69" />
+        <classShapeMoniker Id="44d5929d-b963-4cd1-938c-49cee2f0a7c0" />
+        <classShapeMoniker Id="b9278421-026e-4b2d-9923-63716d10c44e" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 5.34699625651042); (10 : 5.34699625651042); (10 : 7.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/ItemCat/ItemCat_Item" />
       <nodes>
-        <classShapeMoniker Id="f231a921-5385-452a-b8a5-d026fbe24b93" />
-        <classShapeMoniker Id="cf9eeca0-d0d3-403a-b6a9-5fddb3eb442e" />
+        <classShapeMoniker Id="fbd7235b-759c-4745-bd12-59ae243604bf" />
+        <classShapeMoniker Id="4328a800-2930-4d1f-9aa6-8ecb9f4fea3d" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 8.41429768880208); (9 : 8.41429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/Menu/Menu_Item" />
       <nodes>
-        <classShapeMoniker Id="8928f249-47ee-4379-887b-ac554acc0909" />
-        <classShapeMoniker Id="cf9eeca0-d0d3-403a-b6a9-5fddb3eb442e" />
+        <classShapeMoniker Id="3b923e24-4ac6-4d78-8678-32d5b239a597" />
+        <classShapeMoniker Id="4328a800-2930-4d1f-9aa6-8ecb9f4fea3d" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(1.75 : 6.875); (1.75 : 4.94314697265625); (3.5 : 4.94314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/Customer/Customer_OrderHistory" />
       <nodes>
-        <classShapeMoniker Id="1f4eea37-39fe-42ee-a972-2e2b0a169e6e" />
-        <classShapeMoniker Id="eb22cd90-3826-44e0-a671-b02856669146" />
+        <classShapeMoniker Id="44d5929d-b963-4cd1-938c-49cee2f0a7c0" />
+        <classShapeMoniker Id="055dedbe-80b3-47f2-8d97-cb57ad00e618" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(11 : 9.27089680989583); (11.375 : 9.64589680989583); (11.375 : 12.8181469726562); (11.75 : 12.8181469726562)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/Item/Item_OrderLineItem" />
       <nodes>
-        <classShapeMoniker Id="cf9eeca0-d0d3-403a-b6a9-5fddb3eb442e" />
-        <classShapeMoniker Id="b7e0ee4a-8f40-4f6a-9c84-c4d25e03cf52" />
+        <classShapeMoniker Id="4328a800-2930-4d1f-9aa6-8ecb9f4fea3d" />
+        <classShapeMoniker Id="51b37b16-27ed-45d9-8c82-f1913cb9adef" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(6.25 : 12.25); (5.875 : 11.875); (5.875 : 4.94314697265625); (5.5 : 4.94314697265625)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/Order/Order_OrderHistory" />
       <nodes>
-        <classShapeMoniker Id="9ea1e084-95c0-4f66-8e46-8cda80c21c64" />
-        <classShapeMoniker Id="eb22cd90-3826-44e0-a671-b02856669146" />
+        <classShapeMoniker Id="f9ec4616-aefb-467b-a68e-218b58fbc9db" />
+        <classShapeMoniker Id="055dedbe-80b3-47f2-8d97-cb57ad00e618" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 13.2272204589844); (11.75 : 13.2272204589844)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/Order/Order_OrderLineItem" />
       <nodes>
-        <classShapeMoniker Id="9ea1e084-95c0-4f66-8e46-8cda80c21c64" />
-        <classShapeMoniker Id="b7e0ee4a-8f40-4f6a-9c84-c4d25e03cf52" />
+        <classShapeMoniker Id="f9ec4616-aefb-467b-a68e-218b58fbc9db" />
+        <classShapeMoniker Id="51b37b16-27ed-45d9-8c82-f1913cb9adef" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(11 : 8.35419590494792); (12.75 : 8.35419590494792); (12.75 : 9.75)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/Item/Item_Price" />
       <nodes>
-        <classShapeMoniker Id="cf9eeca0-d0d3-403a-b6a9-5fddb3eb442e" />
-        <classShapeMoniker Id="6a66a53a-f62a-4996-a9c0-17ea24fed773" />
+        <classShapeMoniker Id="4328a800-2930-4d1f-9aa6-8ecb9f4fea3d" />
+        <classShapeMoniker Id="c3773196-d09b-46fa-8dc2-21bf9664ebba" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 12.4719962565104); (9 : 12.4719962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/Order/Order_ReservedTable" />
       <nodes>
-        <classShapeMoniker Id="9ea1e084-95c0-4f66-8e46-8cda80c21c64" />
-        <classShapeMoniker Id="b33d337b-f385-42fe-8008-0c7e5483a3ba" />
+        <classShapeMoniker Id="f9ec4616-aefb-467b-a68e-218b58fbc9db" />
+        <classShapeMoniker Id="aea47926-cfc9-4d0a-be4c-7a53643888b3" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 10.6642976888021); (10 : 10.6642976888021); (10 : 11.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/ResTable/ResTable_ReservedTable" />
       <nodes>
-        <classShapeMoniker Id="573d045a-ec16-4f70-bcc6-c0e946bc630e" />
-        <classShapeMoniker Id="b33d337b-f385-42fe-8008-0c7e5483a3ba" />
+        <classShapeMoniker Id="59acf3ac-d6e0-4e6d-b282-386e562ad64a" />
+        <classShapeMoniker Id="aea47926-cfc9-4d0a-be4c-7a53643888b3" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 9.68653746153846); (5.81607443490112 : 9.37046302663734 : JumpStart); (5.93392556509888 : 9.25261189643958 : JumpEnd); (6.0625 : 9.12403746153846); (6.0625 : 9.39109537760417); (6.25 : 9.20359537760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/JustFeastDbDataContext/Restaurant/Restaurant_Menu" />
       <nodes>
-        <classShapeMoniker Id="6b778ab7-8c5f-4371-b984-74c74a8475d8" />
-        <classShapeMoniker Id="8928f249-47ee-4379-887b-ac554acc0909" />
+        <classShapeMoniker Id="11e1e0f8-f1ab-489a-a1ff-b6c22f8c8faf" />
+        <classShapeMoniker Id="3b923e24-4ac6-4d78-8678-32d5b239a597" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(4.5 : 12.1651025390625); (4.5 : 13.2628516210937); (6.25 : 13.2628516210937)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/Restaurant/Restaurant_Order" />
       <nodes>
-        <classShapeMoniker Id="6b778ab7-8c5f-4371-b984-74c74a8475d8" />
-        <classShapeMoniker Id="9ea1e084-95c0-4f66-8e46-8cda80c21c64" />
+        <classShapeMoniker Id="11e1e0f8-f1ab-489a-a1ff-b6c22f8c8faf" />
+        <classShapeMoniker Id="f9ec4616-aefb-467b-a68e-218b58fbc9db" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 10.6642976888021); (5.79166666666667 : 10.6642976888021 : JumpStart); (5.95833333333333 : 10.6642976888021 : JumpEnd); (6.25 : 10.6642976888021)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/Restaurant/Restaurant_ResTable" />
       <nodes>
-        <classShapeMoniker Id="6b778ab7-8c5f-4371-b984-74c74a8475d8" />
-        <classShapeMoniker Id="573d045a-ec16-4f70-bcc6-c0e946bc630e" />
+        <classShapeMoniker Id="11e1e0f8-f1ab-489a-a1ff-b6c22f8c8faf" />
+        <classShapeMoniker Id="59acf3ac-d6e0-4e6d-b282-386e562ad64a" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 8.83668708969351); (3.125 : 9.21168708969351); (3.125 : 10.8950512695312); (3.5 : 10.8950512695312)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/Customer/Customer_Restaurant" />
       <nodes>
-        <classShapeMoniker Id="1f4eea37-39fe-42ee-a972-2e2b0a169e6e" />
-        <classShapeMoniker Id="6b778ab7-8c5f-4371-b984-74c74a8475d8" />
+        <classShapeMoniker Id="44d5929d-b963-4cd1-938c-49cee2f0a7c0" />
+        <classShapeMoniker Id="11e1e0f8-f1ab-489a-a1ff-b6c22f8c8faf" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 10.5100256347656); (3.04166666666667 : 10.5100256347656 : JumpStart); (3.20833333333333 : 10.5100256347656 : JumpEnd); (3.5 : 10.5100256347656)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/JustFeastDbDataContext/ResCat/ResCat_Restaurant" />
       <nodes>
-        <classShapeMoniker Id="4e27db32-b29d-448a-b5be-17fc1003a340" />
-        <classShapeMoniker Id="6b778ab7-8c5f-4371-b984-74c74a8475d8" />
+        <classShapeMoniker Id="f5720ead-6030-4598-a747-c1c04f6ff376" />
+        <classShapeMoniker Id="11e1e0f8-f1ab-489a-a1ff-b6c22f8c8faf" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

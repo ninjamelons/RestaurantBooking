@@ -76,5 +76,16 @@ namespace DatabaseAccessLibrary.Properties {
                 return ((string)(this["JustFeastDbConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=JustFeast;Persist Security Info=True;User I" +
+            "D=sa;Password=dmai0917")]
+        public string JustFeastConnectionString1 {
+            get {
+                return ((string)(this["JustFeastConnectionString1"]));
+            }
+        }
     }
 }

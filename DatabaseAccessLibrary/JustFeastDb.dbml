@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="JustFeastDb" Class="JustFeastDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-T8FO46O\SQLEXPRESS;Initial Catalog=JustFeastDb;Integrated Security=True" SettingsObjectName="DatabaseAccessLibrary.Properties.Settings" SettingsPropertyName="JustFeastDbConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="JustFeast" Class="JustFeastDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=localhost;Initial Catalog=JustFeast;Persist Security Info=True;User ID=sa" SettingsObjectName="DatabaseAccessLibrary.Properties.Settings" SettingsPropertyName="JustFeastConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Customer" Member="Customers">
     <Type Name="Customer">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
