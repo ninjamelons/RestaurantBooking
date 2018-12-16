@@ -26,7 +26,7 @@ namespace ModelLibrary
 
         [Required]
         [Display(Name = "Zip Code")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "ZipCode does not match regex")]
+        [RegularExpression("^[0-9]{4,4}$", ErrorMessage = "ZipCode does not match regex")]
         [StringLength(10, MinimumLength = 1, ErrorMessage = "ZipCode must not exceed 5 characters")]
         public string ZipCode { get; set; }
 

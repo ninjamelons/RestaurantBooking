@@ -108,7 +108,7 @@ namespace UnitTests
                 Price = testPrice
 
             };
-            priceService.CreatePrice(testPrice, 1000000);
+            priceService.UpdatePrice(testPrice, 1000000);
             itemService.UpdateItem(newItemUpdated, 1000000,1000000);
             
             priceService.UpdatePrice(testPrice,1000000);
@@ -125,12 +125,21 @@ namespace UnitTests
             //Setup
             ModelLibrary.Item rtrnItem = itemService.GetItem(1000000);
 
+            var isNull = false;
             //Act
             itemService.DeleteItem(1000000);
 
             //Assert
+            try
+            {
+                itemService.GetItem(1000000);
+            }
+            catch (Exception e)
+            {
+                isNull = true;
+            }
             
-            Assert.IsNull(itemService.GetItem(1000000)); //EHHHHHHHHHHHHHHH
+            Assert.IsTrue(isNull);
         }
 
         [TestMethod]
