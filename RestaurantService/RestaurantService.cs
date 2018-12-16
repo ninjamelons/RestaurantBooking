@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Transactions;
 using DatabaseAccessLibrary;
 using ModelLibrary;
 using ControllerLibrary;
@@ -12,35 +13,9 @@ using Item = ModelLibrary.Item;
 namespace RestaurantService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "RestaurantService" in both code and config file together.
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class RestaurantService : IRestaurantService
     {
-        /*public void CreateTable(Table table)
-        {
-            TableCtrl tableCtrl = new TableCtrl();
-            tableCtrl.CreateTable(table);
-        }
-        public IEnumerable<Table> GetAllTables(int restaurantId)
-        {
-            TableCtrl tableCtrl = new TableCtrl();
-            return tableCtrl.GetRestaurantTables(restaurantId);
-        }
-        public Table GetTable(Table table)
-        {
-            TableCtrl tableCtrl = new TableCtrl();
-            return tableCtrl.GetTable(table);
-        }
-        public void UpdateTable(Table oldTable, Table newTable)
-        {
-            TableCtrl tableCtrl = new TableCtrl();
-            tableCtrl.UpdateTable(oldTable, newTable);
-        }
-        public void DeleteTable(Table table)
-        {
-            TableCtrl tableCtrl = new TableCtrl();
-            tableCtrl.DeleteTable(table);
-        }*/
-
-
         public IEnumerable<ModelLibrary.Restaurant> GetAllRestaurants()
         {
             JustFeastDbDataContext db = new JustFeastDbDataContext();
@@ -163,11 +138,58 @@ namespace RestaurantService
         }
 
 
-        public int ReserveTables(int resId, int NoSeats, DateTime dateTime)
+        public int ReserveTables(int resId, int noSeats, DateTime dateTime)
         {
             TableCtrl tblCtrl = new TableCtrl();
-            var orderId = tblCtrl.ReserveTables(resId, NoSeats, dateTime);
+            var orderId = tblCtrl.ReserveTables(resId, noSeats, dateTime);
             return orderId;
+        }
+
+        public string ReserveSingleTable(int tableId, int resId)
+        {
+            var possibleExc = "Successfully reserved table";
+            try
+            {
+                var tblCtrl = new TableCtrl();
+                tblCtrl.ReserveSingleTable(tableId, resId);
+            }
+            catch (TransactionAbortedException ex)
+            {
+                possibleExc = "Failed to reserve table, Table possibly reserved by another customer";
+            }
+
+            return possibleExc;
+        }
+
+        public IEnumerable<Table> GetTablesWithReserved(int resId)
+        {
+            var tableCtrl = new TableCtrl();
+            var tables = tableCtrl.GetTablesWithReserved(resId);
+            return tables;
+        }
+
+        public IEnumerable<Table> GetAllTablesByRestaurant(int resId)
+        {
+            var tableCtrl = new TableCtrl();
+            return tableCtrl.GetRestaurantTables(resId);
+        }
+
+        public void CreateTable(Table table)
+        {
+            var tableCtrl = new TableCtrl();
+            tableCtrl.CreateTable(table);
+        }
+
+        public void DeleteTable(Table table)
+        {
+            var tableCtrl = new TableCtrl();
+            tableCtrl.DeleteTable(table);
+        }
+
+        public Table GetTable(Table table)
+        {
+            var tableCtrl = new TableCtrl();
+            return tableCtrl.GetTable(table);
         }
     }
 }

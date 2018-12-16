@@ -16,6 +16,8 @@ namespace ModelLibrary
 
         }
 
+        public double Price { get; set; }
+
         public Item LineItem { get; set; }
 
         public int Quantity { get; set; }

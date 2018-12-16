@@ -43,20 +43,23 @@ namespace RestaurantService
         ModelLibrary.Restaurant GetRestaurantWithMenu(int id);
 
 
-        /*[OperationContract]
+        [OperationContract]
         void CreateTable(Table table);
         [OperationContract]
-        IEnumerable<Table> GetAllTables(int restaurantId);
+        IEnumerable<Table> GetAllTablesByRestaurant(int restaurantId);
         [OperationContract]
         Table GetTable(Table table);
         [OperationContract]
-        void UpdateTable(Table oldTable, Table newTable);
-        [OperationContract]
-        void DeleteTable(Table table);*/
+        void DeleteTable(Table table);
 
         //return newly created orderId
         [OperationContract]
         int ReserveTables(int resId, int NoSeats, DateTime dateTime);
 
+        [OperationContract]
+        IEnumerable<ModelLibrary.Table> GetTablesWithReserved(int resId);
+
+        [OperationContract]
+        string ReserveSingleTable(int tableId, int resId);
     }
 }

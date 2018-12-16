@@ -11,6 +11,7 @@ using ControllerLibrary;
 namespace RestaurantService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ItemService" in both code and config file together.
+    [ServiceBehavior(ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class ItemService : IItemService
     {
         ItemDb itemDb = new ItemDb();
@@ -33,7 +34,8 @@ namespace RestaurantService
 
         public void DeleteItem(int itemId)
         {
-
+            var orderC = new OrderCtrl();
+            orderC.DeleteOrderLineItem(itemId);
             itemDb.DeleteItem(itemId);
         }
 

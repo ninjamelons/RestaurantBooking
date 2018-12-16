@@ -40,6 +40,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -72,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\OrderService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\PriceService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -98,6 +104,10 @@
     <Compile Include="RestaurantHome.xaml.cs">
       <DependentUpon>RestaurantHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RestaurantUpdate.xaml.cs">
+      <DependentUpon>RestaurantUpdate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Services.cs" />
     <Compile Include="TablesCrud.xaml.cs">
       <DependentUpon>TablesCrud.xaml</DependentUpon>
     </Compile>
@@ -130,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RestaurantHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RestaurantUpdate.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,6 +200,16 @@
     <None Include="Connected Services\MenuService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\OrderService\ModelLibrary.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderService\service.wsdl" />
+    <None Include="Connected Services\OrderService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\OrderService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\PriceService\ModelLibrary.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -210,6 +234,7 @@
     <None Include="Properties\DataSources\ModelLibrary.Item.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.ItemCat.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.Menu.datasource" />
+    <None Include="Properties\DataSources\ModelLibrary.Order.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.Price.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.Restaurant.datasource" />
     <None Include="Properties\DataSources\ModelLibrary.RestaurantCategory.datasource" />
@@ -247,6 +272,7 @@
     <WCFMetadataStorage Include="Connected Services\CustomerService\" />
     <WCFMetadataStorage Include="Connected Services\ItemService\" />
     <WCFMetadataStorage Include="Connected Services\MenuService\" />
+    <WCFMetadataStorage Include="Connected Services\OrderService\" />
     <WCFMetadataStorage Include="Connected Services\PriceService\" />
     <WCFMetadataStorage Include="Connected Services\RestaurantService\" />
   </ItemGroup>
@@ -306,6 +332,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\CustomerService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\OrderService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\OrderService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\OrderService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

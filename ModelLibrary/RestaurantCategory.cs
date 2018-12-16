@@ -13,5 +13,10 @@ namespace ModelLibrary
         [Display(Name="Category")]
         public string Name { get; set; }
         public List<Restaurant> Restaurants { get; set; }
+
+        public override string ToString()
+        {
+            return Name.ToString();
+        }
     }
 }

@@ -23,9 +23,8 @@ namespace RestaurantDesktopClient
         {
             restaurantId = resId;
             InitializeComponent();
-            var proxy = new MenuServiceClient();
-            dataGridItemList.SelectedItem = proxy.GetMenuById(1000000);
-            var modelMenu = proxy.GetAllMenusByRestaurant(restaurantId);
+            dataGridItemList.SelectedItem = Services._MenuProxy.GetMenuById(1000000);
+            var modelMenu = Services._MenuProxy.GetAllMenusByRestaurant(restaurantId);
             foreach (ModelLibrary.Menu item in modelMenu)
             {
                 dataGridItemList.Items.Add(item);
@@ -39,7 +38,14 @@ namespace RestaurantDesktopClient
             var proxy = new MenuServiceClient();
             return proxy.GetAllMenusByRestaurant(restaurantId);
         }
-       
+
+        private bool ValidateMenu(ModelLibrary.Menu menu)
+        {
+            var context = new ValidationContext(menu, null, null);
+            var result = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+
+            return Validator.TryValidateObject(menu, context, result, true);
+        }
 
         private void buttonAdd_Click(object sender, RoutedEventArgs e) // save menu
         {
@@ -47,7 +53,7 @@ namespace RestaurantDesktopClient
 
         }
 
-        private void buttonDelete_Click(object sender, RoutedEventArgs e)
+        private async void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
             var selectedMenu = (ModelLibrary.Menu)dataGridItemList.SelectedItem;
             if (selectedMenu == null)
@@ -57,10 +63,9 @@ namespace RestaurantDesktopClient
             else
             {
                 //labelRestaurantId = Convert.ToInt32()  
-                var proxy = new MenuServiceClient();
-                proxy.DeleteMenu(selectedMenu.Id);
+                await Services._MenuProxy.DeleteMenuAsync(selectedMenu.Id);
                 dataGridItemList.Items.Clear();
-                var modelMenu = proxy.GetAllMenusByRestaurant(restaurantId);
+                var modelMenu = await Services._MenuProxy.GetAllMenusByRestaurantAsync(restaurantId);
                 foreach (ModelLibrary.Menu item in modelMenu)
                 {
                     dataGridItemList.Items.Add(item);
@@ -69,7 +74,7 @@ namespace RestaurantDesktopClient
 
         }
 
-        private void buttonCreateMenu_Click(object sender, RoutedEventArgs e)
+        private async void buttonCreateMenu_Click(object sender, RoutedEventArgs e)
         {
             if (textBoxName.Text.Length < 2)
             {
@@ -78,7 +83,6 @@ namespace RestaurantDesktopClient
             else
             {
                 bool newBool = checkBoxActive.IsChecked ?? false;
-                var proxy = new MenuServiceClient();
                 ModelLibrary.Menu modelMenu = new ModelLibrary.Menu
                 {
                     RestaurantId = restaurantId,
@@ -87,19 +91,25 @@ namespace RestaurantDesktopClient
                     Active = newBool //////////////////////////CHECK BOXXXXXXXXXXXXXXXXXXXXXXXXXX
 
                 };
-                
-                proxy.CreateMenu(modelMenu);
-                dataGridItemList.Items.Clear();
-                var modelMenu1 = proxy.GetAllMenusByRestaurant(restaurantId);
-                foreach (ModelLibrary.Menu item in modelMenu1)
+                var validation = ValidateMenu(modelMenu);
+                if(validation == true)
                 {
-                    dataGridItemList.Items.Add(item);
-                };
+                    await Services._MenuProxy.CreateMenuAsync(modelMenu);
+                    dataGridItemList.Items.Clear();
+                    var modelMenu1 = await Services._MenuProxy.GetAllMenusByRestaurantAsync(restaurantId);
+                    foreach (ModelLibrary.Menu item in modelMenu1)
+                    {
+                        dataGridItemList.Items.Add(item);
+                    };
+
+                }
+                else { MessageBox.Show("Validation did not pass!"); }
+
 
             }
         }
 
-        private void buttonSaveName_Click(object sender, RoutedEventArgs e)
+        private async void buttonSaveName_Click(object sender, RoutedEventArgs e)
         {
             var selectedItem = (ModelLibrary.Menu)dataGridItemList.SelectedItem;
             bool newBool = checkBoxActive.IsChecked ?? false;
@@ -109,7 +119,6 @@ namespace RestaurantDesktopClient
             }
             else 
             {
-                var proxy = new MenuServiceClient();
                 var oldMenu = new ModelLibrary.Menu
                 {
                     Id = selectedItem.Id,
@@ -127,13 +136,19 @@ namespace RestaurantDesktopClient
                     Name = textBoxName.Text,
                     RestaurantId = restaurantId
                 };
-                proxy.UpdateMenu(oldMenu, newMenu);
-                dataGridItemList.Items.Clear();
-                var modelMenu = proxy.GetAllMenusByRestaurant(restaurantId);
-                foreach (ModelLibrary.Menu item in modelMenu)
+                var validation = ValidateMenu(newMenu);
+                if(validation == true)
                 {
-                    dataGridItemList.Items.Add(item);
-                };
+                    await Services._MenuProxy.UpdateMenuAsync(oldMenu, newMenu);
+                    dataGridItemList.Items.Clear();
+                    var modelMenu = await Services._MenuProxy.GetAllMenusByRestaurantAsync(restaurantId);
+                    foreach (ModelLibrary.Menu item in modelMenu)
+                    {
+                        dataGridItemList.Items.Add(item);
+                    };
+                }
+                else { MessageBox.Show("Validation did not pass!"); }
+                
             }
         }
 
@@ -162,7 +177,7 @@ namespace RestaurantDesktopClient
             }
             else
             {
-                MessageBox.Show("select an Item First");
+                MessageBox.Show("select a Menu First");
             }
            
            

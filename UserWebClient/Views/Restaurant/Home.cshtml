@@ -18,13 +18,14 @@
 <div class="container body-content">
     <div class="row">
         <div class="col-md-3">
+            @{Session["Restaurant"] = restaurant;}
             @Html.ActionLink("Reserve Table", "ReserveTable", "Restaurant", Model, new {@class = "btn btn-danger"})
         </div>
         <div class="col-md-9">
             <table class="table">
                 <thead>
-                <th>Item Name</th>
-                <th>Price</th>
+                <th>@Html.DisplayNameFor(model => restaurant.Menu.Items)</th>
+                <th>@Html.DisplayNameFor(model => restaurant.Menu.Items.First().Price)</th>
                 <th>Add to Cart</th>
                 </thead>
                 <tbody>

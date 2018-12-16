@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using ModelLibrary;
 using RestaurantDesktopClient.RestaurantService;
 
@@ -13,75 +16,60 @@ namespace RestaurantDesktopClient
     /// </summary>
     public partial class TablesCrud : Page
     {
-        public TablesCrud()
+        public TablesCrud(int resId)
         {
             InitializeComponent();
-            hiddenResId.Content = "1000000";
-            //hiddenResId.Content = GetRestaurantId();
-            TableCombo.ItemsSource = GetTables();
+            HiddenResId.Content = resId;
+            ToTableDataGrid();
         }
 
-        private void UpdateAddTable_OnClick(object sender, RoutedEventArgs e)
+        private void AddTable_OnClick(object sender, RoutedEventArgs e)
         {
             var proxy = new RestaurantServiceClient();
-            var oldTable = new Table
+            var table = new Table
             {
-         //       NoSeats = hiddenNoSeats.Content.ToString(),
-          //      RestaurantId = hiddenResId.Content.ToString()
+                NoSeats = Convert.ToInt32(TextBoxSeatsPerTable.Text),
+                RestaurantId = Convert.ToInt32(HiddenResId.Content.ToString())
             };
-            var newTable = CreateTable();
-
-            if (ValidateTable(newTable))
+            if (ValidateTable(table))
             {
-                if (CheckOldTableMatchesDb(oldTable))
-                {
-                    proxy.UpdateTable(oldTable,newTable);
-                }
-            //    else if (newTable.RestaurantId != hiddenResId.Content.ToString()
-           //              && newTable.NoSeats != hiddenNoSeats.Content.ToString())
-           //     {
-             //       proxy.CreateTable(newTable);
-           //     }
-                else
-                {
-                    MessageBoxResult prompt =
-                        MessageBox.Show("Please enter valid characters in all fields", "Invalid Input");
-                }
+                proxy.CreateTableAsync(table);
+                ToTableDataGrid();
+            }
+            else
+            {
+                MessageBoxResult prompt =
+                    MessageBox.Show("Please enter valid characters in all fields", "Invalid Input");
             }
         }
 
-        private bool CheckOldTableMatchesDb(Table oldTable)
-        {
-            var proxy = new RestaurantServiceClient();
-            if (proxy.GetTable(oldTable) != null)
-                return true;
-            return false;
-        }
-
-        private void RemoveTable_OnClickTable_OnClick(object sender, RoutedEventArgs e)
+        private void RemoveTable_OnClick(object sender, RoutedEventArgs e)
         {
             var proxy = new RestaurantServiceClient();
             var table = CreateTable();
 
             if (ValidateTable(table))
             {
-                proxy.DeleteTable(table);
+                proxy.DeleteTableAsync(table);
             }
             else
             {
-                MessageBoxResult prompt = MessageBox.Show("Please enter valid characters in all fields", "Invalid Input");  
+                MessageBoxResult prompt = MessageBox.Show("Please enter valid characters in all fields", "Invalid Input");
             }
+            ToTableDataGrid();
         }
 
-        private void TableCombo_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void DataGridTableList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var proxy = new RestaurantServiceClient();
-            var selectedTable = (ModelLibrary.Table)TableCombo.SelectedItem;
-            var dbTable = proxy.GetTable(selectedTable);
-            hiddenNoSeats.Content = dbTable.NoSeats;
-       //     NoSeats.Text = dbTable.NoSeats;
-       //     NoReserved.Text = dbTable.Reserved;
-       //     NoTotal.Text = dbTable.Total;
+            var selectedItemIndex = dataGridTableList.SelectedIndex;
+            var dict = GetTablesInDictionary();
+            if (selectedItemIndex > -1)
+            {
+                HiddenNoSeats.Content = dict.ElementAt(selectedItemIndex).Key;
+                TextBoxSeatsPerTable.Text = dict.ElementAt(selectedItemIndex).Key.ToString();
+                TextBoxNumberOfTables.Text = dict.ElementAt(selectedItemIndex).Value.ToString();
+                TextBoxTotalSeats.Text = (dict.ElementAt(selectedItemIndex).Key * dict.ElementAt(selectedItemIndex).Value).ToString();
+            }
         }
 
         private bool ValidateTable(ModelLibrary.Table table)
@@ -96,15 +84,68 @@ namespace RestaurantDesktopClient
         {
             return new ModelLibrary.Table
             {
-             //   NoSeats = NoSeats.Text, Reserved = NoReserved.Text,
-             //   RestaurantId = hiddenResId.Content.ToString(), Total = NoTotal.Text
+                NoSeats = int.Parse(HiddenNoSeats.Content.ToString()),
+                RestaurantId = int.Parse(HiddenResId.Content.ToString())
             };
         }
 
         private IEnumerable<Table> GetTables()
         {
             var proxy = new RestaurantServiceClient();
-            return proxy.GetAllTables(Convert.ToInt32(hiddenResId.Content.ToString()));
+            return proxy.GetAllTablesByRestaurant(Convert.ToInt32(HiddenResId.Content.ToString()));
+        }
+
+        private DataGrid ToTableDataGrid()
+        {
+            var noSeatsNoDuplicates = GetTablesInDictionary();
+
+
+
+            var dt = new DataTable();
+            dt.Columns.Add("Number of Seats", typeof(int));
+            dt.Columns.Add("Number of Tables", typeof(int));
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                dt.DefaultView.Delete(i);
+            }
+
+            for (var i = 0; i < noSeatsNoDuplicates.Count; i++)
+            {
+                var dr = dt.NewRow();
+                dr[0] = noSeatsNoDuplicates.ElementAt(i).Key;
+                dr[1] = noSeatsNoDuplicates.ElementAt(i).Value;
+
+                dt.Rows.Add(dr);
+            }
+
+            dataGridTableList.CanUserResizeRows = false;
+            dataGridTableList.CanUserResizeColumns = false;
+            dataGridTableList.CanUserReorderColumns = false;
+            dataGridTableList.ItemsSource = null;
+            dataGridTableList.ItemsSource = dt.DefaultView;
+            
+
+            return dataGridTableList;
+        }
+
+        private Dictionary<int,int> GetTablesInDictionary()
+        {
+
+            var proxy = new RestaurantServiceClient();
+            var call = proxy.GetAllTablesByRestaurantAsync(Convert.ToInt32(HiddenResId.Content.ToString()));
+            var tables = call.Result.ToList();
+            var dictionary = new Dictionary<int, int>();
+
+            foreach (var table in tables)
+            {
+                if (dictionary.ContainsKey(table.NoSeats))
+                    dictionary[table.NoSeats]++;
+                else
+                    dictionary.Add(table.NoSeats, 1);
+            }
+
+            return dictionary;
         }
     }
 }

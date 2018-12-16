@@ -35,6 +35,7 @@
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Items" nillable="true" type="tns:ArrayOfItem" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RestaurantId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Menu" nillable="true" type="tns:Menu" />
@@ -48,19 +49,11 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="ItemCat" nillable="true" type="tns:ItemCat" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Price" nillable="true" type="tns:Price" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Item" nillable="true" type="tns:Item" />
-  <xs:complexType name="ItemCat">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ItemCat" nillable="true" type="tns:ItemCat" />
   <xs:complexType name="Price">
     <xs:sequence>
       <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
@@ -75,4 +68,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfRestaurantCategory" nillable="true" type="tns:ArrayOfRestaurantCategory" />
+  <xs:complexType name="Table">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NoSeats" type="xs:int" />
+      <xs:element minOccurs="0" name="Reserved" type="xs:boolean" />
+      <xs:element minOccurs="0" name="RestaurantId" type="xs:int" />
+      <xs:element minOccurs="0" name="TableId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Table" nillable="true" type="tns:Table" />
+  <xs:complexType name="ArrayOfTable">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Table" nillable="true" type="tns:Table" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTable" nillable="true" type="tns:ArrayOfTable" />
 </xs:schema>

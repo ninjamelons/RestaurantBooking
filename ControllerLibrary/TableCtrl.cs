@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Linq;
+using System.Transactions;
 using DatabaseAccessLibrary;
 using ModelLibrary;
-using Restaurant = DatabaseAccessLibrary.Restaurant;
 
 namespace ControllerLibrary
 {
@@ -12,12 +12,12 @@ namespace ControllerLibrary
     {
 
         private List<Table> tableListPerOrder = new List<Table>();
-        /*private ResTable ConvertTable(Table table)
+        private ResTable ConvertTable(Table table)
         {
             var returnTable = new ResTable();
 
             returnTable.noSeats = Convert.ToInt32(table.NoSeats);
-            returnTable.reserved = Convert.ToInttable.Reserved);
+            returnTable.reserved = table.Reserved;
             returnTable.restaurantId = Convert.ToInt32(table.RestaurantId);
 
             return returnTable;
@@ -32,10 +32,10 @@ namespace ControllerLibrary
             {
                 newTable = new Table
                 {
-                    NoSeats = tbl.noSeats.ToString(),
-                    Reserved = tbl.reserved.ToString(),
-                    RestaurantId = tbl.restaurantId.ToString(),
-                    Total = tbl.total.ToString()
+                    TableId = tbl.id,
+                    NoSeats = tbl.noSeats,
+                    Reserved = tbl.reserved,
+                    RestaurantId = tbl.restaurantId
                 };
             }
 
@@ -52,10 +52,10 @@ namespace ControllerLibrary
             {
                 modelTables.Add(new Table
                 {
-                    NoSeats = table.noSeats.ToString(),
-                    Reserved = table.reserved.ToString(),
-                    RestaurantId = table.restaurantId.ToString(),
-                    Total = table.total.ToString()
+                    TableId = table.id,
+                    NoSeats = table.noSeats,
+                    Reserved = table.reserved,
+                    RestaurantId = table.restaurantId
                 });
             }
 
@@ -73,10 +73,10 @@ namespace ControllerLibrary
             {
                 modelTables.Add(new Table
                 {
-                    NoSeats = table.noSeats.ToString(),
-                    Reserved = table.reserved.ToString(),
-                    RestaurantId = table.restaurantId.ToString(),
-                    Total = table.total.ToString()
+                    TableId = table.id,
+                    NoSeats = table.noSeats,
+                    Reserved = table.reserved,
+                    RestaurantId = table.restaurantId
                 });
             }
 
@@ -90,27 +90,18 @@ namespace ControllerLibrary
             tableDb.AddTable(resTable);
         }
 
-        public void UpdateTable(Table oldTable, Table newTable)
-        {
-            var tableDb = new TableDb();
-            var oldResTable = ConvertTable(oldTable);
-            var newResTable = ConvertTable(newTable);
-
-            tableDb.UpdateTable(oldResTable, newResTable);
-        }
-
         public void DeleteTable(Table table)
         {
             var tableDb = new TableDb();
             var resTable = ConvertTable(table);
             tableDb.DeleteTable(resTable);
         }
-        */
 
         private Table ConvertTableToModel(ResTable table)
         {
             var modelTable = new Table();
 
+            modelTable.TableId = table.id;
             modelTable.NoSeats = table.noSeats;
             modelTable.Reserved = table.reserved;
             modelTable.RestaurantId = table.restaurantId;
@@ -133,23 +124,48 @@ namespace ControllerLibrary
         {
             var tableDb = new TableDb();
             int orderId = 0;
-            List<Table> tables = (List<Table>)GetAvailableRestaurantTables(resId, dateTime);
-            
-            //Algorithm to find suitable tables
-            //Reserve tables found in the reserveTables list --Handle concurrency
-            var reserveTablesIds = ConvertTablesToDb(LeastNumberOfTables(tables, noSeats));
 
-            //Reserve the tables in the database -- Concurrency in the database layer
             try
             {
-                //Create a new order and get its orderId
-                orderId = CreateNewOrder(resId, noSeats, dateTime);
-                tableDb.ReserveTables(reserveTablesIds, orderId);
+                //CONCURRENCY -- makes a transaction that stops others from entering???
+                using (var scope = new TransactionScope())
+                {
+                    var tables = (List<Table>) GetAvailableRestaurantTables(resId, dateTime);
+
+                    //Algorithm to find suitable tables
+                    //Reserve tables found in the reserveTables list --Handle concurrency
+                    var reserveTablesIds = ConvertTablesToDb(LeastNumberOfTables(tables, noSeats));
+
+                    //Reserve the tables in the database -- Concurrency in the database layer
+                    try
+                    {
+                        //Create a new order and get its orderId
+                        orderId = CreateNewOrder(resId, noSeats, dateTime);
+                        tableDb.ReserveTables(reserveTablesIds, orderId);
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+                    catch(TransactionManagerCommunicationException e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
+
+                    scope.Complete();
+                }
             }
-            catch (Exception e)
+            catch (TransactionAbortedException ex)
             {
-                Console.WriteLine(e);
-                throw;
+                Console.WriteLine("TransactionAbortedException Message: {0}", ex.Message);
+                return 0;
             }
 
             return orderId;
@@ -168,10 +184,36 @@ namespace ControllerLibrary
             return resTables;
         }
 
-        private IEnumerable<Table> GetAvailableRestaurantTables(int resId, DateTime datetime)
+        public void ReserveSingleTable(int tableId, int resId)
+        {
+            var tblDb = new TableDb();
+            try
+            {
+                using (var scope = new TransactionScope())
+                {
+                    var orderId = CreateNewOrder(resId, 0, DateTime.Now);
+                    tblDb.ReserveSingleTable(tableId, orderId);
+                    scope.Complete();
+                }
+            }
+            catch (TransactionAbortedException ex)
+            {
+                Console.WriteLine("TransactionAbortedException Message: {0}", ex.Message);
+                throw;
+            }
+        }
+
+        public IEnumerable<Table> GetTablesWithReserved(int resId)
+        {
+            var tblDb = new TableDb();
+            var tables = ConvertTableListToModel(tblDb.GetTablesWithReserved(resId));
+            return tables;
+        }
+
+        private IEnumerable<Table> GetAvailableRestaurantTables(int resId, DateTime dateTime)
         {
             TableDb tblDb = new TableDb();
-            return ConvertTableListToModel(tblDb.GetAvailableRestaurantTables(resId, datetime));
+            return ConvertTableListToModel(tblDb.GetAvailableRestaurantTables(resId, dateTime));
         }
 
         private int CreateNewOrder(int resId, int noSeats, DateTime date)
@@ -187,39 +229,25 @@ namespace ControllerLibrary
             var order = new ModelLibrary.Order
             {
                 RestaurantId = Convert.ToString(resId),
-                DateTime = nowDate,
+                DateTime = Convert.ToString(now),
                 ReservationDateTime = dateTime,
+                //DateTime = nowDate,
+                //ReservationDateTime = dateTime,
                 NoSeats = Convert.ToString(noSeats),
                 Accepted = false
             };
             return orderCtrl.AddOrder(order);
         }
 
-        public Dictionary<int, int> GetAllModulo(List<Table> tables, int tempSeats)
-        {
-            Dictionary<int,int> modulo = new Dictionary<int, int>();
-            int modItr = 0;
-            var seatsLeftInOrder = new int[tables.Count];
-
-            foreach (var table in tables)
-            {
-                modulo[modItr] = tempSeats % table.NoSeats;
-                seatsLeftInOrder[modItr] = tempSeats - table.NoSeats;
-                modItr++;
-            }
-
-            return modulo;
-        }
-
         public List<Table> LeastNumberOfTables(List<Table> tables, int tempSeats)
         {
-            int modItr = 0;
+            int itr = 0;
             var seatsLeftInOrder = new int[tables.Count];
 
             foreach (var table in tables)
             {
-                seatsLeftInOrder[modItr] = tempSeats - table.NoSeats;
-                modItr++;
+                seatsLeftInOrder[itr] = tempSeats - table.NoSeats;
+                itr++;
             }
 
             int index = -1;
@@ -251,7 +279,5 @@ namespace ControllerLibrary
 
             return tableListPerOrder;
         }
-
-   
     }
 }

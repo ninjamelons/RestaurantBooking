@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ModelLibrary;
+using System.ComponentModel.DataAnnotations;
 
 namespace RestaurantDesktopClient
 {
@@ -25,16 +26,15 @@ namespace RestaurantDesktopClient
         public ItemCatCrud()
         {
             InitializeComponent();
-
-            var proxy = new ItemServiceClient();
-            var modelMenu = proxy.GetAllItemCategories();
+            
+            var modelMenu = Services._ItemProxy.GetAllItemCategories();
             foreach (ItemCat item in modelMenu)
             {
                 dataGridItemCatList.Items.Add(item);
             };
         }
 
-        private void buttonDelete_Click(object sender, RoutedEventArgs e)
+        private async void buttonDelete_Click(object sender, RoutedEventArgs e)
         {
             var selectedItemCat = (ModelLibrary.ItemCat)dataGridItemCatList.SelectedItem;
             if (selectedItemCat == null)
@@ -43,21 +43,24 @@ namespace RestaurantDesktopClient
             }
             else
             {
-                //labelRestaurantId = Convert.ToInt32()  
-                var proxy = new ItemServiceClient();
-                proxy.DeleteItemCat(selectedItemCat.Id);
+                await Services._ItemProxy.DeleteItemCatAsync(selectedItemCat.Id);
                 dataGridItemCatList.Items.Clear();
-                var modelMenu = proxy.GetAllItemCategories();
+                var modelMenu = await Services._ItemProxy.GetAllItemCategoriesAsync();
                 foreach (ItemCat item in modelMenu)
                 {
                     dataGridItemCatList.Items.Add(item);
                 };
             }
-
-
         }
 
-        private void buttonCreate_Click(object sender, RoutedEventArgs e)
+        private bool ValidateCat(ModelLibrary.ItemCat itemCat)
+        {
+            var context = new ValidationContext(itemCat, null, null);
+            var result = new List<System.ComponentModel.DataAnnotations.ValidationResult>();
+
+            return Validator.TryValidateObject(itemCat, context, result, true);
+        }
+        private async void buttonCreate_Click(object sender, RoutedEventArgs e)
         {
 
             if (textBoxName.Text.Length < 2)
@@ -66,23 +69,28 @@ namespace RestaurantDesktopClient
             }
             else
             {
+                
                 var newItemCat = new ItemCat
                 {
                     Name = textBoxName.Text
                 };
-
-                var proxy = new ItemServiceClient();
-                proxy.CreateItemCat(newItemCat);
-                dataGridItemCatList.Items.Clear();
-                var modelMenu = proxy.GetAllItemCategories();
-                foreach (ItemCat item in modelMenu)
+                var validation = ValidateCat(newItemCat);
+                if(validation == true)
                 {
-                    dataGridItemCatList.Items.Add(item);
-                };
+                    await Services._ItemProxy.CreateItemCatAsync(newItemCat);
+                    dataGridItemCatList.Items.Clear();
+                    var modelMenu = await Services._ItemProxy.GetAllItemCategoriesAsync();
+                    foreach (ItemCat item in modelMenu)
+                    {
+                        dataGridItemCatList.Items.Add(item);
+                    };
+                }
+                else { MessageBox.Show("Validation did not pass!"); }
+                
             }
         }
 
-        private void buttonEdit_Click(object sender, RoutedEventArgs e)
+        private async void buttonEdit_Click(object sender, RoutedEventArgs e)
         {
             
             if (textBoxName.Text.Length < 2 )
@@ -91,7 +99,6 @@ namespace RestaurantDesktopClient
             }
             else
             {
-                var proxy = new ItemServiceClient();
                 var slectedItemCat = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
                 var oldItem = new ItemCat
                 {
@@ -104,22 +111,26 @@ namespace RestaurantDesktopClient
                     Name = textBoxName.Text,
                     Id = slectedItemCat.Id
                 };
-                proxy.UpdateItemCat(oldItem, newItem);
-                dataGridItemCatList.Items.Clear();
-                var modelMenu = proxy.GetAllItemCategories();
-                foreach (ItemCat item in modelMenu)
+                var validation = ValidateCat(newItem);
+                if (validation == true)
                 {
-                    dataGridItemCatList.Items.Add(item);
-                };
-                var selectedItem = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
+                    await Services._ItemProxy.UpdateItemCatAsync(oldItem, newItem);
+                    dataGridItemCatList.Items.Clear();
+                    var modelMenu = await Services._ItemProxy.GetAllItemCategoriesAsync();
+                    foreach (ItemCat item in modelMenu)
+                    {
+                        dataGridItemCatList.Items.Add(item);
+                    };
+                    var selectedItem = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
+                }
+                else { MessageBox.Show("Validation did not pass!"); }
+                    
             }
 
         }
 
         private void dataGridItemCatList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var proxy = new ItemServiceClient();
-            
             var selectedItem = dataGridItemCatList.SelectedItem as ModelLibrary.ItemCat;
             if (selectedItem == null)
             {

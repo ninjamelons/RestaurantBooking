@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dmai0917_1067303" Class="JustFeastDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=kraka.ucn.dk;Initial Catalog=dmai0917_1067303;Persist Security Info=True;User ID=dmai0917_1067303" SettingsObjectName="DatabaseAccessLibrary.Properties.Settings" SettingsPropertyName="dmai0917_1067303ConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="JustFeast" Class="JustFeastDbDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=HP-PAVILION-FIL\MELONESERVER;Initial Catalog=JustFeast;Integrated Security=True" SettingsObjectName="DatabaseAccessLibrary.Properties.Settings" SettingsPropertyName="JustFeastConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Customer" Member="Customers">
     <Type Name="Customer">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -8,16 +8,9 @@
       <Column Name="phoneNo" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="roleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="Customer_User" Member="User" ThisKey="id" OtherKey="customerId" Type="User" Cardinality="One" />
       <Association Name="Customer_OrderHistory" Member="OrderHistories" ThisKey="id" OtherKey="customerId" Type="OrderHistory" />
       <Association Name="Customer_Restaurant" Member="Restaurant" ThisKey="id" OtherKey="id" Type="Restaurant" Cardinality="One" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="customerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="password" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="Customer_User" Member="Customer" ThisKey="customerId" OtherKey="id" Type="Customer" IsForeignKey="true" />
+      <Association Name="Customer_User" Member="User" ThisKey="id" OtherKey="customerId" Type="User" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.Item" Member="Items">
@@ -132,6 +125,13 @@
       <Association Name="Restaurant_ResTable" Member="ResTables" ThisKey="id" OtherKey="restaurantId" Type="ResTable" />
       <Association Name="Customer_Restaurant" Member="Customer" ThisKey="id" OtherKey="id" Type="Customer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
       <Association Name="ResCat_Restaurant" Member="ResCat" ThisKey="resCatId" OtherKey="id" Type="ResCat" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="customerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Customer_User" Member="Customer" ThisKey="customerId" OtherKey="id" Type="Customer" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

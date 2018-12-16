@@ -55,6 +55,12 @@ namespace DatabaseAccessLibrary
             return db.Orders.FirstOrDefault(o => o.id == id);
         }
 
+        public IEnumerable<Order> GetAllRestaurantOrders(int restaurantId)
+        {
+            var db = new JustFeastDbDataContext();
+            return db.Orders.Where(p => p.restaurantId == restaurantId);
+        }
+
         public void UpdateOrder(Order order)
         {
             var db = new JustFeastDbDataContext();
@@ -89,6 +95,13 @@ namespace DatabaseAccessLibrary
 
             db.Orders.DeleteOnSubmit(db.Orders.FirstOrDefault(x => x.id == id));
             db.SubmitChanges();
+        }
+
+        public IEnumerable<OrderLineItem> GetOrderLineItemsById(int id)
+        {
+            var db = new JustFeastDbDataContext();
+            var items = db.OrderLineItems.Where(oi => oi.orderId == id).AsEnumerable();
+            return items;
         }
     }
 

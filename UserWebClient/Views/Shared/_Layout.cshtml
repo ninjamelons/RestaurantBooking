@@ -45,11 +45,11 @@
                             }
                             if (Session["roleId"].ToString() == "2")
                             {
-                                <li>@Html.ActionLink("My Restaurant", "Home", "Restaurant", new { id = Session["customerId"] })</li>
+                                <li>@Html.ActionLink("My Restaurant", "Owner", "Restaurant", new { id = Session["customerId"] }, new object())</li>
                             }
                         }
-
-                    </ul>
+                                                                      
+                    </ul>                                              
                     @Html.Partial("_LoginPartial")
                 </div>
             </div>
@@ -60,7 +60,7 @@
         <hr />
         <footer>
             <div class="container body-content">
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                <p>&copy; @DateTime.Now.Year - JustFeast</p>
             </div>
         </footer>
     </div>
