@@ -103,6 +103,20 @@ namespace ControllerLibrary
             return itemsList;
         }
 
+        public IEnumerable<ModelLibrary.Order> GetAllOrdersByRestaurant(int restaurantId)
+        {
+            OrderDb orderDb = new OrderDb();
+            OrderCtrl orderCtrl = new OrderCtrl();
+            var dbOrders = orderDb.GetAllRestaurantOrders(restaurantId);
+            var orderList = new List<ModelLibrary.Order>();
+            foreach(var order in dbOrders)
+            {
+                 var modelOrderList = orderCtrl.ConvertOrderToModel(order);
+                 orderList.Add(modelOrderList);
+            }
+            return orderList;
+        }
+
         public void UpdateOrder(Order order)
         {
             OrderDb ordDb = new OrderDb();

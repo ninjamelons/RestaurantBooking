@@ -25,7 +25,7 @@ namespace UserWebClient.Controllers
         }
 
         // GET: Restaurant
-        public async Task<ActionResult> IndexAsync()
+        public async Task<ActionResult> Index()
         {
             if (Session["roleId"] == null)
                 return RedirectToAction("Index", "Home");
@@ -38,7 +38,7 @@ namespace UserWebClient.Controllers
         }
 
         // GET: Restaurant/Create
-        public async Task<ActionResult> CreateAsync()
+        public async Task<ActionResult> Create()
         {
             //  var rescats = new Dictionary<string, RestaurantCategory>();
             //  rescats.Add("-No Category-", null);
@@ -60,7 +60,7 @@ namespace UserWebClient.Controllers
 
         // POST: Restaurant/Create
         [HttpPost]
-        public async Task<ActionResult> CreateAsync(RestaurantViewModel model)
+        public async Task<ActionResult> Create(RestaurantViewModel model)
         {
             try
             {

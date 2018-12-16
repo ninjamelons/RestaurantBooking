@@ -82,5 +82,11 @@ namespace RestaurantService
             var order = ctrl.GetOrderById(orderId);
             return order;
         }
+
+        public IEnumerable<ModelLibrary.Order> GetAllOrdersByRestaurant(int restaurantId)
+        {
+            OrderCtrl orderCtrl = new OrderCtrl();
+            return orderCtrl.GetAllOrdersByRestaurant(restaurantId);
+        }
     }
 }
