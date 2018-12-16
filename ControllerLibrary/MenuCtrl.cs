@@ -71,9 +71,6 @@ namespace ControllerLibrary
             return menu;
         }
 
-
-
-
         public DatabaseAccessLibrary.Menu ConvertMenuToDb(ModelLibrary.Menu menu)
         {
 

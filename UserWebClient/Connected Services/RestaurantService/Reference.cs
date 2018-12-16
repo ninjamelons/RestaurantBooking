@@ -117,12 +117,6 @@ namespace UserWebClient.RestaurantService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/GetTable", ReplyAction="http://tempuri.org/IRestaurantService/GetTableResponse")]
         System.Threading.Tasks.Task<ModelLibrary.Table> GetTableAsync(ModelLibrary.Table table);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/UpdateTable", ReplyAction="http://tempuri.org/IRestaurantService/UpdateTableResponse")]
-        void UpdateTable(ModelLibrary.Table oldTable, ModelLibrary.Table newTable);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/UpdateTable", ReplyAction="http://tempuri.org/IRestaurantService/UpdateTableResponse")]
-        System.Threading.Tasks.Task UpdateTableAsync(ModelLibrary.Table oldTable, ModelLibrary.Table newTable);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/DeleteTable", ReplyAction="http://tempuri.org/IRestaurantService/DeleteTableResponse")]
         void DeleteTable(ModelLibrary.Table table);
         
@@ -309,14 +303,6 @@ namespace UserWebClient.RestaurantService {
         
         public System.Threading.Tasks.Task<ModelLibrary.Table> GetTableAsync(ModelLibrary.Table table) {
             return base.Channel.GetTableAsync(table);
-        }
-        
-        public void UpdateTable(ModelLibrary.Table oldTable, ModelLibrary.Table newTable) {
-            base.Channel.UpdateTable(oldTable, newTable);
-        }
-        
-        public System.Threading.Tasks.Task UpdateTableAsync(ModelLibrary.Table oldTable, ModelLibrary.Table newTable) {
-            return base.Channel.UpdateTableAsync(oldTable, newTable);
         }
         
         public void DeleteTable(ModelLibrary.Table table) {

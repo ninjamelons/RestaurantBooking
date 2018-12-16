@@ -226,23 +226,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="UpdateTable">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="oldTable" nillable="true" type="q17:Table" />
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="newTable" nillable="true" type="q18:Table" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateTableResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
   <xs:element name="DeleteTable">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="table" nillable="true" type="q19:Table" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="table" nillable="true" type="q17:Table" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -277,7 +264,7 @@
   <xs:element name="GetTablesWithReservedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetTablesWithReservedResult" nillable="true" type="q20:ArrayOfTable" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/ModelLibrary" minOccurs="0" name="GetTablesWithReservedResult" nillable="true" type="q18:ArrayOfTable" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

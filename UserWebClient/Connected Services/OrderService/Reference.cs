@@ -50,6 +50,12 @@ namespace UserWebClient.OrderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetOrderById", ReplyAction="http://tempuri.org/IOrderService/GetOrderByIdResponse")]
         System.Threading.Tasks.Task<ModelLibrary.Order> GetOrderByIdAsync(int orderId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetAllOrdersByRestaurant", ReplyAction="http://tempuri.org/IOrderService/GetAllOrdersByRestaurantResponse")]
+        ModelLibrary.Order[] GetAllOrdersByRestaurant(int restaurantId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrderService/GetAllOrdersByRestaurant", ReplyAction="http://tempuri.org/IOrderService/GetAllOrdersByRestaurantResponse")]
+        System.Threading.Tasks.Task<ModelLibrary.Order[]> GetAllOrdersByRestaurantAsync(int restaurantId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -125,6 +131,14 @@ namespace UserWebClient.OrderService {
         
         public System.Threading.Tasks.Task<ModelLibrary.Order> GetOrderByIdAsync(int orderId) {
             return base.Channel.GetOrderByIdAsync(orderId);
+        }
+        
+        public ModelLibrary.Order[] GetAllOrdersByRestaurant(int restaurantId) {
+            return base.Channel.GetAllOrdersByRestaurant(restaurantId);
+        }
+        
+        public System.Threading.Tasks.Task<ModelLibrary.Order[]> GetAllOrdersByRestaurantAsync(int restaurantId) {
+            return base.Channel.GetAllOrdersByRestaurantAsync(restaurantId);
         }
     }
 }
