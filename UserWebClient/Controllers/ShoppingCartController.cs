@@ -67,6 +67,7 @@ namespace UserWebClient.Controllers
         }
 
         [HttpPost]
+        //[RequireHttps]
         public async Task<ActionResult> Charge(string stripeEmail, string stripeToken)
         {
             // Set your secret key: remember to change this to your live secret key in production

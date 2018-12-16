@@ -50,6 +50,16 @@ namespace ControllerLibrary
             return menu;
         }
 
+        public static async Task<ModelLibrary.Menu> GetMenuAsync(int restaurantId)
+        {
+            var menuCtrl = new MenuCtrl();
+            ModelLibrary.Menu menu = null;
+
+            await Task.Run(() => menu = menuCtrl.GetActiveMenu(restaurantId));
+
+            return menu;
+        }
+
         public static ModelLibrary.Restaurant ConvertRestaurantToModel(DatabaseAccessLibrary.Restaurant dbRestaurant)
         {
             var mRes = new ModelLibrary.Restaurant
