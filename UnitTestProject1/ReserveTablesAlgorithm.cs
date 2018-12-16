@@ -4,7 +4,7 @@ using ControllerLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ModelLibrary;
 
-namespace UnitTestProject1
+namespace UnitTests
 {
     [TestClass]
     public class ReserveTablesAlgorithm

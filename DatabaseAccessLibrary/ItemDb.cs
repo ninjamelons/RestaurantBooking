@@ -60,7 +60,7 @@ namespace DatabaseAccessLibrary
             DatabaseAccessLibrary.Item dbItem = db.Items.First(t => t.id == itemId);
             if (dbItem != null)
             {
-                db.Items.DeleteOnSubmit(db.Items.First(t => t.id == itemId));
+                db.Items.DeleteOnSubmit(dbItem);
                 db.SubmitChanges();
             }
         }

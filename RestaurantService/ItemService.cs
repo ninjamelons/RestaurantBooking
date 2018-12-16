@@ -34,7 +34,8 @@ namespace RestaurantService
 
         public void DeleteItem(int itemId)
         {
-
+            var orderC = new OrderCtrl();
+            orderC.DeleteOrderLineItem(itemId);
             itemDb.DeleteItem(itemId);
         }
 

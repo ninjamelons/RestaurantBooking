@@ -181,10 +181,11 @@ namespace UnitTests
             var ordC = new OrderCtrl();
 
             //Act
-            ordC.AddItemToOrder(1000000, 1000001);
+            ordC.AddItemToOrder(1000001, 1000001);
+            var list = ordC.GetOrderById(1000001).ItemsList;
 
             //Assert
-            Assert.IsTrue(ordC.GetOrderById(1000000).ItemsList[1].LineItem.Id == 1000001);
+            Assert.IsTrue(list.Count == 2);
         }
 
         [TestMethod]
