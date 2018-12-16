@@ -142,10 +142,10 @@ namespace RestaurantDesktopClient.RestaurantService {
         System.Threading.Tasks.Task<ModelLibrary.Table[]> GetTablesWithReservedAsync(int resId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/ReserveSingleTable", ReplyAction="http://tempuri.org/IRestaurantService/ReserveSingleTableResponse")]
-        string ReserveSingleTable(int tableId, int orderId);
+        string ReserveSingleTable(int tableId, int resId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRestaurantService/ReserveSingleTable", ReplyAction="http://tempuri.org/IRestaurantService/ReserveSingleTableResponse")]
-        System.Threading.Tasks.Task<string> ReserveSingleTableAsync(int tableId, int orderId);
+        System.Threading.Tasks.Task<string> ReserveSingleTableAsync(int tableId, int resId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -343,12 +343,12 @@ namespace RestaurantDesktopClient.RestaurantService {
             return base.Channel.GetTablesWithReservedAsync(resId);
         }
         
-        public string ReserveSingleTable(int tableId, int orderId) {
-            return base.Channel.ReserveSingleTable(tableId, orderId);
+        public string ReserveSingleTable(int tableId, int resId) {
+            return base.Channel.ReserveSingleTable(tableId, resId);
         }
         
-        public System.Threading.Tasks.Task<string> ReserveSingleTableAsync(int tableId, int orderId) {
-            return base.Channel.ReserveSingleTableAsync(tableId, orderId);
+        public System.Threading.Tasks.Task<string> ReserveSingleTableAsync(int tableId, int resId) {
+            return base.Channel.ReserveSingleTableAsync(tableId, resId);
         }
     }
 }
